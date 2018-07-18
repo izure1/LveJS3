@@ -2,7 +2,8 @@ import each from './each';
 
 import {
   parseArguments
-} from '../Utils/arguments.js';
+} from '../Utils/arguments';
+import calcValue from '../Helpers/calcValue';
 
 
 export default function animate(o, v, d = 0, e = 'linear') {
@@ -10,6 +11,7 @@ export default function animate(o, v, d = 0, e = 'linear') {
   let t;
   let r;
   let w;
+  let d;
 
   t = this.get();
   r = parseArguments.apply(t.style, arguments);
@@ -22,7 +24,7 @@ export default function animate(o, v, d = 0, e = 'linear') {
   }
 
 
-  this.each(function () {
+  each.call(this, function () {
 
     for (let p in r.VALUE) {
       w.renderer.animation.add(`${this.name}.${p}`, e, this.style[p], r.VALUE[p], d);

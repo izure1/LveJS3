@@ -1,6 +1,6 @@
 import TYPE from './Vars/TYPE.js';
-import INIT_ATTRIBUTE from './Vars/INIT_ATTRIBUTE';
-import INIT_STYLE from './Vars/INIT_STYLE';
+import INIT_ATTRIBUTE from './Vars/INIT_ATTRIBUTE.js';
+import INIT_STYLE from './Vars/INIT_STYLE.js';
 
 
 export default function create(o = {}) {

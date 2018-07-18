@@ -5,7 +5,7 @@ export default function current() {
   return {
 
     get canvas() {
-      return t.initSetting.canvas;
+      return t.setting.canvas;
     },
 
     get camera() {

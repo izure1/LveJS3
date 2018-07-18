@@ -2,7 +2,8 @@ import each from './each';
 import {
   parseArguments,
   applyArguments
-} from '../Utils/arguments.js';
+} from '../Utils/arguments';
+import calcValue from '../Helpers/calcValue';
 
 
 /**
@@ -14,6 +15,7 @@ export default function attr(o, v) {
 
   let t;
   let r;
+  let d;
 
   t = this;
   r = parseArguments.apply(t, arguments);
@@ -23,7 +25,8 @@ export default function attr(o, v) {
   }
 
   each.call(this, function () {
-    applyArguments.call(this, r.VALUE);
+    d = calcValue.call(this, r.VALUE, this);
+    applyArguments.call(this, d);
   });
 
   return this;

@@ -1,10 +1,8 @@
 import LveJSObjectSession from './LveJSObjectSession';
-import LveJSObject from './LveJSObject';
 
 import LveJSHashTable from './Managers/LveJSHashTable';
 import LveJSRenderer from './Managers/LveJSRenderer';
 
-import LveJSSetting from './Managers/LveJSSetting';
 import LveJSCache from './Managers/LveJSCache';
 
 import LveQuery from './LveQuery';
@@ -13,6 +11,7 @@ import LveQuery from './LveQuery';
 import FnInstanceOf from './Functions/instanceof';
 import FnCurrent from './Functions/current';
 import FnReady from './Functions/ready';
+import FnInit from './Functions/init';
 
 
 function Lve() {
@@ -20,7 +19,6 @@ function Lve() {
   this.renderer = new LveJSRenderer();
 
   this.hashTable = new LveJSHashTable();
-  this.setting = new LveJSSetting();
   this.cache = new LveJSCache();
 
   this.fn = {};
@@ -43,6 +41,7 @@ function Lve() {
   // Set LveJS Functions for user
   this.lve.instanceof = FnInstanceOf.bind(this);
   this.lve.ready = FnReady.bind(this);
+  this.lve.init = FnInit.bind(this);
   this.lve.current = FnCurrent.call(this);
 
 

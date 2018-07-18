@@ -6,10 +6,17 @@
  */
 function documentReady(f) {
 
+  let r;
+
+  r = true;
+
   if (document.readyState != 'loading') f();
   else {
     document.addEventListener('DOMContentLoaded', f);
+    r = false;
   }
+
+  return r;
 
 }
 
@@ -18,7 +25,11 @@ function documentReady(f) {
  * @param {HTMLElement} t 
  * @param {Function} f 
  */
-function elementReady(t, f, g = f) {
+function elementReady(t, f) {
+
+  let r;
+
+  r = true;
 
   if (t.complete === undefined) f.call(t, t);
   else {
@@ -27,15 +38,22 @@ function elementReady(t, f, g = f) {
     else {
       t.addEventListener('load', () => f.call(t, t));
       t.addEventListener('error', () => f.call(t, t));
+      r = false;
     }
 
   }
 
+  return r;
+
 }
 
-export default function ready(f, g) {
+export default function ready(f) {
 
-  if (this === document || this === window) documentReady(f);
-  else elementReady(this, f, g);
+  let r;
+
+  if (this === document || this === window) r = documentReady(f);
+  else r = elementReady(this, f);
+
+  return r;
 
 };

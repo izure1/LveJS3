@@ -2,7 +2,8 @@ import each from './each';
 import {
   parseArguments,
   applyArguments
-} from '../Utils/arguments.js';
+} from '../Utils/arguments';
+import calcValue from '../Helpers/calcValue';
 
 
 /**
@@ -14,6 +15,7 @@ export default function css(o, v) {
 
   let t;
   let r;
+  let d;
 
   t = this.get();
   t = t.style;
@@ -24,7 +26,8 @@ export default function css(o, v) {
   }
 
   each.call(this, function () {
-    applyArguments.call(this.style, r.VALUE);
+    d = calcValue.call(this, r.VALUE, this.style);
+    applyArguments.call(this.style, d);
   });
 
   return this;

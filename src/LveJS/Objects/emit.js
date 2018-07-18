@@ -1,5 +1,5 @@
 import each from './each';
-import LveJSEvent from '../LveJSEvent.js';
+import LveJSEvent from '../LveJSEvent';
 
 export default function emit(e, o = {}) {
 

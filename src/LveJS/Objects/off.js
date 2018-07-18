@@ -1,7 +1,7 @@
 import each from './each';
 import {
   removeArrayItem
-} from '../Utils/array.js';
+} from '../Utils/array';
 
 
 export default function off(e, h = null) {

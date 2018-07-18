@@ -1,18 +1,17 @@
 import easing from '../Utils/easing';
-import each from './each';
 
 
-export default function getEasingData(attr) {
+export default function getEasingData(p) {
 
   let a;
   let s, g;
 
-  a = this.__system__.ani_init;
-  s = a.origin[attr];
-  g = a.goal[attr];
+  a = this.__system__.animation;
+  s = a.origin[p];
+  g = a.goal[p];
 
   // animating이 아닌 객체이거나, 속성 매개변수가 넘어오지 않았을 시
-  if (!a.count_max || !attr) {
+  if (!a.count_max || !p) {
     return;
   }
 
@@ -24,9 +23,9 @@ export default function getEasingData(attr) {
   // t: current time, b: begInnIng value, c: change In value, d: duration
   let t, b, c, d, e;
 
-  t = a.count[attr] * 1000 / 60 || 1;
-  d = a.duration[attr] || 1;
-  e = a.easing[attr] || 'linear';
+  t = a.count[p] * 1000 / 60 || 1;
+  d = a.duration[p] || 1;
+  e = a.easing[p] || 'linear';
   b = s;
   c = g - s;
 
