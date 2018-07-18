@@ -31,7 +31,13 @@ function setDefAttr(w, u, c) {
 
 function setSysAttr(w, u, c) {
 
-  setHiddenContext.call(this, '__system__', {});
+  let o;
+
+  o = {
+    enumerable: true
+  };
+
+  setHiddenContext.call(this, '__system__', {}, o);
   setHiddenContext.call(this.__system__, 'world', w);
 
 }

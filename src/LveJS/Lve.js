@@ -2,16 +2,18 @@ import LveJSObjectSession from './LveJSObjectSession';
 
 import LveJSHashTable from './Managers/LveJSHashTable';
 import LveJSRenderer from './Managers/LveJSRenderer';
-
 import LveJSCache from './Managers/LveJSCache';
 
 import LveQuery from './LveQuery';
+
+import SuppressJob from './Utils/SuppressJob';
 
 // Functions
 import FnInstanceOf from './Functions/instanceof';
 import FnCurrent from './Functions/current';
 import FnReady from './Functions/ready';
 import FnInit from './Functions/init';
+import FnRequestCaching from './Functions/requestCaching';
 
 
 function Lve() {
@@ -19,6 +21,7 @@ function Lve() {
   this.renderer = new LveJSRenderer();
 
   this.hashTable = new LveJSHashTable();
+  this.suppressJob = new SuppressJob();
   this.cache = new LveJSCache();
 
   this.fn = {};
@@ -42,6 +45,8 @@ function Lve() {
   this.lve.instanceof = FnInstanceOf.bind(this);
   this.lve.ready = FnReady.bind(this);
   this.lve.init = FnInit.bind(this);
+  this.lve.requestCaching = FnRequestCaching.bind(this);
+
   this.lve.current = FnCurrent.call(this);
 
 

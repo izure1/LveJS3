@@ -27,12 +27,23 @@ function setCtxAttr() {
 
 function setSysAttr() {
 
+  let o;
+
+  o = {
+    enumerable: true
+  };
+
   setHiddenContext.call(this.__system__, 'proxy', this);
-  setHiddenContext.call(this.__system__, 'style', {});
+  setHiddenContext.call(this.__system__, 'style', {}, o);
+  setHiddenContext.call(this.__system__, 'animation', {}, o);
+  setHiddenContext.call(this.__system__, 'follow', {}, o);
+  setHiddenContext.call(this.__system__, 'sprite', {}, o);
+  setHiddenContext.call(this.__system__, 'data', {}, o);
+  setHiddenContext.call(this.__system__, 'text', {});
   setHiddenContext.call(this.__system__, 'events', {});
 
   for (let t of DEFAULT_EVENT) {
-    setHiddenContext.call(this.__system__.events, t, []);
+    setHiddenContext.call(this.__system__.events, t, [], o);
   }
 
 }

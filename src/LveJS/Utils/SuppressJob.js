@@ -1,6 +1,6 @@
 'use strict';
 
-class SuppressManager {
+class SuppressJob {
 
   constructor() {
     this.list = {};
@@ -25,4 +25,4 @@ class SuppressManager {
 
 }
 
-module.exports = SuppressManager;
+module.exports = SuppressJob;

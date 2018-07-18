@@ -1,3 +1,6 @@
+import instanceOf from '../Functions/instanceof';
+
+
 export default function copyObject(v) {
 
   let r;
@@ -8,10 +11,7 @@ export default function copyObject(v) {
   }
 
   // LveJSObject or Session
-  if (
-    v instanceof window.LVE.classes.LveJSObjectSession ||
-    v instanceof window.LVE.classes.LveJSObject
-  ) {
+  if (instanceOf(v)) {
     return v;
   }
 

@@ -11,7 +11,6 @@ export default function animate(o, v, d = 0, e = 'linear') {
   let t;
   let r;
   let w;
-  let d;
 
   t = this.get();
   r = parseArguments.apply(t.style, arguments);

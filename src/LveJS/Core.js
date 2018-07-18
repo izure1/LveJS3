@@ -38,5 +38,15 @@ window.lve = new Lve();
     LveJSObjectSession,
     LveJSObject
   };
-  
+
+  // Object length
+  Object.defineProperty(Object.prototype, '__length', {
+    get() {
+      let n = 0;
+      for (let i in this) n++;
+      return n;
+    },
+    enumerable: false
+  });
+
 })();

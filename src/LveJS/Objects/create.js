@@ -24,8 +24,8 @@ export default function create(o = {}) {
   v2 = INIT_STYLE[o.type] || {};
 
   w = this.__system__.world;
-  
-  t = new LVE.classes.LveJSObject(this.name);
+
+  t = new LVE.classes.LveJSObject(w, this.name);
   t.attr('type', o.type).attr(v1).css(v2);
 
   w.hashTable.insert(this.name, t);
