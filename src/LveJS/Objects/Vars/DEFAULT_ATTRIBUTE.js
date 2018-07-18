@@ -9,5 +9,6 @@ export default {
   className: '',
   text: '',
   scene: 'main',
+  style: {}
 
 };

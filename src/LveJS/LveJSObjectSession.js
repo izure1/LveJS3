@@ -1,9 +1,23 @@
 import setHiddenContext from './Utils/setHiddenContext';
 
+import MAddClass from './Objects/addClass';
+import MAnimate from './Objects/animate';
+import MAttr from './Objects/attr';
 import MCreate from './Objects/create';
+import MCss from './Objects/css';
 import MEach from './Objects/each';
+import MEmit from './Objects/emit';
+import MFindClass from './Objects/findClass';
 import MGet from './Objects/get';
 import MGetEasingData from './Objects/getEasingData';
+import MHasClass from './Objects/hasClass';
+import MHeight from './Objects/height';
+import MNotClass from './Objects/notClass';
+import MOff from './Objects/off';
+import MOn from './Objects/on';
+import MRemoveClass from './Objects/removeClass';
+import MToggleClass from './Objects/toggleClass';
+import MWidth from './Objects/width';
 
 
 
@@ -39,9 +53,23 @@ class LveJSObjectSession {
 }
 
 
+LveJSObjectSession.prototype.addClass = MAddClass;
+LveJSObjectSession.prototype.animate = MAnimate;
+LveJSObjectSession.prototype.attr = MAttr;
 LveJSObjectSession.prototype.create = MCreate;
+LveJSObjectSession.prototype.css = MCss;
 LveJSObjectSession.prototype.each = MEach;
+LveJSObjectSession.prototype.emit = MEmit;
+LveJSObjectSession.prototype.findClass = MFindClass;
 LveJSObjectSession.prototype.get = MGet;
 LveJSObjectSession.prototype.getEasingData = MGetEasingData;
+LveJSObjectSession.prototype.hasClass = MHasClass;
+LveJSObjectSession.prototype.height = MHeight;
+LveJSObjectSession.prototype.notClass = MNotClass;
+LveJSObjectSession.prototype.off = MOff;
+LveJSObjectSession.prototype.on = MOn;
+LveJSObjectSession.prototype.removeClass = MRemoveClass;
+LveJSObjectSession.prototype.toggleClass = MToggleClass;
+LveJSObjectSession.prototype.width = MWidth;
 
 export default LveJSObjectSession;
