@@ -40,7 +40,9 @@ export default function calcValue(v, o) {
 			f = l[hc];
 
 			// 일치하는 계산식이 있을 경우 계산합니다
-			dr = f ? f(fc, o[p]) : undefined;
+			if (f) {
+				dr = f(fc, o[p]);
+			}
 
 		}
 

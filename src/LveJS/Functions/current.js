@@ -17,11 +17,11 @@ export default function current() {
     },
 
     get paused() {
-      return !t.isRunning;
+      return !t.renderer.setting.isRunning;
     },
 
     get started() {
-      return t.isStart;
+      return t.renderer.setting.isStart;
     },
 
     get version() {

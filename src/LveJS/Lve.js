@@ -13,6 +13,8 @@ import FnInstanceOf from './Functions/instanceof';
 import FnCurrent from './Functions/current';
 import FnReady from './Functions/ready';
 import FnInit from './Functions/init';
+import FnPlay from './Functions/play';
+import FnPause from './Functions/pause';
 import FnRequestCaching from './Functions/requestCaching';
 
 
@@ -25,9 +27,6 @@ function Lve() {
   this.cache = new LveJSCache();
 
   this.fn = {};
-
-  this.isStart = false;
-  this.isRunning = false;
 
   this.usingCamera = null;
   this.version = '3.0.0';
@@ -45,6 +44,8 @@ function Lve() {
   this.lve.instanceof = FnInstanceOf.bind(this);
   this.lve.ready = FnReady.bind(this);
   this.lve.init = FnInit.bind(this);
+  this.lve.play = FnPlay.bind(this);
+  this.lve.pause = FnPause.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);
 
   this.lve.current = FnCurrent.call(this);

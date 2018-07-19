@@ -29,6 +29,7 @@ export default function init(o) {
 
     this.renderer.setting.canvas.context = c.getContext('2d');
     this.renderer.setting.canvas.element = c;
+    this.renderer.start();
 
   }
 

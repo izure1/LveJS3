@@ -10,6 +10,9 @@ import DEFAULT_EVENT from './Objects/Vars/DEFAULT_EVENT';
 import PROXY_HANDLER_ATTRIBUTE from './Objects/Vars/PROXY_HANDLER.ATTRIBUTE';
 import PROXY_HANDLER_STYLE from './Objects/Vars/PROXY_HANDLER.STYLE';
 
+import M__animationUpdate from './Objects/__animationUpdate';
+import M__draw from './Objects/__draw';
+
 
 
 
@@ -35,10 +38,10 @@ function setSysAttr() {
 
   setHiddenContext.call(this.__system__, 'proxy', this);
   setHiddenContext.call(this.__system__, 'style', {}, o);
-  setHiddenContext.call(this.__system__, 'animation', {}, o);
-  setHiddenContext.call(this.__system__, 'follow', {}, o);
-  setHiddenContext.call(this.__system__, 'sprite', {}, o);
-  setHiddenContext.call(this.__system__, 'data', {}, o);
+  setHiddenContext.call(this.__system__, 'animation', new Set(), o);
+  setHiddenContext.call(this.__system__, 'follow', new Set(), o);
+  setHiddenContext.call(this.__system__, 'sprite', new Set(), o);
+  setHiddenContext.call(this.__system__, 'data', new Set(), o);
   setHiddenContext.call(this.__system__, 'text', {});
   setHiddenContext.call(this.__system__, 'events', {});
 
@@ -76,5 +79,9 @@ class LveJSObject extends LveJSObjectSession {
   }
 
 }
+
+
+LveJSObject.prototype.__animationUpdate = M__animationUpdate;
+LveJSObject.prototype.__draw = M__draw;
 
 export default LveJSObject;

@@ -10,11 +10,10 @@ export default function animate(o, v, d = 0, e = 'linear') {
 
   let t;
   let r;
-  let w;
+  let v1, v2;
 
   t = this.get();
   r = parseArguments.apply(t.style, arguments);
-  w = this.__system__.world;
 
 
   if (typeof o === 'object') {
@@ -22,13 +21,24 @@ export default function animate(o, v, d = 0, e = 'linear') {
     e = arguments[2] || 'linear';
   }
 
+  if (r.IS_GET) {
+    return this;
+  }
+
 
   each.call(this, function () {
 
-    for (let p in r.VALUE) {
-      w.renderer.animation.add(`${this.name}.${p}`, e, this.style[p], r.VALUE[p], d);
-    }
-    
+    v1 = this.style;
+    v2 = calcValue.call(this, r.VALUE, this.style);
+
+    for (let p in cc) this.__system__.animation.add(p, {
+      type: e,
+      duration: d,
+      runtime: 0,
+      start: v1[p],
+      end: v2[p]
+    });
+
   });
 
   return this;
