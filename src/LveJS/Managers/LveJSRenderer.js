@@ -7,6 +7,7 @@ import setObject from './Renderer/setObject';
 import sortObject from './Renderer/sortObject';
 import run from './Renderer/run';
 import update from './Renderer/update';
+import showEmptyFrame from './Renderer/showEmptyFrame';
 
 import DEFAULT_SETTING from './Renderer/Vars/DEFAULT_SETTING';
 
@@ -15,8 +16,11 @@ class LveJSRenderer {
 
   constructor() {
     this.objects = [];
+    this.camera = null;
     this.setting = Object.assign({}, DEFAULT_SETTING);
     this.deltaTimer = new DeltaTimer();
+    this.isRunning = false;
+    this.isStart = false;
   }
 
 }
@@ -29,6 +33,7 @@ LveJSRenderer.prototype.setObject = setObject;
 LveJSRenderer.prototype.sortObject = sortObject;
 LveJSRenderer.prototype.run = run;
 LveJSRenderer.prototype.update = update;
+LveJSRenderer.prototype.showEmptyFrame = showEmptyFrame;
 
 
 

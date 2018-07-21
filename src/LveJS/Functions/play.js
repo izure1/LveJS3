@@ -1,7 +1,7 @@
 export default function play() {
 
-  if (this.renderer.setting.isStart) {
-    this.renderer.setting.isRunning = false;
+  if (this.renderer.isStart) {
+    this.renderer.isRunning = false;
   }
 
   return this;

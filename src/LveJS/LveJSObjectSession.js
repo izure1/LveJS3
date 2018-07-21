@@ -16,6 +16,7 @@ import MOff from './Objects/off';
 import MOn from './Objects/on';
 import MRemoveClass from './Objects/removeClass';
 import MToggleClass from './Objects/toggleClass';
+import MUse from './Objects/use';
 import MWidth from './Objects/width';
 
 
@@ -74,6 +75,7 @@ LveJSObjectSession.prototype.off = MOff;
 LveJSObjectSession.prototype.on = MOn;
 LveJSObjectSession.prototype.removeClass = MRemoveClass;
 LveJSObjectSession.prototype.toggleClass = MToggleClass;
+LveJSObjectSession.prototype.use = MUse;
 LveJSObjectSession.prototype.width = MWidth;
 
 export default LveJSObjectSession;

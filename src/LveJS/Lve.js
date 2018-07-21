@@ -10,6 +10,7 @@ import SuppressJob from './Utils/SuppressJob';
 
 // Functions
 import FnInstanceOf from './Functions/instanceof';
+import FnCheckMobile from './Functions/checkMobile';
 import FnCurrent from './Functions/current';
 import FnReady from './Functions/ready';
 import FnInit from './Functions/init';
@@ -25,10 +26,7 @@ function Lve() {
   this.hashTable = new LveJSHashTable();
   this.suppressJob = new SuppressJob();
   this.cache = new LveJSCache();
-
-  this.fn = {};
-
-  this.usingCamera = null;
+  
   this.version = '3.0.0';
 
   let self = this;
@@ -42,6 +40,7 @@ function Lve() {
 
   // Set LveJS Functions for user
   this.lve.instanceof = FnInstanceOf.bind(this);
+  this.lve.checkMobile = FnCheckMobile.bind(this);
   this.lve.ready = FnReady.bind(this);
   this.lve.init = FnInit.bind(this);
   this.lve.play = FnPlay.bind(this);

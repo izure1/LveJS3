@@ -4,12 +4,12 @@ export default function current() {
 
   return {
 
-    get canvas() {
-      return t.setting.canvas;
+    get camera() {
+      return t.renderer.camera;
     },
 
-    get camera() {
-      return t.usingCamera;
+    get canvas() {
+      return t.renderer.setting.canvas;
     },
 
     get fps() {
@@ -17,11 +17,11 @@ export default function current() {
     },
 
     get paused() {
-      return !t.renderer.setting.isRunning;
+      return !t.renderer.isRunning;
     },
 
     get started() {
-      return t.renderer.setting.isStart;
+      return t.renderer.isStart;
     },
 
     get version() {

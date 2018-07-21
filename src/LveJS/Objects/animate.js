@@ -31,13 +31,13 @@ export default function animate(o, v, d = 0, e = 'linear') {
     v1 = this.style;
     v2 = calcValue.call(this, r.VALUE, this.style);
 
-    for (let p in cc) this.__system__.animation.add(p, {
+    for (let p in v2) this.__system__.animation[p] = {
       type: e,
       duration: d,
       runtime: 0,
       start: v1[p],
       end: v2[p]
-    });
+    };
 
   });
 

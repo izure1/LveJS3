@@ -3,13 +3,12 @@ import easing from '../Utils/easing';
 
 export default function __animationUpdate(tt = 0) {
 
-  let p, v;
+  let v;
   let d;
 
-  for (let t of this.__system__.animation) {
+  for (let p in this.__system__.animation) {
 
-    o = t[0];
-    v = t[1];
+    v = this.__system__.animation[p];
     d = false;
 
     v.runtime += tt;
@@ -19,11 +18,11 @@ export default function __animationUpdate(tt = 0) {
       d = true;
     }
 
-    this.style[o] = easing(v.type, v.runtime, v.start, v.end - v.start, v.duration);
+    this.style[p] = easing(v.type, v.runtime, v.start, v.end - v.start, v.duration);
 
     // 완료된 애니메이션 캐시를 삭제합니다
     if (d) {
-      this.__system__.animation.delete(o);
+      delete this.__system__.animation[p];
     }
 
   }

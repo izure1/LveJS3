@@ -1,6 +1,6 @@
 export default function pause() {
 
-  this.renderer.setting.isRunning = false;
+  this.renderer.isRunning = false;
   return this;
 
 };

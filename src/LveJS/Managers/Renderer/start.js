@@ -1,7 +1,7 @@
 export default function start() {
 
-  this.setting.isRunning = true;
-  this.setting.isStart = true;
+  this.isRunning = true;
+  this.isStart = true;
 
   this.run();
 
