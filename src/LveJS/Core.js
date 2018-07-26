@@ -1,6 +1,9 @@
 import LveJSObjectSession from './LveJSObjectSession';
 import LveJSObject from './LveJSObject';
 import Lve from './Lve';
+import * as f from './Utils/drawCanvas';
+
+const Box2D = require('../External/Box2D/Box2D.js');
 
 
 /* Light Visualnovel Engine
@@ -27,6 +30,7 @@ import Lve from './Lve';
  */
 
 window.lve = new Lve();
+window.f = f;
 
 (function () {
 
@@ -36,7 +40,8 @@ window.lve = new Lve();
 
   LVE.classes = {
     LveJSObjectSession,
-    LveJSObject
+    LveJSObject,
+    Box2D
   };
 
   // Object length

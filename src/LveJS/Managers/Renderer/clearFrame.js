@@ -1,4 +1,4 @@
-export default function showEmptyFrame() {
+export default function clearFrame(cl) {
 
   let c;
   let w, h;
@@ -9,7 +9,7 @@ export default function showEmptyFrame() {
   h = c.canvas.height;
 
   c.globalAlpha = 1;
-  c.fillStyle = 'black';
+  c.fillStyle = cl;
 
   c.beginPath();
   c.clearRect(0, 0, w, h);

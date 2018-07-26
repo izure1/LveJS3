@@ -7,7 +7,7 @@ import setObject from './Renderer/setObject';
 import sortObject from './Renderer/sortObject';
 import run from './Renderer/run';
 import update from './Renderer/update';
-import showEmptyFrame from './Renderer/showEmptyFrame';
+import clearFrame from './Renderer/clearFrame';
 
 import DEFAULT_SETTING from './Renderer/Vars/DEFAULT_SETTING';
 
@@ -33,7 +33,7 @@ LveJSRenderer.prototype.setObject = setObject;
 LveJSRenderer.prototype.sortObject = sortObject;
 LveJSRenderer.prototype.run = run;
 LveJSRenderer.prototype.update = update;
-LveJSRenderer.prototype.showEmptyFrame = showEmptyFrame;
+LveJSRenderer.prototype.clearFrame = clearFrame;
 
 
 

@@ -3,7 +3,7 @@ import each from './each';
 
 /**
  * 
- * @param {String, Object} c
+ * @param {String|Object} c
  * @param {*} LveJSObjectSession
  */
 export default function notClass(c) {

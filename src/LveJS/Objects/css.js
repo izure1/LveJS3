@@ -8,7 +8,7 @@ import calcValue from '../Helpers/calcValue';
 
 /**
  * 
- * @param {String, Object} o 
+ * @param {String|Object} o 
  * @param {*} v 
  */
 export default function css(o, v) {

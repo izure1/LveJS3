@@ -17,7 +17,7 @@ export default function setObject(l, scene) {
         t.scene === scene ||
         t.scene === 'anywhere' ||
         t.type === 'sprite' && t.__system__.sprite.playing ||
-        t.__system__.animation.__length
+        t.animation.__length
       ) {
         this.objects.push(t);
         break;

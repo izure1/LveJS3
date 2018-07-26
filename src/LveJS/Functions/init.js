@@ -1,6 +1,6 @@
 import domReady from '../Utils/domReady';
 import LveJSMouseEvent from '../LveJSMouseEvent';
-import eventEmiter from '../Helpers/eventEmiter';
+import worldQuery from '../Helpers/worldQuery';
 
 
 export default function init(o) {
@@ -37,31 +37,31 @@ export default function init(o) {
       // 이는 PC의 MouseEvent와 동급으로 취급됩니다.
       c.addEventListener('touchstart', e => {
         t = new LveJSMouseEvent('mousedown', e);
-        eventEmiter(t);
+        worldQuery(t);
       });
       c.addEventListener('touchend', e => {
         t = new LveJSMouseEvent('mouseup', e);
-        eventEmiter(t);
+        worldQuery(t);
       });
       c.addEventListener('touchmove', (e) => {
         this.suppressJob.setSuppress('touchmoveEvent', () => {
           t = new LveJSMouseEvent('mousemove', e);
-          eventEmiter(t);
+          worldQuery(t);
         }, i);
       });
 
       // PC 마우스 이벤트
-      c.addEventListener('mousedown', eventEmiter);
-      c.addEventListener('mouseup', eventEmiter);
+      c.addEventListener('mousedown', worldQuery);
+      c.addEventListener('mouseup', worldQuery);
       c.addEventListener('mousemove', (e) => {
         this.suppressJob.setSuppress('mousemoveEvent', () => {
-          eventEmiter(e);
+          worldQuery(e);
         }, i);
       });
 
-      c.addEventListener('click', eventEmiter);
-      c.addEventListener('dblclick', eventEmiter);
-      c.addEventListener('contextmenu', eventEmiter);
+      c.addEventListener('click', worldQuery);
+      c.addEventListener('dblclick', worldQuery);
+      c.addEventListener('contextmenu', worldQuery);
 
       this.cache.inited = true;
 

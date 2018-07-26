@@ -9,6 +9,8 @@ export default {
   className: '',
   text: '',
   scene: 'main',
+  animation: {},
+  dataset: {},
   style: {}
 
 };

@@ -6,6 +6,13 @@ import {
 import calcValue from '../Helpers/calcValue';
 
 
+/**
+ * 
+ * @param {String|Object} o Properties name
+ * @param {Number} v Change in value
+ * @param {Number} d Duration
+ * @param {*} e Easing type
+ */
 export default function animate(o, v, d = 0, e = 'linear') {
 
   let t;
@@ -31,7 +38,7 @@ export default function animate(o, v, d = 0, e = 'linear') {
     v1 = this.style;
     v2 = calcValue.call(this, r.VALUE, this.style);
 
-    for (let p in v2) this.__system__.animation[p] = {
+    for (let p in v2) this.animation[p] = {
       type: e,
       duration: d,
       runtime: 0,

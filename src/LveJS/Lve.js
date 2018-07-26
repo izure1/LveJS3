@@ -17,6 +17,7 @@ import FnInit from './Functions/init';
 import FnPlay from './Functions/play';
 import FnPause from './Functions/pause';
 import FnRequestCaching from './Functions/requestCaching';
+import FnBox2d from './Functions/box2d';
 
 
 function Lve() {
@@ -26,6 +27,7 @@ function Lve() {
   this.hashTable = new LveJSHashTable();
   this.suppressJob = new SuppressJob();
   this.cache = new LveJSCache();
+  //this.box2d = new B.b2World(new B.b2Vec2(0, -300), false);
   
   this.version = '3.0.0';
 
@@ -46,6 +48,7 @@ function Lve() {
   this.lve.play = FnPlay.bind(this);
   this.lve.pause = FnPause.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);
+  this.lve.box2d = FnBox2d.bind(this);
 
   this.lve.current = FnCurrent.call(this);
 

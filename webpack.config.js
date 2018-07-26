@@ -8,6 +8,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 // entries
 const entry_lve = glob.sync('./src/LveJS/**/*.js');
+const entry_box2d = glob.sync('./src/External/Box2D/**/*.js');
 
 // set webpack
 module.exports = {
@@ -15,7 +16,10 @@ module.exports = {
   // development
   mode: 'development',
   entry: {
-    'LveJS': entry_lve
+    'LveJS': [
+      ...entry_lve,
+      ...entry_box2d
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -32,10 +36,6 @@ module.exports = {
             babelrc: true
           }
         }
-      },
-      {
-        test: /\.c$/,
-        use: 'raw-loader'
       }
     ]
   },
@@ -48,5 +48,8 @@ module.exports = {
       // set the current working directory for displaying module paths
       cwd: process.cwd(),
     })
-  ]
+  ],
+  node: {
+    fs: 'empty'
+  }
 };

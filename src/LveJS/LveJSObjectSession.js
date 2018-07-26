@@ -5,6 +5,7 @@ import MAnimate from './Objects/animate';
 import MAttr from './Objects/attr';
 import MCreate from './Objects/create';
 import MCss from './Objects/css';
+import MData from './Objects/data';
 import MEach from './Objects/each';
 import MEmit from './Objects/emit';
 import MFindClass from './Objects/findClass';
@@ -32,14 +33,9 @@ function setDefAttr(w, u, c) {
 
 function setSysAttr(w, u, c) {
 
-  let o;
-
-  o = {
-    enumerable: true
-  };
-
-  setHiddenContext.call(this, '__system__', {}, o);
+  setHiddenContext.call(this, '__system__', {});
   setHiddenContext.call(this.__system__, 'world', w);
+  setHiddenContext.call(this.__system__, 'style', {});
 
 }
 
@@ -64,6 +60,7 @@ LveJSObjectSession.prototype.animate = MAnimate;
 LveJSObjectSession.prototype.attr = MAttr;
 LveJSObjectSession.prototype.create = MCreate;
 LveJSObjectSession.prototype.css = MCss;
+LveJSObjectSession.prototype.data = MData;
 LveJSObjectSession.prototype.each = MEach;
 LveJSObjectSession.prototype.emit = MEmit;
 LveJSObjectSession.prototype.findClass = MFindClass;

@@ -1,14 +1,148 @@
-import {
-  degToRad
-} from '../Utils/math';
-
-function getGradient() {
-
-}
+/*
+ *  Draw Canvas
+ *  v1.0.0
+ * 
+ *  MIT LICENSE
+ *  https://izure.org
+ * 
+ */
 
 function degToRad(d) {
   return d * Math.PI / 180;
 }
+
+function getPropertiesLength(o = {}) {
+  let n = 0;
+  for (let p in o) n++;
+  return n;
+}
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
+ * @param {Object} g Gradient information Object
+ * @param {String} p Gradient type
+ * @param {Number} r Gradient rotation
+ * @param {Number} w Object width
+ * @param {Number} h Object height
+ * @param {Number} x Object axis X
+ * @param {Number} y Object axis Y
+ * @param {Number} f Object axis X revision
+ */
+function getGradient(c, g, p, r, w, h, x, y, f = 0) {
+
+  let grd;
+
+  switch (p) {
+    case 'linear':
+      {
+        let x1, x2, y1, y2;
+
+        if (0 <= r && r < 45) {
+          x1 = 0;
+          y1 = h / 2 * (45 - r) / 45;
+          x2 = w;
+          y2 = h - y1;
+        } else if ((45 <= r && r < 135)) {
+          x1 = w * (r - 45) / (135 - 45);
+          y1 = 0;
+          x2 = w - x1;
+          y2 = h;
+        } else if ((135 <= r && r < 225)) {
+          x1 = w;
+          y1 = h * (r - 135) / (225 - 135);
+          x2 = 0;
+          y2 = h - y1;
+        } else if ((225 <= r && r < 315)) {
+          x1 = w * (1 - (r - 225) / (315 - 225));
+          y1 = h;
+          x2 = w - x1;
+          y2 = 0;
+        } else if (315 <= r) {
+          x1 = 0;
+          y1 = h - h / 2 * (r - 315) / (360 - 315);
+          x2 = w;
+          y2 = h - y1;
+        }
+
+        grd = c.createLinearGradient(x1 + x + f, y1 + y, x2 + x + f, y2 + y);
+        break;
+      }
+    case 'radial':
+      {
+        let hw, hh;
+        let lx, ly;
+
+        hw = w / 2;
+        hh = h / 2;
+
+        lx = x + hw + f,
+        ly = y + hh;
+
+        grd = c.createRadialGradient(lx, ly, 0, lx, ly, hw);
+        break;
+      }
+  }
+
+
+  let pos;
+  let color;
+
+  for (let i in g) {
+
+    pos = i / 100;
+    color = g[i] || 'transparent';
+
+    if (isNaN(pos)) {
+      return;
+    }
+
+    grd.addColorStop(pos, color);
+
+  }
+
+  return grd;
+
+}
+
+/**
+ * 
+ * @param {*} tw Object text width
+ * @param {*} p Gradient direction
+ * @param {*} w Object width
+ * @param {*} align Text align
+ */
+getGradient.getTextAxis = function (tw, p, w, align = 'center') {
+
+  let r = 0;
+
+  switch (align) {
+
+    case 'left':
+      {
+        if (p === 'linear') {
+          r = tw / 2;
+        } else {
+          r = -(w / 2) + (tw / 2);
+        }
+        break;
+      }
+
+    case 'right':
+      {
+        if (p === 'linear') {
+          r = -tw / 2;
+        } else {
+          r = (w / 2) - (tw / 2);
+        }
+        break;
+      }
+
+  }
+
+  return r;
+
+};
 
 
 /**
@@ -39,7 +173,7 @@ function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1) {
   tx += x;
   ty += y;
 
-  c.setTransform(cos, sin, -sin, cos, tx, ty);
+  c.setTransform(cos, -sin, sin, cos, tx, ty);
 
   return {
     x: w * -rx,
@@ -54,26 +188,34 @@ class TextInformation {
   /**
    * @param {String} t Text
    * @param {Number} w Text maxium width
-   * @param {Number} h Text line height
-   * @param {Object} o Option
+   * @param {Object} o Text option (fontSize, fontFamily, fontWeight, fontStyle, color, textAlign, lineHeight)
    */
-  constructor(t, w, h, o) {
+  constructor(t, w, o) {
 
     let c;
-    let tn, tw;
+    let tni, tn, tw;
+
+    o = Object.assign({}, {
+      fontSize: 10,
+      fontFamily: 'arial',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      lineHeight: '100%'
+    }, o);
 
     switch (w) {
       case 0:
-        c = TextInformation.auto(t, o);
+        c = TextInformation.auto(t, w, o);
         break;
       default:
-        c = TextInformation.solid(t, o);
+        c = TextInformation.solid(t, w, o);
         break;
     }
 
     tw = [];
 
-    tn = TextInformation.getTextNodes(c.ranges, c.breaks, t);
+    tni = TextInformation.getTextNodes(c.ranges, c.breaks, t, o);
+    tn = tni.nodes;
     tn.forEach(node => {
 
       if (!tw[node.line]) {
@@ -89,16 +231,20 @@ class TextInformation {
     });
 
     this.width = tw[0];
-    this.height = c.breaks.length + 1 * h;
+    this.maxWidth = w || this.width;
+    this.textAlign = o.textAlign || 'left';
+    this.color = o.color || 'black';
     this.line = c.breaks.length + 1;
     this.nodes = tn;
+    this.lineHeight = o.lineHeight;
+    this.height = tni.height;
 
   }
 
 }
 
 
-TextInformation.getTextNodes = (ranges, breaks, text) => {
+TextInformation.getTextNodes = (ranges, breaks, text, o) => {
 
   let ctx;
 
@@ -150,6 +296,7 @@ TextInformation.getTextNodes = (ranges, breaks, text) => {
         line: line,
         style: range.style,
         width: width,
+        height: 0
       });
 
       log += end;
@@ -159,12 +306,73 @@ TextInformation.getTextNodes = (ranges, breaks, text) => {
   }
 
 
-  return nodes;
+  /* 
+   *  줄간격을 계산합니다.
+   *  percentage 방식은 같은 라인에 있는 노드 중에서 가장 큰 fontsize를 가진 노드를 기준으로 계산됩니다.
+   *  계산된 결과의 최소값은 해당 라인의 fontsize 와 같습니다.
+   * 
+   */
+  let hs;
+  let l, fs;
+
+  hs = [];
+
+  for (let node of nodes) {
+
+    l = node.line;
+
+    if (!hs[l]) {
+      hs[l] = 0;
+    }
+
+    fs = TextInformation.getLineHeight(o.lineHeight, node.style.fontsize);
+
+    if (hs[l] < fs) {
+      hs[l] = fs;
+    }
+
+  }
+
+  hs.forEach((t, i) => {
+
+    for (let node of nodes) {
+
+      if (node.line === i) {
+        node.height = t;
+      }
+
+    }
+
+  });
+
+  l = 0;
+
+  for (let h of hs) l += h;
+  return {
+    nodes,
+    height: l
+  };
+
+};
+
+TextInformation.getLineHeight = function (v, s) {
+
+  let r;
+
+  // percentage value
+  if (isNaN(v - 0)) {
+    r = s * parseFloat(v) / 100;
+  }
+  // pixel value
+  else r = v;
+
+  if (r < s) r = s;
+  return r;
 
 };
 
 
-TextInformation.auto = function (t, o) {
+TextInformation.auto = function (t, w, o) {
 
   let breaks, ranges;
   let width;
@@ -218,14 +426,14 @@ TextInformation.auto = function (t, o) {
 
 };
 
-TextInformation.solid = function (t, o) {
+TextInformation.solid = function (t, w, o) {
 
   let breaks, ranges;
   let width;
 
   breaks = [];
   ranges = [];
-  width = o.width;
+  width = w;
 
   o = TextInformation.removeUnusefulProperties(o);
 
@@ -261,7 +469,7 @@ TextInformation.solid = function (t, o) {
 
         carWidth = TextInformation.getFromStyle(car.charAt(k), node.style);
 
-        if (lastWidth + carWidth > width) {
+        if (lastWidth + carWidth > w) {
 
           lastWidth = 0;
           lastOffset = log + k + 1;
@@ -344,15 +552,14 @@ TextInformation.getParsedXML = function (t) {
   return attribs;
 };
 
-TextInformation.getInformation = (text, defaultStyle = {}) => {
+TextInformation.getInformation = (text, o = {}) => {
 
-  defaultStyle = Object.assign({}, defaultStyle);
-  defaultStyle.color = null;
+  o = Object.assign({}, o);
 
-  for (let i in defaultStyle) {
-    let before = defaultStyle[i];
-    delete defaultStyle[i];
-    defaultStyle[i.toLowerCase()] = before;
+  for (let i in o) {
+    let before = o[i];
+    delete o[i];
+    o[i.toLowerCase()] = before;
   }
 
   let nodes;
@@ -367,10 +574,10 @@ TextInformation.getInformation = (text, defaultStyle = {}) => {
         style = TextInformation.getParsedXML(node.outerHTML);
         break;
       case 3:
-        style = defaultStyle;
+        style = o;
         break;
     }
-    style = Object.assign({}, defaultStyle, style);
+    style = Object.assign({}, o, style);
     return {
       text,
       style
@@ -381,20 +588,25 @@ TextInformation.getInformation = (text, defaultStyle = {}) => {
 };
 
 TextInformation.getFromStyle = (text, style) => {
-  let c = document.createElement('canvas');
+  let c;
+  c = document.createElement('canvas');
   c = c.getContext('2d');
   c.font = style.fontstyle + ' ' + style.fontweight + ' ' + style.fontsize + 'px ' + style.fontfamily;
   return c.measureText(text).width;
 };
 
 TextInformation.removeUnusefulProperties = (style) => {
-  const styles = ['fontsize', 'fontfamily', 'fontweight', 'fontstyle', 'color'];
+  let styles;
+
+  styles = ['fontsize', 'fontfamily', 'fontweight', 'fontstyle', 'color'];
   style = Object.assign({}, style);
+
   for (let i in style) {
     if (styles.indexOf(i.toLowerCase()) === -1) {
       delete style[i];
     }
   }
+
   return style;
 };
 
@@ -419,14 +631,15 @@ function square(c, x, y, o) {
     c.shadowOffsetX = o.shadowOffsetX;
     c.shadowOffsetY = o.shadowOffsetY;
   }
+
   if (o.borderWidth) {
     c.strokeStyle = o.borderColor;
     c.lineWidth = o.borderWidth;
-    c.rect(o.left, o.bottom, o.width + o.borderWidth, o.height + o.borderWidth);
+    c.rect(x, y, o.width + o.borderWidth, o.height + o.borderWidth);
     c.stroke();
   }
 
-  fillColor = o.gradient.__length ? getGradient(this, c, o.opacity, x, y) : o.color;
+  fillColor = getPropertiesLength(o.gradient) ? getGradient(c, o.gradient, o.gradientType, o.gradientDirection, o.width, o.height, x, y) : o.color;
   c.fillStyle = fillColor;
 
   c.rect(x, y, o.width, o.height);
@@ -452,13 +665,14 @@ function circle(c, x, y, o) {
   mx = x + hw;
   my = y + hh;
 
-  if (style.shadowBlur) {
+  if (o.shadowBlur) {
     c.shadowColor = o.shadowColor;
     c.shadowBlur = o.shadowBlur;
     c.shadowOffsetX = o.shadowOffsetX;
     c.shadowOffsetY = o.shadowOffsetY;
   }
-  if (style.borderWidth) {
+
+  if (o.borderWidth) {
     c.strokeStyle = o.borderColor;
     c.lineWidth = o.borderWidth;
     c.ellipse(
@@ -472,7 +686,7 @@ function circle(c, x, y, o) {
     c.stroke();
   }
 
-  fillColor = o.gradient.__length ? getGradient(this, c, o.opacity, x, y) : o.color;
+  fillColor = getPropertiesLength(o.gradient) ? getGradient(c, o.gradient, o.gradientType, o.gradientDirection, o.width, o.height, x, y) : o.color;
 
   c.fillStyle = fillColor;
   c.beginPath();
@@ -489,15 +703,15 @@ function circle(c, x, y, o) {
 }
 
 
-function text_draw(c, f, t, x, y, o) {
+function text_draw(c, f, t, rx, ry, fc) {
 
   let lw;
+  let x, y;
 
   lw = [];
 
   x = [];
-  y = ry + o.height;
-  f = c[f];
+  y = ry + t.height;
 
   if (!t.nodes[0]) {
     return;
@@ -525,34 +739,34 @@ function text_draw(c, f, t, x, y, o) {
     let xx, yy;
 
     ln = node.line;
-    width = lw[node.line] * o.scale;
+    width = lw[node.line];
     ns = node.style;
 
     xx = rx;
-    xx += x[ln] * o.scale;
+    xx += x[ln];
     x[ln] += node.width;
 
-    switch (o.textAlign) {
+    switch (t.textAlign) {
       case 'center':
         {
-          xx += (relative.width / 2) - (width / 2) + (node.width * o.scale / 2);
+          xx += (t.maxWidth / 2) - (width / 2) + (node.width / 2);
           break;
         }
       case 'right':
         {
-          xx += relative.width - width + (node.width * o.scale);
+          xx += t.maxWidth - width + node.width;
           break;
         }
     }
 
     xx = xx;
-    yy = (y - (node.line * lineHeight));
+    yy = (y - (node.line * node.height));
 
-    c.textAlign = o.textAlign;
-    c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + (ns.fontsize * o.scale) + 'px ' + ns.fontfamily;
-    c.fillStyle = ns.color || color;
-    
-    f(node.text, xx, yy);
+    c.textAlign = t.textAlign;
+    c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + ns.fontsize + 'px ' + ns.fontfamily;
+    c.fillStyle = node.style.color || fc;
+
+    c[f](node.text, xx, yy);
 
   }
 
@@ -567,12 +781,11 @@ function text_draw(c, f, t, x, y, o) {
  * @param {Number} y Object axis y
  * @param {Object} o Option
  */
-function text(c, t, x, y, o) {
+function text(c, t, x, y, o = {}) {
 
   let fillColor;
-  let left;
 
-  fillColor = o.gradient.__length ? getGradient(this, c, o.opacity, x, y) : o.color;
+  fillColor = getPropertiesLength(o.gradient) ? getGradient(c, o.gradient, o.gradientType, o.gradientDirection, t.maxWidth, t.lineHeight * t.line, x, y) : t.color;
   c.lineJoin = 'round';
 
   if (o.shadowBlur) {
@@ -585,10 +798,42 @@ function text(c, t, x, y, o) {
   if (o.borderWidth) {
     c.strokeStyle = o.borderColor;
     c.lineWidth = o.borderWidth;
-    text_draw(c, 'strokeText', t, x, y, o);
+    text_draw(c, 'strokeText', t, x, y, fillColor);
   }
 
-  text_draw(c, 'fillText', t, x, y, o);
+  text_draw(c, 'fillText', t, x, y, fillColor);
+
+}
+
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
+ * @param {HTMLImageElement} m Image Object
+ * @param {Number} x Object axis x
+ * @param {Number} y Object axis y
+ * @param {Object} o Option
+ */
+function image(c, m, x, y, o) {
+
+  c.beginPath();
+
+  if (o.shadowBlur) {
+    c.shadowColor = o.shadowColor;
+    c.shadowBlur = o.shadowBlur;
+    c.shadowOffsetX = o.shadowOffsetX;
+    c.shadowOffsetY = o.shadowOffsetY;
+  }
+
+  if (o.borderWidth) {
+    c.strokeStyle = o.borderColor;
+    c.lineWidth = o.borderWidth;
+    c.rect(x - o.borderWidth / 2, y - o.borderWidth / 2, o.width + o.borderWidth, o.height + o.borderWidth);
+    c.stroke();
+  }
+
+  c.fill();
+  c.drawImage(m, x, y, o.width, o.height);
 
 }
 
@@ -600,5 +845,6 @@ export {
   TextInformation,
   square,
   circle,
-  text
+  text,
+  image
 };

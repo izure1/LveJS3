@@ -19,10 +19,12 @@ function getScale(x, s, g) {
  * @param {Number} by Target axis y
  * @param {Number} bz Target axis z
  * @param {Number} s Scale distance
+ * @returns {Object} x, y, scale
  */
 function getPosition(w, h, ax, ay, az, bx, by, bz, s = 100) {
 
   let x, y, z;
+  let scale;
   x = bx - ax;
   y = by - ay;
   z = bz - az;
@@ -33,9 +35,11 @@ function getPosition(w, h, ax, ay, az, bx, by, bz, s = 100) {
   x += w / 2;
   y += h / 2;
   y = h - y;
+
+  scale = s / z;
   
   return {
-    x, y
+    x, y, scale
   }
 
 }

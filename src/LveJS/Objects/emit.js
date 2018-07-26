@@ -1,6 +1,11 @@
 import each from './each';
 import LveJSEvent from '../LveJSEvent';
 
+/**
+ * 
+ * @param {String} e Event name
+ * @param {Object} o Detail information
+ */
 export default function emit(e, o = {}) {
 
   let t;

@@ -3,7 +3,7 @@ import each from './each';
 
 /**
  * 
- * @param {String, Function} c
+ * @param {String|Function} c
  * @returns {Boolean}
  */
 export default function addClass(c) {

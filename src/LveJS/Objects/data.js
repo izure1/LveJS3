@@ -8,16 +8,17 @@ import calcValue from '../Helpers/calcValue';
 
 /**
  * 
- * @param {String|Object} o Properties name
- * @param {*} v Value
+ * @param {String|Object} o 
+ * @param {*} v 
  */
-export default function attr(o, v) {
+export default function data(o, v) {
 
   let t;
   let r;
   let d;
 
-  t = this;
+  t = this.get();
+  t = t.style;
   r = parseArguments.apply(t, arguments);
 
   if (r.IS_GET) {
@@ -25,8 +26,8 @@ export default function attr(o, v) {
   }
 
   each.call(this, function () {
-    d = calcValue.call(this, r.VALUE, this);
-    applyArguments.call(this, d);
+    d = calcValue.call(this, r.VALUE, this.dataset);
+    applyArguments.call(this.dataset, d);
   });
 
   return this;

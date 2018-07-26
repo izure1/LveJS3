@@ -3,6 +3,10 @@ import INIT_ATTRIBUTE from './Vars/INIT_ATTRIBUTE.js';
 import INIT_STYLE from './Vars/INIT_STYLE.js';
 
 
+/**
+ * 
+ * @param {Object} o Object properties
+ */
 export default function create(o = {}) {
 
   let t;
