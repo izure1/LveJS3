@@ -4,7 +4,7 @@ import domReady from '../Utils/domReady';
 export default function ready(f) {
 
   if (typeof f !== 'function') {
-    return lve;
+    return lve.lve;
   }
 
   domReady.call(document, f);

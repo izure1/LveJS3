@@ -6,7 +6,7 @@ export default function getEasingData(p) {
   let a;
   let s, g;
 
-  a = this.animation;
+  a = this.animationset;
   s = a.origin[p];
   g = a.goal[p];
 

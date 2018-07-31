@@ -23,6 +23,21 @@ class SuppressJob {
     delete this.list[id];
   }
 
+  reserve(id, complete) {
+    this.list[id] = complete;
+  }
+
+  fire() {
+    let t;
+    for (let u in this.list) {
+      t = this.list[u];
+      if (t.call) {
+        t();
+        delete this.list[u];
+      }
+    }
+  }
+
 }
 
 module.exports = SuppressJob;

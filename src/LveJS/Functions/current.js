@@ -26,6 +26,10 @@ export default function current() {
 
     get version() {
       return t.version;
+    },
+
+    get world() {
+      return t;
     }
 
   };

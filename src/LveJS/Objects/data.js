@@ -18,7 +18,12 @@ export default function data(o, v) {
   let d;
 
   t = this.get();
-  t = t.style;
+
+  if (!t) {
+    return this;
+  }
+
+  t = t.dataset;
   r = parseArguments.apply(t, arguments);
 
   if (r.IS_GET) {

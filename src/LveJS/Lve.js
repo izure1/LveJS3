@@ -14,6 +14,7 @@ import FnCheckMobile from './Functions/checkMobile';
 import FnCurrent from './Functions/current';
 import FnReady from './Functions/ready';
 import FnInit from './Functions/init';
+import FnStart from './Functions/start';
 import FnPlay from './Functions/play';
 import FnPause from './Functions/pause';
 import FnRequestCaching from './Functions/requestCaching';
@@ -27,6 +28,7 @@ function Lve() {
   this.hashTable = new LveJSHashTable();
   this.suppressJob = new SuppressJob();
   this.cache = new LveJSCache();
+  this.queue = [];
   //this.box2d = new B.b2World(new B.b2Vec2(0, -300), false);
   
   this.version = '3.0.0';
@@ -45,6 +47,7 @@ function Lve() {
   this.lve.checkMobile = FnCheckMobile.bind(this);
   this.lve.ready = FnReady.bind(this);
   this.lve.init = FnInit.bind(this);
+  this.lve.start = FnStart.bind(this);
   this.lve.play = FnPlay.bind(this);
   this.lve.pause = FnPause.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);

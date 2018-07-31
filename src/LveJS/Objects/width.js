@@ -3,6 +3,14 @@
  */
 export default function width() {
 
-  return this.__system__.style.width;
+  let t;
+
+  t = this.get();
+
+  if (!t) {
+    return null;
+  }
+
+  return t.__system__.style.width;
 
 };

@@ -11,13 +11,13 @@ export default function setObject(l, scene) {
 
     scene = scenes[0];
 
-    for (let i = 0, I = i.length; i < I; i++) {
+    for (let i = 0, I = scenes.length; i < I; i++) {
 
       if (
         t.scene === scene ||
         t.scene === 'anywhere' ||
         t.type === 'sprite' && t.__system__.sprite.playing ||
-        t.animation.__length
+        t.animationset.__length
       ) {
         this.objects.push(t);
         break;

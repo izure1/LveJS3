@@ -4,6 +4,6 @@ export default function play() {
     this.renderer.isRunning = false;
   }
 
-  return this;
+  return this.lve;
 
 };

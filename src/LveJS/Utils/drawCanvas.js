@@ -84,7 +84,6 @@ function getGradient(c, g, p, r, w, h, x, y, f = 0) {
       }
   }
 
-
   let pos;
   let color;
 
@@ -148,6 +147,106 @@ getGradient.getTextAxis = function (tw, p, w, align = 'center') {
 /**
  * 
  * @param {HTMLCanvasElement} c Canvas context
+ * @param {Number} b Shadow blur
+ * @param {String} l Shadow color
+ * @param {Number} x Shadow offset X
+ * @param {Number} y Shadow offset Y
+ */
+function setShadow(c, b = 0, l = 'black', x = 0, y = 0) {
+
+  c.shadowBlur = b;
+  c.shadowColor = l;
+  c.shadowOffsetX = x;
+  c.shadowOffsetY = y;
+
+}
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
+ * @param {Number} w Object width
+ * @param {Number} h Object height
+ * @param {Number} x Object axis X
+ * @param {Number} y Object axis Y
+ * @param {Number} bw Object border width
+ * @param {String} l Object border color
+ */
+function borderSquare(c, w, h, x, y, bw, l) {
+
+  if (!bw) {
+    bw = undefined;
+  }
+
+  c.strokeStyle = l;
+  c.lineWidth = bw;
+  c.beginPath();
+  c.strokeRect(x - bw / 2, y - bw / 2, w + bw, h + bw);
+
+}
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
+ * @param {Number} w Object width
+ * @param {Number} h Object height
+ * @param {Number} x Object axis X
+ * @param {Number} y Object axis Y
+ * @param {Number} bw Object border width
+ * @param {String} l Object border color
+ */
+function borderCircle(c, w, h, x, y, bw, l) {
+
+  if (!bw) {
+    bw = undefined;
+  }
+
+  let hw, hh, mx, my;
+
+  hw = w / 2;
+  hh = h / 2;
+  mx = x + hw;
+  my = y + hh;
+
+  c.strokeStyle = l;
+  c.lineWidth = bw;
+  c.beginPath();
+  c.ellipse(
+    mx,
+    my,
+    hw + bw / 2,
+    hh + bw / 2,
+    0, 0,
+    Math.PI * 2
+  );
+  c.stroke();
+
+}
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
+ * @param {TextInformation} t Object width
+ * @param {Number} x Object height
+ * @param {Number} y Object axis Y
+ * @param {Number} bw Object border width
+ * @param {String} l Object border color
+ */
+function borderText(c, t, x, y, bw, l) {
+
+  if (!bw) {
+    bw = undefined;
+  }
+
+  c.strokeStyle = l;
+  c.lineWidth = bw;
+  text_draw(c, 'strokeText', t, x, y, l);
+
+}
+
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
  * @param {Number} w Object width
  * @param {Number} h Object height
  * @param {Number} x Object axis x
@@ -183,6 +282,18 @@ function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1) {
 }
 
 
+/**
+ * 
+ * @param {HTMLCanvasElement} c Canvas context
+ * @param {*} v Alpha value
+ */
+function setAlpha(c, v) {
+
+  c.globalAlpha = v;
+
+}
+
+
 class TextInformation {
 
   /**
@@ -203,8 +314,8 @@ class TextInformation {
       lineHeight: '100%'
     }, o);
 
-    switch (w) {
-      case 0:
+    switch (w < 0) {
+      case true:
         c = TextInformation.auto(t, w, o);
         break;
       default:
@@ -238,6 +349,7 @@ class TextInformation {
     this.nodes = tn;
     this.lineHeight = o.lineHeight;
     this.height = tni.height;
+    this.scale = 1;
 
   }
 
@@ -611,38 +723,30 @@ TextInformation.removeUnusefulProperties = (style) => {
 };
 
 
+TextInformation.prototype.setScale = function (s = 1) {
+
+  this.scale = s;
+  return this;
+
+};
+
+
 /**
  * 
  * @param {HTMLCanvasElement} c Canvas context
+ * @param {Number} w Object width
+ * @param {Number} h Object height
+ * @param {String} l Color
  * @param {Number} x Object axis x
  * @param {Number} y Object axis y
- * @param {Object} o Option
  */
-function square(c, x, y, o) {
+function square(c, w, h, l, x, y) {
 
-  let fillColor;
   let r;
 
+  c.fillStyle = l;
   c.beginPath();
-
-  if (o.shadowBlur) {
-    c.shadowColor = o.shadowColor;
-    c.shadowBlur = o.shadowBlur;
-    c.shadowOffsetX = o.shadowOffsetX;
-    c.shadowOffsetY = o.shadowOffsetY;
-  }
-
-  if (o.borderWidth) {
-    c.strokeStyle = o.borderColor;
-    c.lineWidth = o.borderWidth;
-    c.rect(x, y, o.width + o.borderWidth, o.height + o.borderWidth);
-    c.stroke();
-  }
-
-  fillColor = getPropertiesLength(o.gradient) ? getGradient(c, o.gradient, o.gradientType, o.gradientDirection, o.width, o.height, x, y) : o.color;
-  c.fillStyle = fillColor;
-
-  c.rect(x, y, o.width, o.height);
+  c.rect(x, y, w, h);
   c.fill();
 
 }
@@ -651,44 +755,23 @@ function square(c, x, y, o) {
 /**
  * 
  * @param {HTMLCanvasElement} c Canvas context
+ * @param {Number} w Object width
+ * @param {Number} h Object height
+ * @param {String} l Color
  * @param {Number} x Object axis x
  * @param {Number} y Object axis y
  * @param {Object} o Option
  */
-function circle(c, x, y, o) {
+function circle(c, w, h, l, x, y, o) {
 
-  let fillColor;
   let hw, hh, mx, my;
 
-  hw = o.width / 2;
-  hh = o.height / 2;
+  hw = w / 2;
+  hh = h / 2;
   mx = x + hw;
   my = y + hh;
 
-  if (o.shadowBlur) {
-    c.shadowColor = o.shadowColor;
-    c.shadowBlur = o.shadowBlur;
-    c.shadowOffsetX = o.shadowOffsetX;
-    c.shadowOffsetY = o.shadowOffsetY;
-  }
-
-  if (o.borderWidth) {
-    c.strokeStyle = o.borderColor;
-    c.lineWidth = o.borderWidth;
-    c.ellipse(
-      mx,
-      my,
-      hw + o.borderWidth / 2,
-      hh + o.borderWidth / 2,
-      0, 0,
-      Math.PI * 2
-    );
-    c.stroke();
-  }
-
-  fillColor = getPropertiesLength(o.gradient) ? getGradient(c, o.gradient, o.gradientType, o.gradientDirection, o.width, o.height, x, y) : o.color;
-
-  c.fillStyle = fillColor;
+  c.fillStyle = l;
   c.beginPath();
   c.ellipse(
     mx,
@@ -706,9 +789,11 @@ function circle(c, x, y, o) {
 function text_draw(c, f, t, rx, ry, fc) {
 
   let lw;
+  let s;
   let x, y;
 
   lw = [];
+  s = t.scale;
 
   x = [];
   y = ry + t.height;
@@ -739,22 +824,22 @@ function text_draw(c, f, t, rx, ry, fc) {
     let xx, yy;
 
     ln = node.line;
-    width = lw[node.line];
+    width = lw[node.line] * s;
     ns = node.style;
 
     xx = rx;
-    xx += x[ln];
+    xx += x[ln] * s;
     x[ln] += node.width;
 
     switch (t.textAlign) {
       case 'center':
         {
-          xx += (t.maxWidth / 2) - (width / 2) + (node.width / 2);
+          xx += (t.maxWidth / 2) - (width / 2) + (node.width * s / 2);
           break;
         }
       case 'right':
         {
-          xx += t.maxWidth - width + node.width;
+          xx += t.maxWidth - width + node.width * s;
           break;
         }
     }
@@ -763,7 +848,7 @@ function text_draw(c, f, t, rx, ry, fc) {
     yy = (y - (node.line * node.height));
 
     c.textAlign = t.textAlign;
-    c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + ns.fontsize + 'px ' + ns.fontfamily;
+    c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + ns.fontsize * s + 'px ' + ns.fontfamily;
     c.fillStyle = node.style.color || fc;
 
     c[f](node.text, xx, yy);
@@ -783,25 +868,8 @@ function text_draw(c, f, t, rx, ry, fc) {
  */
 function text(c, t, x, y, o = {}) {
 
-  let fillColor;
-
-  fillColor = getPropertiesLength(o.gradient) ? getGradient(c, o.gradient, o.gradientType, o.gradientDirection, t.maxWidth, t.lineHeight * t.line, x, y) : t.color;
   c.lineJoin = 'round';
-
-  if (o.shadowBlur) {
-    c.shadowColor = o.shadowColor;
-    c.shadowBlur = o.shadowBlur;
-    c.shadowOffsetX = o.shadowOffsetX;
-    c.shadowOffsetY = o.shadowOffsetY;
-  }
-
-  if (o.borderWidth) {
-    c.strokeStyle = o.borderColor;
-    c.lineWidth = o.borderWidth;
-    text_draw(c, 'strokeText', t, x, y, fillColor);
-  }
-
-  text_draw(c, 'fillText', t, x, y, fillColor);
+  text_draw(c, 'fillText', t, x, y, t.color);
 
 }
 
@@ -810,30 +878,16 @@ function text(c, t, x, y, o = {}) {
  * 
  * @param {HTMLCanvasElement} c Canvas context
  * @param {HTMLImageElement} m Image Object
+ * @param {Number} w Object width
+ * @param {Number} h Object height
  * @param {Number} x Object axis x
  * @param {Number} y Object axis y
- * @param {Object} o Option
  */
-function image(c, m, x, y, o) {
+function image(c, m, w, h, x, y) {
 
   c.beginPath();
-
-  if (o.shadowBlur) {
-    c.shadowColor = o.shadowColor;
-    c.shadowBlur = o.shadowBlur;
-    c.shadowOffsetX = o.shadowOffsetX;
-    c.shadowOffsetY = o.shadowOffsetY;
-  }
-
-  if (o.borderWidth) {
-    c.strokeStyle = o.borderColor;
-    c.lineWidth = o.borderWidth;
-    c.rect(x - o.borderWidth / 2, y - o.borderWidth / 2, o.width + o.borderWidth, o.height + o.borderWidth);
-    c.stroke();
-  }
-
   c.fill();
-  c.drawImage(m, x, y, o.width, o.height);
+  c.drawImage(m, x, y, w, h);
 
 }
 
@@ -842,6 +896,11 @@ function image(c, m, x, y, o) {
 export {
   getGradient,
   setRotate,
+  setAlpha,
+  borderCircle,
+  borderSquare,
+  borderText,
+  setShadow,
   TextInformation,
   square,
   circle,

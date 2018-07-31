@@ -20,12 +20,22 @@ export default function animate(o, v, d = 0, e = 'linear') {
   let v1, v2;
 
   t = this.get();
-  r = parseArguments.apply(t.style, arguments);
+
+  if (!t) {
+    return this;
+  }
+
+  t = this.style;
+  r = parseArguments.apply(t, arguments);
 
 
   if (typeof o === 'object') {
     d = arguments[1] || 0;
     e = arguments[2] || 'linear';
+  }
+
+  if (typeof d === 'object') {
+    d = d.speed;
   }
 
   if (r.IS_GET) {
@@ -38,13 +48,21 @@ export default function animate(o, v, d = 0, e = 'linear') {
     v1 = this.style;
     v2 = calcValue.call(this, r.VALUE, this.style);
 
-    for (let p in v2) this.animation[p] = {
-      type: e,
-      duration: d,
-      runtime: 0,
-      start: v1[p],
-      end: v2[p]
-    };
+    for (let p in v2) {
+
+      this.animationset[p] = {
+        type: e,
+        duration: d,
+        runtime: 0,
+        start: v1[p],
+        end: v2[p]
+      };
+
+      this.emit('animatestart', {
+        propertyName: p
+      });
+
+    }
 
   });
 

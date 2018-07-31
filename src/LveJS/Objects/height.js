@@ -3,6 +3,14 @@
  */
 export default function height() {
 
-  return this.__system__.style.height;
+  let t;
+
+  t = this.get();
+
+  if (!t) {
+    return null;
+  }
+
+  return t.__system__.style.height;
 
 };

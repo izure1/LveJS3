@@ -7,7 +7,9 @@ import MCreate from './Objects/create';
 import MCss from './Objects/css';
 import MData from './Objects/data';
 import MEach from './Objects/each';
+import MElement from './Objects/element';
 import MEmit from './Objects/emit';
+import MFilter from './Objects/filter';
 import MFindClass from './Objects/findClass';
 import MGet from './Objects/get';
 import MHasClass from './Objects/hasClass';
@@ -15,7 +17,9 @@ import MHeight from './Objects/height';
 import MNotClass from './Objects/notClass';
 import MOff from './Objects/off';
 import MOn from './Objects/on';
+import MRemove from './Objects/remove';
 import MRemoveClass from './Objects/removeClass';
+import MStop from './Objects/stop';
 import MToggleClass from './Objects/toggleClass';
 import MUse from './Objects/use';
 import MWidth from './Objects/width';
@@ -35,7 +39,14 @@ function setSysAttr(w, u, c) {
 
   setHiddenContext.call(this, '__system__', {});
   setHiddenContext.call(this.__system__, 'world', w);
-  setHiddenContext.call(this.__system__, 'style', {});
+
+  Object.defineProperty(this, 'length', {
+
+    get() {
+      return this.context.length;
+    }
+    
+  });
 
 }
 
@@ -62,7 +73,9 @@ LveJSObjectSession.prototype.create = MCreate;
 LveJSObjectSession.prototype.css = MCss;
 LveJSObjectSession.prototype.data = MData;
 LveJSObjectSession.prototype.each = MEach;
+LveJSObjectSession.prototype.element = MElement;
 LveJSObjectSession.prototype.emit = MEmit;
+LveJSObjectSession.prototype.filter = MFilter;
 LveJSObjectSession.prototype.findClass = MFindClass;
 LveJSObjectSession.prototype.get = MGet;
 LveJSObjectSession.prototype.hasClass = MHasClass;
@@ -70,7 +83,9 @@ LveJSObjectSession.prototype.height = MHeight;
 LveJSObjectSession.prototype.notClass = MNotClass;
 LveJSObjectSession.prototype.off = MOff;
 LveJSObjectSession.prototype.on = MOn;
+LveJSObjectSession.prototype.remove = MRemove;
 LveJSObjectSession.prototype.removeClass = MRemoveClass;
+LveJSObjectSession.prototype.stop = MStop;
 LveJSObjectSession.prototype.toggleClass = MToggleClass;
 LveJSObjectSession.prototype.use = MUse;
 LveJSObjectSession.prototype.width = MWidth;

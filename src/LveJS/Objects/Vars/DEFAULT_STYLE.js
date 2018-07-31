@@ -1,6 +1,6 @@
 export default {
 
-  fontSize: 10,
+  fontSize: 50,
   fontFamily: 'arial, sans-serif',
   fontWeight: 'normal',
   fontStyle: 'normal',
@@ -23,7 +23,7 @@ export default {
   scale: 1,
   blur: 0,
   gradientDirection: 0,
-  gradientType: 'direction',
+  gradientType: 'linear',
   gradient: {},
   pointerEvents: true,
   display: 'block',

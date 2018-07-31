@@ -4,14 +4,20 @@ import each from './each';
 export default function on(e, h) {
 
   let t;
+
+  e = e.split(' ');
   each.call(this, function () {
 
-    if (!(e in this.__system__.events)) {
-      this.__system__.events[e] = [];
-    }
+    for (let p of e) {
 
-    t = h.bind(this);
-    this.__system__.events[e].push(t);
+      if (!(p in this.__system__.events)) {
+        this.__system__.events[p] = [];
+      }
+  
+      t = h.bind(this);
+      this.__system__.events[p].push(t);
+
+    }
 
   });
 

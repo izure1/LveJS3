@@ -1,51 +1,81 @@
 /**
  * 
  * @param {Number} x Value
- * @param {Number} s Scale distance
+ * @param {Number} d Scale distance
  * @param {Number} g Gap
  */
-function getScale(x, s, g) {
-  return x * s / g;
+function getScale(x, d, g) {
+  return x * d / g;
 }
 
 /**
  * 
  * @param {Number} w Viewport width
  * @param {Number} h Viewport height
- * @param {Number} ax Camera axis x
- * @param {Number} ay Camera axis y
- * @param {Number} az Camera axis z
- * @param {Number} bx Target axis x
- * @param {Number} by Target axis y
- * @param {Number} bz Target axis z
- * @param {Number} s Scale distance
+ * @param {Number} ax Target axis x
+ * @param {Number} ay Target axis y
+ * @param {Number} az Target axis z
+ * @param {Number} bx Camera axis x
+ * @param {Number} by Camera axis y
+ * @param {Number} bz Camera axis z
+ * @param {Number} d Scale distance
  * @returns {Object} x, y, scale
  */
-function getPosition(w, h, ax, ay, az, bx, by, bz, s = 100) {
+function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100) {
 
   let x, y, z;
-  let scale;
-  x = bx - ax;
-  y = by - ay;
-  z = bz - az;
+  let s;
+  x = ax - bx;
+  y = ay - by;
+  z = az - bz;
 
-  x = getScale(x, s, z);
-  y = getScale(y, s, z);
+  if (z <= 0) {
+    s = 0;
+    return {
+      s
+    };
+  }
+
+  x = getScale(x, d, z);
+  y = getScale(y, d, z);
 
   x += w / 2;
   y += h / 2;
   y = h - y;
 
-  scale = s / z;
-  
+  s = d / z;
+
   return {
-    x, y, scale
-  }
+    x,
+    y,
+    s
+  };
+
+}
+
+
+/**
+ * 
+ * @param {Number} w Viewport width
+ * @param {Number} h Viewport height
+ * @param {Number} x Camera axis x
+ * @param {Number} y Camera axis y
+ */
+function getAABB(w, h, x, y) {
+
+  y = h - y;
+
+  return {
+    x,
+    y,
+    s: 1
+  };
 
 }
 
 
 export {
   getPosition,
+  getAABB,
   getScale
 };

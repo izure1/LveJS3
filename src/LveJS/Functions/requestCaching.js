@@ -4,12 +4,12 @@ import instanceOf from './instanceof';
 export default function requestCaching(f = false) {
 
   if (!instanceOf(this.renderer.camera)) {
-    return this;
+    return this.lve;
   }
 
   if (f) {
     this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene);
-    return this;
+    return this.lve;
   }
 
   this.suppressJob.setSuppress('requestCaching', () => {
@@ -18,6 +18,6 @@ export default function requestCaching(f = false) {
 
   }, this.renderer.setting.cacheLevel);
   
-  return this;
+  return this.lve;
 
 };

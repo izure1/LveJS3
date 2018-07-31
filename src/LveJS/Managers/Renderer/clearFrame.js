@@ -1,4 +1,4 @@
-export default function clearFrame(cl) {
+export default function clearFrame(l) {
 
   let c;
   let w, h;
@@ -9,7 +9,7 @@ export default function clearFrame(cl) {
   h = c.canvas.height;
 
   c.globalAlpha = 1;
-  c.fillStyle = cl;
+  c.fillStyle = l;
 
   c.beginPath();
   c.clearRect(0, 0, w, h);

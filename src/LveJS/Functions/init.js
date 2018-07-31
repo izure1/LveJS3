@@ -21,6 +21,7 @@ export default function init(o) {
       this.renderer.setting.canvas = {};
       this.renderer.setting.canvas.context = c.getContext('2d');
       this.renderer.setting.canvas.element = c;
+      this.renderer.setting.canvas.context.save();
       this.renderer.start();
 
     }
@@ -63,7 +64,11 @@ export default function init(o) {
       c.addEventListener('dblclick', worldQuery);
       c.addEventListener('contextmenu', worldQuery);
 
+
+      for (let f of this.queue) f.call(this, this);
+
       this.cache.inited = true;
+      delete this.queue;
 
     }
 

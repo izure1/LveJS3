@@ -44,7 +44,7 @@ LveJSHashTable.prototype.select = function (name = '*', filter = () => {
 
     for (let p in this.table) {
 
-      r = [...r, this.table[p]];
+      r = [...r, ...this.table[p]];
 
     }
 

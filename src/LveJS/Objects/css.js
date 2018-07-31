@@ -18,6 +18,11 @@ export default function css(o, v) {
   let d;
 
   t = this.get();
+
+  if (!t) {
+    return this;
+  }
+
   t = t.style;
   r = parseArguments.apply(t, arguments);
 

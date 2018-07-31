@@ -7,17 +7,24 @@ import {
 export default function off(e, h = null) {
 
   let t;
+  let r;
+
   each.call(this, function () {
 
     t = this.__system__.events;
+    r = e ? e.split(' ') : Object.keys(t);
 
-    if (!(e in t)) {
-      return;
-    }
+    for (let p of r) {
 
-    if (h === null) t[e] = [];
-    else {
-      removeArrayItem(t[e], h);
+      if (!(p in t)) {
+        return;
+      }
+
+      if (h === null) t[p] = [];
+      else {
+        removeArrayItem(t[p], h);
+      }
+
     }
 
   });

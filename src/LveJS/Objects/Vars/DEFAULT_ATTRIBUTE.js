@@ -1,16 +1,21 @@
 export default {
 
   type: null,
-  src: null,
-  loop: null,
   element: null,
   physics: null,
+  density: 1,
+  friction: 1,
+  restitution: 0.3,
+  loop: false,
   timescale: 1,
   className: '',
   text: '',
+  src: '',
   scene: 'main',
-  animation: {},
+  animationset: {},
   dataset: {},
+  followset: {},
+  spriteset: {},
   style: {}
 
 };
