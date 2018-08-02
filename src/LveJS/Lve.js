@@ -20,6 +20,8 @@ import FnPause from './Functions/pause';
 import FnRequestCaching from './Functions/requestCaching';
 import FnBox2d from './Functions/box2d';
 
+import B from '../External/Box2D/Box2D';
+
 
 function Lve() {
 
@@ -29,8 +31,9 @@ function Lve() {
   this.suppressJob = new SuppressJob();
   this.cache = new LveJSCache();
   this.queue = [];
-  //this.box2d = new B.b2World(new B.b2Vec2(0, -300), false);
-  
+  this.box2d = B();
+  this.physics = new this.box2d.b2World(new this.box2d.b2Vec2(0, -300), false);
+
   this.version = '3.0.0';
 
   let self = this;

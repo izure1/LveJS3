@@ -3,26 +3,34 @@ import easing from '../Utils/easing';
 
 export default function __animationUpdate(tt = 0) {
 
-  let v;
+  let t;
   let d;
+  let v;
 
   for (let p in this.animationset) {
 
-    v = this.animationset[p];
-    v.runtime += tt;
+    t = this.animationset[p];
+    t.runtime += tt;
 
-    if (v.runtime > v.duration) {
-      v.runtime = v.duration;
+    if (t.runtime > t.duration) {
+      t.runtime = t.duration;
       d = true;
     }
-    
-    this.style[p] = easing(v.type, v.runtime, v.start, v.end - v.start, v.duration);
+
+    v = easing(t.type, t.runtime, t.start, t.end - t.start, t.duration);
+
+    this.style[p] = v
+    this.emit('animateupdate', {
+      propertyName: p,
+      value: v
+    });
 
     if (d) {
       delete this.animationset[p];
-      this.style[p] = v.end;
+      this.style[p] = t.end;
       this.emit('animateend', {
-        propertyName: p
+        propertyName: p,
+        value: t.end
       });
     }
 

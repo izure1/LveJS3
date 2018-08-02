@@ -14,9 +14,12 @@ import MFindClass from './Objects/findClass';
 import MGet from './Objects/get';
 import MHasClass from './Objects/hasClass';
 import MHeight from './Objects/height';
+import MIn from './Objects/in';
 import MNotClass from './Objects/notClass';
 import MOff from './Objects/off';
 import MOn from './Objects/on';
+import MPause from './Objects/pause';
+import MPlay from './Objects/play';
 import MRemove from './Objects/remove';
 import MRemoveClass from './Objects/removeClass';
 import MStop from './Objects/stop';
@@ -45,7 +48,7 @@ function setSysAttr(w, u, c) {
     get() {
       return this.context.length;
     }
-    
+
   });
 
 }
@@ -80,9 +83,12 @@ LveJSObjectSession.prototype.findClass = MFindClass;
 LveJSObjectSession.prototype.get = MGet;
 LveJSObjectSession.prototype.hasClass = MHasClass;
 LveJSObjectSession.prototype.height = MHeight;
+LveJSObjectSession.prototype.in = MIn;
 LveJSObjectSession.prototype.notClass = MNotClass;
 LveJSObjectSession.prototype.off = MOff;
 LveJSObjectSession.prototype.on = MOn;
+LveJSObjectSession.prototype.pause = MPause;
+LveJSObjectSession.prototype.play = MPlay;
 LveJSObjectSession.prototype.remove = MRemove;
 LveJSObjectSession.prototype.removeClass = MRemoveClass;
 LveJSObjectSession.prototype.stop = MStop;

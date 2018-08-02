@@ -21,6 +21,7 @@ class LveJSRenderer {
     this.deltaTimer = new DeltaTimer();
     this.isRunning = false;
     this.isStart = false;
+    this.interval = 0;
   }
 
 }

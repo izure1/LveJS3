@@ -1,5 +1,17 @@
-let handler = {};
+let handler;
 
+
+handler = {};
+handler.__observer = function (p, v, t) {
+
+  this.emit('attrmodified', {
+
+    propertyName: p,
+    value: v
+
+  });
+
+};
 
 
 handler.src = function (p, v, t) {
@@ -20,6 +32,13 @@ handler.text = function (p, v, t) {
   }
 
   this.__setInformation_text();
+  return v;
+
+};
+
+handler.scene = function(p, v, t) {
+
+  this.__system__.world.lve.requestCaching();
   return v;
 
 };

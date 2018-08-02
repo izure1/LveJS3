@@ -59,7 +59,8 @@ export default function animate(o, v, d = 0, e = 'linear') {
       };
 
       this.emit('animatestart', {
-        propertyName: p
+        propertyName: p,
+        value: v1[p]
       });
 
     }

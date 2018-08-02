@@ -600,3 +600,4 @@ td();b.b2Manifold.e_faceA=rj();b.b2Manifold.e_faceB=sj();b.b2_staticBody=Sl();b.
 
   return Box2D;
 };
+export default Box2D;

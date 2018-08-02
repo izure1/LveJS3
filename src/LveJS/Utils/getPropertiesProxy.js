@@ -18,6 +18,9 @@ export default function getPropertiesProxy(t, h) {
       return t[p];
     },
     set(t, p, v) {
+      if (h.__observer) {
+        h.__observer.call(self, p, v, t);
+      }
       t[p] = h[p] ? h[p].call(self, p, v, t) : v;
       return true;
     }

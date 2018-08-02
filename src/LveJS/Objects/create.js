@@ -30,7 +30,7 @@ export default function create(o = {}) {
   w = this.__system__.world;
 
   t = new LVE.classes.LveJSObject(w, this.name);
-  t.attr(v1).attr(o).css(v2).css(t.css());
+  t.emit('create').attr(v1).attr(o).css(v2).css(t.css());
 
   w.hashTable.insert(this.name, t);
   w.lve.requestCaching();

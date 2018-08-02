@@ -1,7 +1,6 @@
 export default function run() {
 
   // interval virtual, interval real, drawing frame
-  let tt;
   let {
     extendStart,
     extendEnd,
@@ -9,7 +8,7 @@ export default function run() {
     extendDrawEnd
   } = this.setting;
 
-  tt = this.deltaTimer.update();
+  this.interval = this.deltaTimer.update();
 
 
   if (extendStart) extendStart();
@@ -18,7 +17,7 @@ export default function run() {
 
     if (extendDrawStart) extendDrawStart();
 
-    this.update(tt);
+    this.update(this.interval);
 
     if (extendDrawEnd) extendDrawEnd();
 

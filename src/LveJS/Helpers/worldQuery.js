@@ -1,4 +1,4 @@
-const B = require('../../External/Box2D/Box2D');
+import B from '../../External/Box2D/Box2D';
 
 
 export default function worldQuery(e) {

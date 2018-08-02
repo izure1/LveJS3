@@ -7,6 +7,7 @@ export default [
   'attrmodified',
   'animateupdate',
   'datamodified',
+  'followmodified',
   'follow',
   'followupdate',
   'unfollow',

@@ -3,7 +3,7 @@ import LveJSObject from './LveJSObject';
 import Lve from './Lve';
 import * as f from './Utils/drawCanvas';
 
-const Box2D = require('../External/Box2D/Box2D.js');
+import Box2D from '../External/Box2D/Box2D';
 
 
 /* Light Visualnovel Engine

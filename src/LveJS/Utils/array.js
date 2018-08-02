@@ -29,6 +29,17 @@ function removeArrayItem(t, m, n = t.length) {
 
 }
 
+/**
+ * 
+ * @param {Array} Target array 
+ */
+function removeDuplicate(t) {
+
+  return [...new Set(t)];
+
+}
+
 export {
-  removeArrayItem
+  removeArrayItem,
+  removeDuplicate
 };

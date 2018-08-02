@@ -1,4 +1,17 @@
-let handler = {};
+let handler;
+
+
+handler = {};
+handler.__observer = function (p, v, t) {
+
+  this.emit('cssmodified', {
+
+    propertyName: p,
+    value: v
+
+  });
+
+};
 
 
 handler.width = handler.height = function (p, v, t) {
