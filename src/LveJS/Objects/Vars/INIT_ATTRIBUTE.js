@@ -1,11 +1,20 @@
-export default {
+export default function () {
 
-  sprite: {
+  this.image = {
+    element: document.createElement('img')
+  };
+
+  this.sprite = {
+    element: document.createElement('img'),
     loop: true
-  },
+  };
 
-  text: {
+  this.video = {
+    element: document.createElement('video')
+  };
+
+  this.text = {
     text: 'Hello, World!'
-  }
+  };
 
 };

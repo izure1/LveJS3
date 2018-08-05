@@ -1,7 +1,7 @@
-export default {
+export default function () {
 
-  follower: [],
-  following: null,
-  relative: {}
+  this.follower = [];
+  this.following = null;
+  this.position = {};
 
 };

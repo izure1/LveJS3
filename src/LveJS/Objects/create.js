@@ -24,8 +24,10 @@ export default function create(o = {}) {
   }
 
 
-  v1 = INIT_ATTRIBUTE[o.type] || {};
-  v2 = INIT_STYLE[o.type] || {};
+  v1 = new INIT_ATTRIBUTE;
+  v2 = new INIT_STYLE;
+  v1 = v1[o.type] || {};
+  v2 = v2[o.type] || {};
 
   w = this.__system__.world;
 

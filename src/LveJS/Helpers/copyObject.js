@@ -1,18 +1,13 @@
 import instanceOf from '../Functions/instanceof';
 
 
-export default function copyObject(v) {
+export default function copyObject(v, f = {}) {
 
   let r;
 
   // HTML Element
   if (v instanceof HTMLElement) {
     return v.cloneNode(true);
-  }
-
-  // LveJSObject or Session
-  if (instanceOf(v)) {
-    return v;
   }
 
   // Array or Object
@@ -25,11 +20,16 @@ export default function copyObject(v) {
 
     for (let p in v) {
 
+      if (p in f) {
+        r[p] = f[p];
+        continue;
+      }
+
       c = v[p];
 
       if (typeof c !== 'object') r[p] = c;
-      else {
-        r[p] = copyObject(c);
+      else if (!instanceOf(v)) {
+        r[p] = copyObject(c, f);
       }
 
     }

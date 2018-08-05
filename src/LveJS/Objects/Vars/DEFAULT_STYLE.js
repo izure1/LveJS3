@@ -1,34 +1,34 @@
-export default {
+export default function () {
 
-  fontSize: 50,
-  fontFamily: 'arial, sans-serif',
-  fontWeight: 'normal',
-  fontStyle: 'normal',
-  textAlign: 'left',
-  width: 100,
-  height: 100,
-  color: 'black',
-  borderColor: 'black',
-  shadowColor: 'black',
-  borderWidth: 0,
-  shadowBlur: 0,
-  shadowOffsetX: 0,
-  shadowOffsetY: 0,
-  position: 'absolute',
-  left: 0,
-  bottom: 0,
-  perspective: 100,
-  opacity: 1,
-  rotate: 0,
-  scale: 1,
-  blur: 0,
-  gradientDirection: 0,
-  gradientType: 'linear',
-  gradient: {},
-  pointerEvents: true,
-  display: 'block',
-  lineHeight: '100%',
-  verticalAlign: 'top',
-  zIndex: 0
+  this.fontSize = 50;
+  this.fontFamily = 'arial; sans-serif';
+  this.fontWeight = 'normal';
+  this.fontStyle = 'normal';
+  this.textAlign = 'left';
+  this.width = 100;
+  this.height = 100;
+  this.color = 'black';
+  this.borderColor = 'black';
+  this.shadowColor = 'black';
+  this.borderWidth = 0;
+  this.shadowBlur = 0;
+  this.shadowOffsetX = 0;
+  this.shadowOffsetY = 0;
+  this.position = 'absolute';
+  this.left = 0;
+  this.bottom = 0;
+  this.perspective = 100;
+  this.opacity = 1;
+  this.rotate = 0;
+  this.scale = 1;
+  this.blur = 0;
+  this.gradientDirection = 0;
+  this.gradientType = 'linear';
+  this.gradient = {};
+  this.pointerEvents = true;
+  this.display = 'block';
+  this.lineHeight = '100%';
+  this.verticalAlign = 'top';
+  this.zIndex = 0;
 
 };

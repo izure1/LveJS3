@@ -17,12 +17,8 @@ export default function __setInformation_image() {
     t = this.element;
 
     if (!s) {
-      this.element = null;
+      t.src = '';
       return;
-    }
-
-    if (!t) {
-      t = new Image();
     }
 
     w = this.style.width;

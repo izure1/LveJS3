@@ -1,6 +1,3 @@
-import each from './each';
-
-
 /**
  * 
  * @param {String|Object} o Properties name

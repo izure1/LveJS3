@@ -1,8 +1,8 @@
-export default {
+export default function () {
 
-  playing: false,
-  stage: 1,
-  fps: 1,
-  current: 0,
+  this.playing = false;
+  this.stage = 1;
+  this.fps = 1;
+  this.current = 0;
 
 };

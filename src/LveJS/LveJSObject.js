@@ -20,18 +20,20 @@ import PROXY_HANDLER_SPRITE from './Objects/Vars/PROXY_HANDLER.SPRITE';
 import M__fireReservation from './Objects/__fireReservation';
 import M__animationUpdate from './Objects/__animationUpdate';
 import M__draw from './Objects/__draw';
+import M__followUpdate from './Objects/__followUpdate';
+import M__followUpdateFromObj from './Objects/__followUpdateFromObj';
 import M__setInformation_image from './Objects/__setInformation_image';
 import M__setInformation_text from './Objects/__setInformation_text';
 
 
 
-function setCtxAttr() {
-  setHiddenContext.call(this, 'context', [this]);
+function setCtxAttr(r) {
+  setHiddenContext.call(this, 'context', [r]);
 }
 
-function setSysAttr() {
+function setSysAttr(r) {
 
-  setHiddenContext.call(this.__system__, 'proxy', this);
+  setHiddenContext.call(this.__system__, 'proxy', r);
   setHiddenContext.call(this.__system__, 'style', {});
   setHiddenContext.call(this.__system__, 'text', {});
   setHiddenContext.call(this.__system__, 'events', {});
@@ -44,22 +46,22 @@ function setSysAttr() {
 
 }
 
-function setHDRAttr() {
+function setHDRAttr(r) {
 
   // style
-  this.style = JSON.parse(JSON.stringify(DEFAULT_STYLE));
+  this.style = new DEFAULT_STYLE;
   this.style = getPropertiesProxy.call(this, this.style, PROXY_HANDLER_STYLE);
 
   // dataset
-  this.dataset = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  this.dataset = new DEFAULT_DATA;
   this.dataset = getPropertiesProxy.call(this, this.dataset, PROXY_HANDLER_DATA);
 
   // followset
-  this.followset = JSON.parse(JSON.stringify(DEFAULT_FOLLOW));
+  this.followset = new DEFAULT_FOLLOW;
   this.followset = getPropertiesProxy.call(this, this.followset, PROXY_HANDLER_FOLLOW);
 
   // spriteset
-  this.spriteset = JSON.parse(JSON.stringify(DEFAULT_SPRITE));
+  this.spriteset = new DEFAULT_SPRITE;
   this.spriteset = getPropertiesProxy.call(this, this.spriteset, PROXY_HANDLER_SPRITE);
 
 }
@@ -76,14 +78,12 @@ class LveJSObject extends LveJSObjectSession {
 
     // 객체의 속성 수정을 감지할 수 있는 새로운 프록시 객체를 만듭니다.
     // 이 프록시 객체가 해시테이블에 스택으로 존재하며, 실제 객체는 레퍼런스 변수로서만 남습니다.
-    r = JSON.stringify(DEFAULT_ATTRIBUTE);
-    r = JSON.parse(r);
-    r = Object.assign(this, r);
+    r = Object.assign(this, new DEFAULT_ATTRIBUTE);
     r = getPropertiesProxy.call(this, r, PROXY_HANDLER_ATTRIBUTE);
 
-    setCtxAttr.apply(r, arguments);
-    setSysAttr.apply(r, arguments);
-    setHDRAttr.apply(r, arguments);
+    setCtxAttr.call(this, r);
+    setSysAttr.call(this, r);
+    setHDRAttr.call(this, r);
 
     return r;
 
@@ -95,6 +95,8 @@ class LveJSObject extends LveJSObjectSession {
 LveJSObject.prototype.__fireReservation = M__fireReservation;
 LveJSObject.prototype.__animationUpdate = M__animationUpdate;
 LveJSObject.prototype.__draw = M__draw;
+LveJSObject.prototype.__followUpdate = M__followUpdate;
+LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj;
 LveJSObject.prototype.__setInformation_image = M__setInformation_image;
 LveJSObject.prototype.__setInformation_text = M__setInformation_text;
 

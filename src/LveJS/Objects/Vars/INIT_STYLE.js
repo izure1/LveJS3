@@ -1,21 +1,21 @@
-export default {
+export default function () {
 
-  camera: {
+  this.camera = {
     width: 0,
     height: 0,
     perspective: 0
-  },
+  };
 
-  circle: {
+  this.circle = {
     gradientType: 'radial'
-  },
+  };
 
-  image: {
+  this.image = {
     width: 'auto',
     height: 'auto'
-  },
-  
-  text: {
+  };
+
+  this.text = {
     width: 'auto',
     height: 'auto'
   }

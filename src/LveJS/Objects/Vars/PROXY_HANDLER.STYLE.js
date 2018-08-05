@@ -98,4 +98,27 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
 
 };
 
+
+handler.left = handler.bottom = handler.perspective = function (p, v) {
+
+  let w;
+  let t;
+
+  w = this.__system__.world;
+
+  for (let i of this.followset.follower) {
+
+    t = w.hashTable.select(i);
+    t = t[0];
+
+    if (!t) continue;
+
+    t.__followUpdate(p, v);
+
+  }
+
+  return v;
+
+};
+
 export default handler;

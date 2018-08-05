@@ -4,27 +4,27 @@
  * 
  * @param {Array} t Target array 
  * @param {*} m The Element of delete hoping.
- * @param {Number} n repeat time
  */
-function removeArrayItem(t, m, n = t.length) {
+function removeArrayItem(t, m) {
+
+  let i;
 
   if (t.indexOf(m) === -1) {
     return t;
   }
 
-  let i = t.length;
+  i = t.length;
 
-  t.reverse();
+  while (i--) {
 
-  while (--i) {
-    if (!n) break;
-    if (t[i] === m) {
-      t.splice(i, 1);
-      n--;
+    if (t[i] !== m) {
+      continue;
     }
+
+    t.splice(i, 1);
+
   }
 
-  t.reverse();
   return t;
 
 }
