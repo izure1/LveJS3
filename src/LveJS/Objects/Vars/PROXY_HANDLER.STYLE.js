@@ -117,6 +117,39 @@ handler.left = handler.bottom = handler.perspective = function (p, v) {
 
   }
 
+  if (p === 'perspective') {
+    w.lve.requestCaching();
+  }
+
+  return v;
+
+};
+
+handler.opacity = function (p, v, t) {
+
+  if (v > 1) {
+    v = 1;
+  }
+
+  if (v <= 0) {
+    v = 0;
+  }
+
+  this.__system__.style.d_opacity = v;
+  return v;
+
+};
+
+handler.display = function (p, v, t) {
+
+  this.__system__.style.d_display = 0;
+
+  if (v !== 'block') {
+    v = 'none';
+  } else {
+    this.__system__.style.d_display = 1;
+  }
+
   return v;
 
 };

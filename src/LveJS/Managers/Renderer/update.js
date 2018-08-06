@@ -7,7 +7,8 @@ import {
 // 캔버스가 설정되어있지 않을 경우 화면에 보여질 문장 정보를 정의합니다
 let c;
 let str;
-let camera, camera_x, camera_y, camera_z;
+let camera, camera_h, camera_x, camera_y, camera_z;
+let st;
 
 str = new TextInformation('NO CAMERA\n<style fontsize="15" color="gray">지정된 카메라가 없습니다</style>', 0, {
   fontSize: 50,
@@ -36,6 +37,7 @@ export default function update(tt = 0) {
   }
 
 
+  camera_h = camera.__system__.style.height;
   camera_x = camera.style.left;
   camera_y = camera.style.bottom;
   camera_z = camera.style.perspective;
@@ -45,16 +47,19 @@ export default function update(tt = 0) {
 
   for (let t of this.objects) {
 
+    st = t.__system__.style;
+
     // 객체 애니메이션 업데이트
     t.__fireReservation();
     t.__animationUpdate(tt);
 
-    if (t.type === 'camera') continue;
+    if (!(st.d_opacity * st.d_display * st.d_type)) continue;
 
     t.__draw(
       c.context,
       c.element.width,
       c.element.height,
+      camera_h,
       camera_x,
       camera_y,
       camera_z,

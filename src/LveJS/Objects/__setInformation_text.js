@@ -10,10 +10,6 @@ export default function __setInformation_text() {
   let t;
   let str, w;
 
-  if (this.type !== 'text') {
-    return this;
-  }
-
   this.__system__.suppressJob.reserve('setTextInformation', () => {
 
     fontSize = this.style.fontSize;

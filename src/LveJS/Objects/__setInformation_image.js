@@ -7,10 +7,6 @@ export default function __setInformation_image() {
   let s;
   let w, h;
 
-  if (this.type !== 'image') {
-    return this;
-  }
-
   this.__system__.suppressJob.reserve('__setImage', () => {
 
     s = this.src || '';

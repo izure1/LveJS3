@@ -30,13 +30,14 @@ VERTEX.fixed = getAABB;
  * @param {HTMLCanvasElement} c Drawing Canvas
  * @param {Number} w Canvas width
  * @param {Number} h Canvas height
+ * @param {Number} ah Camera height
  * @param {Number} ax Camera axis x
  * @param {Number} ay Camera axis y
  * @param {Number} az Camera axis z
  * @param {Number} d Scale distance
  * @param {Number} a Alpha color
  */
-export default function __draw(c, cw, ch, ax, ay, az, d, a = 1) {
+export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
 
   let st, st_;
 

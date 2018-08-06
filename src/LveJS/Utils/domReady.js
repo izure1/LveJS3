@@ -12,7 +12,12 @@ function documentReady(f) {
 
   if (document.readyState != 'loading') f();
   else {
-    document.addEventListener('DOMContentLoaded', f);
+
+    document.addEventListener('DOMContentLoaded', function cb() {
+      document.removeEventListener('DOMContentLoaded', cb);
+      f();
+    });
+
     r = false;
   }
 
@@ -36,9 +41,18 @@ function elementReady(t, f) {
 
     if (t.complete) f.call(t, t);
     else {
-      t.addEventListener('load', () => f.call(t, t));
-      t.addEventListener('error', () => f.call(t, t));
+
+      t.addEventListener('load', function cb() {
+        t.removeEventListener('load', cb);
+        f.call(t, t);
+      });
+      t.addEventListener('error', function cb() {
+        t.removeEventListener('error', cb);
+        f.call(t, t)
+      });
+
       r = false;
+
     }
 
   }
