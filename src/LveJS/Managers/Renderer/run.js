@@ -13,7 +13,7 @@ export default function run() {
 
   if (extendStart) extendStart();
 
-  if (this.isRunning) {
+  if (this.isRunning && this.deltaTimer.checkAndClear(this.setting.frameLimit)) {
 
     if (extendDrawStart) extendDrawStart();
 

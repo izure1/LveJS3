@@ -5,6 +5,8 @@ export default function play() {
   }
 
   this.renderer.isRunning = true;
+  
+  this.renderer.deltaTimer.play();
 
   // video 유형의 객체 재생
   for (let t of this.renderer.objects) {

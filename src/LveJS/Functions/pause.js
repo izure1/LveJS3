@@ -1,6 +1,8 @@
 export default function pause() {
 
   this.renderer.isRunning = false;
+  
+  this.renderer.deltaTimer.pause();
 
   for (let t of this.renderer.objects) {
 
