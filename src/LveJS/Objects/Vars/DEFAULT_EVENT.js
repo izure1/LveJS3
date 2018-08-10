@@ -40,6 +40,5 @@ export default [
   'error',
   'repeat',
   'use',
-  'crash',
-  'readystatechange'
+  'crash'
 ];
