@@ -2,7 +2,6 @@ export default {
 
   canvas: {},
   scaleDistance: 100,
-  frameLimit: 60,
   backgroundColor: 'white',
   maxSight: undefined,
   minSize: 0.35,

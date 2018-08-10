@@ -24,6 +24,7 @@ import M__followUpdate from './Objects/__followUpdate';
 import M__followUpdateFromObj from './Objects/__followUpdateFromObj';
 import M__setInformation_image from './Objects/__setInformation_image';
 import M__setInformation_text from './Objects/__setInformation_text';
+import M__setPhysicsBody from './Objects/__setPhysicsBody';
 
 
 
@@ -99,5 +100,6 @@ LveJSObject.prototype.__followUpdate = M__followUpdate;
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj;
 LveJSObject.prototype.__setInformation_image = M__setInformation_image;
 LveJSObject.prototype.__setInformation_text = M__setInformation_text;
+LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody;
 
 export default LveJSObject;

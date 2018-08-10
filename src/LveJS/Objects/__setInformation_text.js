@@ -41,7 +41,7 @@ export default function __setInformation_text() {
     this.__system__.style.width = t.width;
     this.__system__.style.height = t.height;
 
-  }, 0);
+  });
 
   return this;
 

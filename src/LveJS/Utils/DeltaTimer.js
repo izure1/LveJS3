@@ -52,7 +52,7 @@ DeltaTimer.prototype.play = function () {
 
 DeltaTimer.prototype.check = function (fps) {
 
-  return this.delta > 1000 / fps;
+  return ~~this.delta >= ~~(1000 / fps) - 1;
 
 };
 

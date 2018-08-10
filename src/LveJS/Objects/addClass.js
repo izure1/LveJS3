@@ -10,6 +10,7 @@ export default function addClass(c) {
 
   let r;
   let t, f;
+  let cs;
 
   if (typeof c === 'function') {
     f = c;
@@ -27,6 +28,8 @@ export default function addClass(c) {
     t += '';
     t = t.split(' ');
 
+    cs = t.filter(u => c.indexOf(u) === -1);
+
     t = [...t, ...c];
     t = new Set(t);
 
@@ -35,6 +38,10 @@ export default function addClass(c) {
     t = Array.from(t);
 
     this.className = t.join(' ');
+
+    for (let c of cs) this.emit('addclass', {
+      value: c
+    });
 
   });
 

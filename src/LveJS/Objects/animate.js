@@ -4,6 +4,7 @@ import {
   parseArguments
 } from '../Utils/arguments';
 import calcValue from '../Helpers/calcValue';
+import { deflateRaw } from 'zlib';
 
 
 /**
@@ -34,10 +35,6 @@ export default function animate(o, v, d = 0, e = 'linear') {
     e = arguments[2] || 'linear';
   }
 
-  if (typeof d === 'object') {
-    d = d.speed;
-  }
-
   if (r.IS_GET) {
     return this;
   }
@@ -50,9 +47,19 @@ export default function animate(o, v, d = 0, e = 'linear') {
 
     for (let p in v2) {
 
+      let dr;
+
+      dr = d;
+
+      if (typeof d === 'object') {
+        dr = v2[p] - v1[p];
+        dr = Math.abs(dr);
+        dr = dr / d.speed * 1000;
+      }
+
       this.animationset[p] = {
         type: e,
-        duration: d,
+        duration: dr,
         runtime: 0,
         start: v1[p],
         end: v2[p]

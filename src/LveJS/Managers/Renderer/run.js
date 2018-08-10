@@ -9,11 +9,12 @@ export default function run() {
   } = this.setting;
 
   this.interval = this.deltaTimer.update();
+  this.deltaTimer.clear();
 
 
   if (extendStart) extendStart();
 
-  if (this.isRunning && this.deltaTimer.checkAndClear(this.setting.frameLimit)) {
+  if (this.isRunning) {
 
     if (extendDrawStart) extendDrawStart();
 

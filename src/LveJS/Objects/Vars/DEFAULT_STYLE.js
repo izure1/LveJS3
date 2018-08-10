@@ -1,7 +1,7 @@
 export default function () {
 
   this.fontSize = 50;
-  this.fontFamily = 'arial; sans-serif';
+  this.fontFamily = 'arial, sans-serif';
   this.fontWeight = 'normal';
   this.fontStyle = 'normal';
   this.textAlign = 'left';

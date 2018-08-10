@@ -10,6 +10,7 @@ export default function removeClass(c) {
 
   let r;
   let t, f;
+  let cs;
 
   if (typeof c === 'function') {
     f = c;
@@ -27,6 +28,8 @@ export default function removeClass(c) {
     t += '';
     t = t.split(' ');
 
+    cs = t.filter(u => c.indexOf(u) !== -1);
+
     c = c.filter(s => t.indexOf(s) === -1);
     t = new Set(c);
 
@@ -35,6 +38,10 @@ export default function removeClass(c) {
     t = Array.from(t);
 
     this.className = t.join(' ');
+
+    for (let c of cs) this.emit('removeclass', {
+      value: c
+    });
 
   });
 

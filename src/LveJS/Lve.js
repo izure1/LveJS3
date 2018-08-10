@@ -17,6 +17,8 @@ import FnInit from './Functions/init';
 import FnStart from './Functions/start';
 import FnPlay from './Functions/play';
 import FnPause from './Functions/pause';
+import FnOn from './Functions/on';
+import FnOff from './Functions/off';
 import FnRequestCaching from './Functions/requestCaching';
 import FnBox2d from './Functions/box2d';
 
@@ -31,6 +33,7 @@ function Lve() {
   this.suppressJob = new SuppressJob();
   this.cache = new LveJSCache();
   this.queue = [];
+  this.events = {};
   this.box2d = B();
   this.physics = new this.box2d.b2World(new this.box2d.b2Vec2(0, -300), false);
 
@@ -53,6 +56,8 @@ function Lve() {
   this.lve.start = FnStart.bind(this);
   this.lve.play = FnPlay.bind(this);
   this.lve.pause = FnPause.bind(this);
+  this.lve.on = FnOn.bind(this);
+  this.lve.off = FnOff.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);
   this.lve.box2d = FnBox2d.bind(this);
 
