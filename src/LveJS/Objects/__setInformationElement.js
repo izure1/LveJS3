@@ -1,13 +1,13 @@
 import ready from '../Utils/domReady';
 
 
-export default function __setInformation_image() {
+export default function __setInformationElement() {
 
   let t;
   let s;
   let w, h;
 
-  this.__system__.suppressJob.reserve('__setImage', () => {
+  this.__system__.suppressJob.reserve('setElement', () => {
 
     s = this.src || '';
     t = this.element;
@@ -40,7 +40,13 @@ export default function __setInformation_image() {
       this.__system__.style.height = t.height;
       document.body.removeChild(t);
 
+      this.emit('load');
+
     });
+
+    if (t.load) {
+      t.load();
+    }
 
   });
 

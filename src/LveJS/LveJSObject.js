@@ -22,8 +22,8 @@ import M__animationUpdate from './Objects/__animationUpdate';
 import M__draw from './Objects/__draw';
 import M__followUpdate from './Objects/__followUpdate';
 import M__followUpdateFromObj from './Objects/__followUpdateFromObj';
-import M__setInformation_image from './Objects/__setInformation_image';
-import M__setInformation_text from './Objects/__setInformation_text';
+import M__setInformationElement from './Objects/__setInformationElement';
+import M__setInformationText from './Objects/__setInformationText';
 import M__setPhysicsBody from './Objects/__setPhysicsBody';
 
 
@@ -98,8 +98,8 @@ LveJSObject.prototype.__animationUpdate = M__animationUpdate;
 LveJSObject.prototype.__draw = M__draw;
 LveJSObject.prototype.__followUpdate = M__followUpdate;
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj;
-LveJSObject.prototype.__setInformation_image = M__setInformation_image;
-LveJSObject.prototype.__setInformation_text = M__setInformation_text;
+LveJSObject.prototype.__setInformationElement = M__setInformationElement;
+LveJSObject.prototype.__setInformationText = M__setInformationText;
 LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody;
 
 export default LveJSObject;

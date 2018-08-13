@@ -3,7 +3,7 @@ import {
 } from '../Utils/drawCanvas';
 
 
-export default function __setInformation_text() {
+export default function __setInformationText() {
 
   // fontSize, fontFamily, fontStyle, fontWeight, textAlign, lineHeight, color
   let fontSize, fontFamily, fontStyle, fontWeight, textAlign, lineHeight, color;

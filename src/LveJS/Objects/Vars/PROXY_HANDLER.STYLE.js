@@ -19,7 +19,13 @@ handler.width = handler.height = function (p, v, t) {
   let f;
   let r;
 
-  f = this.__proto__[`__setInformation_${this.type}`];
+  switch (this.type) {
+    case 'image':
+    case 'sprite':
+    case 'video':
+      f = this.__setInformationElement;
+      break;
+  }
 
   if (f) f.call(this);
   else {
@@ -93,7 +99,7 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
     return v;
   }
 
-  this.__setInformation_text();
+  this.__setInformationText();
   return v;
 
 };

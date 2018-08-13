@@ -54,7 +54,7 @@ export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
   } = VERTEX[st.position](cw, ch, st.left, st.bottom, st.perspective, ax, ay, az, d);
 
   // 카메라보다 뒤에 있는 객체는 그리기를 중단합니다
-  if (!s) {
+  if (s <= 0) {
     return;
   }
 

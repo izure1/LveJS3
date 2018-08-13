@@ -28,11 +28,14 @@ handler.type = function (p, v, t) {
 
 handler.src = function (p, v, t) {
 
+  let f;
+
   switch (this.type) {
 
     case 'image':
     case 'sprite':
     case 'video':
+      this.__setInformationElement();
       break;
 
     default:
@@ -40,7 +43,6 @@ handler.src = function (p, v, t) {
 
   }
 
-  this.__setInformation_image();
   return v;
 
 };
@@ -51,7 +53,7 @@ handler.text = function (p, v, t) {
     return '';
   }
 
-  this.__setInformation_text();
+  this.__setInformationText();
   return v;
 
 };

@@ -13,4 +13,14 @@ handler.__observer = function (p, v, t) {
 
 };
 
+handler.stage = function (p, v, t) {
+
+  if (this.type !== 'sprite') {
+    return handler;
+  }
+
+  return v;
+
+};
+
 export default handler;

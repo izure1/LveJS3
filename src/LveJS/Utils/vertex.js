@@ -29,13 +29,6 @@ function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100) {
   y = ay - by;
   z = az - bz;
 
-  if (z <= 0) {
-    s = 0;
-    return {
-      s
-    };
-  }
-
   x = getScale(x, d, z);
   y = getScale(y, d, z);
 
