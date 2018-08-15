@@ -3,6 +3,7 @@ import DeltaTimer from '../Utils/DeltaTimer';
 import init from './Renderer/init';
 import start from './Renderer/start';
 import getFPS from './Renderer/getFPS';
+import getDrawArguments from './Renderer/getDrawArguments';
 import setObject from './Renderer/setObject';
 import sortObject from './Renderer/sortObject';
 import run from './Renderer/run';
@@ -30,6 +31,7 @@ class LveJSRenderer {
 LveJSRenderer.prototype.init = init;
 LveJSRenderer.prototype.start = start;
 LveJSRenderer.prototype.getFPS = getFPS;
+LveJSRenderer.prototype.getDrawArguments = getDrawArguments;
 LveJSRenderer.prototype.setObject = setObject;
 LveJSRenderer.prototype.sortObject = sortObject;
 LveJSRenderer.prototype.run = run;

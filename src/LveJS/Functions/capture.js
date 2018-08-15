@@ -1,6 +1,25 @@
 import instanceOf from '../Functions/instanceof';
 
 
+function setScene(u) {
+
+  let a;
+
+  this.renderer.camera = u;
+  this.lve.requestCaching(true);
+
+  this.renderer.clearFrame(this.renderer.setting.backgroundColor);
+
+  a = this.renderer.getDrawArguments();
+  a = a.value;
+
+  for (let t of this.renderer.objects) {
+    t.__draw.apply(t, a);
+  }
+
+}
+
+
 export default function capture(u = lve.current.camera, o = {}) {
 
   let r;
@@ -13,6 +32,7 @@ export default function capture(u = lve.current.camera, o = {}) {
     quality,
     scale = 1
   } = o;
+
 
   oc = this.renderer.setting.canvas.element;
 
@@ -51,14 +71,12 @@ export default function capture(u = lve.current.camera, o = {}) {
   u = u.get();
   u2 = this.renderer.camera;
 
-  this.renderer.camera = u;
-  this.lve.requestCaching(true);
+  setScene.call(this, u);
 
   r = nc.getContext('2d').drawImage(oc, 0, 0, nc.width, nc.height);
   r = nc.toDataURL(type, quality);
 
-  this.renderer.camera = u2;
-  this.lve.requestCaching(true);
+  setScene.call(this, u2);
 
   return r;
 
