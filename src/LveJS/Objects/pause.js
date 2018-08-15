@@ -1,4 +1,5 @@
 import each from './each';
+import ready from '../Utils/domReady';
 
 
 export default function pause() {
@@ -14,8 +15,12 @@ export default function pause() {
     }
 
     if (this.element && this.element.pause && this.element.pause.call) {
-      this.element.pause();
-      this.element.dataset.playing = 'false';
+
+      ready.call(this.element, () => {
+        this.element.pause();
+        this.element.dataset.playing = 'false';
+      });
+      
     }
 
     this.spriteset.playing = false;

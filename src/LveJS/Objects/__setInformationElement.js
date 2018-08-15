@@ -1,52 +1,46 @@
 import ready from '../Utils/domReady';
+import getSizeofElement from '../Helpers/getSizeofElement';
 
 
-export default function __setInformationElement() {
+/**
+ * @param {String} s Element src
+ */
+export default function __setInformationElement(s = '') {
 
   let t;
-  let s;
-  let w, h;
+  let d;
 
   this.__system__.suppressJob.reserve('setElement', () => {
 
-    s = this.src || '';
     t = this.element;
 
-    if (!s) {
-      t.src = '';
-      return;
+    // 엘리멘트와 매개변수로 넘어온 source 주소값이 다를 경우, 새롭게 불러들입니다.
+    if (t.src !== s) {
+
+      t.src = s;
+      if (t.load) t.load();
+
     }
 
-    w = this.style.width;
-    h = this.style.height;
-
-    if (typeof w === 'number') {
-      w = `${w}px`;
-    }
-
-    if (typeof h === 'number') {
-      h = `${h}px`;
-    }
-
-    t.src = s;
-    t.style.width = w;
-    t.style.height = h;
-
+    // 엘리멘트가 준비되면 실제 크기값을 저장합니다
     ready.call(t, () => {
 
-      document.body.appendChild(t);
-      this.element = t;
-      this.__system__.style.width = t.width;
-      this.__system__.style.height = t.height;
-      document.body.removeChild(t);
+      this.__system__.world.lve.start(w => {
+
+        let c;
+
+        c = w.renderer.setting.canvas.element;
+        d = getSizeofElement(t, this.style.width, this.style.height, c.width, c.height);
+
+        this.element = t;
+        this.__system__.style.width = d.width;
+        this.__system__.style.height = d.height;
+
+      });
 
       this.emit('load');
 
     });
-
-    if (t.load) {
-      t.load();
-    }
 
   });
 

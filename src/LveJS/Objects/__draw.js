@@ -119,6 +119,11 @@ export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
       break;
 
     case 'video':
+      if (!this.element) {
+        return;
+      }
+      borderSquare(c, w, h, x, y, bw, bc);
+      image(c, this.element, w, h, x, y);
       break;
 
     case 'sprite':

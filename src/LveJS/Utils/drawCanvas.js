@@ -11,12 +11,6 @@ function degToRad(d) {
   return d * Math.PI / 180;
 }
 
-function getPropertiesLength(o = {}) {
-  let n = 0;
-  for (let p in o) n++;
-  return n;
-}
-
 /**
  * 
  * @param {HTMLCanvasElement} c Canvas context
@@ -305,6 +299,7 @@ class TextInformation {
 
     let c;
     let tni, tn, tw;
+    let nw;
 
     o = Object.assign({}, {
       fontSize: 10,
@@ -325,7 +320,7 @@ class TextInformation {
 
     tw = [];
 
-    tni = TextInformation.getTextNodes(c.ranges, c.breaks, t, o);
+    tni = TextInformation.getTextNodes(c.ranges, c.breaks, t);
     tn = tni.nodes;
     tn.forEach(node => {
 
@@ -337,16 +332,18 @@ class TextInformation {
 
     });
 
+    nw = [...tw];
     tw.sort((a, b) => {
       return b - a;
     });
 
     this.width = tw[0];
-    this.maxWidth = w || this.width;
+    this.maxWidth = w >= 0 ? w : this.width;
     this.textAlign = o.textAlign || 'left';
     this.color = o.color || 'black';
     this.line = c.breaks.length + 1;
     this.nodes = tn;
+    this.nodesWidth = nw;
     this.lineHeight = o.lineHeight;
     this.height = tni.height;
     this.scale = 1;
@@ -356,7 +353,7 @@ class TextInformation {
 }
 
 
-TextInformation.getTextNodes = (ranges, breaks, text, o) => {
+TextInformation.getTextNodes = (ranges, breaks, text) => {
 
   let ctx;
 
@@ -437,7 +434,7 @@ TextInformation.getTextNodes = (ranges, breaks, text, o) => {
       hs[l] = 0;
     }
 
-    fs = TextInformation.getLineHeight(o.lineHeight, node.style.fontsize);
+    fs = TextInformation.getLineHeight(node.style.lineheight, node.style.fontsize);
 
     if (hs[l] < fs) {
       hs[l] = fs;
@@ -458,6 +455,7 @@ TextInformation.getTextNodes = (ranges, breaks, text, o) => {
   });
 
   l = 0;
+  nodes.reverse();
 
   for (let h of hs) l += h;
   return {
@@ -710,7 +708,7 @@ TextInformation.getFromStyle = (text, style) => {
 TextInformation.removeUnusefulProperties = (style) => {
   let styles;
 
-  styles = ['fontsize', 'fontfamily', 'fontweight', 'fontstyle', 'color'];
+  styles = ['fontsize', 'fontfamily', 'fontweight', 'fontstyle', 'color', 'lineheight'];
   style = Object.assign({}, style);
 
   for (let i in style) {
@@ -790,46 +788,32 @@ function text_draw(c, f, t, rx, ry, fc) {
 
   let lw;
   let s;
-  let x, y;
-
-  lw = [];
-  s = t.scale;
-
-  x = [];
-  y = ry + t.height;
+  let x, y, l, h;
 
   if (!t.nodes[0]) {
     return;
   }
 
-  x.length = t.nodes[0].line + 1;
-  x.fill(0);
-
-
-  for (const node of t.nodes) {
-
-    if (!lw[node.line]) {
-      lw[node.line] = 0;
-    }
-
-    lw[node.line] += node.width;
-
-  }
+  s = t.scale;
+  x = [...t.nodesWidth];
+  y = ry + t.height;
+  l = 0;
+  h = t.nodes[0].height;
 
 
   for (const node of t.nodes) {
 
     let ln;
     let ns, width;
-    let xx, yy;
+    let xx;
 
     ln = node.line;
-    width = lw[node.line] * s;
+    width = t.nodesWidth[node.line] * s;
     ns = node.style;
 
+    x[ln] -= node.width;
     xx = rx;
     xx += x[ln] * s;
-    x[ln] += node.width;
 
     switch (t.textAlign) {
       case 'center':
@@ -844,14 +828,17 @@ function text_draw(c, f, t, rx, ry, fc) {
         }
     }
 
-    xx = xx;
-    yy = (y - (node.line * node.height));
+    if (l !== node.line) {
+      y -= h;
+      l = node.line;
+      h = node.height;
+    }
 
     c.textAlign = t.textAlign;
     c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + ns.fontsize * s + 'px ' + ns.fontfamily;
     c.fillStyle = node.style.color || fc;
 
-    c[f](node.text, xx, yy);
+    c[f](node.text, xx, y);
 
   }
 

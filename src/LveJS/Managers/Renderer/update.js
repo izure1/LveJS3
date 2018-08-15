@@ -10,7 +10,7 @@ let str;
 let camera, camera_h, camera_x, camera_y, camera_z;
 let st;
 
-str = new TextInformation('NO CAMERA\n<style fontsize="15" color="gray">지정된 카메라가 없습니다</style>', 0, {
+str = new TextInformation('No cameras rendering\n<style fontsize="15" color="gray" lineheight="40">지정된 카메라가 없습니다</style>\n<style fontsize="15" color="gray" lineheight="150%">use 메서드를 사용하여 객체를 카메라로 지정하세요</style>', -1, {
   fontSize: 50,
   color: 'white',
   textAlign: 'center'
@@ -31,7 +31,7 @@ export default function update(tt = 0) {
     }
 
     this.clearFrame('black');
-    text(c.context, str, (c.element.width / 2) - (str.width / 2), (c.element.height / 2) - (str.height / 2), {});
+    text(c.context, str, (c.element.width / 2) - (str.width / 2), (c.element.height / 2) - (str.height / 2));
     return;
 
   }

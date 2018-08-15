@@ -18,7 +18,7 @@ export default function animate(o, v, d = 0, e = 'linear') {
 
   let t;
   let r;
-  let v1, v2;
+  let v1, v2, vo;
 
   t = this.get();
 
@@ -42,8 +42,9 @@ export default function animate(o, v, d = 0, e = 'linear') {
 
   each.call(this, function () {
 
-    v1 = this.style;
-    v2 = calcValue.call(this, r.VALUE, this.style);
+    vo = Object.assign({}, this.style, this.__system__.style);
+    v1 = vo;
+    v2 = calcValue.call(this, r.VALUE, vo);
 
     for (let p in v2) {
 
@@ -62,7 +63,7 @@ export default function animate(o, v, d = 0, e = 'linear') {
         duration: dr,
         runtime: 0,
         start: v1[p],
-        end: v2[p]
+        end: v2[p],
       };
 
       this.emit('animatestart', {

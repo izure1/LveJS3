@@ -1,4 +1,5 @@
 import each from './each';
+import ready from '../Utils/domReady';
 
 
 export default function play() {
@@ -14,8 +15,12 @@ export default function play() {
     }
 
     if (this.element && this.element.play && this.element.play.call) {
-      this.element.play();
-      this.element.dataset.playing = 'true';
+
+      ready.call(this.element, () => {
+        this.element.play();
+        this.element.dataset.playing = 'true';
+      });
+      
     }
 
     this.spriteset.playing = true;

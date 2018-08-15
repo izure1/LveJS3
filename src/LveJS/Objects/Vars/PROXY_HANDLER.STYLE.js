@@ -1,3 +1,6 @@
+import getSizeofElement from '../../Helpers/getSizeofElement';
+
+
 let handler;
 
 
@@ -16,29 +19,37 @@ handler.__observer = function (p, v, t) {
 
 handler.width = handler.height = function (p, v, t) {
 
-  let f;
-  let r;
+  let w;
+  let d;
 
-  switch (this.type) {
-    case 'image':
-    case 'sprite':
-    case 'video':
-      f = this.__setInformationElement;
-      break;
-  }
+  let sw, sh;
+  let c, vp;
 
-  if (f) f.call(this);
-  else {
+  w = this.__system__.world;
+  w.lve.start(w => {
 
-    r = v;
+    sw = this.style.width;
+    sh = this.style.height;
+    vp = w.renderer.setting.canvas.element;
 
-    if (v === 'auto') {
-      r = 100;
+    switch (p) {
+
+      case 'width':
+        sw = v;
+        break;
+
+      case 'height':
+        sh = v;
+        break;
+
     }
 
-    this.__system__.style[p] = r;
+    c = this.element || {};
+    d = getSizeofElement(c, sw, sh, vp.width, vp.height);
 
-  }
+    this.__system__.style[p] = d[p];
+
+  });
 
   return v;
 

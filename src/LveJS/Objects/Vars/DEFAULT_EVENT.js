@@ -16,6 +16,8 @@ export default [
   'unfollowed',
   'kick',
   'kicked',
+  'load',
+  'error',
   'play',
   'pause',
   'ended',
@@ -36,8 +38,6 @@ export default [
   'drag',
   'dragend',
   'drop',
-  'load',
-  'error',
   'repeat',
   'use',
   'crash'

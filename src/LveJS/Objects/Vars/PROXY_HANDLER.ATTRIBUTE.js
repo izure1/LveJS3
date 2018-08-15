@@ -35,7 +35,7 @@ handler.src = function (p, v, t) {
     case 'image':
     case 'sprite':
     case 'video':
-      this.__setInformationElement();
+      this.__setInformationElement(v);
       break;
 
     default:
