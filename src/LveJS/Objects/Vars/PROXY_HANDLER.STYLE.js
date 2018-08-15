@@ -44,10 +44,20 @@ handler.width = handler.height = function (p, v, t) {
 
     }
 
-    c = this.element || {};
-    d = getSizeofElement(c, sw, sh, vp.width, vp.height);
+    switch (this.type) {
 
-    this.__system__.style[p] = d[p];
+      case 'text':
+        this.__setInformationText();
+        break;
+
+      default:
+        c = this.element || {};
+        d = getSizeofElement(c, sw, sh, vp.width, vp.height);
+
+        this.__system__.style[p] = d[p];
+        break;
+
+    }
 
   });
 

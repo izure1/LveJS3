@@ -38,7 +38,7 @@ export default function __setInformationText() {
     });
 
     this.__system__.text.information = t;
-    this.__system__.style.width = t.width;
+    this.__system__.style.width = t.maxWidth;
     this.__system__.style.height = t.height;
 
   });

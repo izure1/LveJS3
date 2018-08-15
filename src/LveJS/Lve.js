@@ -17,6 +17,7 @@ import FnInit from './Functions/init';
 import FnStart from './Functions/start';
 import FnPlay from './Functions/play';
 import FnPause from './Functions/pause';
+import FnCapture from './Functions/capture';
 import FnOn from './Functions/on';
 import FnOff from './Functions/off';
 import FnRequestCaching from './Functions/requestCaching';
@@ -56,6 +57,7 @@ function Lve() {
   this.lve.start = FnStart.bind(this);
   this.lve.play = FnPlay.bind(this);
   this.lve.pause = FnPause.bind(this);
+  this.lve.capture = FnCapture.bind(this);
   this.lve.on = FnOn.bind(this);
   this.lve.off = FnOff.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);

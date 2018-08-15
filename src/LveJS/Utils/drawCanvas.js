@@ -278,8 +278,20 @@ function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1) {
 
 /**
  * 
+ * @param {HTMlCanvasElement} c Canvas context
+ * @param {Number} v Blur (pixel)
+ */
+function setBlur(c, v) {
+
+  c.filter = ~~v ? `blur(${v}px)` : 'none';
+
+}
+
+
+/**
+ * 
  * @param {HTMLCanvasElement} c Canvas context
- * @param {*} v Alpha value
+ * @param {Number} v Alpha value (0 ~ 1)
  */
 function setAlpha(c, v) {
 
@@ -816,16 +828,19 @@ function text_draw(c, f, t, rx, ry, fc) {
     xx += x[ln] * s;
 
     switch (t.textAlign) {
+
+      case 'left':
+        xx += 0 - width + (node.width * s);
+        break;
+
       case 'center':
-        {
-          xx += (t.maxWidth / 2) - (width / 2) + (node.width * s / 2);
-          break;
-        }
+        xx += (t.maxWidth / 2) - (width / 2) + (node.width * s / 2);
+        break;
+
       case 'right':
-        {
-          xx += t.maxWidth - width + node.width * s;
-          break;
-        }
+        xx += t.maxWidth - width + node.width * s;
+        break;
+
     }
 
     if (l !== node.line) {
@@ -884,6 +899,7 @@ export {
   getGradient,
   setRotate,
   setAlpha,
+  setBlur,
   borderCircle,
   borderSquare,
   borderText,

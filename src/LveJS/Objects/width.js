@@ -11,6 +11,14 @@ export default function width() {
     return null;
   }
 
-  return t.__system__.style.width / t.spriteset.stage;
+  switch (t.type) {
+
+    case 'sprite':
+      return t.__system__.style.width / t.spriteset.stage;
+
+    default:
+      return t.__system__.style.width;
+
+  }
 
 };

@@ -8,6 +8,7 @@ import {
   getGradient,
   setRotate,
   setAlpha,
+  setBlur,
   borderCircle,
   borderSquare,
   borderText,
@@ -77,8 +78,10 @@ export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
   bw = st.borderWidth * s;
 
   // 알파값 지정 및 회전 알고리즘을 적용합니다
+  r = setBlur(c, st.blur);
   r = setAlpha(c, a * st.opacity);
   r = setRotate(c, w, h, x, y, st.rotate, st_.rx, st_.ry);
+
   setShadow(c, sb, sc, sx, sy);
 
   x = r.x;
@@ -131,7 +134,7 @@ export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
 
   }
 
-  c.resetTransform();
+  c.setTransform(1, 0, 0, 1, 0, 0);
 
   return this;
 
