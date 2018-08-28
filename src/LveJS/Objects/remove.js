@@ -16,6 +16,12 @@ export default function remove() {
     w.hashTable.delete(this.name);
     w.lve.requestCaching();
 
+    this.__system__.suppressJob.setSuppress('remove', () => {
+
+      w.physics.destroyObject(this.__system__.physics.body);
+
+    }, 1);
+
   });
 
   return this;

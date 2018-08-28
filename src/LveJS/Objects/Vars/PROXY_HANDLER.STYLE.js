@@ -1,8 +1,11 @@
 import getSizeofElement from '../../Helpers/getSizeofElement';
+import {
+  radToDeg,
+  degToRad
+} from '../../Utils/math';
 
 
 let handler;
-
 
 handler = {};
 handler.__observer = function (p, v, t) {
@@ -58,6 +61,8 @@ handler.width = handler.height = function (p, v, t) {
         break;
 
     }
+
+    this.__setPhysicsFixture();
 
   });
 
@@ -121,6 +126,7 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
   }
 
   this.__setInformationText();
+  this.__setPhysicsFixture();
   return v;
 
 };
@@ -128,10 +134,14 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
 
 handler.left = handler.bottom = handler.perspective = function (p, v) {
 
+  let B;
   let w;
+  let s;
   let t;
 
   w = this.__system__.world;
+  s = w.physics.setting.unitScale;
+  B = w.physics.box2d;
 
   for (let i of this.followset.follower) {
 
@@ -144,13 +154,32 @@ handler.left = handler.bottom = handler.perspective = function (p, v) {
 
   }
 
-  if (p === 'perspective') {
-    w.lve.requestCaching();
+  this.__system__.physics.body.SetAwake(true);
+
+  switch (p) {
+
+    case 'left':
+      if (this.__system__.physics.force) {
+        this.__system__.physics.body.SetTransform(new B.b2Vec2(v / s, this.style.bottom / s), degToRad(this.style.rotate));
+      }
+      break;
+
+    case 'bottom':
+      if (this.__system__.physics.force) {
+        this.__system__.physics.body.SetTransform(new B.b2Vec2(this.style.left / s, v / s), degToRad(this.style.rotate));
+      }
+      break;
+
+    case 'perspective':
+      w.lve.requestCaching();
+      break;
+
   }
 
   return v;
 
 };
+
 
 handler.opacity = function (p, v, t) {
 
@@ -167,14 +196,45 @@ handler.opacity = function (p, v, t) {
 
 };
 
+
 handler.display = function (p, v, t) {
 
-  this.__system__.style.d_display = 0;
+  let r;
 
   if (v !== 'block') {
     v = 'none';
+    r = 0;
   } else {
-    this.__system__.style.d_display = 1;
+    r = 1;
+  }
+
+  this.__system__.style.d_display = r;
+
+  this.__setPhysicsActive('display', r);
+
+  return v;
+
+};
+
+
+handler.rotate = function (p, v, t) {
+
+  let B;
+
+  B = this.__system__.world.physics.box2d;
+
+  let pos;
+  let r;
+
+  if (this.__system__.physics.force) {
+
+    pos = this.__system__.physics.body.GetPosition();
+    pos = new B.b2Vec2(pos.get_x(), pos.get_y());
+
+    r = degToRad(v);
+
+    this.__system__.physics.body.SetTransform(pos, r);
+
   }
 
   return v;

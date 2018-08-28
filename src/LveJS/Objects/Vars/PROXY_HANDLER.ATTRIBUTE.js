@@ -1,6 +1,5 @@
 let handler;
 
-
 handler = {};
 handler.__observer = function (p, v, t) {
 
@@ -36,6 +35,7 @@ handler.src = function (p, v, t) {
     case 'sprite':
     case 'video':
       this.__setInformationElement(v);
+      this.__setPhysicsFixture();
       break;
 
     default:
@@ -54,6 +54,7 @@ handler.text = function (p, v, t) {
   }
 
   this.__setInformationText();
+  this.__setPhysicsFixture();
   return v;
 
 };
@@ -75,6 +76,73 @@ handler.followset = handler.spriteset = handler.dataset = handler.style = functi
   }
 
   return handler;
+
+};
+
+
+handler.physics = function (p, v, t) {
+
+  let B;
+  let y;
+
+  B = this.__system__.world.physics.box2d;
+
+  switch (v) {
+
+    case 'dynamic':
+      y = B.b2_dynamicBody;
+      break;
+
+    case 'static':
+      y = B.b2_staticBody;
+      break;
+
+    default:
+      y = null;
+      break;
+
+  }
+
+  if (y !== null) {
+
+    this.__system__.physics.body.SetType(y);
+    this.__setPhysicsActive('physics', 1);
+
+  } else {
+
+    this.__setPhysicsActive('physics', 0);
+
+  }
+
+  return v;
+
+};
+
+handler.density = function (p, v, t) {
+
+  this.__system__.physics.body.GetFixtureList().SetDensity(v);
+  return v;
+
+};
+
+handler.friction = function (p, v, t) {
+
+  this.__system__.physics.body.GetFixtureList().SetFriction(v);
+  return v;
+
+};
+
+handler.restitution = function (p, v, t) {
+
+  this.__system__.physics.body.GetFixtureList().SetRestitution(v);
+  return v;
+
+};
+
+handler.gravityscale = function (p, v, t) {
+
+  this.__system__.physics.body.SetGravityScale(v);
+  return v;
 
 };
 

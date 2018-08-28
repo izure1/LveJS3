@@ -12,6 +12,7 @@ export default function create(o = {}) {
   let t;
   let w;
   let v1, v2;
+  let B;
 
   for (const t of this.context) {
     if (t.name !== this.name) continue;
@@ -30,9 +31,15 @@ export default function create(o = {}) {
   v2 = v2[o.type] || {};
 
   w = this.__system__.world;
+  B = w.physics.box2d;
 
   t = new LVE.classes.LveJSObject(w, this.name);
-  t.emit('create').attr(v1).attr(o).css(v2).css(t.css());
+  t.emit('create');
+  t.attr(v1).attr(o);
+  t.__setPhysicsBody();
+  t.css(v2).css(t.css());
+
+  t.physics = t.physics;
 
   w.hashTable.insert(this.name, t);
   w.lve.requestCaching();

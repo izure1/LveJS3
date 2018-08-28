@@ -25,6 +25,7 @@ import MNotClass from './Objects/notClass';
 import MOff from './Objects/off';
 import MOn from './Objects/on';
 import MPause from './Objects/pause';
+import MPhysicsUpdate from './Objects/physicsUpdate';
 import MPlay from './Objects/play';
 import MReady from './Objects/ready';
 import MRemove from './Objects/remove';
@@ -34,6 +35,14 @@ import MToggleClass from './Objects/toggleClass';
 import MUnfollow from './Objects/unfollow';
 import MUse from './Objects/use';
 import MWidth from './Objects/width';
+
+// Physics
+import MApplyForce from './Objects/applyForce';
+import MApplyLinearImpulse from './Objects/applyLinearImpulse';
+import MApplyAngularImpulse from './Objects/applyAngularImpulse';
+import MSetLinearVelocity from './Objects/setLinearVelocity';
+import MSetAngularVelocity from './Objects/setAngularVelocity';
+import MGetPhysicsBody from './Objects/getPhysicsBody';
 
 
 
@@ -102,6 +111,7 @@ LveJSObjectSession.prototype.notClass = MNotClass;
 LveJSObjectSession.prototype.off = MOff;
 LveJSObjectSession.prototype.on = MOn;
 LveJSObjectSession.prototype.pause = MPause;
+LveJSObjectSession.prototype.physicsUpdate = MPhysicsUpdate;
 LveJSObjectSession.prototype.play = MPlay;
 LveJSObjectSession.prototype.ready = MReady;
 LveJSObjectSession.prototype.remove = MRemove;
@@ -111,5 +121,12 @@ LveJSObjectSession.prototype.toggleClass = MToggleClass;
 LveJSObjectSession.prototype.unfollow = MUnfollow;
 LveJSObjectSession.prototype.use = MUse;
 LveJSObjectSession.prototype.width = MWidth;
+
+LveJSObjectSession.prototype.applyForce = MApplyForce;
+LveJSObjectSession.prototype.applyLinearImpulse = MApplyLinearImpulse;
+LveJSObjectSession.prototype.applyAngularImpulse = MApplyAngularImpulse;
+LveJSObjectSession.prototype.setLinearVelocity = MSetLinearVelocity;
+LveJSObjectSession.prototype.setAngularVelocity = MSetAngularVelocity;
+LveJSObjectSession.prototype.getPhysicsBody = MGetPhysicsBody;
 
 export default LveJSObjectSession;

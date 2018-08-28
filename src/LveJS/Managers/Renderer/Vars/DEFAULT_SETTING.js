@@ -1,16 +1,16 @@
-export default {
+export default function () {
 
-  canvas: {},
-  scaleDistance: 100,
-  backgroundColor: 'white',
-  maxSight: undefined,
-  minSize: 0.35,
-  cacheLevel: 1,
-  isStart: false,
-  isRunning: false,
-  extendStart: null,
-  extendEnd: null,
-  extendDrawStart: null,
-  extendDrawEnd: null
+  this.canvas = {};
+  this.scaleDistance = 100;
+  this.backgroundColor = 'white';
+  this.maxSight = undefined;
+  this.minSize = 0.35;
+  this.cacheLevel = 1;
+  this.isStart = false;
+  this.isRunning = false;
+  this.extendStart = null;
+  this.extendEnd = null;
+  this.extendDrawStart = null;
+  this.extendDrawEnd = null
 
 };

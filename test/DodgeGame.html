@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="./css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="../dist/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="600" height="850"></canvas>
+  <script type="text/javascript">
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  </script>
+  <script type="text/javascript">
+    lve.init({
+      canvas: '#test'
+    });
+
+    lve('camera').create({
+      type: 'camera'
+    }).css('bottom', 200).use();
+
+    lve('ground').create({
+      type: 'square'
+    }).css({
+      width: 1000,
+      height: 5,
+      color: '#ddd'
+    }).attr('physics', 'static');
+
+    lve('wall-left').create({
+      type: 'square'
+    }).css({
+      width: 5,
+      height: 1000,
+      color: '#ddd',
+      left: -300
+    }).attr('physics', 'static').addClass('wall');
+
+    lve('wall-right').create({
+      type: 'square'
+    }).css({
+      width: 5,
+      height: 1000,
+      color: '#ddd',
+      left: 300
+    }).attr('physics', 'static').addClass('wall');
+
+    lve('character').create({
+      type: 'square'
+    }).css({
+      width: 30,
+      height: 50,
+      color: 'red',
+      bottom: 350
+    }).attr({
+      physics: 'dynamic',
+      friction: 0
+    }).addClass('character');
+
+    lve.on('contactstart', e => {
+
+      if (e.target.hasClass('ball')) {
+
+        if (e.with.hasClass('character')) {
+
+          alert('Game over!');
+          location.reload();
+
+        }
+
+        else e.target.remove();
+
+      }
+
+    })
+
+    // Keyboard Controler
+    window.onkeydown = function (e) {
+
+      switch (e.keyCode) {
+
+        case 37:
+          lve('character').applyForce(-1000, 0);
+          break;
+
+        case 39:
+          lve('character').applyForce(1000, 0);
+          break;
+
+      }
+
+    };
+  </script>
+  <script type="text/javascript">
+    function createBall(i = 0) {
+
+      let tt;
+      let r, g, b;
+      let x;
+
+      setTimeout(() => {
+
+        x = getRandomInt(-300, 300);
+        r = getRandomInt(0, 255);
+        g = getRandomInt(0, 255);
+        b = getRandomInt(0, 255);
+        tt = getRandomInt(0, 500);
+
+        lve(`ball_${getRandomInt(0, 1000000)}`).create({
+          type: 'circle'
+        }).css({
+          width: 30,
+          height: 30,
+          color: `rgb(${r}, ${g}, ${b})`,
+          left: x,
+          bottom: 1000
+        }).attr({
+          physics: 'dynamic',
+          gravityscale: 0.5
+        }).addClass('ball');
+
+        createBall(tt);
+
+      }, i);
+
+    }
+
+    createBall(0);
+  </script>
+</body>
+
+</html>

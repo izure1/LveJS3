@@ -31,14 +31,13 @@ VERTEX.fixed = getAABB;
  * @param {HTMLCanvasElement} c Drawing Canvas
  * @param {Number} w Canvas width
  * @param {Number} h Canvas height
- * @param {Number} ah Camera height
  * @param {Number} ax Camera axis x
  * @param {Number} ay Camera axis y
  * @param {Number} az Camera axis z
- * @param {Number} d Scale distance
+ * @param {Number} sd Scale distance
  * @param {Number} a Alpha color
  */
-export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
+export default function __draw(c, cw, ch, ax, ay, az, sd, a = 1) {
 
   let st, st_;
 
@@ -52,12 +51,14 @@ export default function __draw(c, cw, ch, ah, ax, ay, az, d, a = 1) {
     x,
     y,
     s
-  } = VERTEX[st.position](cw, ch, st.left, st.bottom, st.perspective, ax, ay, az, d);
+  } = VERTEX[st.position](cw, ch, st.left, st.bottom, st.perspective, ax, ay, az, sd);
 
   // 카메라보다 뒤에 있는 객체는 그리기를 중단합니다
   if (s <= 0) {
     return;
   }
+
+  s = s * st.scale;
 
   // position Fixed / verticalAlign 등의 요소를 고려하여 좌표를 보정합니다.
   // fx, fy 변수가 사용됩니다.

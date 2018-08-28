@@ -5,6 +5,7 @@ export default function play() {
   }
 
   this.renderer.isRunning = true;
+  this.physics.isRunning = true;
   
   this.renderer.deltaTimer.play();
 

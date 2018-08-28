@@ -1,43 +1,23 @@
 export default function __setPhysicsBody() {
 
   if (this.__system__.physics.body) {
-    return this.__system__.world.physics.body;
+    return this.__system__.physics.body;
   }
 
-  let B;
-  let w, h;
-  let x, y;
-
-  B = this.__system__.world.box2d;
+  let w, h, x, y;
+  let F, B;
+  let r;
 
   w = this.__system__.style.width;
   h = this.__system__.style.height;
-
-  w /= 2;
-  h /= 2;
-
   x = this.style.left;
   y = this.style.bottom;
 
-  let oB, oF, oS, t;
+  F = this.__system__.world.physics.createFixture(this, w, h, this.density, this.friction, this.restitution);
+  B = this.__system__.world.physics.createBody(this.physics, x, y);
 
-  oB = B.b2BodyDef();
-  oF = B.b2FixtureDef();
-  oS = B.b2PolygonShape();
+  r = this.__system__.physics.body = this.__system__.world.physics.createObject(this, B, F);
 
-  oF.set_density(this.density);
-  oF.set_friction(this.friction);
-  oF.set_restitution(this.restitution);
-  oF.set_shape(oS);
-
-  oS.SetAsBox(w, h, new B.b2Vec2(0, h), 0);
-
-  oB.set_type(B.b2_dynamicBody);
-  oB.set_position(new B.b2Vec2(x, y));
-
-  t = this.__system__.world.physics.CreateBody(oB);
-  t.CreateFixture(oF);
-
-  return t;
+  return r;
 
 };

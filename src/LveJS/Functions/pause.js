@@ -1,6 +1,7 @@
 export default function pause() {
 
   this.renderer.isRunning = false;
+  this.physics.isRunning = false;
   
   this.renderer.deltaTimer.pause();
 

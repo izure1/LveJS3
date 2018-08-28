@@ -40,5 +40,6 @@ export default [
   'drop',
   'repeat',
   'use',
-  'crash'
+  'contactstart',
+  'contactend'
 ];

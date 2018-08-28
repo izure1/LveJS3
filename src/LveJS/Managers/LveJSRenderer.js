@@ -18,8 +18,8 @@ class LveJSRenderer {
   constructor() {
     this.objects = [];
     this.camera = null;
-    this.setting = Object.assign({}, DEFAULT_SETTING);
-    this.deltaTimer = new DeltaTimer();
+    this.setting = new DEFAULT_SETTING;
+    this.deltaTimer = new DeltaTimer;
     this.isRunning = false;
     this.isStart = false;
     this.interval = 0;

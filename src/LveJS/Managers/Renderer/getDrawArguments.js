@@ -21,9 +21,8 @@ export default function getDrawArguments() {
       c.context,
       c.element.width,
       c.element.height,
-      ca.__system__.style.height,
       ca.style.left,
-      ca.style.bottom,
+      ca.style.bottom + ca.__system__.style.height * ca.style.scale,
       ca.style.perspective,
       t.setting.scaleDistance
     ]

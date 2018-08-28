@@ -25,6 +25,9 @@ import M__followUpdateFromObj from './Objects/__followUpdateFromObj';
 import M__setInformationElement from './Objects/__setInformationElement';
 import M__setInformationText from './Objects/__setInformationText';
 import M__setPhysicsBody from './Objects/__setPhysicsBody';
+import M__setPhysicsFixture from './Objects/__setPhysicsFixture';
+import M__setPhysicsActive from './Objects/__setPhysicsActive';
+import M__physicsUpdate from './Objects/__physicsUpdate';
 
 
 
@@ -34,16 +37,23 @@ function setCtxAttr(r) {
 
 function setSysAttr(r) {
 
+  let writable = {
+    writable: true
+  };
+
   setHiddenContext.call(this.__system__, 'proxy', r);
   setHiddenContext.call(this.__system__, 'style', {});
   setHiddenContext.call(this.__system__, 'text', {});
   setHiddenContext.call(this.__system__, 'events', {});
   setHiddenContext.call(this.__system__, 'physics', {});
+  setHiddenContext.call(this.__system__.physics, 'information', {});
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob());
 
   for (let t of DEFAULT_EVENT) {
     this.__system__.events[t] = [];
   }
+
+  this.__system__.physics.force = true;
 
 }
 
@@ -101,5 +111,8 @@ LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj;
 LveJSObject.prototype.__setInformationElement = M__setInformationElement;
 LveJSObject.prototype.__setInformationText = M__setInformationText;
 LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody;
+LveJSObject.prototype.__setPhysicsFixture = M__setPhysicsFixture;
+LveJSObject.prototype.__setPhysicsActive = M__setPhysicsActive;
+LveJSObject.prototype.__physicsUpdate = M__physicsUpdate;
 
 export default LveJSObject;

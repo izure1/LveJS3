@@ -58,11 +58,11 @@ function parseArguments(p, v) {
 
     // Object.method()
     if (!arguments.length) {
-      r.VALUE = getProperties.call(this);
+      r.VALUE = getProperties.call(t);
     }
     // Object.method('property')
     else {
-      r.VALUE = this[p];
+      r.VALUE = t[p];
     }
 
     return r;

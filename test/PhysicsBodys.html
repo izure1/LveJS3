@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="./css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="../dist/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  </script>
+  <script type="text/javascript">
+    lve('camera').create({
+      type: 'camera'
+    }).css({
+      bottom: 200
+    }).use();
+
+    lve.init({
+      canvas: '#test'
+    });
+
+    lve('ground').create({
+      type: 'square'
+    }).attr('physics', 'static').css({
+      width: 1000,
+      height: 5,
+      color: '#ddd'
+    });
+
+    for (let i = 0; i < 30; i++) {
+
+      let w, h;
+      let x, y, t;
+      let r, g, b;
+
+      w = getRandomInt(30, 50);
+      h = getRandomInt(30, 50);
+      x = getRandomInt(-300, 300);
+      y = getRandomInt(1200, 1500);
+      t = getRandomInt(0, 360);
+      r = getRandomInt(0, 255);
+      g = getRandomInt(0, 255);
+      b = getRandomInt(0, 255);
+
+      lve(`square_${i}`).create({
+        type: 'square'
+      }).attr('physics', 'dynamic').css({
+        width: w,
+        height: h,
+        left: x,
+        bottom: y,
+        color: `rgb(${r}, ${g}, ${b})`,
+        rotate: t
+      });
+
+    }
+  </script>
+</body>
+
+</html>

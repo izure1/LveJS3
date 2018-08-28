@@ -6,10 +6,14 @@ import worldQuery from '../Helpers/worldQuery';
 export default function init(o) {
 
   let c;
+  let worldQ;
+
+  worldQ = worldQuery.bind(this);
 
   domReady.call(document, () => {
 
     this.renderer.init(o);
+    this.physics.init();
 
     if (o.canvas) {
 
@@ -23,6 +27,7 @@ export default function init(o) {
       this.renderer.setting.canvas.element = c;
       this.renderer.setting.canvas.context.save();
       this.renderer.start();
+      this.physics.start();
 
     }
 
@@ -38,32 +43,31 @@ export default function init(o) {
       // 이는 PC의 MouseEvent와 동급으로 취급됩니다.
       c.addEventListener('touchstart', e => {
         t = new LveJSMouseEvent('mousedown', e);
-        worldQuery(t);
+        worldQ(t);
       });
       c.addEventListener('touchend', e => {
         t = new LveJSMouseEvent('mouseup', e);
-        worldQuery(t);
+        worldQ(t);
       });
       c.addEventListener('touchmove', (e) => {
         this.suppressJob.setSuppress('touchmoveEvent', () => {
           t = new LveJSMouseEvent('mousemove', e);
-          worldQuery(t);
+          worldQ(t);
         }, i);
       });
 
       // PC 마우스 이벤트
-      c.addEventListener('mousedown', worldQuery);
-      c.addEventListener('mouseup', worldQuery);
+      c.addEventListener('mousedown', worldQ);
+      c.addEventListener('mouseup', worldQ);
       c.addEventListener('mousemove', (e) => {
         this.suppressJob.setSuppress('mousemoveEvent', () => {
-          worldQuery(e);
+          worldQ(e);
         }, i);
       });
 
-      c.addEventListener('click', worldQuery);
-      c.addEventListener('dblclick', worldQuery);
-      c.addEventListener('contextmenu', worldQuery);
-
+      c.addEventListener('click', worldQ);
+      c.addEventListener('dblclick', worldQ);
+      c.addEventListener('contextmenu', worldQ);
 
       for (let f of this.queue) f.call(this, this);
 

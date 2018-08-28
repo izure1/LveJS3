@@ -1,17 +1,21 @@
 export default function __setPhysicsFixture() {
 
-  let testF, testS;
+  if (!this.__system__.physics.body) {
+    return this.__setPhysicsBody();
+  }
 
-  testF = new B.b2FixtureDef();
-  testS = new B.b2PolygonShape();
+  let w, h;
+  let F, B;
 
-  testF.set_density(1);
-  testF.set_friction(1);
-  testF.set_restitution(0.3);
-  testF.set_shape(testS);
+  w = this.__system__.style.width;
+  h = this.__system__.style.height;
 
-  testS.SetAsBox(100, 100, new B.b2Vec2(0, 100), 0);
+  B = this.__system__.physics.body;
+  F = this.__system__.world.physics.createFixture(this, w, h, this.density, this.friction, this.restitution);
 
-  return testF;
+  B.DestroyFixture(B.GetFixtureList());
+  B.CreateFixture(F);
+
+  return B;
 
 };

@@ -6,6 +6,7 @@ export default function () {
   this.density = 1;
   this.friction = 1;
   this.restitution = 0.3;
+  this.gravityscale = 1;
   this.loop = false;
   this.timescale = 1;
   this.className = '';
