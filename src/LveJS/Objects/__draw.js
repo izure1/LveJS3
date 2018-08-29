@@ -58,7 +58,7 @@ export default function __draw(c, cw, ch, ax, ay, az, sd, a = 1) {
     return;
   }
 
-  s = s * st.scale;
+  s = s * st_.scale;
 
   // position Fixed / verticalAlign 등의 요소를 고려하여 좌표를 보정합니다.
   // fx, fy 변수가 사용됩니다.

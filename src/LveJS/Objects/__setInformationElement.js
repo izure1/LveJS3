@@ -5,7 +5,7 @@ import getSizeofElement from '../Helpers/getSizeofElement';
 /**
  * @param {String} s Element src
  */
-export default function __setInformationElement(s = '') {
+export default function __setInformationElement(s = '', cb = function () {}) {
 
   let t;
   let d;
@@ -35,6 +35,8 @@ export default function __setInformationElement(s = '') {
         this.element = t;
         this.__system__.style.width = d.width;
         this.__system__.style.height = d.height;
+
+        cb.call(this);
 
       });
 

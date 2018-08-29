@@ -16,11 +16,17 @@ function getContactObjects(B, ptr) {
 
 function checkCollisionAble(a, b) {
 
-  if (a.style.perspective === b.style.perspective) {
-    return true;
+  let r = true;
+
+  if (a.style.perspective !== b.style.perspective) {
+    r = false;
   }
 
-  return false;
+  if (a.style.position !== b.style.position) {
+    r = false;
+  }
+
+  return r;
 
 }
 
@@ -74,7 +80,7 @@ export default function getContactListener() {
     if (!checkCollisionAble(a, b)) {
 
       pointer.SetEnabled(false);
-      
+
     }
 
     return false;
@@ -87,6 +93,9 @@ export default function getContactListener() {
       a,
       b
     } = getContactObjects(B, ptr);
+
+    a.SetAwake(true);
+    b.SetAwake(true);
 
     // emit contactend event
     a = m.get(a);

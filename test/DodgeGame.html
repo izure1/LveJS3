@@ -30,7 +30,10 @@
       width: 1000,
       height: 5,
       color: '#ddd'
-    }).attr('physics', 'static');
+    }).attr({
+      physics: 'static',
+      friction: 0.3
+    });
 
     lve('wall-left').create({
       type: 'square'
@@ -56,10 +59,9 @@
       width: 30,
       height: 50,
       color: 'red',
-      bottom: 350
+      bottom: 10,
     }).attr({
-      physics: 'dynamic',
-      friction: 0
+      physics: 'dynamic'
     }).addClass('character');
 
     lve.on('contactstart', e => {

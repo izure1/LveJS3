@@ -1,3 +1,6 @@
+import getFixture from '../Helpers/getFixture';
+
+
 export default function __setPhysicsBody() {
 
   if (this.__system__.physics.body) {
@@ -13,7 +16,7 @@ export default function __setPhysicsBody() {
   x = this.style.left;
   y = this.style.bottom;
 
-  F = this.__system__.world.physics.createFixture(this, w, h, this.density, this.friction, this.restitution);
+  F = getFixture.call(this);
   B = this.__system__.world.physics.createBody(this.physics, x, y);
 
   r = this.__system__.physics.body = this.__system__.world.physics.createObject(this, B, F);

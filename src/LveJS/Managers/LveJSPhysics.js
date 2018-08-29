@@ -18,7 +18,6 @@ class LveJSPhysics {
 
   constructor() {
 
-    this.deltaTimer = new DeltaTimer;
     this.setting = new DEFAULT_SETTING;
     this.map = new WeakMap;
 

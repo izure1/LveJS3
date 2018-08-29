@@ -9,7 +9,14 @@
 </head>
 
 <body>
-  <canvas id="test" width="800" height="450"></canvas>
+  <div>
+      <canvas id="test" width="800" height="450"></canvas>
+  </div>
+  <div>
+    <button onclick="lve('*').findClass('square').css('verticalAlign', 'top')">Vertical Align - Top</button>
+    <button onclick="lve('*').findClass('square').css('verticalAlign', 'middle')">Vertical Align - Middle</button>
+    <button onclick="lve('*').findClass('square').css('verticalAlign', 'bottom')">Vertical Align - Bottom</button>
+  </div>
   <script type="text/javascript">
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -30,8 +37,9 @@
       type: 'square'
     }).attr('physics', 'static').css({
       width: 1000,
-      height: 5,
-      color: '#ddd'
+      height: 100,
+      color: '#ddd',
+      verticalAlign: 'bottom'
     });
 
     for (let i = 0; i < 30; i++) {
@@ -50,15 +58,15 @@
       b = getRandomInt(0, 255);
 
       lve(`square_${i}`).create({
-        type: 'square'
+        type: 'square',
       }).attr('physics', 'dynamic').css({
         width: w,
         height: h,
         left: x,
         bottom: y,
         color: `rgb(${r}, ${g}, ${b})`,
-        rotate: t
-      });
+        rotate: t,
+      }).addClass('square');
 
     }
   </script>

@@ -1,16 +1,15 @@
 export default function run() {
 
-  let tt;
+  let r;
 
-  tt = this.deltaTimer.update();
-  this.deltaTimer.clear();
+  r = this.setting.stepInterval;
 
   if (this.isRunning) {
-
-    this.update(tt);
-
+    this.update(r);
   }
 
-  window.requestAnimationFrame(run.bind(this));
+  setTimeout(() => {
+    this.run();
+  }, r);
 
 };

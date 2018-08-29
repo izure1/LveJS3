@@ -1,3 +1,5 @@
+import setHiddenContext from '../Utils/setHiddenContext';
+
 import TYPE from './Vars/TYPE.js';
 import INIT_ATTRIBUTE from './Vars/INIT_ATTRIBUTE.js';
 import INIT_STYLE from './Vars/INIT_STYLE.js';
@@ -33,16 +35,16 @@ export default function create(o = {}) {
   w = this.__system__.world;
   B = w.physics.box2d;
 
-  t = new LVE.classes.LveJSObject(w, this.name);
-  t.emit('create');
-  t.attr(v1).attr(o);
-  t.__setPhysicsBody();
-  t.css(v2).css(t.css());
+  // 객체 속성을 정의합니다
+  t = new LVE.classes.LveJSObject(w, this.name, o.type);
 
-  t.physics = t.physics;
+  t.attr(v1).attr(o).__setPhysicsBody();
+  t.css(v2).css(t.css());
 
   w.hashTable.insert(this.name, t);
   w.lve.requestCaching();
+
+  t.attr('physics', t.physics).emit('create');
 
   return t;
 

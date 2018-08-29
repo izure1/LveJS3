@@ -76,18 +76,23 @@ handler.position = function (p, v, t) {
   let rx;
 
   switch (v) {
+
     case 'absolute':
       fx = 0.5;
       rx = 0.5;
       break;
+
     case 'fixed':
       fx = 0;
       rx = 0.5;
       break;
+
   }
 
   this.__system__.style.fx = fx;
   this.__system__.style.rx = rx;
+
+  this.__setPhysicsFixture();
   return v;
 
 };
@@ -98,22 +103,28 @@ handler.verticalAlign = function (p, v, t) {
   let ry;
 
   switch (v) {
+
     case 'top':
       fy = 1;
       ry = 1
       break;
+
     case 'middle':
       fy = 0.5;
       ry = 0.5;
       break;
+
     case 'bottom':
       fy = 0;
       ry = 0;
       break;
+
   }
 
   this.__system__.style.fy = fy;
   this.__system__.style.ry = ry;
+
+  this.__setPhysicsFixture();
   return v;
 
 };
@@ -237,6 +248,15 @@ handler.rotate = function (p, v, t) {
 
   }
 
+  return v;
+
+};
+
+
+handler.scale = function (p, v, t) {
+
+  this.__system__.style.scale = v;
+  this.__setPhysicsFixture();
   return v;
 
 };

@@ -1,3 +1,6 @@
+import setHiddenContext from '../../Utils/setHiddenContext';
+
+
 let handler;
 
 handler = {};
@@ -25,6 +28,14 @@ handler.type = function (p, v, t) {
 };
 
 
+handler.timescale = function (p, v, t) {
+
+  this.__setTimescaleElement(v);
+  return v;
+
+};
+
+
 handler.src = function (p, v, t) {
 
   let f;
@@ -34,8 +45,10 @@ handler.src = function (p, v, t) {
     case 'image':
     case 'sprite':
     case 'video':
-      this.__setInformationElement(v);
-      this.__setPhysicsFixture();
+      this.__setInformationElement(v, () => {
+        this.__setTimescaleElement(this.timescale);
+        this.__setPhysicsFixture();
+      });
       break;
 
     default:

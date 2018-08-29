@@ -10,7 +10,7 @@ export default function __animationUpdate(tt = 0) {
   for (let p in this.animationset) {
 
     t = this.animationset[p];
-    t.runtime += tt;
+    t.runtime += tt * this.timescale;
 
     if (t.runtime > t.duration) {
       t.runtime = t.duration;
