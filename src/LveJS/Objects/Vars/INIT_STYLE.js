@@ -15,6 +15,11 @@ export default function () {
     height: 'auto'
   };
 
+  this.sprite = {
+    width: 'auto',
+    height: 'auto'
+  };
+
   this.text = {
     width: 'auto',
     height: 'auto'

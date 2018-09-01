@@ -53,6 +53,10 @@ handler.width = handler.height = function (p, v, t) {
         this.__setInformationText();
         break;
 
+      case 'sprite':
+        this.__setInformationSprite(sw, sh, this.spriteset.stage);
+        break;
+
       default:
         c = this.element || {};
         d = getSizeofElement(c, sw, sh, vp.width, vp.height);

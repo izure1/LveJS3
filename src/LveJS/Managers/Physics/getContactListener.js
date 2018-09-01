@@ -56,10 +56,10 @@ export default function getContactListener() {
 
       // emit contactstart event
       a.emit('contactstart', {
-        with: b
+        other: b
       });
       b.emit('contactstart', {
-        with: a
+        other: a
       });
 
     }
@@ -104,10 +104,10 @@ export default function getContactListener() {
     if (checkCollisionAble(a, b)) {
 
       a.emit('contactend', {
-        with: b
+        other: b
       });
       b.emit('contactend', {
-        with: a
+        other: a
       });
 
     }

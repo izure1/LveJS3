@@ -884,12 +884,16 @@ function text(c, t, x, y, o = {}) {
  * @param {Number} h Object height
  * @param {Number} x Object axis x
  * @param {Number} y Object axis y
+ * @param {Number} rx x axis of clipped image
+ * @param {Number} ry y axis of clipped image
+ * @param {Number} cw Object width of the clipped image
+ * @param {Number} ch Object width of the clipped image
  */
-function image(c, m, w, h, x, y) {
+function image(c, m, w, h, x, y, rx = 0, ry = 0, cw = w, ch = h) {
 
   c.beginPath();
   c.fill();
-  c.drawImage(m, x, y, w, h);
+  c.drawImage(m, rx, ry, cw, ch, x, y, w, h);
 
 }
 

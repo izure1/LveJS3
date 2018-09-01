@@ -1,24 +1,16 @@
-import {
-  removeArrayItem
-} from '../Utils/array';
-
 export default function off(e, h = null) {
 
   let t;
   let r;
 
-  t = this.events;
+  t = this.emitter.global;
   r = e ? e.split(' ') : Object.keys(t);
 
   for (let p of r) {
 
-    if (!(p in t)) {
-      return this.lve;
-    }
-
     if (h === null) t[p] = [];
     else {
-      removeArrayItem(t[p], h);
+      this.emitter.removeEventListener(p, h);
     }
 
   }

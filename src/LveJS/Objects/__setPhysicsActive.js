@@ -16,8 +16,10 @@ export default function __setPhysicsActive(p, v) {
 
   if (r === h.information.__length)
     h.body.SetActive(true);
-    
+
   else
     h.body.SetActive(false);
+
+  return this;
 
 };

@@ -47,6 +47,7 @@ export default function update(tt = 0) {
     // 객체 애니메이션 업데이트
     t.__fireReservation();
     t.__animationUpdate(tt);
+    t.__spriteUpdate(tt);
     t.__physicsUpdate();
 
     if (!(s.d_opacity * s.d_display * s.d_type)) continue;

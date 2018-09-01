@@ -36,10 +36,10 @@ export default function create(o = {}) {
   B = w.physics.box2d;
 
   // 객체 속성을 정의합니다
-  t = new LVE.classes.LveJSObject(w, this.name, o.type);
+  t = new LVE.classes.LveJSObject(w, this.name);
 
-  t.attr(v1).attr(o).__setPhysicsBody();
-  t.css(v2).css(t.css());
+  t.attr(v1).__setPhysicsBody().__setElementEvent();
+  t.attr(o).css(v2).css(t.css()).sprite(t.sprite());
 
   w.hashTable.insert(this.name, t);
   w.lve.requestCaching();

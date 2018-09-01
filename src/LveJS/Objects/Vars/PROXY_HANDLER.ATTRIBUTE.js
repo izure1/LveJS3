@@ -46,6 +46,7 @@ handler.src = function (p, v, t) {
     case 'sprite':
     case 'video':
       this.__setInformationElement(v, () => {
+        this.__setInformationSprite(this.style.width, this.style.height, this.spriteset.stage);
         this.__setTimescaleElement(this.timescale);
         this.__setPhysicsFixture();
       });

@@ -1,4 +1,4 @@
-export default function () {
+export default function (t) {
 
   this.image = {
     element: document.createElement('img')

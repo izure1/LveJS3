@@ -40,7 +40,7 @@ function elementSourceReady(t, f, fa) {
   if (t.complete === undefined) f.call(t, t);
   else {
 
-    if (t.complete) f.call(t, t);
+    if (t.complete && t.src) f.call(t, t);
     else {
 
       t.addEventListener('load', function cb() {

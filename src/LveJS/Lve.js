@@ -3,6 +3,7 @@ import LveJSObjectSession from './LveJSObjectSession';
 import LveJSHashTable from './Managers/LveJSHashTable';
 import LveJSRenderer from './Managers/LveJSRenderer';
 import LveJSPhysics from './Managers/LveJSPhysics';
+import LveJSEmitter from './Managers/LveJSEmitter';
 import LveJSCache from './Managers/LveJSCache';
 
 import LveQuery from './LveQuery';
@@ -24,18 +25,19 @@ import FnOn from './Functions/on';
 import FnOff from './Functions/off';
 import FnRequestCaching from './Functions/requestCaching';
 import FnBox2d from './Functions/box2d';
+import FnSetGravity from './Functions/setGravity';
 
 
 function Lve() {
 
   this.renderer = new LveJSRenderer;
   this.physics = new LveJSPhysics;
+  this.emitter = new LveJSEmitter;
 
   this.hashTable = new LveJSHashTable;
   this.suppressJob = new SuppressJob;
   this.cache = new LveJSCache;
   this.queue = [];
-  this.events = {};
 
   this.version = '3.0.0';
 
@@ -62,6 +64,7 @@ function Lve() {
   this.lve.off = FnOff.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);
   this.lve.box2d = FnBox2d.bind(this);
+  this.lve.setGravity = FnSetGravity.bind(this);
 
   this.lve.current = FnCurrent.call(this);
 

@@ -24,7 +24,6 @@ export default function play() {
     }
 
     this.spriteset.playing = true;
-    this.emit('play');
 
   });
 

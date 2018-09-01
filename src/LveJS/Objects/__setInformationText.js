@@ -21,6 +21,10 @@ export default function __setInformationText() {
   str = this.text || '';
   w = this.style.width;
 
+  if (this.type !== 'text') {
+    return this;
+  }
+
   if (w === 'auto') {
     w = -1;
   }

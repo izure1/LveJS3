@@ -18,6 +18,7 @@ export default [
   'kicked',
   'load',
   'error',
+  'canplay',
   'play',
   'pause',
   'ended',

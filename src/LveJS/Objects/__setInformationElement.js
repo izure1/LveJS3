@@ -32,7 +32,6 @@ export default function __setInformationElement(s = '', cb = function () {}) {
         c = w.renderer.setting.canvas.element;
         d = getSizeofElement(t, this.style.width, this.style.height, c.width, c.height);
 
-        this.element = t;
         this.__system__.style.width = d.width;
         this.__system__.style.height = d.height;
 

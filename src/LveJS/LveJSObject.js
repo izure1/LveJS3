@@ -19,12 +19,15 @@ import PROXY_HANDLER_SPRITE from './Objects/Vars/PROXY_HANDLER.SPRITE';
 
 import M__fireReservation from './Objects/__fireReservation';
 import M__animationUpdate from './Objects/__animationUpdate';
+import M__spriteUpdate from './Objects/__spriteUpdate';
 import M__draw from './Objects/__draw';
 import M__followUpdate from './Objects/__followUpdate';
 import M__followUpdateFromObj from './Objects/__followUpdateFromObj';
 import M__setInformationElement from './Objects/__setInformationElement';
 import M__setInformationText from './Objects/__setInformationText';
+import M__setInformationSprite from './Objects/__setInformationSprite';
 import M__setTimescaleElement from './Objects/__setTimescaleElement';
+import M__setElementEvent from './Objects/__setElementEvent';
 import M__setPhysicsBody from './Objects/__setPhysicsBody';
 import M__setPhysicsFixture from './Objects/__setPhysicsFixture';
 import M__setPhysicsActive from './Objects/__setPhysicsActive';
@@ -46,9 +49,13 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__, 'style', {});
   setHiddenContext.call(this.__system__, 'text', {});
   setHiddenContext.call(this.__system__, 'events', {});
+  setHiddenContext.call(this.__system__, 'sprite', {});
   setHiddenContext.call(this.__system__, 'physics', {});
   setHiddenContext.call(this.__system__.physics, 'information', {});
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob());
+
+  this.__system__.sprite.interval = 0;
+  this.__system__.sprite.duration = 0;
 
   for (let t of DEFAULT_EVENT) {
     this.__system__.events[t] = [];
@@ -106,12 +113,15 @@ class LveJSObject extends LveJSObjectSession {
 
 LveJSObject.prototype.__fireReservation = M__fireReservation;
 LveJSObject.prototype.__animationUpdate = M__animationUpdate;
+LveJSObject.prototype.__spriteUpdate = M__spriteUpdate;
 LveJSObject.prototype.__draw = M__draw;
 LveJSObject.prototype.__followUpdate = M__followUpdate;
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj;
 LveJSObject.prototype.__setInformationElement = M__setInformationElement;
 LveJSObject.prototype.__setInformationText = M__setInformationText;
+LveJSObject.prototype.__setInformationSprite = M__setInformationSprite;
 LveJSObject.prototype.__setTimescaleElement = M__setTimescaleElement;
+LveJSObject.prototype.__setElementEvent = M__setElementEvent;
 LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody;
 LveJSObject.prototype.__setPhysicsFixture = M__setPhysicsFixture;
 LveJSObject.prototype.__setPhysicsActive = M__setPhysicsActive;

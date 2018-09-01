@@ -4,7 +4,7 @@ import getFixture from '../Helpers/getFixture';
 export default function __setPhysicsBody() {
 
   if (this.__system__.physics.body) {
-    return this.__system__.physics.body;
+    return this;
   }
 
   let w, h, x, y;
@@ -21,6 +21,6 @@ export default function __setPhysicsBody() {
 
   r = this.__system__.physics.body = this.__system__.world.physics.createObject(this, B, F);
 
-  return r;
+  return this;
 
 };
