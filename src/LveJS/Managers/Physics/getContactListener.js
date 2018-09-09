@@ -18,6 +18,10 @@ function checkCollisionAble(a, b) {
 
   let r = true;
 
+  if (!(a.__system__.physics.active && b.__system__.physics.active)) {
+    r = false;
+  }
+
   if (a.style.perspective !== b.style.perspective) {
     r = false;
   }

@@ -38,7 +38,7 @@ export default function create(o = {}) {
   // 객체 속성을 정의합니다
   t = new LVE.classes.LveJSObject(w, this.name);
 
-  t.attr(v1).__setPhysicsBody().__setElementEvent();
+  t.attr(v1).__setElementEvent();
   t.attr(o).css(v2).css(t.css()).sprite(t.sprite());
 
   w.hashTable.insert(this.name, t);

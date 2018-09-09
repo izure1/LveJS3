@@ -149,14 +149,10 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
 
 handler.left = handler.bottom = handler.perspective = function (p, v) {
 
-  let B;
   let w;
-  let s;
   let t;
 
   w = this.__system__.world;
-  s = w.physics.setting.unitScale;
-  B = w.physics.box2d;
 
   for (let i of this.followset.follower) {
 
@@ -169,20 +165,14 @@ handler.left = handler.bottom = handler.perspective = function (p, v) {
 
   }
 
-  this.__system__.physics.body.SetAwake(true);
-
   switch (p) {
 
     case 'left':
-      if (this.__system__.physics.force) {
-        this.__system__.physics.body.SetTransform(new B.b2Vec2(v / s, this.style.bottom / s), degToRad(this.style.rotate));
-      }
+      this.__setPhysicsTransform(v, this.style.bottom, this.style.rotate);
       break;
 
     case 'bottom':
-      if (this.__system__.physics.force) {
-        this.__system__.physics.body.SetTransform(new B.b2Vec2(this.style.left / s, v / s), degToRad(this.style.rotate));
-      }
+      this.__setPhysicsTransform(this.style.left, v, this.style.rotate);
       break;
 
     case 'perspective':
@@ -234,24 +224,7 @@ handler.display = function (p, v, t) {
 
 handler.rotate = function (p, v, t) {
 
-  let B;
-
-  B = this.__system__.world.physics.box2d;
-
-  let pos;
-  let r;
-
-  if (this.__system__.physics.force) {
-
-    pos = this.__system__.physics.body.GetPosition();
-    pos = new B.b2Vec2(pos.get_x(), pos.get_y());
-
-    r = degToRad(v);
-
-    this.__system__.physics.body.SetTransform(pos, r);
-
-  }
-
+  this.__setPhysicsTransform(this.style.left, this.style.bottom, v);
   return v;
 
 };

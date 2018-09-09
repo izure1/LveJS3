@@ -117,22 +117,22 @@ handler.physics = function (p, v, t) {
 
   }
 
-  if (y !== null) {
-
-    this.__system__.physics.body.SetType(y);
-    this.__setPhysicsActive('physics', 1);
-
-  } else {
-
-    this.__setPhysicsActive('physics', 0);
-
+  if (y === null) {
+    this.__setPhysicsDestroy();
+    return v;
   }
 
+  this.__setPhysicsBody();
+  this.__system__.physics.body.SetType(y);
   return v;
 
 };
 
 handler.density = function (p, v, t) {
+
+  if (!this.__system__.physics.body) {
+    return v;
+  }
 
   this.__system__.physics.body.GetFixtureList().SetDensity(v);
   return v;
@@ -141,6 +141,10 @@ handler.density = function (p, v, t) {
 
 handler.friction = function (p, v, t) {
 
+  if (!this.__system__.physics.body) {
+    return v;
+  }
+
   this.__system__.physics.body.GetFixtureList().SetFriction(v);
   return v;
 
@@ -148,12 +152,20 @@ handler.friction = function (p, v, t) {
 
 handler.restitution = function (p, v, t) {
 
+  if (!this.__system__.physics.body) {
+    return v;
+  }
+
   this.__system__.physics.body.GetFixtureList().SetRestitution(v);
   return v;
 
 };
 
 handler.gravityscale = function (p, v, t) {
+
+  if (!this.__system__.physics.body) {
+    return v;
+  }
 
   this.__system__.physics.body.SetGravityScale(v);
   return v;

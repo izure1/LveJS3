@@ -4,7 +4,7 @@ import getFixture from '../Helpers/getFixture';
 export default function __setPhysicsFixture() {
 
   if (!this.__system__.physics.body) {
-    return this.__setPhysicsBody();
+    return this;
   }
 
   let F, B;

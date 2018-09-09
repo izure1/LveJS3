@@ -11,6 +11,6 @@ export default function width() {
     return null;
   }
 
-  return t.__system__.style.width * t.__system__.style.scale;
+  return t.__system__.style.width;
 
 };

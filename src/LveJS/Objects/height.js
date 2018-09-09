@@ -11,6 +11,6 @@ export default function height() {
     return null;
   }
 
-  return t.__system__.style.height * t.__system__.style.scale;
+  return t.__system__.style.height;
 
 };

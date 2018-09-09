@@ -1,8 +1,8 @@
 /**
  * 
- * @param {*} t Body Type (static, dynamic)
- * @param {*} x Body X axis
- * @param {*} y body Y axis
+ * @param {String} t Body Type (static, dynamic)
+ * @param {Number} x Body X axis
+ * @param {Number} y Body Y axis
  */
 export default function createBody(t, x = 0, y = 0) {
 

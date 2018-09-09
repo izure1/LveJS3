@@ -12,7 +12,7 @@ class LveJSEvent {
 
 LveJSEvent.prototype.attachProperties = function (o = {}) {
 
-  if (o instanceof MouseEvent) e.originalEvent = o;
+  if (o instanceof MouseEvent) this.originalEvent = o;
   else {
     Object.assign(this, o);
   }

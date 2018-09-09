@@ -29,8 +29,10 @@ import M__setInformationSprite from './Objects/__setInformationSprite';
 import M__setTimescaleElement from './Objects/__setTimescaleElement';
 import M__setElementEvent from './Objects/__setElementEvent';
 import M__setPhysicsBody from './Objects/__setPhysicsBody';
+import M__setPhysicsDestroy from './Objects/__setphysicsDestroy';
 import M__setPhysicsFixture from './Objects/__setPhysicsFixture';
 import M__setPhysicsActive from './Objects/__setPhysicsActive';
+import M__setPhysicsTransform from './Objects/__setPhysicsTransform';
 import M__physicsUpdate from './Objects/__physicsUpdate';
 
 
@@ -123,8 +125,10 @@ LveJSObject.prototype.__setInformationSprite = M__setInformationSprite;
 LveJSObject.prototype.__setTimescaleElement = M__setTimescaleElement;
 LveJSObject.prototype.__setElementEvent = M__setElementEvent;
 LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody;
+LveJSObject.prototype.__setPhysicsDestroy = M__setPhysicsDestroy;
 LveJSObject.prototype.__setPhysicsFixture = M__setPhysicsFixture;
 LveJSObject.prototype.__setPhysicsActive = M__setPhysicsActive;
+LveJSObject.prototype.__setPhysicsTransform = M__setPhysicsTransform;
 LveJSObject.prototype.__physicsUpdate = M__physicsUpdate;
 
 export default LveJSObject;

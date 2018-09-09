@@ -9,6 +9,10 @@ export default function __physicsUpdate() {
   let pos;
   let s;
 
+  if (!this.__system__.physics.body) {
+    return this;
+  }
+
   if (!this.__system__.physics.body.IsActive()) {
     return this;
   }
@@ -18,7 +22,7 @@ export default function __physicsUpdate() {
 
   pos = physics.body.GetPosition();
   physics.force = false;
-  
+
   this.style.left = pos.get_x() * s;
   this.style.bottom = pos.get_y() * s;
   this.style.rotate = radToDeg(physics.body.GetAngle());
