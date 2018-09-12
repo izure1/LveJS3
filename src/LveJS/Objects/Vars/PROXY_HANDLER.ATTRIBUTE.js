@@ -67,6 +67,8 @@ handler.text = function (p, v, t) {
     return '';
   }
 
+  this.__system__.text.content = v;
+
   this.__setInformationText();
   this.__setPhysicsFixture();
   return v;

@@ -13,6 +13,4 @@ export default function sortObject() {
 
   });
 
-  //lve.root.fn.updatePhysicsPerspective();
-
 };

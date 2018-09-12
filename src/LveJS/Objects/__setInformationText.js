@@ -9,42 +9,43 @@ export default function __setInformationText() {
   let fontSize, fontFamily, fontStyle, fontWeight, textAlign, lineHeight, color;
   let t;
   let str, w;
-  let st;
 
-  st = this.__system__.style;
+  this.__system__.suppressJob.setSuppress('__setInformationText', () => {
 
-  fontSize = st.fontSize;
-  fontFamily = st.fontFamily;
-  fontStyle = st.fontStyle;
-  fontWeight = st.fontWeight;
-  textAlign = st.textAlign;
-  lineHeight = st.lineHeight;
-  color = st.color;
+    fontSize = this.style.fontSize;
+    fontFamily = this.style.fontFamily;
+    fontStyle = this.style.fontStyle;
+    fontWeight = this.style.fontWeight;
+    textAlign = this.style.textAlign;
+    lineHeight = this.style.lineHeight;
+    color = this.style.color;
 
-  str = this.text || '';
-  w = this.style.width;
+    str = this.text || '';
+    w = this.style.width;
 
-  if (this.type !== 'text') {
-    return this;
-  }
+    if (this.type !== 'text') {
+      return this;
+    }
 
-  if (w === 'auto') {
-    w = -1;
-  }
+    if (w === 'auto') {
+      w = -1;
+    }
 
-  t = new TextInformation(str, w, {
-    fontSize,
-    fontFamily,
-    fontWeight,
-    fontStyle,
-    color,
-    textAlign,
-    lineHeight
-  });
+    t = new TextInformation(str, w, {
+      fontSize,
+      fontFamily,
+      fontWeight,
+      fontStyle,
+      color,
+      textAlign,
+      lineHeight
+    });
 
-  this.__system__.text.information = t;
-  this.__system__.style.width = t.maxWidth;
-  this.__system__.style.height = t.height;
+    this.__system__.text.information = t;
+    this.__system__.style.width = t.maxWidth;
+    this.__system__.style.height = t.height;
+
+  }, 1);
 
   return this;
 

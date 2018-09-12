@@ -11,6 +11,8 @@ export default function width() {
     return null;
   }
 
+  this.__system__.suppressJob.immediately('__setInformationText');
+
   return t.__system__.style.width;
 
 };

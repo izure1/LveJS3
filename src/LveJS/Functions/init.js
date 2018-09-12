@@ -36,7 +36,10 @@ export default function init(o) {
       let t;
       let i;
 
-      i = 20;
+      i = {
+        delay: 30,
+        limit: 5
+      };
 
       // 모바일 마우스 이벤트
       // 이는 PC의 MouseEvent와 동급으로 취급됩니다.
@@ -52,7 +55,7 @@ export default function init(o) {
         this.suppressJob.setSuppress('touchmoveEvent', () => {
           t = new LveJSMouseEvent('mousemove', e);
           worldQ(t);
-        }, i);
+        }, i.delay, i.limit);
       });
 
       // PC 마우스 이벤트
@@ -61,7 +64,7 @@ export default function init(o) {
       c.addEventListener('mousemove', (e) => {
         this.suppressJob.setSuppress('mousemoveEvent', () => {
           worldQ(e);
-        }, i);
+        }, i.delay, i.limit);
       });
 
       c.addEventListener('click', worldQ);

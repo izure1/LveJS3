@@ -17,7 +17,6 @@ import PROXY_HANDLER_DATA from './Objects/Vars/PROXY_HANDLER.DATA';
 import PROXY_HANDLER_FOLLOW from './Objects/Vars/PROXY_HANDLER.FOLLOW';
 import PROXY_HANDLER_SPRITE from './Objects/Vars/PROXY_HANDLER.SPRITE';
 
-import M__fireReservation from './Objects/__fireReservation';
 import M__animationUpdate from './Objects/__animationUpdate';
 import M__spriteUpdate from './Objects/__spriteUpdate';
 import M__draw from './Objects/__draw';
@@ -117,7 +116,6 @@ class LveJSObject extends LveJSObjectSession {
 }
 
 
-LveJSObject.prototype.__fireReservation = M__fireReservation;
 LveJSObject.prototype.__animationUpdate = M__animationUpdate;
 LveJSObject.prototype.__spriteUpdate = M__spriteUpdate;
 LveJSObject.prototype.__draw = M__draw;

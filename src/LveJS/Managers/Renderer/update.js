@@ -45,7 +45,6 @@ export default function update(tt = 0) {
     s = t.__system__.style;
 
     // 객체 애니메이션 업데이트
-    t.__fireReservation();
     t.__animationUpdate(tt);
     t.__spriteUpdate(tt);
     t.__physicsUpdate();

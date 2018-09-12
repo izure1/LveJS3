@@ -1,7 +1,9 @@
+import instanceOf from '../../Functions/instanceof';
+
+
 export default function setObject(l, scene) {
 
   let scenes;
-  let c;
 
   this.objects = [];
 
@@ -30,10 +32,6 @@ export default function setObject(l, scene) {
     }
 
   }
-
-  // if (cache.objectArr.indexOf(cache.mouseoverItem) === -1 && lve.instanceof(cache.mouse)) {
-  //   cache.objectArr.push(cache.mouseoverItem);
-  // }
 
   this.sortObject();
 

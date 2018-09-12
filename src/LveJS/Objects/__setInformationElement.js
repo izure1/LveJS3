@@ -10,7 +10,7 @@ export default function __setInformationElement(s = '', cb = function () {}) {
   let t;
   let d;
 
-  this.__system__.suppressJob.reserve('setElement', () => {
+  this.__system__.suppressJob.setSuppress('setElement', () => {
 
     t = this.element;
 
@@ -43,7 +43,7 @@ export default function __setInformationElement(s = '', cb = function () {}) {
 
     });
 
-  });
+  }, 0, 1);
 
   return this;
 

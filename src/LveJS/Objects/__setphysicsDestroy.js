@@ -11,9 +11,13 @@ export default function __setPhysicsDestroy() {
     return this;
   }
 
-  this.__system__.world.physics.destroyObject(B);
-  delete this.__system__.physics.body;
-  
+  setTimeout(() => {
+
+    this.__system__.world.physics.destroyObject(B);
+    delete this.__system__.physics.body;
+
+  }, 1);
+
   return this;
 
 };

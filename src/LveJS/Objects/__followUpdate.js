@@ -1,6 +1,3 @@
-import instanceOf from '../Functions/instanceof';
-
-
 export default function __followUpdate(p, v) {
   
   let t;

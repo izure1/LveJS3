@@ -168,7 +168,7 @@ function setShadow(c, b = 0, l = 'black', x = 0, y = 0) {
 function borderSquare(c, w, h, x, y, bw, l) {
 
   if (!bw) {
-    bw = undefined;
+    return;
   }
 
   c.strokeStyle = l;
@@ -191,7 +191,7 @@ function borderSquare(c, w, h, x, y, bw, l) {
 function borderCircle(c, w, h, x, y, bw, l) {
 
   if (!bw) {
-    bw = undefined;
+    return;
   }
 
   let hw, hh, mx, my;
@@ -228,7 +228,7 @@ function borderCircle(c, w, h, x, y, bw, l) {
 function borderText(c, t, x, y, bw, l) {
 
   if (!bw) {
-    bw = undefined;
+    return;
   }
 
   c.strokeStyle = l;
