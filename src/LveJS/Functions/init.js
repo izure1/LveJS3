@@ -36,8 +36,7 @@ export default function init(o) {
       let t;
       let i;
 
-      i = this.renderer.setting.frameLimit || 1;
-      i = 1000 / i;
+      i = 20;
 
       // 모바일 마우스 이벤트
       // 이는 PC의 MouseEvent와 동급으로 취급됩니다.

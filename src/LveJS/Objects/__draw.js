@@ -39,11 +39,12 @@ VERTEX.fixed = getAABB;
  */
 export default function __draw(c, cw, ch, ax, ay, az, sd, a = 1) {
 
-  let st, st_, sp_;
+  let st, st_, sp_, po_;
 
   st = this.style;
   st_ = this.__system__.style;
   sp_ = this.__system__.sprite;
+  po_ = this.__system__.position;
 
   // 카메라와 객체의 정보를 이용해 캔버스 내의 x, y 절대좌표와 그리기 비율을 구합니다
   let w, h, l, r;
@@ -86,8 +87,12 @@ export default function __draw(c, cw, ch, ax, ay, az, sd, a = 1) {
 
   setShadow(c, sb, sc, sx, sy);
 
+  po_.x = x;
+  po_.y = y;
+  po_.s = s;
   x = r.x;
   y = r.y;
+
 
   if (st.gradient.__length) {
 
@@ -112,7 +117,7 @@ export default function __draw(c, cw, ch, ax, ay, az, sd, a = 1) {
         return;
       }
       borderSquare(c, w, h, x, y, bw, bc);
-      image(c, this.element, w, h, x, y);
+      image(c, this.element, w, h, x, y, 0, 0, this.element.naturalWidth, this.element.naturalHeight);
       break;
 
     case 'text':
@@ -128,7 +133,7 @@ export default function __draw(c, cw, ch, ax, ay, az, sd, a = 1) {
         return;
       }
       borderSquare(c, w, h, x, y, bw, bc);
-      image(c, this.element, w, h, x, y);
+      image(c, this.element, w, h, x, y, 0, 0, this.element.videoWidth, this.element.videoHeight);
       break;
 
     case 'sprite':

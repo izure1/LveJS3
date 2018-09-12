@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="./css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="../dist/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+
+    lve.on('mouseover', function (e) {
+      e.target.css('color', 'red');
+    });
+
+    lve.on('mouseout', function (e) {
+      e.target.css('color', 'blue');
+    });
+
+
+
+    lve('square').create({
+      type: 'square'
+    }).css('perspective', 1000).animate({
+      perspective: 100
+    }, 3000);
+
+    lve('camera').create({
+      type: 'camera'
+    }).use();
+
+    lve.init({
+      canvas: '#test'
+    });
+
+  </script>
+</body>
+
+</html>

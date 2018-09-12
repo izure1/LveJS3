@@ -23,6 +23,11 @@ export default function () {
   this.text = {
     width: 'auto',
     height: 'auto'
-  }
+  };
+
+  this.video = {
+    width: 'auto',
+    height: 'auto'
+  };
 
 };

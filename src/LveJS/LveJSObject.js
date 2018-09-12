@@ -21,6 +21,7 @@ import M__fireReservation from './Objects/__fireReservation';
 import M__animationUpdate from './Objects/__animationUpdate';
 import M__spriteUpdate from './Objects/__spriteUpdate';
 import M__draw from './Objects/__draw';
+import M__isDisplay from './Objects/__isDisplay';
 import M__followUpdate from './Objects/__followUpdate';
 import M__followUpdateFromObj from './Objects/__followUpdateFromObj';
 import M__setInformationElement from './Objects/__setInformationElement';
@@ -52,12 +53,15 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__, 'text', {});
   setHiddenContext.call(this.__system__, 'events', {});
   setHiddenContext.call(this.__system__, 'sprite', {});
+  setHiddenContext.call(this.__system__, 'position', {});
   setHiddenContext.call(this.__system__, 'physics', {});
   setHiddenContext.call(this.__system__.physics, 'information', {});
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob());
 
   this.__system__.sprite.interval = 0;
   this.__system__.sprite.duration = 0;
+  this.__system__.position.x = 0;
+  this.__system__.position.y = 0;
 
   for (let t of DEFAULT_EVENT) {
     this.__system__.events[t] = [];
@@ -117,6 +121,7 @@ LveJSObject.prototype.__fireReservation = M__fireReservation;
 LveJSObject.prototype.__animationUpdate = M__animationUpdate;
 LveJSObject.prototype.__spriteUpdate = M__spriteUpdate;
 LveJSObject.prototype.__draw = M__draw;
+LveJSObject.prototype.__isDisplay = M__isDisplay;
 LveJSObject.prototype.__followUpdate = M__followUpdate;
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj;
 LveJSObject.prototype.__setInformationElement = M__setInformationElement;

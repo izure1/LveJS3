@@ -32,7 +32,7 @@
       color: '#ddd'
     }).attr({
       physics: 'static',
-      friction: 0.3
+      friction: 0.5
     });
 
     lve('wall-left').create({
@@ -61,7 +61,9 @@
       color: 'red',
       bottom: 10,
     }).attr({
-      physics: 'dynamic'
+      physics: 'dynamic',
+      friction: 0,
+      density: 2
     }).addClass('character');
 
     lve.on('contactstart', e => {
@@ -87,11 +89,11 @@
       switch (e.keyCode) {
 
         case 37:
-          lve('character').applyForce(-1000, 0);
+          lve('character').applyForce(-600, 0);
           break;
 
         case 39:
-          lve('character').applyForce(1000, 0);
+          lve('character').applyForce(600, 0);
           break;
 
       }

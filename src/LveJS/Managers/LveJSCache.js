@@ -1,8 +1,6 @@
 export default function LveJSInitSetting() {
 
-
-  return {
-    inited: false
-  };
+  this.inited = false;
+  this.mouseSelected = null;
 
 };

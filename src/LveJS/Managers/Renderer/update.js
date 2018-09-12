@@ -50,7 +50,7 @@ export default function update(tt = 0) {
     t.__spriteUpdate(tt);
     t.__physicsUpdate();
 
-    if (!(s.d_opacity * s.d_display * s.d_type)) continue;
+    if (!t.__isDisplay()) continue;
 
     t.__draw.apply(t, args.value);
 

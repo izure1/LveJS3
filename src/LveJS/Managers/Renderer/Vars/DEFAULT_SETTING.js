@@ -11,6 +11,6 @@ export default function () {
   this.extendStart = null;
   this.extendEnd = null;
   this.extendDrawStart = null;
-  this.extendDrawEnd = null
+  this.extendDrawEnd = null;
 
 };

@@ -62,6 +62,12 @@ function getSizeofElement(t, w, h, vw, vh) {
       s = nw / nh;
       break;
 
+    case 'VIDEO':
+      nw = t.videoWidth;
+      nh = t.videoHeight;
+      s = nw / nh;
+      break;
+
   }
 
   switch (getValueType(w)) {

@@ -1,81 +1,77 @@
-/**
- * 
- * @param {*} x Mouse X
- * @param {*} y Mouse Y
- * @param {*} cx Camera X
- * @param {*} cy Camera Y
- */
-function queryAABB(B, W, x, y, cx, cy, s) {
+import clickCheck from '../Utils/clickCheck';
 
-  let aabb;
-  let myQueryCallback;
 
-  x += cx;
-  y += cy;
+function mouseQuery(objects, pos) {
 
-  x /= s;
-  y /= s;
+  let r;
+  let p, s;
+  let rw, rh, rx, ry, rs;
 
-  aabb = new B.b2AABB;
-  myQueryCallback = new B.JSQueryCallback;
+  r = null;
 
-  aabb.set_lowerBound(new B.b2Vec2(x - 0.001, y - 0.001));
-  aabb.set_upperBound(new B.b2Vec2(x + 0.001, y + 0.001));
+  for (let t of objects) {
 
-  myQueryCallback.ReportFixture = function (ptr) {
+    if (!t.__isDisplay()) continue;
 
-    ptr = B.wrapPointer(ptr, B.b2Fixture);
+    p = t.__system__.position;
+    s = t.__system__.style;
 
-    if (!ptr.TestPoint(ptr.GetBody().GetTransform(), this.m_point)) {
-      return true;
+    rs = p.s;
+    rw = s.width * rs;
+    rh = s.height * rs;
+    rx = rw * s.rx;
+    ry = rh * s.ry;
+    rx += p.x;
+    ry += p.y;
+
+    if (clickCheck(pos, [p.x, p.y], [rw, rh], [rx, ry], -t.style.rotate)) {
+      r = t;
+      break;
     }
 
-    this.m_target = ptr.GetBody();
-    return false;
+  }
 
-  };
-
-  myQueryCallback.m_target = null;
-  myQueryCallback.m_point = new B.b2Vec2(x, y);
-
-  W.QueryAABB(myQueryCallback, aabb); // the AABB is a tiny square around the current mouse position
-
-  return myQueryCallback.m_target;
+  return r;
 
 }
 
 
 export default function worldQuery(e) {
 
-  let B, W;
-  let a, x, y, s;
-  let t;
+  let a, t;
+  let m, b;
 
-  B = this.physics.box2d;
-  W = this.physics.world;
-  s = this.physics.setting.unitScale;
   a = this.renderer.getDrawArguments();
-
-  x = e.offsetX;
-  y = e.target.height - e.offsetY;
+  m = this.cache.mouseSelected;
+  b = null;
 
   if (!a.ready) {
     return;
   }
 
   a = a.value;
-  t = queryAABB(B, W, x, y, a[3] - e.target.width / 2, a[4] - e.target.height / 2, s);
+  t = mouseQuery(this.renderer.objects, [e.offsetX, e.offsetY]);
 
-  if (!t) {
+  if (t) {
+    t.emit(e.type, e);
+  }
+
+
+  if (m === t) {
     return;
   }
 
-  t = this.physics.map.get(t);
-
-  if (!t) {
-    return;
+  if (m) {
+    m.emit('mouseout', e);
+    b = null;
   }
 
-  t.emit(e.type, e);
+  if (t) {
+    t.emit('mouseover', e);
+    b = t;
+  }
+
+  this.cache.mouseSelected = b;
+
 
 };
