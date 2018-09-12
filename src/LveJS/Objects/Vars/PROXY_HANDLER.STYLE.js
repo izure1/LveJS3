@@ -140,6 +140,8 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
     return v;
   }
 
+  this.__system__.style[p] = v;
+
   this.__setInformationText();
   this.__setPhysicsFixture();
   return v;

@@ -57,21 +57,21 @@ export default function worldQuery(e) {
   }
 
 
-  if (m === t) {
-    return;
-  }
+  if (m !== t) {
 
-  if (m) {
-    m.emit('mouseout', e);
-    b = null;
-  }
+    if (m) {
+      m.emit('mouseout', e);
+      b = null;
+    }
 
-  if (t) {
-    t.emit('mouseover', e);
-    b = t;
-  }
+    if (t) {
+      t.emit('mouseover', e);
+      b = t;
+    }
 
-  this.cache.mouseSelected = b;
+    this.cache.mouseSelected = b;
+
+  }
 
 
 };

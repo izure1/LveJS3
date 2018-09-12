@@ -9,14 +9,17 @@ export default function __setInformationText() {
   let fontSize, fontFamily, fontStyle, fontWeight, textAlign, lineHeight, color;
   let t;
   let str, w;
+  let st;
 
-  fontSize = this.style.fontSize;
-  fontFamily = this.style.fontFamily;
-  fontStyle = this.style.fontStyle;
-  fontWeight = this.style.fontWeight;
-  textAlign = this.style.textAlign;
-  lineHeight = this.style.lineHeight;
-  color = this.style.color;
+  st = this.__system__.style;
+
+  fontSize = st.fontSize;
+  fontFamily = st.fontFamily;
+  fontStyle = st.fontStyle;
+  fontWeight = st.fontWeight;
+  textAlign = st.textAlign;
+  lineHeight = st.lineHeight;
+  color = st.color;
 
   str = this.text || '';
   w = this.style.width;
