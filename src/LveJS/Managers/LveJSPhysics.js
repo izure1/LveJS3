@@ -23,7 +23,8 @@ class LveJSPhysics {
 
     this.box2d = B();
     this.world = new this.box2d.b2World(new this.box2d.b2Vec2(0, this.setting.gravity), false);
-    
+    this.bodies = new Set;
+
     this.isRunning = false;
     this.isStart = false;
 

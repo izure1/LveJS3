@@ -14,7 +14,7 @@ const entry_box2d = glob.sync('./src/External/Box2D/**/*.js');
 module.exports = {
   // production
   // development
-  mode: 'development',
+  mode: 'production',
   entry: {
     'LveJS': [
       ...entry_lve,
