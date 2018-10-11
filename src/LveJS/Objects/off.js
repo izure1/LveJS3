@@ -1,7 +1,4 @@
 import each from './each';
-import {
-  removeArrayItem
-} from '../Utils/array';
 
 
 export default function off(e, h = null) {
@@ -20,9 +17,9 @@ export default function off(e, h = null) {
         return;
       }
 
-      if (h === null) t[p] = [];
+      if (h === null) t[p] = new Map;
       else {
-        removeArrayItem(t[p], h);
+        t[p].delete(h);
       }
 
     }

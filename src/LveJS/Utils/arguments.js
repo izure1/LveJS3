@@ -39,10 +39,9 @@ function parseArguments(p, v) {
     VALUE: {}
   };
 
-  // StirObject 객체 자기자신을 파싱하는 경우
+  // LveJSObject 객체 자기자신을 파싱하는 경우
   // 세션 중 맨 처음 객체만을 받아옵니다.
-
-  if (this instanceof window.LVE.classes.LveJSObjectSession) {
+  if (this.__system__ && this.__system__.world && t instanceof this.__system__.world.classes.LveJSObjectSession) {
     t = this.get();
   }
 

@@ -31,14 +31,30 @@ export default function from(t, e, o) {
   // 전역 이벤트 발생
   if (e in this.global) {
 
-    for (let f of this.global[e]) f.call(t, v);
+    for (let [h, o] of this.global[e]) {
+
+      h.call(t, v);
+
+      if (o.once) {
+        this.global[e].delete(h);
+      }
+
+    }
 
   }
 
   // 로컬 이벤트 발생
   if (e in t.__system__.events) {
 
-    for (let f of t.__system__.events[e]) f.call(t, v);
+    for (let [h, o] of t.__system__.events[e]) {
+
+      h.call(t, v);
+
+      if (o.once) {
+        t.__system__.events[e].delete(h);
+      }
+
+    }
 
   }
 

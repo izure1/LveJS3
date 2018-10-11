@@ -1,5 +1,11 @@
 export default function instanceOf(t) {
 
-		return t instanceof window.LVE.classes.LveJSObjectSession || t instanceof window.LVE.classes.LveJSObject;
+	let r;
+
+	if (t && t.__system__ && t.__system__.world) {
+		r = t instanceof t.__system__.world.classes.LveJSObjectSession;
+	}
+
+	return !!r;
 
 };

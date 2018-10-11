@@ -1,15 +1,10 @@
-import {
-  removeArrayItem
-} from '../../Utils/array';
-
-
 export default function removeEventListener(e, h) {
 
   if (!(e in this.global)) {
     return this;
   }
 
-  removeArrayItem(this.global[e], h);
+  this.global[e].delete(h);
 
   return this;
 

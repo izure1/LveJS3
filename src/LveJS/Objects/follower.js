@@ -20,6 +20,6 @@ export default function follower() {
 
   }
 
-  return new LVE.classes.LveJSObjectSession(w, this.name, r);
+  return new w.classes.LveJSObjectSession(w, this.name, r);
 
 };

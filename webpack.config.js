@@ -14,7 +14,7 @@ const entry_box2d = glob.sync('./src/External/Box2D/**/*.js');
 module.exports = {
   // production
   // development
-  mode: 'production',
+  mode: 'development',
   entry: {
     'LveJS': [
       ...entry_lve,
@@ -27,17 +27,16 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.js$/,
-        include: path.join(__dirname),
-        exclude: /(node_modules)|(dist)|(External)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            babelrc: true
-          }
+      test: /\.js$/,
+      include: path.join(__dirname),
+      exclude: /(node_modules)|(dist)|(External)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          babelrc: true
         }
       }
-    ]
+    }]
   },
   plugins: [
     new CircularDependencyPlugin({

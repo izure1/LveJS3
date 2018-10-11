@@ -1,9 +1,12 @@
 import LveJSObjectSession from './LveJSObjectSession';
+import LveJSObject from './LveJSObject';
+import Box2D from '../External/Box2D/Box2D';
 
 import LveJSHashTable from './Managers/LveJSHashTable';
 import LveJSRenderer from './Managers/LveJSRenderer';
 import LveJSPhysics from './Managers/LveJSPhysics';
 import LveJSEmitter from './Managers/LveJSEmitter';
+import LveJSListener from './Managers/LveJSListener';
 import LveJSCache from './Managers/LveJSCache';
 
 import LveQuery from './LveQuery';
@@ -14,6 +17,7 @@ import SuppressJob from './Utils/SuppressJob';
 import FnInstanceOf from './Functions/instanceof';
 import FnCheckMobile from './Functions/checkMobile';
 import FnCurrent from './Functions/current';
+import FnDestroy from './Functions/destroy';
 import FnReady from './Functions/ready';
 import FnInit from './Functions/init';
 import FnStart from './Functions/start';
@@ -22,6 +26,7 @@ import FnPlay from './Functions/play';
 import FnPause from './Functions/pause';
 import FnCapture from './Functions/capture';
 import FnOn from './Functions/on';
+import FnOnce from './Functions/once';
 import FnOff from './Functions/off';
 import FnRequestCaching from './Functions/requestCaching';
 import FnBox2d from './Functions/box2d';
@@ -33,6 +38,7 @@ function Lve() {
   this.renderer = new LveJSRenderer;
   this.physics = new LveJSPhysics;
   this.emitter = new LveJSEmitter;
+  this.listener = new LveJSListener;
 
   this.hashTable = new LveJSHashTable;
   this.suppressJob = new SuppressJob;
@@ -40,6 +46,11 @@ function Lve() {
   this.queue = [];
 
   this.version = '3.0.0';
+  this.classes = {
+    LveJSObjectSession,
+    LveJSObject,
+    Box2D
+  };
 
   let self = this;
   this.lve = function (u = null) {
@@ -53,6 +64,7 @@ function Lve() {
   // Set LveJS Functions for user
   this.lve.instanceof = FnInstanceOf.bind(this);
   this.lve.checkMobile = FnCheckMobile.bind(this);
+  this.lve.destroy = FnDestroy.bind(this);
   this.lve.ready = FnReady.bind(this);
   this.lve.init = FnInit.bind(this);
   this.lve.start = FnStart.bind(this);
@@ -61,6 +73,7 @@ function Lve() {
   this.lve.pause = FnPause.bind(this);
   this.lve.capture = FnCapture.bind(this);
   this.lve.on = FnOn.bind(this);
+  this.lve.once = FnOnce.bind(this);
   this.lve.off = FnOff.bind(this);
   this.lve.requestCaching = FnRequestCaching.bind(this);
   this.lve.box2d = FnBox2d.bind(this);

@@ -1,9 +1,4 @@
-import LveJSObjectSession from './LveJSObjectSession';
-import LveJSObject from './LveJSObject';
 import Lve from './Lve';
-import * as f from './Utils/drawCanvas';
-
-import Box2D from '../External/Box2D/Box2D';
 
 
 /* Light Visualnovel Engine
@@ -29,20 +24,7 @@ import Box2D from '../External/Box2D/Box2D';
  *  그 외 lve.js 에서 필요한 내용은 lve 상수의 속성의 형태로 저장되어 있습니다. 변수형 또는 함수형입니다. ( Ex. lve.root or lve.init() )
  */
 
-window.lve = new Lve();
-window.f = f;
-
 (function () {
-
-  Object.defineProperty(window, 'LVE', {
-    value: {}
-  });
-
-  LVE.classes = {
-    LveJSObjectSession,
-    LveJSObject,
-    Box2D
-  };
 
   // Object length
   Object.defineProperty(Object.prototype, '__length', {
@@ -54,4 +36,26 @@ window.f = f;
     enumerable: false
   });
 
-})();
+}());
+
+(function (root, factory) {
+  if (typeof root.define === 'function' && root.define.amd) {
+    // AMD. Register as an anonymous module.
+    root.define([], factory);
+  } else if (typeof root.module === 'object' && root.module.exports) {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    root.module.exports = factory();
+  } else {
+    // Browser globals (root is window)
+    root.Lve = Lve;
+    root.lve = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function () {
+
+  // Just return a value to define the module export.
+  // This example returns an object, but the module
+  // can return a function as the exported value.
+  return new Lve;
+}));

@@ -5,7 +5,7 @@
  */
 export default function extend(u, f) {
 
-  window.LVE.classes.LveJSObjectSession.prototype[u] = f;
+  this.classes.LveJSObjectSession.prototype[u] = f;
   return this.lve;
 
 };

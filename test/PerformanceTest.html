@@ -81,11 +81,13 @@
 
       lve('camera').animate({
         perspective: length * gap
-      }, 30000);
+      }, 30000).once('animateend', e => {
 
-      end = performance.now();
+        end = performance.now();
 
-      console.log(`interval: ${end - start}ms`);
+        console.log(`interval: ${end - start}ms`);
+
+      });
     }
 
     window.onload = function () {

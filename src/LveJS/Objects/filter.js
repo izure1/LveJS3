@@ -10,6 +10,6 @@ export default function filter(f) {
   t = this.context.filter(f);
   w = this.__system__.world;
 
-  return new LVE.classes.LveJSObjectSession(w, this.name, t);
+  return new w.classes.LveJSObjectSession(w, this.name, t);
 
 };

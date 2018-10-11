@@ -1,14 +1,10 @@
 import domReady from '../Utils/domReady';
-import LveJSMouseEvent from '../LveJSMouseEvent';
 import worldQuery from '../Helpers/worldQuery';
 
 
 export default function init(o) {
 
   let c;
-  let worldQ;
-
-  worldQ = worldQuery.bind(this);
 
   domReady.call(document, () => {
 
@@ -29,47 +25,28 @@ export default function init(o) {
       this.renderer.start();
       this.physics.start();
 
+      if (!this.listener.inited) {
+
+        this.listener.init(c, worldQuery.bind(this));
+
+        // mobile events
+        this.listener.addListener('touchstart');
+        this.listener.addListener('touchend');
+        this.listener.addListener('touchmove');
+
+        // pc events
+        this.listener.addListener('mousemove');
+        this.listener.addListener('mousedown');
+        this.listener.addListener('mouseup');
+        this.listener.addListener('click');
+        this.listener.addListener('dblclick');
+        this.listener.addListener('contextmenu');
+
+      }
+
     }
 
     if (!this.cache.inited) {
-
-      let t;
-      let i;
-
-      i = {
-        delay: 30,
-        limit: 5
-      };
-
-      // 모바일 마우스 이벤트
-      // 이는 PC의 MouseEvent와 동급으로 취급됩니다.
-      c.addEventListener('touchstart', e => {
-        t = new LveJSMouseEvent('mousedown', e);
-        worldQ(t);
-      });
-      c.addEventListener('touchend', e => {
-        t = new LveJSMouseEvent('mouseup', e);
-        worldQ(t);
-      });
-      c.addEventListener('touchmove', (e) => {
-        this.suppressJob.setSuppress('touchmoveEvent', () => {
-          t = new LveJSMouseEvent('mousemove', e);
-          worldQ(t);
-        }, i.delay, i.limit);
-      });
-
-      // PC 마우스 이벤트
-      c.addEventListener('mousedown', worldQ);
-      c.addEventListener('mouseup', worldQ);
-      c.addEventListener('mousemove', (e) => {
-        this.suppressJob.setSuppress('mousemoveEvent', () => {
-          worldQ(e);
-        }, i.delay, i.limit);
-      });
-
-      c.addEventListener('click', worldQ);
-      c.addEventListener('dblclick', worldQ);
-      c.addEventListener('contextmenu', worldQ);
 
       for (let f of this.queue) f.call(this, this);
 

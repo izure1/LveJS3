@@ -1,7 +1,7 @@
 import each from './each';
 
 
-export default function on(e, h) {
+export default function once(e, h) {
 
   let t;
 
@@ -16,7 +16,7 @@ export default function on(e, h) {
 
       t = h.bind(this);
       this.__system__.events[p].set(h, {
-        once: false
+        once: true
       });
 
     }

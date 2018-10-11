@@ -26,6 +26,8 @@ export default function run() {
 
   if (extendEnd) extendEnd();
 
-  window.requestAnimationFrame(run.bind(this));
+  if (this.isRunning) {
+    window.requestAnimationFrame(run.bind(this));
+  }
 
 };

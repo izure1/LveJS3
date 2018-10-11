@@ -63,7 +63,7 @@ function setSysAttr(r) {
   this.__system__.position.y = 0;
 
   for (let t of DEFAULT_EVENT) {
-    this.__system__.events[t] = [];
+    this.__system__.events[t] = new Map;
   }
 
   this.__system__.physics.force = true;
