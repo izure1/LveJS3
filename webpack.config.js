@@ -1,14 +1,9 @@
 'use strict';
 
 const path = require('path');
-const glob = require('glob');
 
 // external modules
 const CircularDependencyPlugin = require('circular-dependency-plugin');
-
-// entries
-const entry_lve = glob.sync('./src/LveJS/**/*.js');
-const entry_box2d = glob.sync('./src/External/Box2D/**/*.js');
 
 // set webpack
 module.exports = {
@@ -16,14 +11,14 @@ module.exports = {
   // development
   mode: 'development',
   entry: {
-    'LveJS': [
-      ...entry_lve,
-      ...entry_box2d
-    ]
+    'LveJS': './src/LveJS/Core.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    library: 'Lve',
+    libraryExport: 'default',
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{

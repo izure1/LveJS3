@@ -45,7 +45,7 @@ function Lve() {
   this.cache = new LveJSCache;
   this.queue = [];
 
-  this.version = '3.0.0';
+  this.version = '3.0.1';
   this.classes = {
     LveJSObjectSession,
     LveJSObject,

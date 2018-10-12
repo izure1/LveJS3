@@ -12,6 +12,8 @@
   <canvas id="test" width="800" height="450"></canvas>
   <script type="text/javascript">
 
+    const lve = new Lve;
+
     lve.on('mouseover', function (e) {
       lve('text').attr('text', 'Mouse over!');
       e.target.css('borderWidth', 5);

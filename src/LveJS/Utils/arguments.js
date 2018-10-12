@@ -41,7 +41,7 @@ function parseArguments(p, v) {
 
   // LveJSObject 객체 자기자신을 파싱하는 경우
   // 세션 중 맨 처음 객체만을 받아옵니다.
-  if (this.__system__ && this.__system__.world && t instanceof this.__system__.world.classes.LveJSObjectSession) {
+  if (this && this.__system__ && this.__system__.world && t instanceof this.__system__.world.classes.LveJSObjectSession) {
     t = this.get();
   }
 

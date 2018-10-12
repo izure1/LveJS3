@@ -38,24 +38,4 @@ import Lve from './Lve';
 
 }());
 
-(function (root, factory) {
-  if (typeof root.define === 'function' && root.define.amd) {
-    // AMD. Register as an anonymous module.
-    root.define([], factory);
-  } else if (typeof root.module === 'object' && root.module.exports) {
-    // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
-    root.module.exports = factory();
-  } else {
-    // Browser globals (root is window)
-    root.Lve = Lve;
-    root.lve = factory();
-  }
-}(typeof self !== 'undefined' ? self : this, function () {
-
-  // Just return a value to define the module export.
-  // This example returns an object, but the module
-  // can return a function as the exported value.
-  return new Lve;
-}));
+export default Lve;
