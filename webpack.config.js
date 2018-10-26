@@ -9,7 +9,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 module.exports = {
   // production
   // development
-  mode: 'development',
+  mode: 'production',
   entry: {
     'LveJS': './src/LveJS/Core.js'
   },
