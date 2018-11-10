@@ -30,5 +30,6 @@ export default function () {
   this.lineHeight = '100%';
   this.verticalAlign = 'top';
   this.zIndex = 0;
+  this.cursor = 'auto';
 
 };

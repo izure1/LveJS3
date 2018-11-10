@@ -1,4 +1,6 @@
 import LveJSEvent from '../../LveJSEvent';
+
+import HANDLER_DEFAULT from './Vars/HANDLER.DEFAULT';
 import HANDLER_VIDEO from './Vars/HANDLER.VIDEO';
 import HANDLER_SPRITE from './Vars/HANDLER.SPRITE';
 
@@ -9,6 +11,10 @@ handler = {};
 handler.sprite = HANDLER_SPRITE;
 handler.video = HANDLER_VIDEO;
 
+for (let type in handler) {
+  handler[type] = Object.assign({}, HANDLER_DEFAULT, handler[type]);
+}
+
 
 export default function from(t, e, o) {
 
@@ -16,7 +22,7 @@ export default function from(t, e, o) {
   let h;
 
   // 이벤트 정보 생성
-  h = handler[t.type] || {};
+  h = handler[t.type] || HANDLER_DEFAULT;
   v = new LveJSEvent(e, t).attachProperties(o);
 
   // 핸들러 함수 작동
