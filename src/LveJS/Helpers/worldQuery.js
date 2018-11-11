@@ -36,6 +36,26 @@ function mouseQuery(objects, pos) {
 }
 
 
+function getOffset(el, e) {
+
+  let o;
+  let x, y;
+
+  o = el.getBoundingClientRect();
+  x = e.clientX;
+  y = e.clientY;
+
+  x -= o.x;
+  y -= o.y;
+
+  return {
+    x,
+    y
+  };
+
+}
+
+
 export default function worldQuery(e) {
 
   let a, t;
@@ -50,7 +70,10 @@ export default function worldQuery(e) {
   }
 
   a = a.value;
-  t = mouseQuery(this.renderer.objects, [e.offsetX, e.offsetY]);
+  a = a[0].canvas;
+
+  t = getOffset(a, e);
+  t = mouseQuery(this.renderer.objects, [t.x, t.y]);
 
   if (t) {
     t.emit(e.type, e);
