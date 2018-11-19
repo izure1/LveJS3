@@ -1,4 +1,5 @@
 import clickCheck from '../Utils/clickCheck';
+import getOffset from '../Utils/getOffset';
 
 
 function mouseQuery(objects, pos) {
@@ -32,26 +33,6 @@ function mouseQuery(objects, pos) {
   }
 
   return r;
-
-}
-
-
-function getOffset(el, e) {
-
-  let o;
-  let x, y;
-
-  o = el.getBoundingClientRect();
-  x = e.clientX;
-  y = e.clientY;
-
-  x -= o.x;
-  y -= o.y;
-
-  return {
-    x,
-    y
-  };
 
 }
 

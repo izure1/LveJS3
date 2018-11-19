@@ -8,6 +8,8 @@ export default function play() {
   this.physics.isRunning = true;
   
   this.renderer.deltaTimer.play();
+  this.renderer.run();
+  this.physics.run();
 
   // video 유형의 객체 재생
   for (let t of this.renderer.objects) {

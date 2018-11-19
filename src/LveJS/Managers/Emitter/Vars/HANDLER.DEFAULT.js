@@ -1,7 +1,4 @@
 let handler;
-let defaultCursor;
-
-defaultCursor = 'auto';
 
 handler = {};
 handler.mouseover = function () {
@@ -14,7 +11,7 @@ handler.mouseover = function () {
     return;
   }
 
-  defaultCursor = getComputedStyle(c.element).cursor;
+  this.__system__.world.cache.mouseCursor = getComputedStyle(c.element).cursor;
 
   c.element.style.cursor = this.style.cursor;
 
@@ -30,7 +27,7 @@ handler.mouseout = function () {
     return;
   }
 
-  c.element.style.cursor = defaultCursor;
+  c.element.style.cursor = this.__system__.world.cache.mouseCursor;
 
 };
 
