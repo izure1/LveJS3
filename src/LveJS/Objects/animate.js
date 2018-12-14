@@ -4,7 +4,6 @@ import {
   parseArguments
 } from '../Utils/arguments';
 import calcValue from '../Helpers/calcValue';
-import { deflateRaw } from 'zlib';
 
 
 /**
