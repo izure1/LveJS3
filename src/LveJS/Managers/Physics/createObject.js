@@ -6,13 +6,13 @@
  */
 export default function createObject(t, B, F) {
 
-  let r;
+  let r
 
-  r = this.world.CreateBody(B);
-  r.CreateFixture(F);
+  r = this.world.CreateBody(B)
+  r.CreateFixture(F)
 
-  this.map.set(r, t);
+  this.map.set(r, t)
 
-  return r;
+  return r
 
-};
+}

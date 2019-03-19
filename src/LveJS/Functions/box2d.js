@@ -5,4 +5,4 @@ export default function () {
     Box2D: this.classes.Box2D
   }
 
-};
+}

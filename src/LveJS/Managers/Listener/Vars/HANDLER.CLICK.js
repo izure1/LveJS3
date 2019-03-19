@@ -1,11 +1,11 @@
-import LveJSMouseEvent from '../../../LveJSMouseEvent';
+import LveJSMouseEvent from '../../../LveJSMouseEvent'
 
 
 export default function (e) {
 
-  let t;
+  let t
 
-  t = new LveJSMouseEvent('click', e);
-  this.worldQuery(t);
+  t = new LveJSMouseEvent('click', e)
+  this.worldQuery(t)
 
-};
+}

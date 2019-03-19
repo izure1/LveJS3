@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 
 
 function DeltaTimer() {
 
-  this.start = null;
-  this.before = null;
-  this.current = null;
-  this.paused = false;
-  this.delta = 0;
+  this.start = null
+  this.before = null
+  this.current = null
+  this.paused = false
+  this.delta = 0
 
 }
 
 DeltaTimer.prototype.init = function () {
-  this.start = performance.now();
-  this.before = performance.now();
-  this.current = performance.now();
-};
+  this.start = performance.now()
+  this.before = performance.now()
+  this.current = performance.now()
+}
 
 /**
  * @description
@@ -26,47 +26,47 @@ DeltaTimer.prototype.init = function () {
  */
 DeltaTimer.prototype.update = function () {
 
-  this.before = this.current;
-  this.current = performance.now();
-  this.delta += this.current - this.before;
+  this.before = this.current
+  this.current = performance.now()
+  this.delta += this.current - this.before
 
-  return this.delta;
+  return this.delta
 
-};
+}
 
 DeltaTimer.prototype.uptime = function () {
-  return this.current - this.start;
-};
+  return this.current - this.start
+}
 
 DeltaTimer.prototype.clear = function () {
-  this.delta = 0;
-};
+  this.delta = 0
+}
 
 DeltaTimer.prototype.pause = function () {
-  this.paused = true;
-};
+  this.paused = true
+}
 
 DeltaTimer.prototype.play = function () {
-  this.paused = false;
-};
+  this.paused = false
+}
 
 DeltaTimer.prototype.check = function (fps) {
 
-  return ~~this.delta >= ~~(1000 / fps) - 1;
+  return ~~this.delta >= ~~(1000 / fps) - 1
 
-};
+}
 
 DeltaTimer.prototype.checkAndClear = function (fps) {
 
-  let r;
+  let r
 
   if (r = this.check(fps)) {
-    this.clear();
+    this.clear()
   }
 
-  return r;
+  return r
 
-};
+}
 
 
-export default DeltaTimer;
+export default DeltaTimer

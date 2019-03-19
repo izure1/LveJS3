@@ -1,13 +1,13 @@
 export default function once(e, h) {
 
-  e = e.split(' ');
+  e = e.split(' ')
 
   for (let p of e) {
 
-    this.emitter.addEventListener(p, h, true);
+    this.emitter.addEventListener(p, h, true)
 
   }
 
-  return this.lve;
+  return this.lve
 
-};
+}

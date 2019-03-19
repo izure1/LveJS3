@@ -5,7 +5,7 @@
  * @param {Number} g Gap
  */
 function getScale(x, d, g) {
-  return x * d / g;
+  return x * d / g
 }
 
 /**
@@ -23,26 +23,26 @@ function getScale(x, d, g) {
  */
 function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100) {
 
-  let x, y, z;
-  let s;
-  x = ax - bx;
-  y = ay - by;
-  z = az - bz;
+  let x, y, z
+  let s
+  x = ax - bx
+  y = ay - by
+  z = az - bz
 
-  x = getScale(x, d, z);
-  y = getScale(y, d, z);
+  x = getScale(x, d, z)
+  y = getScale(y, d, z)
 
-  x += w / 2;
-  y += h / 2;
-  y = h - y;
+  x += w / 2
+  y += h / 2
+  y = h - y
 
-  s = d / z;
+  s = d / z
 
   return {
     x,
     y,
     s
-  };
+  }
 
 }
 
@@ -56,13 +56,13 @@ function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100) {
  */
 function getAABB(w, h, x, y) {
 
-  y = h - y;
+  y = h - y
 
   return {
     x,
     y,
     s: 1
-  };
+  }
 
 }
 
@@ -71,4 +71,4 @@ export {
   getPosition,
   getAABB,
   getScale
-};
+}

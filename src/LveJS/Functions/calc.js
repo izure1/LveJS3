@@ -1,12 +1,11 @@
-import instanceOf from './instanceof';
-import DEFAULT_STYLE from '../Objects/Vars/DEFAULT_STYLE';
+import instanceOf from './instanceof'
 
 
 export default function calc(o = {}, c = lve.current.camera) {
 
   if (!instanceOf(c)) {
-    c = this.hashTable.select(c);
-    c = c[0];
+    c = this.hashTable.select(c)
+    c = c[0]
   }
 
   

@@ -1,15 +1,15 @@
-import LveJSMouseEvent from '../../../LveJSMouseEvent';
+import LveJSMouseEvent from '../../../LveJSMouseEvent'
 
 
 export default function (e) {
 
-  let t;
+  let t
 
-  this.suppressJob.setSuppress('mousemove_duration', () => {
+  this.suppressJob.set('mousemove_duration', () => {
 
-    t = new LveJSMouseEvent('mousemove', e);
-    this.worldQuery(t);
+    t = new LveJSMouseEvent('mousemove', e)
+    this.worldQuery(t)
 
-  }, this.setting.delay, this.setting.limit);
+  }, this.setting.delay, this.setting.limit)
 
-};
+}

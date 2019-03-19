@@ -11,7 +11,7 @@
 class LveJSHashTable {
 
   constructor() {
-    this.table = {};
+    this.table = {}
   }
 
 }
@@ -20,68 +20,68 @@ class LveJSHashTable {
 LveJSHashTable.prototype.insert = function (name, item) {
 
   if (name in this.table === false) {
-    this.table[name] = [];
+    this.table[name] = []
   }
 
   if (this.select(name, selected => selected === item).length) {
-    return;
+    return
   }
 
-  this.table[name].push(item);
+  this.table[name].push(item)
 
-};
+}
 
 
 LveJSHashTable.prototype.select = function (name = '*', filter = () => {
   return true
 }) {
 
-  let r;
+  let r
 
   if (name === '*') {
 
-    r = [];
+    r = []
 
     for (let p in this.table) {
 
-      r = [...r, ...this.table[p]];
+      r = [...r, ...this.table[p]]
 
     }
 
-    return r;
+    return r
 
   }
 
   if (!(name in this.table)) {
-    this.table[name] = [];
+    this.table[name] = []
   }
 
-  return this.table[name].filter(filter);
+  return this.table[name].filter(filter)
 
-};
+}
 
 
 LveJSHashTable.prototype.update = function (name, news, filter = () => {
   return true
 }) {
 
-  let lists;
+  let lists
 
   if (!(name in this.table)) {
-    this.table[name] = [];
+    this.table[name] = []
   }
 
-  lists = this.table[name].filter(filter);
+  lists = this.table[name].filter(filter)
 
 
   for (let item of lists) {
 
-    this.delete(name, selected => selected === item);
-    this.insert(news, item);
+    this.delete(name, selected => selected === item)
+    this.insert(news, item)
 
   }
 
-};
+}
 
 
 LveJSHashTable.prototype.delete = function (name, filter = () => {
@@ -89,29 +89,29 @@ LveJSHashTable.prototype.delete = function (name, filter = () => {
 }) {
 
   if (!(name in this.table)) {
-    return;
+    return
   }
 
-  let i;
-  let match;
+  let i
+  let match
 
-  i = this.table[name].length;
+  i = this.table[name].length
 
   while (i--) {
 
-    match = filter(this.table[name][i]);
+    match = filter(this.table[name][i])
 
-    if (!match) continue;
+    if (!match) continue
 
-    this.table[name].splice(i, 1);
+    this.table[name].splice(i, 1)
 
   }
 
   if (!this.table[name].length) {
-    delete this.table[name];
+    delete this.table[name]
   }
 
-};
+}
 
 
-export default LveJSHashTable;
+export default LveJSHashTable

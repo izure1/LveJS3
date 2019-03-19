@@ -1,17 +1,17 @@
 export default function run() {
 
-  let r;
+  let r
 
-  r = this.setting.stepInterval;
+  r = this.setting.stepInterval
 
   if (!this.isRunning) {
-    return this;
+    return this
   }
 
-  this.update(r);
+  this.update(r)
 
   setTimeout(() => {
-    this.run();
-  }, r);
+    this.run()
+  }, r)
 
-};
+}

@@ -1,14 +1,14 @@
 export default function getSceneObj(u) {
 
-  let r;
-  let scenes, scene;
+  let r
+  let scenes, scene
 
-  r = [];
-  scenes = u.split('::');
+  r = []
+  scenes = u.split('::')
 
   for (let t of this) {
 
-    scene = scenes[0];
+    scene = scenes[0]
 
     for (let j = 0, len_j = scenes.length; j < len_j; j++) {
 
@@ -16,18 +16,18 @@ export default function getSceneObj(u) {
         t.scene === scene ||
         t.scene === 'anywhere'
       ) {
-        r.push(t);
-        break;
+        r.push(t)
+        break
       }
 
       if (scenes[j + 1] !== undefined) {
-        scene += `::${scenes[j + 1]}`;
+        scene += `::${scenes[j + 1]}`
       }
 
     }
 
   }
 
-  return r;
+  return r
   
-};
+}

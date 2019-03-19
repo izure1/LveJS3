@@ -1,35 +1,35 @@
-let handler;
+let handler
 
-handler = {};
+handler = {}
 handler.mouseover = function () {
 
-  let c;
+  let c
 
-  c = this.__system__.world.renderer.setting.canvas;
+  c = this.__system__.world.renderer.setting.canvas
 
   if (!c) {
-    return;
+    return
   }
 
-  this.__system__.world.cache.mouseCursor = getComputedStyle(c.element).cursor;
+  this.__system__.world.cache.mouseCursor = getComputedStyle(c.element).cursor
 
-  c.element.style.cursor = this.style.cursor;
+  c.element.style.cursor = this.style.cursor
 
-};
+}
 
 handler.mouseout = function () {
 
-  let c;
+  let c
 
-  c = this.__system__.world.renderer.setting.canvas;
+  c = this.__system__.world.renderer.setting.canvas
 
   if (!c) {
-    return;
+    return
   }
 
-  c.element.style.cursor = this.__system__.world.cache.mouseCursor;
+  c.element.style.cursor = this.__system__.world.cache.mouseCursor
 
-};
+}
 
 
-export default handler;
+export default handler

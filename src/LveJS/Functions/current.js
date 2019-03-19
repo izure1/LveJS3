@@ -1,37 +1,37 @@
 export default function current() {
 
-  let t = this;
+  let t = this
 
   return {
 
     get camera() {
-      return t.renderer.camera;
+      return t.renderer.camera
     },
 
     get canvas() {
-      return t.renderer.setting.canvas;
+      return t.renderer.setting.canvas
     },
 
     get fps() {
-      return t.renderer.getFPS();
+      return t.renderer.getFPS()
     },
 
     get paused() {
-      return !t.renderer.isRunning;
+      return !t.renderer.isRunning
     },
 
     get started() {
-      return t.renderer.isStart;
+      return t.renderer.isStart
     },
 
     get version() {
-      return t.version;
+      return t.version
     },
 
     get world() {
-      return t;
+      return t
     }
 
-  };
+  }
 
-};
+}

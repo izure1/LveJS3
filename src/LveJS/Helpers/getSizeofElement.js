@@ -1,4 +1,4 @@
-import DEFAULT_STYLE from '../Objects/Vars/DEFAULT_STYLE';
+import DEFAULT_STYLE from '../Methods/Vars/DEFAULT_STYLE'
 
 
 const Symbols = {
@@ -7,29 +7,29 @@ const Symbols = {
   PERCENTAGE: Symbol('PERCENTAGE'),
   AUTO: Symbol('AUTO')
 
-};
+}
 
 
 function getValueType(v) {
 
-  let r;
+  let r
 
   if (typeof v === 'number') {
-    r = Symbols.NUMBER;
+    r = Symbols.NUMBER
   } else if (v.substr(-1) === '%') {
     r = Symbols.PERCENTAGE
   } else {
-    r = Symbols.AUTO;
+    r = Symbols.AUTO
   }
 
-  return r;
+  return r
 
 }
 
 
 function getPercentageValue(v, vo) {
 
-  return parseFloat(v) / 100 * vo;
+  return parseFloat(v) / 100 * vo
 
 }
 
@@ -43,30 +43,30 @@ function getPercentageValue(v, vo) {
  */
 function getSizeofElement(t, w, h, vw, vh) {
 
-  let nw, nh, s;
-  let d, r;
+  let nw, nh, s
+  let d, r
 
-  d = new DEFAULT_STYLE;
+  d = new DEFAULT_STYLE
 
-  nw = d.width;
-  nh = d.height;
-  s = nw / nh;
+  nw = d.width
+  nh = d.height
+  s = nw / nh
 
-  r = {};
+  r = {}
 
   switch (t.nodeName) {
 
     case 'IMG':
-      nw = t.naturalWidth;
-      nh = t.naturalHeight;
-      s = nw / nh;
-      break;
+      nw = t.naturalWidth
+      nh = t.naturalHeight
+      s = nw / nh
+      break
 
     case 'VIDEO':
-      nw = t.videoWidth;
-      nh = t.videoHeight;
-      s = nw / nh;
-      break;
+      nw = t.videoWidth
+      nh = t.videoHeight
+      s = nw / nh
+      break
 
   }
 
@@ -77,31 +77,31 @@ function getSizeofElement(t, w, h, vw, vh) {
       switch (getValueType(h)) {
 
         case Symbols.AUTO:
-          r.height = nh;
-          r.width = nw;
-          return r;
+          r.height = nh
+          r.width = nw
+          return r
 
         case Symbols.PERCENTAGE:
-          r.height = getPercentageValue(h, vh);
-          r.width = r.height * s;
-          return r;
+          r.height = getPercentageValue(h, vh)
+          r.width = r.height * s
+          return r
 
         case Symbols.NUMBER:
-          r.height = h;
-          r.width = r.height * s;
-          return r;
+          r.height = h
+          r.width = r.height * s
+          return r
 
       }
 
-      break;
+      break
 
     case Symbols.PERCENTAGE:
-      r.width = getPercentageValue(w, vw);
-      break;
+      r.width = getPercentageValue(w, vw)
+      break
 
     case Symbols.NUMBER:
-      r.width = w;
-      break;
+      r.width = w
+      break
 
   }
 
@@ -110,22 +110,22 @@ function getSizeofElement(t, w, h, vw, vh) {
   switch (getValueType(h)) {
 
     case Symbols.AUTO:
-      r.height = r.width / s;
-      break;
+      r.height = r.width / s
+      break
 
     case Symbols.PERCENTAGE:
-      r.height = getPercentageValue(h, vh);
-      break;
+      r.height = getPercentageValue(h, vh)
+      break
 
     case Symbols.NUMBER:
-      r.height = h;
-      break;
+      r.height = h
+      break
 
   }
 
-  return r;
+  return r
 
-};
+}
 
 
-export default getSizeofElement;
+export default getSizeofElement

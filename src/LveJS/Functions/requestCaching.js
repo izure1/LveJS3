@@ -1,27 +1,28 @@
-import instanceOf from './instanceof';
+import instanceOf from './instanceof'
 
 
 export default function requestCaching(f = false) {
 
   if (!instanceOf(this.renderer.camera)) {
-    return this.lve;
+    return this.lve
   }
 
   if (f) {
-    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene);
-    return this.lve;
+    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene)
+    this.suppressJob.clear('requestCaching')
+    return this.lve
   }
 
-  this.suppressJob.setSuppress('requestCaching', () => {
+  this.suppressJob.set('requestCaching', () => {
 
     if (!instanceOf(this.renderer.camera)) {
-      return;
+      return
     }
 
-    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene);
+    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene)
 
-  }, this.renderer.setting.cacheLevel);
+  }, this.renderer.setting.cacheLevel)
 
-  return this.lve;
+  return this.lve
 
-};
+}

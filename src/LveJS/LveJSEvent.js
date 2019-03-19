@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
 
 
 class LveJSEvent {
 
   constructor(e, target = null) {
-    this.type = e;
-    this.target = target;
+    this.type = e
+    this.target = target
   }
 
 }
 
 LveJSEvent.prototype.attachProperties = function (o = {}) {
 
-  if (o instanceof MouseEvent) this.originalEvent = o;
+  if (o instanceof MouseEvent) this.originalEvent = o
   else {
-    Object.assign(this, o);
+    Object.assign(this, o)
   }
 
-  return this;
+  return this
 
-};
+}
 
-export default LveJSEvent;
+export default LveJSEvent

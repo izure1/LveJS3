@@ -1,4 +1,4 @@
-import HANDLER_MOUSEUP from './HANDLER.MOUSEDOWN';
+import HANDLER_MOUSEUP from './HANDLER.MOUSEDOWN'
 
 
-export default HANDLER_MOUSEUP;
+export default HANDLER_MOUSEUP

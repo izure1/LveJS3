@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * 
@@ -7,25 +7,25 @@
  */
 function removeArrayItem(t, m) {
 
-  let i;
+  let i
 
   if (t.indexOf(m) === -1) {
-    return t;
+    return t
   }
 
-  i = t.length;
+  i = t.length
 
   while (i--) {
 
     if (t[i] !== m) {
-      continue;
+      continue
     }
 
-    t.splice(i, 1);
+    t.splice(i, 1)
 
   }
 
-  return t;
+  return t
 
 }
 
@@ -35,11 +35,11 @@ function removeArrayItem(t, m) {
  */
 function removeDuplicate(t) {
 
-  return [...new Set(t)];
+  return [...new Set(t)]
 
 }
 
 export {
   removeArrayItem,
   removeDuplicate
-};
+}

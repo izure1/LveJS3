@@ -12,15 +12,15 @@
   <canvas id="test" width="800" height="450"></canvas>
   <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new Lve
     
     lve.init({
       canvas: '#test'
-    });
+    })
 
     lve('camera').create({
       type: 'camera'
-    }).use();
+    }).use()
 
     for (let i = 0; i < 10; i++) {
 
@@ -29,20 +29,20 @@
         text: i
       }).css({
         fontSize: 20
-      }).addClass('unit');
+      }).addClass('unit')
 
       if (i !== 0) {
         lve(`unit_${i}`).follow(`unit_${i - 1}`, {
           left: -20,
           bottom: -20
-        });
+        })
       }
       
     }
 
     lve('unit_0').animate({
       bottom: 200
-    }, 5000);
+    }, 5000)
 
   </script>
 </body>

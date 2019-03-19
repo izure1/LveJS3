@@ -1,4 +1,4 @@
-import Lve from './Lve';
+import Lve from './Lve'
 
 
 /* Light Visualnovel Engine
@@ -12,8 +12,6 @@ import Lve from './Lve';
  * Release -> http://github.com/izure1/lvejs
  * wiki book -> http://cafe.naver.com/lvejs/book5084371
  */
-
-'use strict';
 
 /*  lve.js 에서, 객체를 선택하는 방법은 해당 객체의 이름(name), 또는 객체 정보(context)를, lve() 함수의 인수로 담아 호출하는 방식입니다.
  *  반환되는 값은 JSON 형태를 지니며, name, context 속성을 갖습니다. 그리고 lve.js 에서 이것을 '세션(session)'이라고 부릅니다.
@@ -29,13 +27,13 @@ import Lve from './Lve';
   // Object length
   Object.defineProperty(Object.prototype, '__length', {
     get() {
-      let n = 0;
-      for (let i in this) n++;
-      return n;
+      let n = 0
+      for (let i in this) n++
+      return n
     },
     enumerable: false
-  });
+  })
 
-}());
+}())
 
-export default Lve;
+export default Lve

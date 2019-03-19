@@ -12,42 +12,42 @@
   <canvas id="test" width="800" height="450"></canvas>
   <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new Lve
     
     function initWorld() {
       lve.init({
         canvas: '#test',
         backgroundColor: 'black'
-      });
+      })
     }
 
     function initCamera(length, gap) {
-      let w = length * gap;
+      let w = length * gap
       lve('camera').create({
         type: 'camera'
       }).css({
         left: w / 2,
         bottom: w / 2
-      }).use();
+      }).use()
 
     }
 
     function createParticles(length, gap = 50) {
 
-      let left, bottom, perspective;
-      let particle;
+      let left, bottom, perspective
+      let particle
 
       for (let i = 0; i < length; i++) {
 
-        left = i * gap;
+        left = i * gap
 
         for (let j = 0; j < length; j++) {
 
-          bottom = j * gap;
+          bottom = j * gap
 
           for (let k = 0; k < length; k++) {
 
-            perspective = k * gap;
+            perspective = k * gap
             particle = lve(`particle_${i}_${j}_${k}`).create({
               type: 'square',
               text: 'Hello, World!'
@@ -58,7 +58,7 @@
               fontSize: 5
             }).animate({
               rotate: 2080
-            }, 30000);
+            }, 30000)
 
           }
 
@@ -70,39 +70,39 @@
         width: 5,
         height: 5,
         color: 'white'
-      });
+      })
 
     }
 
 
     function checkPerformance(length, gap) {
 
-      const duration = 10000;
-      let start, end;
+      const duration = 10000
+      let start, end
 
-      start = performance.now();
+      start = performance.now()
 
       lve('camera').animate({
         perspective: length * gap
       }, 30000).once('animateend', e => {
 
-        end = performance.now();
+        end = performance.now()
 
-        console.log(`interval: ${end - start}ms`);
+        console.log(`interval: ${end - start}ms`)
 
-      });
+      })
     }
 
     window.onload = function () {
 
       const length = 20,
-        gap = 50;
+        gap = 50
 
-      initWorld();
-      initCamera(length, gap);
-      createParticles(length, gap);
-      checkPerformance(length, gap);
-    };
+      initWorld()
+      initCamera(length, gap)
+      createParticles(length, gap)
+      checkPerformance(length, gap)
+    }
   </script>
 </body>
 

@@ -4,7 +4,7 @@
  */
 export default function init(o) {
 
-  Object.assign(this.setting, o);
-  return this;
+  Object.assign(this.setting, o)
+  return this
 
-};
+}

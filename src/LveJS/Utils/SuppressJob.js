@@ -1,89 +1,95 @@
-'use strict';
+'use strict'
 
 class SuppressJob {
 
   constructor() {
-    this.list = {};
+    this.list = {}
   }
 
   static setTimeout(fn, delay) {
 
     return setTimeout(() => {
-      fn();
-    }, delay);
+      fn()
+    }, delay)
 
   }
 
   isDoing(id) {
-    return !!this.list[id];
+    return !!this.list[id]
   }
 
-  setSuppress(id, complete, delay = 0, count = -1) {
+  set(id, complete, delay = 0, count = -1) {
 
-    let t;
+    let t
+    let r
 
-    t = this.list[id];
+    return new Promise(resolve => {
 
-    if (t) {
+      t = this.list[id]
 
-      clearTimeout(t.to);
+      if (t) {
 
-      if (--t.count !== 0) {
-        t.to = SuppressJob.setTimeout(t.fn, t.delay);
-        return;
+        clearTimeout(t.to)
+
+        if (--t.count !== 0) {
+          t.to = SuppressJob.setTimeout(t.fn, t.delay)
+          return
+        }
+
+        t.fn()
+        this.clear(t.id)
+
+      } else {
+
+        t = {
+          to: null,
+          fn: null,
+          count: count
+        }
+
+        t.fn = () => {
+          complete()
+          resolve()
+          delete this.list[id]
+        }
+
+        t.delay = delay
+        t.to = SuppressJob.setTimeout(t.fn, t.delay)
+
+        this.list[id] = t
+
       }
 
-      t.fn();
-      this.clearSuppress(t.id);
-
-    } else {
-
-      t = {
-        to: null,
-        fn: null,
-        count: count
-      };
-
-      t.fn = () => {
-        complete();
-        delete this.list[id];
-      };
-
-      t.delay = delay;
-      t.to = SuppressJob.setTimeout(t.fn, t.delay);
-
-      this.list[id] = t;
-
-    }
+    })
 
   }
 
-  clearSuppress(id) {
+  clear(id) {
 
     if (!this.list[id]) {
-      return;
+      return
     }
 
-    clearTimeout(this.list[id].to);
-    delete this.list[id];
+    clearTimeout(this.list[id].to)
+    delete this.list[id]
 
   }
 
   immediately(id) {
 
-    let t;
+    let t
 
-    t = this.list[id];
+    t = this.list[id]
 
     if (!t) {
-      return;
+      return
     }
 
-    this.list[id].fn();
-    this.clearSuppress(id);
+    this.list[id].fn()
+    this.clear(id)
 
   }
 
 }
 
-module.exports = SuppressJob;
+module.exports = SuppressJob

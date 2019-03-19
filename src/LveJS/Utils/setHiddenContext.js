@@ -6,14 +6,14 @@
  */
 export default function setHiddenContext(p, v, o = {}) {
 
-  let r;
+  let r
 
-  r = {};
+  r = {}
   r.get = function () {
-    return v;
-  };
+    return v
+  }
 
-  Object.assign(r, o);
-  Object.defineProperty(this, p, r);
+  Object.assign(r, o)
+  Object.defineProperty(this, p, r)
 
 }

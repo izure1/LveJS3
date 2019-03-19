@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * 
@@ -11,34 +11,44 @@
  */
 export default function getPropertiesProxy(t, h) {
 
-  let self = this;
+  let self = this
 
   return new Proxy(t, {
 
     get(t, p) {
-      return t[p];
+
+      if (!h.__getter) {
+        return t[p]
+      }
+
+      if (h.__getter[p]) {
+        return h.__getter[p].call(self, p, t)
+      }
+
+      return t[p]
+
     },
 
     set(t, p, v) {
 
-      let r;
+      let r
 
       if (h.__observer) {
-        h.__observer.call(self, p, v, t);
+        h.__observer.call(self, p, v, t)
       }
 
-      r = h[p] ? h[p].call(self, p, v, t) : v;
+      r = h[p] ? h[p].call(self, p, v, t) : v
 
       if (r === h) {
-        return true;
+        return true
       }
 
-      t[p] = r;
+      t[p] = r
 
-      return true;
+      return true
 
     }
 
-  });
+  })
 
-};
+}

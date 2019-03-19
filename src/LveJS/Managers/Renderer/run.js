@@ -6,28 +6,26 @@ export default function run() {
     extendEnd,
     extendDrawStart,
     extendDrawEnd
-  } = this.setting;
+  } = this.setting
 
-  this.interval = this.deltaTimer.update();
-  this.deltaTimer.clear();
+  this.interval = this.deltaTimer.update()
+  this.deltaTimer.clear()
 
 
-  if (extendStart) extendStart();
+  this.runCallbacks(extendStart, this.interval)
 
   if (this.isRunning) {
 
-    if (extendDrawStart) extendDrawStart();
-
-    this.update(this.interval);
-
-    if (extendDrawEnd) extendDrawEnd();
+    this.runCallbacks(extendDrawStart, this.interval)
+    this.update(this.interval)
+    this.runCallbacks(extendDrawEnd, this.interval)
 
   }
 
-  if (extendEnd) extendEnd();
+  this.runCallbacks(extendEnd, this.interval)
 
   if (this.isRunning) {
-    window.requestAnimationFrame(run.bind(this));
+    window.requestAnimationFrame(run.bind(this))
   }
 
-};
+}

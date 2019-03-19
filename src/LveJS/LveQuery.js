@@ -1,13 +1,13 @@
-import getSceneObj from './Helpers/getSceneObj';
-import instanceOf from './Functions/instanceof';
+import getSceneObj from './Helpers/getSceneObj'
+import instanceOf from './Functions/instanceof'
 
 
 export default function LveQuery(u) {
 
-  let r;
-  let camera;
+  let r
+  let camera
 
-  camera = this.lve.current.camera;
+  camera = this.lve.current.camera
 
   /*
    *  문자열로 검색하거나, 숫자 등 단말노드로 검색했을 때
@@ -15,46 +15,46 @@ export default function LveQuery(u) {
    */
   switch (typeof u) {
     case 'number':
-      u += '';
+      u += ''
     case 'string':
       {
         switch (u) {
           case '*':
             {
-              r = this.hashTable.select();
-              break;
+              r = this.hashTable.select()
+              break
             }
           case '[USING_SCENE]':
             {
-              r = getSceneObj.call(this.hashTable.select(), camera.scene);
-              break;
+              r = getSceneObj.call(this.hashTable.select(), camera.scene)
+              break
             }
           case '[using_scene]':
             {
-              r = getSceneObj.call(this.hashTable.select(), camera.scene);
-              break;
+              r = getSceneObj.call(this.hashTable.select(), camera.scene)
+              break
             }
           case '[USING_CAMERA]':
             {
               if (instanceOf(camera)) {
-                r = [camera];
+                r = [camera]
               }
-              break;
+              break
             }
           case '[using_camera]':
             {
               if (instanceOf(camera)) {
-                r = [camera];
+                r = [camera]
               }
-              break;
+              break
             }
           default:
             {
-              r = this.hashTable.select(u);
-              break;
+              r = this.hashTable.select(u)
+              break
             }
         }
-        break;
+        break
       }
 
       /*
@@ -65,24 +65,24 @@ export default function LveQuery(u) {
       {
         // session
         if ('context' in u) {
-          r = u.context;
-          u = u.name;
+          r = u.context
+          u = u.name
         } else {
           // Objects
           if (lve.instanceof(u)) {
-            r = [u];
-            u = u.name;
+            r = [u]
+            u = u.name
           }
           // 잘못된 검색 시도
           else {
-            r = null;
-            u = null;
+            r = null
+            u = null
           }
         }
-        break;
+        break
       }
   }
 
-  return r;
+  return r
 
-};
+}

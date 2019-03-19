@@ -1,21 +1,21 @@
 function isUndefined(v) {
-  return v === undefined;
+  return v === undefined
 }
 
 function isNull(v) {
-  return v === null;
+  return v === null
 }
 
 function isEmptyString(v) {
-  return v === '';
+  return v === ''
 }
 
 function isEmptyArray(v) {
-  return Array.isArray(v) && v.length === 0;
+  return Array.isArray(v) && v.length === 0
 }
 
 function isZero(v) {
-  return v === 0;
+  return v === 0
 }
 
 
@@ -25,4 +25,4 @@ export {
   isEmptyString,
   isEmptyArray,
   isZero
-};
+}

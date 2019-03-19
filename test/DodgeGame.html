@@ -9,33 +9,33 @@
 </head>
 
 <body>
-  <canvas id="test" width="600" height="850"></canvas>
+  <canvas id="test" width="1200" height="850"></canvas>
   <script type="text/javascript">
     function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+      return Math.floor(Math.random() * (max - min + 1)) + min
     }
   </script>
   <script type="text/javascript">
-    const lve = new Lve;
+    const lve = new Lve
 
     lve.init({
       canvas: '#test'
-    });
+    })
 
     lve('camera').create({
       type: 'camera'
-    }).css('bottom', 200).use();
+    }).css('bottom', 200).use()
 
     lve('ground').create({
       type: 'square'
     }).css({
-      width: 1000,
+      width: 1200,
       height: 5,
-      color: '#ddd'
+      color: '#A5F2F3'
     }).attr({
       physics: 'static',
-      friction: 0.5
-    });
+      friction: 0.3
+    })
 
     lve('wall-left').create({
       type: 'square'
@@ -43,8 +43,11 @@
       width: 5,
       height: 1000,
       color: '#ddd',
-      left: -300
-    }).attr('physics', 'static').addClass('wall');
+      left: -600
+    }).attr({
+      physics: 'static',
+      restitution: 1
+    }).addClass('wall')
 
     lve('wall-right').create({
       type: 'square'
@@ -52,34 +55,38 @@
       width: 5,
       height: 1000,
       color: '#ddd',
-      left: 300
-    }).attr('physics', 'static').addClass('wall');
+      left: 600
+    }).attr({
+      physics: 'static',
+      restitution: 1
+    }).addClass('wall')
 
     lve('character').create({
       type: 'square'
     }).css({
-      width: 30,
+      width: 20,
       height: 50,
-      color: 'red',
+      color: 'gray',
       bottom: 10,
     }).attr({
       physics: 'dynamic',
-      friction: 0,
-      density: 2
-    }).addClass('character');
+      friction: 1,
+      density: 1,
+      fixedrotation: true
+    }).addClass('character')
 
     lve.on('contactstart', e => {
 
       if (e.target.hasClass('ball')) {
 
-        if (e.other.hasClass('character')) {
+        if (e.another.hasClass('character')) {
 
-          alert('Game over!');
-          location.reload();
+          alert('Game over!')
+          location.reload()
 
         }
 
-        else e.target.remove();
+        else e.target.remove()
 
       }
 
@@ -91,52 +98,52 @@
       switch (e.keyCode) {
 
         case 37:
-          lve('character').applyForce(-600, 0);
-          break;
+          lve('character').applyForce(-600, 0)
+          break
 
         case 39:
-          lve('character').applyForce(600, 0);
-          break;
+          lve('character').applyForce(600, 0)
+          break
 
       }
 
-    };
+    }
   </script>
   <script type="text/javascript">
     function createBall(i = 0) {
 
-      let tt;
-      let r, g, b;
-      let x;
+      let tt
+      let r, g, b
+      let x
 
       setTimeout(() => {
 
-        x = getRandomInt(-300, 300);
-        r = getRandomInt(0, 255);
-        g = getRandomInt(0, 255);
-        b = getRandomInt(0, 255);
-        tt = getRandomInt(0, 500);
+        x = getRandomInt(-600, 600)
+        r = getRandomInt(0, 255)
+        g = getRandomInt(0, 255)
+        b = getRandomInt(0, 255)
+        tt = getRandomInt(0, 500)
 
         lve(`ball_${getRandomInt(0, 1000000)}`).create({
           type: 'circle'
         }).css({
-          width: 30,
-          height: 30,
+          width: 20,
+          height: 20,
           color: `rgb(${r}, ${g}, ${b})`,
           left: x,
           bottom: 1000
         }).attr({
           physics: 'dynamic',
-          gravityscale: 0.5
-        }).addClass('ball');
+          gravityscale: getRandomInt(0.3, 1)
+        }).addClass('ball')
 
-        createBall(tt);
+        createBall(tt)
 
-      }, i);
+      }, i)
 
     }
 
-    createBall(0);
+    createBall(0)
   </script>
 </body>
 

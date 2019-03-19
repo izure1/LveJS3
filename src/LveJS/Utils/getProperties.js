@@ -1,13 +1,13 @@
 export default function getProperties() {
 
-  let r;
+  let r
 
-  r = {};
+  r = {}
 
   for (let p in this) {
-    r[p] = this[p];
+    r[p] = this[p]
   }
 
-  return r;
+  return r
 
-};
+}

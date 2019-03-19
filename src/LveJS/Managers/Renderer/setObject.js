@@ -1,17 +1,17 @@
-import instanceOf from '../../Functions/instanceof';
+import instanceOf from '../../Functions/instanceof'
 
 
 export default function setObject(l, scene) {
 
-  let scenes;
+  let scenes
 
-  this.objects = [];
+  this.objects = []
 
-  scenes = scene.split('::');
+  scenes = scene.split('::')
 
   for (let t of l) {
 
-    scene = scenes[0];
+    scene = scenes[0]
 
     for (let i = 0, I = scenes.length; i < I; i++) {
 
@@ -21,18 +21,18 @@ export default function setObject(l, scene) {
         t.type === 'sprite' ||
         t.animationset.__length
       ) {
-        this.objects.push(t);
-        break;
+        this.objects.push(t)
+        break
       }
 
       if (scene[i + 1] !== undefined) {
-        scene += '::' + scenes[i + 1];
+        scene += '::' + scenes[i + 1]
       }
 
     }
 
   }
 
-  this.sortObject();
+  this.sortObject()
 
-};
+}

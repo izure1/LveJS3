@@ -1,14 +1,14 @@
-let handler;
+let handler
 
-handler = {};
+handler = {}
 handler.ended = function () {
 
   if (this.loop) {
-    this.element.currentTime = 0;
-    this.play();
+    this.element.currentTime = 0
+    this.play()
   }
 
-};
+}
 
 
-export default handler;
+export default handler

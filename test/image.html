@@ -10,20 +10,22 @@
     <canvas id="test" width="800" height="450"></canvas>
     <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new Lve
 
     lve('image').create({
       type: 'image',
       src: './image/logo.png'
-    });
+    }).css({
+      verticalAlign: 'middle'
+    })
 
     lve('camera').create({
       type: 'camera'
-    }).use();
+    }).use()
 
     lve.init({
       canvas: '#test'
-    });
+    })
     
     </script>
   </body>

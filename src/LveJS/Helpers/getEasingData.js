@@ -1,34 +1,34 @@
-import easing from '../Utils/easing';
+import easing from '../Utils/easing'
 
 
 export default function getEasingData(p) {
 
-  let a;
-  let s, g;
+  let a
+  let s, g
 
-  a = this.animationset;
-  s = a.origin[p];
-  g = a.goal[p];
+  a = this.animationset
+  s = a.origin[p]
+  g = a.goal[p]
 
   // animating이 아닌 객체이거나, 속성 매개변수가 넘어오지 않았을 시
   if (!a.count_max || !p) {
-    return;
+    return
   }
 
   // 존재하지 않는 속성일 경우
   if (s === undefined || g === undefined) {
-    return;
+    return
   }
 
   // t: current time, b: begInnIng value, c: change In value, d: duration
-  let t, b, c, d, e;
+  let t, b, c, d, e
 
-  t = a.count[p] * 1000 / 60 || 1;
-  d = a.duration[p] || 1;
-  e = a.easing[p] || 'linear';
-  b = s;
-  c = g - s;
+  t = a.count[p] * 1000 / 60 || 1
+  d = a.duration[p] || 1
+  e = a.easing[p] || 'linear'
+  b = s
+  c = g - s
 
-  return easing(e, t, b, c, d);
+  return easing(e, t, b, c, d)
 
-};
+}

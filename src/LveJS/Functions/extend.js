@@ -5,7 +5,7 @@
  */
 export default function extend(u, f) {
 
-  this.classes.LveJSObjectSession.prototype[u] = f;
-  return this.lve;
+  this.classes.LveJSObjectSession.prototype[u] = f
+  return this.lve
 
-};
+}

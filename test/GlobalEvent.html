@@ -12,17 +12,17 @@
   <canvas id="test" width="800" height="450"></canvas>
   <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new Lve
 
     lve.on('mouseover', function (e) {
-      lve('text').attr('text', 'Mouse over!');
-      e.target.css('borderWidth', 5);
-    });
+      lve('text').attr('text', 'Mouse over!')
+      e.target.css('borderWidth', 5)
+    })
 
     lve.on('mouseout', function (e) {
-      lve('text').attr('text', 'Mouse out!');
-      e.target.css('borderWidth', 0);
-    });
+      lve('text').attr('text', 'Mouse out!')
+      e.target.css('borderWidth', 0)
+    })
 
 
 
@@ -33,7 +33,7 @@
       borderColor: 'orange'
     }).animate({
       perspective: 100
-    }, 3000);
+    }, 3000)
 
     lve('text').create({
       type: 'text',
@@ -41,15 +41,15 @@
     }).css({
       bottom: -200,
       borderColor: 'orange'
-    });
+    })
 
     lve('camera').create({
       type: 'camera'
-    }).use();
+    }).use()
 
     lve.init({
       canvas: '#test'
-    });
+    })
 
   </script>
 </body>

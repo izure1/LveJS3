@@ -20,15 +20,13 @@ export default function update(tt = 0) {
   let args
   let s
 
-  args = this.getDrawArguments()
+  args = this.getRenderStates()
 
   // 카메라가 지정되어 있지 않을경우 화면에 카메라 경고 문구를 출력합니다.
   if (!args.ready) {
 
     for (let t of this.objects) {
-      t.__animationUpdate(tt)
-      t.__transitionUpdate(tt)
-      t.__physicsUpdate()
+      t.forceUpdate(tt)
     }
 
     this.clearFrame('black')
@@ -46,14 +44,11 @@ export default function update(tt = 0) {
     s = t.__system__.style
 
     // 객체 애니메이션 업데이트
-    t.__animationUpdate(tt)
-    t.__transitionUpdate(tt)
-    t.__spriteUpdate(tt)
-    t.__physicsUpdate()
+    t.forceUpdate(tt)
 
     if (!t.__isDisplay() && !t.__system__.transition.isRunning()) continue
 
-    t.__draw.apply(t, args.value)
+    t.draw(...args.value)
 
   }
 

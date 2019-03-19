@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 function getProperties(t = Object.keys(this)) {
 
-  let r = {};
+  let r = {}
 
   if (!Array.isArray(t)) {
-    t = [t];
+    t = [t]
   }
 
   for (const p in this) {
-    if (t.indexOf(p) !== -1) r[p] = this[p];
+    if (t.indexOf(p) !== -1) r[p] = this[p]
   }
 
-  return r;
+  return r
 
 }
 
@@ -30,19 +30,19 @@ function parseArguments(p, v) {
    * 
    */
 
-  let t;
-  let r, k;
+  let t
+  let r, k
 
-  t = this;
+  t = this
   r = {
     IS_GET: arguments.length < 2 && typeof p !== 'object',
     VALUE: {}
-  };
+  }
 
   // LveJSObject 객체 자기자신을 파싱하는 경우
   // 세션 중 맨 처음 객체만을 받아옵니다.
   if (this && this.__system__ && this.__system__.world && t instanceof this.__system__.world.classes.LveJSObjectSession) {
-    t = this.get();
+    t = this.get()
   }
 
   if (r.IS_GET) {
@@ -51,20 +51,20 @@ function parseArguments(p, v) {
     // undefined 를 반환합니다.
 
     if (!t) {
-      r.VALUE = undefined;
-      return r;
+      r.VALUE = undefined
+      return r
     }
 
     // Object.method()
     if (!arguments.length) {
-      r.VALUE = getProperties.call(t);
+      r.VALUE = getProperties.call(t)
     }
     // Object.method('property')
     else {
-      r.VALUE = t[p];
+      r.VALUE = t[p]
     }
 
-    return r;
+    return r
 
   }
 
@@ -76,25 +76,25 @@ function parseArguments(p, v) {
    */
 
   // Object.method('property', 'value')
-  if (p instanceof String) p = p.toString();
+  if (p instanceof String) p = p.toString()
   if (typeof p === 'string') {
-    r.VALUE[p] = v;
+    r.VALUE[p] = v
   }
 
   // Object.method({ ... })
   else if (typeof p === 'object') {
-    r.VALUE = p;
+    r.VALUE = p
   }
 
-  return r;
-};
+  return r
+}
 
 function applyArguments(o) {
-  for (const p in o) this[p] = o[p];
+  for (const p in o) this[p] = o[p]
 }
 
 export {
   parseArguments,
   applyArguments,
   getProperties
-};
+}

@@ -5,40 +5,39 @@ import LveJSObjectSession from './LveJSObjectSession'
 import LveJSTransition from './LveJSTransition'
 import getPropertiesProxy from './Utils/getPropertiesProxy'
 
-import DEFAULT_ATTRIBUTE from './Objects/Vars/DEFAULT_ATTRIBUTE'
-import DEFAULT_STYLE from './Objects/Vars/DEFAULT_STYLE'
-import DEFAULT_EVENT from './Objects/Vars/DEFAULT_EVENT'
-import DEFAULT_DATA from './Objects/Vars/DEFAULT_DATA'
-import DEFAULT_FOLLOW from './Objects/Vars/DEFAULT_FOLLOW'
-import DEFAULT_SPRITE from './Objects/Vars/DEFAULT_SPRITE'
+import DEFAULT_ATTRIBUTE from './Methods/Vars/DEFAULT_ATTRIBUTE'
+import DEFAULT_STYLE from './Methods/Vars/DEFAULT_STYLE'
+import DEFAULT_EVENT from './Methods/Vars/DEFAULT_EVENT'
+import DEFAULT_DATA from './Methods/Vars/DEFAULT_DATA'
+import DEFAULT_FOLLOW from './Methods/Vars/DEFAULT_FOLLOW'
+import DEFAULT_SPRITE from './Methods/Vars/DEFAULT_SPRITE'
+import DEFAULT_PHYSICS from './Methods/Vars/DEFAULT_PHYSICS'
 
-import PROXY_HANDLER_ATTRIBUTE from './Objects/Vars/PROXY_HANDLER.ATTRIBUTE'
-import PROXY_HANDLER_STYLE from './Objects/Vars/PROXY_HANDLER.STYLE'
-import PROXY_HANDLER_DATA from './Objects/Vars/PROXY_HANDLER.DATA'
-import PROXY_HANDLER_FOLLOW from './Objects/Vars/PROXY_HANDLER.FOLLOW'
-import PROXY_HANDLER_SPRITE from './Objects/Vars/PROXY_HANDLER.SPRITE'
+import PROXY_HANDLER_ATTRIBUTE from './Methods/Vars/PROXY_HANDLER.ATTRIBUTE'
+import PROXY_HANDLER_STYLE from './Methods/Vars/PROXY_HANDLER.STYLE'
+import PROXY_HANDLER_DATA from './Methods/Vars/PROXY_HANDLER.DATA'
+import PROXY_HANDLER_FOLLOW from './Methods/Vars/PROXY_HANDLER.FOLLOW'
+import PROXY_HANDLER_SPRITE from './Methods/Vars/PROXY_HANDLER.SPRITE'
+import PROXY_HANDLER_PHYSICS from './Methods/Vars/PROXY_HANDLER.PHYSICS'
 
-import M__animationUpdate from './Objects/__animationUpdate'
-import M__spriteUpdate from './Objects/__spriteUpdate'
-import M__draw from './Objects/__draw'
-import M__isDisplay from './Objects/__isDisplay'
-import M__followUpdate from './Objects/__followUpdate'
-import M__followUpdateFromObj from './Objects/__followUpdateFromObj'
-import M__setInformationElement from './Objects/__setInformationElement'
-import M__setInformationText from './Objects/__setInformationText'
-import M__setInformationSprite from './Objects/__setInformationSprite'
-import M__setTimescaleElement from './Objects/__setTimescaleElement'
-import M__setElementEvent from './Objects/__setElementEvent'
-import M__setPhysicsBody from './Objects/__setPhysicsBody'
-import M__setPhysicsDestroy from './Objects/__setphysicsDestroy'
-import M__setPhysicsFixture from './Objects/__setPhysicsFixture'
-import M__setPhysicsActive from './Objects/__setPhysicsActive'
-import M__setPhysicsTransform from './Objects/__setPhysicsTransform'
-import M__transitionUpdate from './Objects/__transitionUpdate'
-import M__physicsUpdate from './Objects/__physicsUpdate'
-import {
-  throws
-} from 'assert';
+import M__animationUpdate from './Methods/__animationUpdate'
+import M__spriteUpdate from './Methods/__spriteUpdate'
+import M__draw from './Methods/draw'
+import M__isDisplay from './Methods/__isDisplay'
+import M__followUpdate from './Methods/__followUpdate'
+import M__followUpdateFromObj from './Methods/__followUpdateFromObj'
+import M__setInformationElement from './Methods/__setInformationElement'
+import M__setInformationText from './Methods/__setInformationText'
+import M__setInformationSprite from './Methods/__setInformationSprite'
+import M__setTimescaleElement from './Methods/__setTimescaleElement'
+import M__setElementEvent from './Methods/__setElementEvent'
+import M__setPhysicsBody from './Methods/__setPhysicsBody'
+import M__setPhysicsDestroy from './Methods/__setPhysicsDestroy'
+import M__setPhysicsFixture from './Methods/__setPhysicsFixture'
+import M__setPhysicsActive from './Methods/__setPhysicsActive'
+import M__setPhysicsTransform from './Methods/__setPhysicsTransform'
+import M__transitionUpdate from './Methods/__transitionUpdate'
+import M__physicsUpdate from './Methods/__physicsUpdate'
 
 
 
@@ -94,6 +93,10 @@ function setHDRAttr(r) {
   this.spriteset = new DEFAULT_SPRITE
   this.spriteset = getPropertiesProxy.call(this, this.spriteset, PROXY_HANDLER_SPRITE)
 
+  // physicsset
+  this.physicsset = new DEFAULT_PHYSICS
+  this.physicsset = getPropertiesProxy.call(this, this.physicsset, PROXY_HANDLER_PHYSICS)
+
 }
 
 
@@ -124,7 +127,7 @@ class LveJSObject extends LveJSObjectSession {
 
 LveJSObject.prototype.__animationUpdate = M__animationUpdate
 LveJSObject.prototype.__spriteUpdate = M__spriteUpdate
-LveJSObject.prototype.__draw = M__draw
+LveJSObject.prototype.draw = M__draw
 LveJSObject.prototype.__isDisplay = M__isDisplay
 LveJSObject.prototype.__followUpdate = M__followUpdate
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj

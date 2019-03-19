@@ -19,22 +19,26 @@
   </div>
   <script type="text/javascript">
     function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+      return Math.floor(Math.random() * (max - min + 1)) + min
     }
   </script>
   <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new Lve
     
     lve('camera').create({
       type: 'camera'
     }).css({
       bottom: 200
-    }).use();
+    }).use()
 
     lve.init({
       canvas: '#test'
-    });
+    })
+
+    lve.on('click', e => {
+      e.target.applyForce(getRandomInt(-20000, 20000), getRandomInt(0, 20000))
+    })
 
     lve('ground').create({
       type: 'square'
@@ -43,22 +47,22 @@
       height: 100,
       color: '#ddd',
       verticalAlign: 'bottom'
-    });
+    })
 
     for (let i = 0; i < 100; i++) {
 
-      let w, h;
-      let x, y, t;
-      let r, g, b;
+      let w, h
+      let x, y, t
+      let r, g, b
 
-      w = getRandomInt(30, 50);
-      h = getRandomInt(30, 50);
-      x = getRandomInt(-300, 300);
-      y = getRandomInt(1200, 1500);
-      t = getRandomInt(0, 360);
-      r = getRandomInt(0, 255);
-      g = getRandomInt(0, 255);
-      b = getRandomInt(0, 255);
+      w = getRandomInt(30, 50)
+      h = getRandomInt(30, 50)
+      x = getRandomInt(-300, 300)
+      y = getRandomInt(1200, 1500)
+      t = getRandomInt(0, 360)
+      r = getRandomInt(0, 255)
+      g = getRandomInt(0, 255)
+      b = getRandomInt(0, 255)
 
       lve(`square_${i}`).create({
         type: 'square',
@@ -69,7 +73,7 @@
         bottom: y,
         color: `rgb(${r}, ${g}, ${b})`,
         rotate: t,
-      }).addClass('square');
+      }).addClass('square')
 
     }
   </script>

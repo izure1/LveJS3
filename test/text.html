@@ -14,10 +14,14 @@
 
     lve('text').create({
       type: 'text',
-      text: 'Hello, World!'
+      text: 'Hello, World!\nYou can use multiple line,\nand <style fontSize="20" fontWeight="bold" fontStyle="italic" color="yellow" borderColor="red">Size, Color, Style, Weight</style> properties support.'
     }).css({
-      borderWidth: 2,
-      borderColor: 'red'
+      textAlign: 'center',
+      lineHeight: '150%',
+      color: 'white',
+      borderColor: '#0075c8',
+      borderWidth: 4,
+      fontSize: 30
     });
 
     lve('camera').create({

@@ -1,21 +1,21 @@
-import HANDLERS from './Vars/HANDLERS';
+import HANDLERS from './Vars/HANDLERS'
 
 
 export default function addListener(e) {
 
-  let f;
+  let f
 
   if (!(e in HANDLERS)) {
-    return this;
+    return this
   }
 
   if (e in this.handlers) {
-    return this;
+    return this
   }
 
-  f = HANDLERS[e].bind(this);
+  f = HANDLERS[e].bind(this)
 
-  this.canvas.addEventListener(e, f);
-  this.handlers[e] = f;
+  this.canvas.addEventListener(e, f)
+  this.handlers[e] = f
 
-};
+}
