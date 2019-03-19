@@ -227,7 +227,6 @@ function borderCircle(c, w, h, x, y, bw, l) {
  */
 function borderText(c, t, x, y) {
 
-  c.lineWidth = t.borderWidth
   text_draw(c, 'strokeText', 'borderColor', t, x, y)
 
 }
@@ -949,12 +948,17 @@ function text_draw(c, f, cl, t, rx, ry) {
 
     let strokeStyle
     let fillStyle
+    let lineWidth
+
+    lineWidth = node.style.borderwidth || t.borderWidth
 
     switch (cl) {
 
       case 'borderColor':
         strokeStyle = color
         fillStyle = 'transparent'
+
+        if (!lineWidth) continue
         break
 
       case 'color':
@@ -964,10 +968,12 @@ function text_draw(c, f, cl, t, rx, ry) {
 
     }
 
+
     c.textAlign = t.textAlign
     c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + ns.fontsize * s + 'px ' + ns.fontfamily
     c.strokeStyle = strokeStyle
     c.fillStyle = fillStyle
+    c.lineWidth = lineWidth
 
     c[f](node.text, xx, y)
 
