@@ -17,7 +17,6 @@ export default function __setPhysicsTansform(x, y, r) {
 
   if (this.__system__.physics.force) {
 
-    this.__system__.physics.body.SetAwake(true)
     this.__system__.physics.body.SetTransform(new B.b2Vec2(x / S, y / S), degToRad(r))
 
   }

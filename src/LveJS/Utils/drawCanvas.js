@@ -241,15 +241,10 @@ function borderText(c, t, x, y) {
  * @param {Number} y Object axis y
  * @param {Number} r rotate angle
  * @param {Number} rx Center of rotate point (width)
- * @param {Number} rx Center of rotate point (height)
+ * @param {Number} ry Center of rotate point (height)
+ * @param {Number} ar Camera rotate angle
  */
-function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1) {
-
-  let sin, cos
-
-  r = degToRad(r)
-  sin = Math.sin(r)
-  cos = Math.cos(r)
+function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1, ar = 0) {
 
   // datum points (default: center)
   let tx, ty
@@ -257,14 +252,17 @@ function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1) {
   tx = rx * w
   ty = ry * h
 
-  tx += x
-  ty += y
+  let sin, cos
 
-  c.setTransform(cos, -sin, sin, cos, tx, ty)
+  r = degToRad(r)
+  sin = Math.sin(r)
+  cos = Math.cos(r)
+
+  c.setTransform(cos, -sin, sin, cos, x + tx, y + ty)
 
   return {
-    x: w * -rx,
-    y: h * -ry
+    x: -tx,
+    y: -ty
   }
 
 }

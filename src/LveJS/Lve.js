@@ -36,6 +36,7 @@ import FnCreateObject from './Functions/createObject'
 import FnGetRenderStates from './Functions/getRenderStates'
 import FnRequestCaching from './Functions/requestCaching'
 import FnBox2d from './Functions/box2d'
+import FnGetGravity from './Functions/getGravity'
 import FnSetGravity from './Functions/setGravity'
 import FnSave from './Functions/save'
 import FnRestore from './Functions/restore'
@@ -53,7 +54,7 @@ function Lve() {
   this.cache = new LveJSCache
   this.queue = []
 
-  this.version = '3.2.1'
+  this.version = '3.2.2'
   this.classes = {
     LveJSObjectSession,
     LveJSObject,
@@ -91,6 +92,7 @@ function Lve() {
   this.lve.getRenderStates = FnGetRenderStates.bind(this)
   this.lve.requestCaching = FnRequestCaching.bind(this)
   this.lve.box2d = FnBox2d.bind(this)
+  this.lve.getGravity = FnGetGravity.bind(this)
   this.lve.setGravity = FnSetGravity.bind(this)
   this.lve.save = FnSave.bind(this)
   this.lve.restore = FnRestore.bind(this)

@@ -18,9 +18,8 @@
     }
   </script>
   <script type="text/javascript">
-
     const lve = new Lve
-    
+
     lve('camera').create({
       type: 'camera'
     }).css({
@@ -32,7 +31,26 @@
     })
 
     lve.on('click', e => {
-      e.target.applyForce(getRandomInt(-20000, 20000), getRandomInt(0, 20000)).applyAngularImpulse(getRandomInt(-100, 100))
+      e.target.applyForce(getRandomInt(-20000, 20000), getRandomInt(0, 20000)).applyAngularImpulse(getRandomInt(-10,
+        10))
+    })
+
+    lve.on('contactstart', e => {
+
+      if (e.target.hasClass('wall')) {
+
+        e.target.css('color', 'red')
+
+      }
+
+    })
+
+    lve.on('contactend', e => {
+
+      if (e.target.hasClass('wall')) {
+        e.target.css('color', '#ddd')
+      }
+
     })
 
     lve('ground').create({
@@ -51,7 +69,7 @@
       height: 500,
       color: '#ddd',
       left: -475,
-    })
+    }).addClass('wall')
 
     lve('wall-right').create({
       type: 'square'
@@ -60,7 +78,7 @@
       height: 500,
       color: '#ddd',
       left: 475,
-    })
+    }).addClass('wall')
 
     lve('wall-top').create({
       type: 'square'
@@ -69,7 +87,7 @@
       height: 50,
       color: '#ddd',
       bottom: 450,
-    })
+    }).addClass('wall')
 
     lve('square').create({
       type: 'square'
@@ -80,6 +98,15 @@
       cursor: 'pointer'
     })
 
+    lve('text').create({
+      type: 'text',
+      text: 'Click me!'
+    }).css({
+      fontSize: 13
+    }).follow('square', {
+      left: 0,
+      bottom: 60
+    })
   </script>
 </body>
 

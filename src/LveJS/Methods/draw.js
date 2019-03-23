@@ -28,34 +28,36 @@ VERTEX.fixed = getAABB
 
 /**
  * 
- * @param {HTMLCanvasElement} c Drawing Canvas
- * @param {Number} w Canvas width
- * @param {Number} h Canvas height
- * @param {Number} ax Camera axis x
- * @param {Number} ay Camera axis y
- * @param {Number} az Camera axis z
- * @param {Number} sd Scale distance
- * @param {Number} a Alpha color
+ * @param {HTMLCanvasElement} canvas Drawing Canvas
+ * @param {Number} canvasWidth Canvas width
+ * @param {Number} canvasHeight Canvas height
+ * @param {Number} cameraHeight Camera height
+ * @param {Number} cameraX Camera axis x
+ * @param {Number} cameraY Camera axis y
+ * @param {Number} cameraZ Camera axis z
+ * @param {Number} cameraRotate Camera rotation
+ * @param {Number} distance Scale distance
+ * @param {Number} alpha Alpha color
  */
-export default function draw(c, cw, ch, ax, ay, az, sd, a = 1) {
+export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, cameraX, cameraY, cameraZ, cameraRotate, distance, alpha = 1) {
 
-  let st, st_, sp_, po_, tr_
+  let style, style_s, sprite, pos, transition
 
-  st = this.style
-  st_ = this.__system__.style
-  sp_ = this.__system__.sprite
-  po_ = this.__system__.position
-  tr_ = this.__system__.transition
+  style = this.style
+  style_s = this.__system__.style
+  sprite = this.__system__.sprite
+  pos = this.__system__.position
+  transition = this.__system__.transition
 
   // 카메라와 객체의 정보를 이용해 캔버스 내의 x, y 절대좌표와 그리기 비율을 구합니다
-  let w, h, l, r
-  let sb, sc, sx, sy, bw, bc
+  let drawWidth, drawHeight, drawColor, rotateInfo
+  let drawShadowBlur, drawShadowColor, drawShadowOffsetX, drawShadowOffsetY, drawBorderWidth, drawBorderColor
   let X, Y, S
   let {
     x,
     y,
     s
-  } = VERTEX[st.position](cw, ch, st.left, st.bottom, st.perspective, ax, ay, az, sd)
+  } = VERTEX[style.position](canvasWidth, canvasHeight, style.left, style.bottom, style.perspective, cameraX, cameraY, cameraZ, distance)
 
   X = x
   Y = y
@@ -68,65 +70,70 @@ export default function draw(c, cw, ch, ax, ay, az, sd, a = 1) {
 
   S =
     s =
-    s * st_.scale
+    s * style_s.scale
 
   // position Fixed / verticalAlign 등의 요소를 고려하여 좌표를 보정합니다.
   // fx, fy 변수가 사용됩니다.
-  x -= s * st_.width * st_.fx
-  y -= s * st_.height * st_.fy
+  x -= s * style_s.width * style_s.fx
+  y -= s * style_s.height * style_s.fy
 
   // 그리기 비율을 곱해 실제 크기를 구합니다
-  w = st_.width * s
-  h = st_.height * s
-  l = st.color
+  drawWidth = style_s.width * s
+  drawHeight = style_s.height * s
+  drawColor = style.color
 
-  sc = st.shadowColor
-  sb = st.shadowBlur * s
-  sx = st.shadowOffsetX * s
-  sy = st.shadowOffsetY * s
+  drawShadowColor = style.shadowColor
+  drawShadowBlur = style.shadowBlur * s
+  drawShadowOffsetX = style.shadowOffsetX * s
+  drawShadowOffsetY = style.shadowOffsetY * s
 
-  bc = st.borderColor
-  bw = st.borderWidth * s
+  drawBorderColor = style.borderColor
+  drawBorderWidth = style.borderWidth * s
+
 
   // 투명도를 지정합니다
   let opacity
-  let opacity_tr
+  let opacity_transition
 
-  opacity_tr = tr_.opacity()
+  opacity_transition = transition.opacity()
 
-  opacity = a
-  opacity = a * st.opacity * opacity_tr
+  opacity = alpha
+  opacity = alpha * style.opacity * opacity_transition
+
 
   // 알파값 지정 및 회전 알고리즘을 적용합니다
-  r = setBlur(c, st.blur)
-  r = setAlpha(c, opacity)
-  r = setRotate(c, w, h, x, y, st.rotate, st_.rx, st_.ry)
+  setBlur(canvas, style.blur)
+  setAlpha(canvas, opacity)
+  setShadow(canvas, drawShadowBlur, drawShadowColor, drawShadowOffsetX, drawShadowOffsetY)
 
-  setShadow(c, sb, sc, sx, sy)
+  rotateInfo = setRotate(canvas, drawWidth, drawHeight, x, y, style.rotate, style_s.rx, style_s.ry, cameraRotate)
 
-  po_.x = x
-  po_.y = y
-  po_.s = s
-  x = r.x
-  y = r.y
+  //setRotateCamera(canvas, cameraHeight, cameraRotate, rotateInfo.x, rotateInfo.y)
 
 
-  if (st.gradient.__length) {
+  pos.x = x
+  pos.y = y
+  pos.s = s
+  x = rotateInfo.x
+  y = rotateInfo.y
 
-    l = getGradient(c, st.gradient, st.gradientType, st.gradientDirection, w, h, x, y)
+
+  if (style.gradient.__length) {
+
+    drawColor = getGradient(canvas, style.gradient, style.gradientType, style.gradientDirection, drawWidth, drawHeight, x, y)
 
   }
 
   switch (this.type) {
 
     case 'square':
-      borderSquare(c, w, h, x, y, bw, bc)
-      square(c, w, h, l, x, y)
+      borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
+      square(canvas, drawWidth, drawHeight, drawColor, x, y)
       break
 
     case 'circle':
-      borderCircle(c, w, h, x, y, bw, bc)
-      circle(c, w, h, l, x, y)
+      borderCircle(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
+      circle(canvas, drawWidth, drawHeight, drawColor, x, y)
       break
 
     case 'image':
@@ -135,27 +142,27 @@ export default function draw(c, cw, ch, ax, ay, az, sd, a = 1) {
         break
       }
 
-      borderSquare(c, w, h, x, y, bw, bc)
-      image(c, this.element, w, h, x, y, 0, 0, this.element.naturalWidth, this.element.naturalHeight)
+      borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
+      image(canvas, this.element, drawWidth, drawHeight, x, y, 0, 0, this.element.naturalWidth, this.element.naturalHeight)
 
       // 트랜지션 이미지를 그립니다
-      if (!tr_.isRunning('image_origin')) {
+      if (!transition.isRunning('image_origin')) {
         break
       }
 
-      let ai = tr_.image_origin.element
+      let transImage = transition.image_origin.element
 
       // 트랜지션 이미지의 좌표를 보정합니다
-      ai._w = S * tr_.image_origin.width
-      ai._h = S * tr_.image_origin.height
-      ai._x = X - (ai._w * st_.fx)
-      ai._y = Y - (ai._h * st_.fy)
+      transImage._w = S * transition.image_origin.width
+      transImage._h = S * transition.image_origin.height
+      transImage._x = X - (transImage._w * style_s.fx)
+      transImage._y = Y - (transImage._h * style_s.fy)
 
-      r = c.setTransform(1, 0, 0, 1, 0, 0)
-      r = setRotate(c, ai._w, ai._h, ai._x, ai._y, st.rotate, st_.rx, st_.ry)
+      rotateInfo = canvas.setTransform(1, 0, 0, 1, 0, 0)
+      rotateInfo = setRotate(canvas, transImage._w, transImage._h, transImage._x, transImage._y, style.rotate, style_s.rx, style_s.ry)
 
-      setAlpha(c, a * (1 - opacity_tr) * st.opacity)
-      image(c, ai, ai._w, ai._h, r.x, r.y, 0, 0, ai.naturalWidth, ai.naturalHeight)
+      setAlpha(canvas, alpha * (1 - opacity_transition) * style.opacity)
+      image(canvas, transImage, transImage._w, transImage._h, rotateInfo.x, rotateInfo.y, 0, 0, transImage.naturalWidth, transImage.naturalHeight)
       break
 
     case 'text':
@@ -163,29 +170,27 @@ export default function draw(c, cw, ch, ax, ay, az, sd, a = 1) {
         break
       }
       this.__system__.text.information.setScale(s)
-      borderText(c, this.__system__.text.information, x, y)
-      text(c, this.__system__.text.information, x, y)
+      borderText(canvas, this.__system__.text.information, x, y)
+      text(canvas, this.__system__.text.information, x, y)
       break
 
     case 'video':
       if (!this.element) {
         break
       }
-      borderSquare(c, w, h, x, y, bw, bc)
-      image(c, this.element, w, h, x, y, 0, 0, this.element.videoWidth, this.element.videoHeight)
+      borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
+      image(canvas, this.element, drawWidth, drawHeight, x, y, 0, 0, this.element.videoWidth, this.element.videoHeight)
       break
 
     case 'sprite':
       if (!this.element) {
         break
       }
-      borderSquare(c, w, h, x, y, bw, bc)
-      image(c, this.element, w, h, x, y, this.spriteset.current * sp_.width, 0, sp_.width, sp_.height)
+      borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
+      image(canvas, this.element, drawWidth, drawHeight, x, y, this.spriteset.current * sprite.width, 0, sprite.width, sprite.height)
       break
 
   }
-
-  c.setTransform(1, 0, 0, 1, 0, 0)
 
   return this
 

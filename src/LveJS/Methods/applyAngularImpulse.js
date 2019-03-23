@@ -17,7 +17,6 @@ export default function applyAngularImpulse(v) {
 
     if (!this.__system__.physics.body) return
 
-    this.__system__.physics.body.SetAwake(true)
     this.__system__.physics.body.ApplyAngularImpulse(v)
 
   })

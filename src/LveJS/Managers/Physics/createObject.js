@@ -9,7 +9,9 @@ export default function createObject(t, B, F) {
   let r
 
   r = this.world.CreateBody(B)
+  
   r.CreateFixture(F)
+  r.SetSleepingAllowed(false)
 
   this.map.set(r, t)
 

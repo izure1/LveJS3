@@ -24,7 +24,6 @@ export default function applyForce(x, y) {
 
     if (!this.__system__.physics.body) return
 
-    this.__system__.physics.body.SetAwake(true)
     this.__system__.physics.body.ApplyForceToCenter(V)
 
   })

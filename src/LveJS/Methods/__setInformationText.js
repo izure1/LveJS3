@@ -22,7 +22,7 @@ export default function __setInformationText() {
     borderColor = this.style.borderColor
     color = this.style.color
 
-    str = this.text || ''
+    str = this.text + ''
     w = this.style.width
 
     if (this.type !== 'text') {

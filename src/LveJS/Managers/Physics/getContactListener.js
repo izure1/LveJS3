@@ -98,9 +98,6 @@ export default function getContactListener() {
       b
     } = getContactObjects(B, ptr)
 
-    a.SetAwake(true)
-    b.SetAwake(true)
-
     // emit contactend event
     a = m.get(a)
     b = m.get(b)
