@@ -7,8 +7,8 @@ function removeElement(w) {
   if (this.element && this.element.play) {
 
     w.lve.start(() => {
-      w.renderer.setting.canvas.element.appendChild(this.element)
-      w.renderer.setting.canvas.element.removeChild(this.element)
+      w.canvas.appendChild(this.element)
+      w.canvas.removeChild(this.element)
     })
 
   }

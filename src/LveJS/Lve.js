@@ -7,6 +7,7 @@ import LveJSRenderer from './Managers/LveJSRenderer'
 import LveJSPhysics from './Managers/LveJSPhysics'
 import LveJSEmitter from './Managers/LveJSEmitter'
 import LveJSListener from './Managers/LveJSListener'
+import LveJSObserver from './Managers/LveJSObserver'
 import LveJSCache from './Managers/LveJSCache'
 
 import LveQuery from './LveQuery'
@@ -40,6 +41,10 @@ import FnGetGravity from './Functions/getGravity'
 import FnSetGravity from './Functions/setGravity'
 import FnSave from './Functions/save'
 import FnRestore from './Functions/restore'
+import FnFullScreen from './Functions/fullScreen'
+import FnExitFullScreen from './Functions/exitFullScreen'
+import FnToggleFullScreen from './Functions/toggleFullScreen'
+import FnIsFullScreen from './Functions/isFullScreen'
 
 
 function Lve() {
@@ -48,13 +53,13 @@ function Lve() {
   this.physics = new LveJSPhysics
   this.emitter = new LveJSEmitter
   this.listener = new LveJSListener
+  this.observer = new LveJSObserver
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
   this.cache = new LveJSCache
   this.queue = []
 
-  this.version = '3.2.2'
   this.classes = {
     LveJSObjectSession,
     LveJSObject,
@@ -96,10 +101,35 @@ function Lve() {
   this.lve.setGravity = FnSetGravity.bind(this)
   this.lve.save = FnSave.bind(this)
   this.lve.restore = FnRestore.bind(this)
+  this.lve.fullscreen = this.lve.fullScreen = FnFullScreen.bind(this)
+  this.lve.exitFullscreen = this.lve.exitFullScreen = FnExitFullScreen.bind(this)
+  this.lve.toggleFullscreen = this.lve.toggleFullScreen = FnToggleFullScreen.bind(this)
+  this.lve.isFullscreen = this.lve.isFullScreen = FnIsFullScreen.bind(this)
 
   this.lve.current = FnCurrent.call(this)
 
 
+
+  /*
+   *
+   * Define static properties
+   * 
+   */
+  Object.defineProperties(this, {
+
+    'version': {
+      get() {
+        return '3.3.0'
+      }
+    },
+
+    'canvas': {
+      get() {
+        return this.renderer.setting.canvas.element
+      }
+    }
+
+  })
 
   /*
    *

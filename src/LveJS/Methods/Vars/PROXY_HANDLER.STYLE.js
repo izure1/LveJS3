@@ -34,7 +34,7 @@ handler.width = handler.height = function (p, v, t) {
 
     sw = this.style.width
     sh = this.style.height
-    vp = w.renderer.setting.canvas.element
+    vp = w.canvas
 
     switch (p) {
 
@@ -177,6 +177,7 @@ handler.left = handler.bottom = handler.perspective = function (p, v) {
       break
 
     case 'perspective':
+      if (this.type === 'camera') break
       w.lve.requestCaching()
       break
 

@@ -29,7 +29,7 @@ export default function __setInformationElement(s = '', cb = function () {}) {
 
         let c
 
-        c = w.renderer.setting.canvas.element
+        c = w.canvas
         d = getSizeofElement(t, this.style.width, this.style.height, c.width, c.height)
 
         this.__system__.style.width = d.width

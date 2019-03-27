@@ -1,6 +1,38 @@
-import clickCheck from '../Utils/clickCheck'
-import getOffset from '../Utils/getOffset'
+import screenfull from 'screenfull'
 
+import clickCheck from '../Utils/clickCheck'
+import getMouseCoords from '../Utils/getMouseCoords'
+
+
+function getMouseCoordsFromFullscreen(el, t) {
+
+  if (!screenfull.isFullscreen) {
+    return t
+  }
+
+  let s
+
+  if (el.width > el.height) {
+
+    s = t.offset.width / el.width
+
+    t.x /= s
+    t.y -= ((t.offset.height - (el.height * s)) / 2)
+    t.y /= s
+
+  } else {
+
+    s = el.height / t.offset.height
+
+    t.x -= ((t.offset.width - (el.width * s)) / 2)
+    t.x /= s
+    t.y /= s
+
+  }
+
+  return t
+
+}
 
 function mouseQuery(objects, pos) {
 
@@ -18,8 +50,10 @@ function mouseQuery(objects, pos) {
     s = t.__system__.style
 
     rs = p.s
+
     rw = s.width * rs
     rh = s.height * rs
+
     rx = rw * s.rx
     ry = rh * s.ry
     rx += p.x
@@ -51,9 +85,9 @@ export default function worldQuery(e) {
   }
 
   a = a.value
-  a = a[0].canvas
 
-  t = getOffset(a, e)
+  t = getMouseCoords(this.canvas, e)
+  t = getMouseCoordsFromFullscreen(this.canvas, t)
   t = mouseQuery(this.renderer.objects, [t.x, t.y])
 
   if (t) {

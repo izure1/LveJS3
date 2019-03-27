@@ -15,7 +15,7 @@ export default function __setInformationSprite(w = 0, h = 0, s = 1) {
 
     this.__system__.world.lve.start(() => {
 
-      vp = this.__system__.world.renderer.setting.canvas.element
+      vp = this.__system__.world.canvas
       c = getSizeofElement(this.element, w, h, vp.width, vp.height)
 
       this.__system__.style.width = c.width

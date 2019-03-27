@@ -34,7 +34,7 @@ export default function capture(u = lve.current.camera, o = {}) {
   } = o
 
 
-  oc = this.renderer.setting.canvas.element
+  oc = this.canvas
 
   if (!oc) {
     return ''

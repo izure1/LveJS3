@@ -44,6 +44,14 @@ export default function init(o) {
 
       }
 
+      if (!this.observer.inited) {
+
+        this.observer.init(c)
+
+        // 캔버스에 특정 요소가 변경되었을 때, 이를 감지하고 싶으면 this.observer.observe 메서드를 사용합니다.
+
+      }
+
     }
 
     if (!this.cache.inited) {
@@ -59,20 +67,4 @@ export default function init(o) {
 
   return this.lve
 
-  // fullscreen orientation
-  // window.addEventListener('orientationchange', () => {
-  //   const screenElement = lve.root.cache.screenElement
-  //   if (lve.root.cache.destroy) return
-  //   if (screenElement === null) return
-  //   if (screenElement.getAttribute('data-fullscreen-extend') === 'true') {
-  //     const screenScale = [
-  //       window.screen.width / screenElement.width,
-  //       window.screen.height / screenElement.height
-  //     ].sort((a, b) => {
-  //       return a - b
-  //     })[0]
-  //     screenElement.style.transform = 'scale(' + screenScale + ')'
-  //     lve.root.cache.screenScale = screenScale
-  //   }
-  // })
 }

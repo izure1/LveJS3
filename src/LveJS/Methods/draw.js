@@ -107,9 +107,7 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
   setShadow(canvas, drawShadowBlur, drawShadowColor, drawShadowOffsetX, drawShadowOffsetY)
 
   rotateInfo = setRotate(canvas, drawWidth, drawHeight, x, y, style.rotate, style_s.rx, style_s.ry, cameraRotate)
-
-  //setRotateCamera(canvas, cameraHeight, cameraRotate, rotateInfo.x, rotateInfo.y)
-
+  
 
   pos.x = x
   pos.y = y

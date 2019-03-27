@@ -5,15 +5,15 @@ handler.mouseover = function () {
 
   let c
 
-  c = this.__system__.world.renderer.setting.canvas
+  c = this.__system__.world.canvas
 
   if (!c) {
     return
   }
 
-  this.__system__.world.cache.mouseCursor = getComputedStyle(c.element).cursor
+  this.__system__.world.cache.mouseCursor = getComputedStyle(c).cursor
 
-  c.element.style.cursor = this.style.cursor
+  c.style.cursor = this.style.cursor
 
 }
 
@@ -21,13 +21,13 @@ handler.mouseout = function () {
 
   let c
 
-  c = this.__system__.world.renderer.setting.canvas
+  c = this.__system__.world.canvas
 
   if (!c) {
     return
   }
 
-  c.element.style.cursor = this.__system__.world.cache.mouseCursor
+  c.style.cursor = this.__system__.world.cache.mouseCursor
 
 }
 

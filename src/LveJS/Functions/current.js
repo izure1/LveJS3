@@ -8,10 +8,6 @@ export default function current() {
       return t.renderer.camera
     },
 
-    get canvas() {
-      return t.renderer.setting.canvas
-    },
-
     get fps() {
       return t.renderer.getFPS()
     },
@@ -22,6 +18,10 @@ export default function current() {
 
     get started() {
       return t.renderer.isStart
+    },
+
+    get canvas() {
+      return t.canvas
     },
 
     get version() {
