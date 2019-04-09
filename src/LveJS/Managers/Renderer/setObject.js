@@ -1,6 +1,3 @@
-import instanceOf from '../../Functions/instanceof'
-
-
 export default function setObject(l, scene) {
 
   let scenes
@@ -21,8 +18,13 @@ export default function setObject(l, scene) {
         t.type === 'sprite' ||
         t.animationset.__length
       ) {
+        t.__setPhysicsFreeze(false)
+        t.__setPhysicsActive('scene', true)
         this.objects.push(t)
         break
+      } else {
+        t.__setPhysicsActive('scene', false)
+        t.__setPhysicsFreeze(true)
       }
 
       if (scene[i + 1] !== undefined) {

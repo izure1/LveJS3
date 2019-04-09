@@ -12,9 +12,10 @@
   <canvas id="test" width="1200" height="850"></canvas>
   <script type="text/javascript">
     const gamename = 'LveJS_dodgeGame'
-    const lve = new Lve
+    const lve = new LveJS
 
     let highscore = getHighScore()
+    let isGameover = false
 
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min
@@ -64,7 +65,7 @@
       lve.extendDrawEnd(function () {
 
         let score
-        
+
         score = performance.now() / 10
         score = ~~score
 
@@ -111,14 +112,39 @@
 
     function gameover() {
 
-      let score
+      if (isGameover) {
+        return
+      }
 
-      score = lve('score').attr('text') - 0
+      isGameover = true
 
-      setHighScore(highscore)
-      alert(`Game over!\n\nYour score is ${score}`)
+      lve('camera').animate({
 
-      location.reload()
+        perspective: 50
+
+      }, 3000, 'easeOutExpo').follow('character', {
+        
+        left: 0,
+        bottom: 0
+
+      })
+
+      lve('character').css('color', 'red').animate({
+        opacity: 0.3
+      }, 3000, 'easeOutExpo')
+
+      setTimeout(() => {
+
+        let score
+
+        score = lve('score').attr('text') - 0
+
+        setHighScore(highscore)
+        alert(`Game over!\n\nYour score is ${score}`)
+
+        location.reload()
+
+      }, 3000)
 
     }
   </script>

@@ -20,9 +20,9 @@ import PROXY_HANDLER_FOLLOW from './Methods/Vars/PROXY_HANDLER.FOLLOW'
 import PROXY_HANDLER_SPRITE from './Methods/Vars/PROXY_HANDLER.SPRITE'
 import PROXY_HANDLER_PHYSICS from './Methods/Vars/PROXY_HANDLER.PHYSICS'
 
+import M__draw from './Methods/draw'
 import M__animationUpdate from './Methods/__animationUpdate'
 import M__spriteUpdate from './Methods/__spriteUpdate'
-import M__draw from './Methods/draw'
 import M__isDisplay from './Methods/__isDisplay'
 import M__followUpdate from './Methods/__followUpdate'
 import M__followUpdateFromObj from './Methods/__followUpdateFromObj'
@@ -35,6 +35,8 @@ import M__setPhysicsBody from './Methods/__setPhysicsBody'
 import M__setPhysicsDestroy from './Methods/__setPhysicsDestroy'
 import M__setPhysicsFixture from './Methods/__setPhysicsFixture'
 import M__setPhysicsActive from './Methods/__setPhysicsActive'
+import M__setPhysicsFreeze from './Methods/__setPhysicsFreeze'
+import M__setPhysicsDensity from './Methods/__setPhysicsDensity'
 import M__setPhysicsTransform from './Methods/__setPhysicsTransform'
 import M__transitionUpdate from './Methods/__transitionUpdate'
 import M__physicsUpdate from './Methods/__physicsUpdate'
@@ -125,9 +127,9 @@ class LveJSObject extends LveJSObjectSession {
 }
 
 
+LveJSObject.prototype.draw = M__draw
 LveJSObject.prototype.__animationUpdate = M__animationUpdate
 LveJSObject.prototype.__spriteUpdate = M__spriteUpdate
-LveJSObject.prototype.draw = M__draw
 LveJSObject.prototype.__isDisplay = M__isDisplay
 LveJSObject.prototype.__followUpdate = M__followUpdate
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj
@@ -140,6 +142,8 @@ LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody
 LveJSObject.prototype.__setPhysicsDestroy = M__setPhysicsDestroy
 LveJSObject.prototype.__setPhysicsFixture = M__setPhysicsFixture
 LveJSObject.prototype.__setPhysicsActive = M__setPhysicsActive
+LveJSObject.prototype.__setPhysicsFreeze = M__setPhysicsFreeze
+LveJSObject.prototype.__setPhysicsDensity = M__setPhysicsDensity
 LveJSObject.prototype.__setPhysicsTransform = M__setPhysicsTransform
 LveJSObject.prototype.__transitionUpdate = M__transitionUpdate
 LveJSObject.prototype.__physicsUpdate = M__physicsUpdate

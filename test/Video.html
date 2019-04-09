@@ -12,28 +12,28 @@
   <canvas id="test" width="800" height="450"></canvas>
   <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new LveJS
 
     lve.on('load', function () {
-      console.log('Video playing!');
+      console.log('Video playing!')
     }).on('error', function () {
-      console.log('Video load failed.');
+      console.log('Video load failed.')
     });
 
     lve('video').create({
       type: 'video',
       src: './video/sample.mp4'
-    });
+    })
 
     lve('camera').create({
       type: 'camera'
-    }).use();
+    }).use()
 
     lve.init({
       canvas: '#test'
     }).ready(function () {
       lve('video').play();
-    });
+    })
     
   </script>
 </body>

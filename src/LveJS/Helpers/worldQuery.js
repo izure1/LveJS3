@@ -45,6 +45,7 @@ function mouseQuery(objects, pos) {
   for (let t of objects) {
 
     if (!t.__isDisplay()) continue
+    if (!t.style.pointerEvents) continue
 
     p = t.__system__.position
     s = t.__system__.style
@@ -88,7 +89,7 @@ export default function worldQuery(e) {
 
   t = getMouseCoords(this.canvas, e)
   t = getMouseCoordsFromFullscreen(this.canvas, t)
-  t = mouseQuery(this.renderer.objects, [t.x, t.y])
+  t = mouseQuery(this.renderer.subjects, [t.x, t.y])
 
   if (t) {
     t.emit(e.type, e)

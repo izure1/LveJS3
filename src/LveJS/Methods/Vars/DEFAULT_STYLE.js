@@ -31,5 +31,10 @@ export default function () {
   this.verticalAlign = 'top'
   this.zIndex = 0
   this.cursor = 'auto'
+  this.margin = '0 0 0 0'
+  this.marginLeft = 0
+  this.marginRight = 0
+  this.marginTop = 0
+  this.marginBottom = 0
 
 }

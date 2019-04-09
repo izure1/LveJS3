@@ -11,9 +11,14 @@ export default function applyLinearImpulse(x, y) {
 
   let B, V
   let s
+  let ml, mb
 
   s = this.__system__.world.physics.setting.unitScale
+  ml = this.__system__.style.marginLeft
+  mb = this.__system__.style.marginBottom
 
+  x += ml
+  y += mb
   x /= s
   y /= s
 

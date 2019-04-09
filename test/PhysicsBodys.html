@@ -24,7 +24,7 @@
   </script>
   <script type="text/javascript">
 
-    const lve = new Lve
+    const lve = new LveJS
     
     lve('camera').create({
       type: 'camera'
@@ -73,6 +73,7 @@
         bottom: y,
         color: `rgb(${r}, ${g}, ${b})`,
         rotate: t,
+        cursor: 'pointer'
       }).addClass('square')
 
     }

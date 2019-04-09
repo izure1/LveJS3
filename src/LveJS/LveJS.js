@@ -47,7 +47,7 @@ import FnToggleFullScreen from './Functions/toggleFullScreen'
 import FnIsFullScreen from './Functions/isFullScreen'
 
 
-function Lve() {
+function LveJS() {
 
   this.renderer = new LveJSRenderer
   this.physics = new LveJSPhysics
@@ -119,7 +119,7 @@ function Lve() {
 
     'version': {
       get() {
-        return '3.3.0'
+        return '3.4.0'
       }
     },
 
@@ -137,11 +137,11 @@ function Lve() {
    * 
    */
 
-  if (this instanceof Lve) return this.lve
+  if (this instanceof LveJS) return this.lve
   else {
     throw 'Class constructor a cannot be invoked without \'new\''
   }
 
 }
 
-export default Lve
+export default LveJS

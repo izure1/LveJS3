@@ -1,4 +1,4 @@
-import Lve from './Lve'
+import LveJS from './LveJS'
 
 
 /* Light Visualnovel Engine
@@ -36,4 +36,4 @@ import Lve from './Lve'
 
 }())
 
-export default Lve
+export default LveJS

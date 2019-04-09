@@ -10,8 +10,13 @@ const MINSIZE = 0.001
  * @param {Number} r Fixture restitution
  * @param {Number} x Fixture standard point X axis
  * @param {Number} y Fixture standard point Y axis
+ * @param {Number} ml Margin left
+ * @param {Number} mr Margin right
+ * @param {Number} mt Margin top
+ * @param {Number} mb Margin bottom
+ * 
  */
-export default function createFixture(t, w = 1, h = 1, d = 1, f = 1, r = 0, x = 0, y = 0) {
+export default function createFixture(t, w = 1, h = 1, d = 1, f = 1, r = 0, x = 0, y = 0, ml = 0, mr = 0, mt = 0, mb = 0) {
 
   let s
   let B
@@ -29,8 +34,18 @@ export default function createFixture(t, w = 1, h = 1, d = 1, f = 1, r = 0, x = 
 
   w /= 2
   h /= 2
+  ml /= 2
+  mr /= 2
+  mt /= 2
+  mb /= 2
+
   w /= s
   h /= s
+
+  ml /= s
+  mr /= s
+  mt /= s
+  mb /= s
 
   x /= 2
   y /= 2
@@ -40,7 +55,7 @@ export default function createFixture(t, w = 1, h = 1, d = 1, f = 1, r = 0, x = 
   if (w < MINSIZE) w = MINSIZE
   if (h < MINSIZE) h = MINSIZE
 
-  S.SetAsBox(w, h, new B.b2Vec2(x, y), 0)
+  S.SetAsBox(w + ml + mr, h + mt + mb, new B.b2Vec2(x + mr - ml, y + mt - mb), 0)
 
   return F
 

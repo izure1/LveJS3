@@ -127,17 +127,15 @@ handler.physics = function (p, v, t) {
 
   this.__setPhysicsBody()
   this.__system__.physics.body.SetType(y)
+  this.__system__.physics.type = y
+
   return v
 
 }
 
 handler.density = function (p, v, t) {
-
-  if (!this.__system__.physics.body) {
-    return v
-  }
-
-  this.__system__.physics.body.GetFixtureList().SetDensity(v)
+  
+  this.__setPhysicsDensity(v)
   return v
 
 }

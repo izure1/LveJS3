@@ -15,6 +15,8 @@ export default function __setPhysicsFixture() {
   B.DestroyFixture(B.GetFixtureList())
   B.CreateFixture(F)
 
+  this.__setPhysicsDensity(this.density)
+
   return this
 
 }

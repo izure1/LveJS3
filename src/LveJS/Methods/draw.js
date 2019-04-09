@@ -38,6 +38,7 @@ VERTEX.fixed = getAABB
  * @param {Number} cameraRotate Camera rotation
  * @param {Number} distance Scale distance
  * @param {Number} alpha Alpha color
+ * 
  */
 export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, cameraX, cameraY, cameraZ, cameraRotate, distance, alpha = 1) {
 
@@ -189,6 +190,9 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
       break
 
   }
+
+
+  this.__system__.world.renderer.subjects.push(this)
 
   return this
 

@@ -5,6 +5,8 @@ export default function clearFrame(l) {
 
   c = this.setting.canvas.context
 
+  this.subjects = []
+
   w = c.canvas.width
   h = c.canvas.height
 

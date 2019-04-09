@@ -12,7 +12,7 @@ export default function removeClass(c) {
   let t, f
   let cs
 
-  if (typeof c === 'function') {
+  if ( c === 'function') {
     f = c
   }
 

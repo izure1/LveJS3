@@ -13,33 +13,33 @@
   <p>5000 Particles in the world</p>
   <script type="text/javascript">
 
-    const lve = new Lve;
+    const lve = new LveJS
     
     function initLve() {
       lve.init({
         canvas: document.getElementById('test'),
         backgroundColor: 'black'
-      });
+      })
 
       lve('camera').create({
         type: 'camera'
       }).animate({
         perspective: 30000
-      }, 20000).use();
+      }, 20000).use()
     }
 
     function setStars() {
 
-      let left, bottom, persp;
+      let left, bottom, persp
 
       for (let i = 0; i < 5000; i++) {
 
-        let nagative_left = Math.random() > .5 ? 1 : -1;
-        let nagative_bottom = Math.random() > .5 ? 1 : -1;
+        let nagative_left = Math.random() > .5 ? 1 : -1
+        let nagative_bottom = Math.random() > .5 ? 1 : -1
 
-        left = Math.random() * 30000 * nagative_left;
-        bottom = Math.random() * 30000 * nagative_bottom;
-        persp = Math.random() * 30000;
+        left = Math.random() * 30000 * nagative_left
+        bottom = Math.random() * 30000 * nagative_bottom
+        persp = Math.random() * 30000
 
         lve(`star_${i}`).create({
           type: 'circle'
@@ -50,7 +50,7 @@
           left: left,
           bottom: bottom,
           perspective: persp
-        }).addClass('star');
+        }).addClass('star')
 
       }
 
@@ -58,8 +58,8 @@
 
 
     window.onload = function () {
-      initLve();
-      setStars();
+      initLve()
+      setStars()
     };
   </script>
 </body>

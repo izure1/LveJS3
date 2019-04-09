@@ -240,4 +240,71 @@ handler.scale = function (p, v, t) {
 
 }
 
+
+handler.margin = function (p, v, t) {
+
+  let ml, mr, mt, mb
+
+  v = `${v}`.trim()
+  v = v.split(' ')
+  v = v.map(t => parseFloat(t))
+
+  switch (v.length) {
+
+    case 1:
+      ml = mr = mt = mb = v[0]
+      break
+
+    case 2:
+      mt = mb = v[0]
+      ml = mr = v[1]
+      break
+
+    case 3:
+      mt = v[0]
+      ml = mr = v[1]
+      mb = v[2]
+      break
+
+    case 4:
+      mt = v[0]
+      mr = v[1]
+      mb = v[2]
+      ml = v[3]
+      break
+
+    default:
+      mt = this.__system__.style.marginTop || 0
+      mr = this.__system__.style.marginRight || 0
+      mb = this.__system__.style.marginBottom || 0
+      ml = this.__system__.style.marginLeft || 0
+      break
+
+  }
+
+  this.__system__.style.marginLeft = ml
+  this.__system__.style.marginRight = mr
+  this.__system__.style.marginTop = mt
+  this.__system__.style.marginBottom = mb
+
+  this.__setPhysicsFixture()
+
+  return `${mt} ${mr} ${mb} ${ml}`
+
+}
+
+
+handler.marginLeft = handler.marginRight = handler.marginTop = handler.marginBottom = function (p, v, t) {
+
+  if (v < 0) {
+    v = 0
+  }
+
+  this.__system__.style[p] = v
+  this.__setPhysicsFixture()
+
+  return v
+
+}
+
 export default handler
