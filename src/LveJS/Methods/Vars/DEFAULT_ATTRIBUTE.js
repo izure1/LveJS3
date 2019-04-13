@@ -14,6 +14,10 @@ export default function () {
   this.text = ''
   this.src = ''
   this.scene = 'main'
+  this.spritestage = 0
+  this.spritefps = 0
+  this.spriteplaying = 0
+  this.spritecurrent = 0
   this.animationset = {}
   this.dataset = {}
   this.followset = {}

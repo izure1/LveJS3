@@ -37,6 +37,7 @@ import MRemoveClass from './Methods/removeClass'
 import MSprite from './Methods/sprite'
 import MStop from './Methods/stop'
 import MToggleClass from './Methods/toggleClass'
+import MToString from './Methods/toString'
 import MTransition from './Methods/transition'
 import MUnfollow from './Methods/unfollow'
 import MUse from './Methods/use'
@@ -131,6 +132,7 @@ LveJSObjectSession.prototype.removeClass = MRemoveClass
 LveJSObjectSession.prototype.sprite = MSprite
 LveJSObjectSession.prototype.stop = MStop
 LveJSObjectSession.prototype.toggleClass = MToggleClass
+LveJSObjectSession.prototype.toString = MToString
 LveJSObjectSession.prototype.transition = MTransition
 LveJSObjectSession.prototype.unfollow = MUnfollow
 LveJSObjectSession.prototype.use = MUse
@@ -144,5 +146,6 @@ LveJSObjectSession.prototype.getAngularVelocity = MGetAngularVelocity
 LveJSObjectSession.prototype.setLinearVelocity = MSetLinearVelocity
 LveJSObjectSession.prototype.setAngularVelocity = MSetAngularVelocity
 LveJSObjectSession.prototype.getPhysicsBody = MGetPhysicsBody
+
 
 export default LveJSObjectSession

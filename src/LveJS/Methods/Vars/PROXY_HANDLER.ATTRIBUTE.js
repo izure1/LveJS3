@@ -4,7 +4,15 @@ import setHiddenContext from '../../Utils/setHiddenContext'
 let handler
 
 handler = {}
-handler.__getter = null
+handler.__getter = {}
+
+handler.__getter.spriteplaying = handler.__getter.spriteplaying = handler.__getter.spritefps = handler.__getter.spritecurrent = function (p, t) {
+
+  p = p.substr(6)
+  return t.spriteset[p]
+
+}
+
 handler.__observer = function (p, v, t) {
 
   this.emit('attrmodified', {
@@ -134,7 +142,7 @@ handler.physics = function (p, v, t) {
 }
 
 handler.density = function (p, v, t) {
-  
+
   this.__setPhysicsDensity(v)
   return v
 
@@ -180,6 +188,15 @@ handler.fixedrotation = function (p, v, t) {
   }
 
   this.__system__.physics.body.SetFixedRotation(v)
+  return v
+
+}
+
+handler.spriteplaying = handler.spritestage = handler.spritefps = handler.spritecurrent = function (p, v, t) {
+
+  p = p.substr(6)
+  t.spriteset[p] = v
+
   return v
 
 }
