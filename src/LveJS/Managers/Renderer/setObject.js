@@ -18,13 +18,20 @@ export default function setObject(l, scene) {
         t.type === 'sprite' ||
         t.animationset.__length
       ) {
+
         t.__setPhysicsFreeze(false)
         t.__setPhysicsActive('scene', true)
+        t.__setAudioMute(false)
+
         this.objects.push(t)
         break
+
       } else {
+
         t.__setPhysicsActive('scene', false)
         t.__setPhysicsFreeze(true)
+        t.__setAudioMute(true)
+
       }
 
       if (scene[i + 1] !== undefined) {

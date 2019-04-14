@@ -6,10 +6,17 @@ let handler
 handler = {}
 handler.__getter = {}
 
-handler.__getter.spriteplaying = handler.__getter.spriteplaying = handler.__getter.spritefps = handler.__getter.spritecurrent = function (p, t) {
+handler.__getter.sprite_playing = handler.__getter.sprite_playing = handler.__getter.sprite_fps = handler.__getter.sprite_current = function (p, t) {
+
+  p = p.substr(7)
+  return t.spriteset[p]
+
+}
+
+handler.__getter.video_playbackRate = handler.__getter.video_currentTime = handler.__getter.video_volume = handler.__getter.video_muted = function (p, t) {
 
   p = p.substr(6)
-  return t.spriteset[p]
+  return t.videoset[p]
 
 }
 
@@ -192,10 +199,19 @@ handler.fixedrotation = function (p, v, t) {
 
 }
 
-handler.spriteplaying = handler.spritestage = handler.spritefps = handler.spritecurrent = function (p, v, t) {
+handler.sprite_playing = handler.sprite_stage = handler.sprite_fps = handler.sprite_current = function (p, v, t) {
+
+  p = p.substr(7)
+  t.spriteset[p] = v
+
+  return v
+
+}
+
+handler.video_playbackRate = handler.video_currentTime = handler.video_volume = handler.video_muted = function (p, v, t) {
 
   p = p.substr(6)
-  t.spriteset[p] = v
+  t.videoset[p] = v
 
   return v
 

@@ -12,6 +12,7 @@ import DEFAULT_DATA from './Methods/Vars/DEFAULT_DATA'
 import DEFAULT_FOLLOW from './Methods/Vars/DEFAULT_FOLLOW'
 import DEFAULT_SPRITE from './Methods/Vars/DEFAULT_SPRITE'
 import DEFAULT_PHYSICS from './Methods/Vars/DEFAULT_PHYSICS'
+import DEFAULT_VIDEO from './Methods/Vars/DEFAULT_VIDEO'
 
 import PROXY_HANDLER_ATTRIBUTE from './Methods/Vars/PROXY_HANDLER.ATTRIBUTE'
 import PROXY_HANDLER_STYLE from './Methods/Vars/PROXY_HANDLER.STYLE'
@@ -19,6 +20,7 @@ import PROXY_HANDLER_DATA from './Methods/Vars/PROXY_HANDLER.DATA'
 import PROXY_HANDLER_FOLLOW from './Methods/Vars/PROXY_HANDLER.FOLLOW'
 import PROXY_HANDLER_SPRITE from './Methods/Vars/PROXY_HANDLER.SPRITE'
 import PROXY_HANDLER_PHYSICS from './Methods/Vars/PROXY_HANDLER.PHYSICS'
+import PROXY_HANDLER_VIDEO from './Methods/Vars/PROXY_HANDLER.VIDEO'
 
 import M__draw from './Methods/draw'
 import M__animationUpdate from './Methods/__animationUpdate'
@@ -26,6 +28,7 @@ import M__spriteUpdate from './Methods/__spriteUpdate'
 import M__isDisplay from './Methods/__isDisplay'
 import M__followUpdate from './Methods/__followUpdate'
 import M__followUpdateFromObj from './Methods/__followUpdateFromObj'
+import M__setAudioMute from './Methods/__setAudioMute'
 import M__setInformationElement from './Methods/__setInformationElement'
 import M__setInformationText from './Methods/__setInformationText'
 import M__setInformationSprite from './Methods/__setInformationSprite'
@@ -61,6 +64,7 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__, 'position', {})
   setHiddenContext.call(this.__system__, 'physics', {})
   setHiddenContext.call(this.__system__.physics, 'information', {})
+  setHiddenContext.call(this.__system__, 'audio', {})
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob)
   setHiddenContext.call(this.__system__, 'transition', new LveJSTransition)
 
@@ -99,6 +103,10 @@ function setHDRAttr(r) {
   this.physicsset = new DEFAULT_PHYSICS
   this.physicsset = getPropertiesProxy.call(this, this.physicsset, PROXY_HANDLER_PHYSICS)
 
+  // videoset
+  this.videoset = new DEFAULT_VIDEO
+  this.videoset = getPropertiesProxy.call(this, this.videoset, PROXY_HANDLER_VIDEO)
+
 }
 
 
@@ -133,6 +141,7 @@ LveJSObject.prototype.__spriteUpdate = M__spriteUpdate
 LveJSObject.prototype.__isDisplay = M__isDisplay
 LveJSObject.prototype.__followUpdate = M__followUpdate
 LveJSObject.prototype.__followUpdateFromObj = M__followUpdateFromObj
+LveJSObject.prototype.__setAudioMute = M__setAudioMute
 LveJSObject.prototype.__setInformationElement = M__setInformationElement
 LveJSObject.prototype.__setInformationText = M__setInformationText
 LveJSObject.prototype.__setInformationSprite = M__setInformationSprite

@@ -14,14 +14,19 @@ export default function () {
   this.text = ''
   this.src = ''
   this.scene = 'main'
-  this.spritestage = 0
-  this.spritefps = 0
-  this.spriteplaying = 0
-  this.spritecurrent = 0
+  this.sprite_stage = 0
+  this.sprite_fps = 0
+  this.sprite_playing = 0
+  this.sprite_current = 0
+  this.video_playbackRate = 1
+  this.video_currentTime = 1
+  this.video_volume = 1
+  this.video_muted = false
   this.animationset = {}
   this.dataset = {}
   this.followset = {}
   this.spriteset = {}
+  this.videoset = {}
   this.style = {}
 
 }
