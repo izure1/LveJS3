@@ -41,6 +41,10 @@ export default function __setInformationElement(s = '', cb = function () {}) {
 
       this.emit('load')
 
+    }, () => {
+
+      this.emit('error')
+
     })
 
   }, 0, 1)

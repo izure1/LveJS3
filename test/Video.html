@@ -24,7 +24,11 @@
       type: 'video',
       src: './video/sample.mp4',
       loop: true
-    }).css('verticalAlign', 'middle')
+    }).css({
+      verticalAlign: 'middle',
+      width: '100%',
+      height: '100%'
+    })
 
     lve('camera').create({
       type: 'camera'

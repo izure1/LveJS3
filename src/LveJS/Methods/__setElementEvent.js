@@ -24,6 +24,10 @@ export default function __setElementEvent() {
     this.emit('ended')
   })
 
+  this.element.addEventListener('error', () => {
+    this.emit('error')
+  })
+
   this.element.__setElementEvent = true
 
   return this

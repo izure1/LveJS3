@@ -74,6 +74,10 @@ function setSysAttr(r) {
   this.__system__.sprite.duration = 0
   this.__system__.position.x = 0
   this.__system__.position.y = 0
+  this.__system__.audio.setting.playbackRate = 1
+  this.__system__.audio.setting.currentTime = 0
+  this.__system__.audio.setting.volume = 1
+  this.__system__.audio.setting.muted = false
 
   for (let t of DEFAULT_EVENT) {
     this.__system__.events[t] = new Map
