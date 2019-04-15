@@ -63,6 +63,7 @@ handler.src = function (p, v, t) {
     case 'video':
       this.__setInformationElement(v, () => {
         this.__setInformationSprite(this.style.width, this.style.height, this.spriteset.stage)
+        this.__setInformationVideo()
         this.__setTimescaleElement(this.timescale)
         this.__setPhysicsFixture()
       })

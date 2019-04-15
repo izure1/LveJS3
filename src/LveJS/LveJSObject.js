@@ -32,6 +32,7 @@ import M__setAudioMute from './Methods/__setAudioMute'
 import M__setInformationElement from './Methods/__setInformationElement'
 import M__setInformationText from './Methods/__setInformationText'
 import M__setInformationSprite from './Methods/__setInformationSprite'
+import M__setInformationVideo from './Methods/__setInformationVideo'
 import M__setTimescaleElement from './Methods/__setTimescaleElement'
 import M__setElementEvent from './Methods/__setElementEvent'
 import M__setPhysicsBody from './Methods/__setPhysicsBody'
@@ -65,6 +66,7 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__, 'physics', {})
   setHiddenContext.call(this.__system__.physics, 'information', {})
   setHiddenContext.call(this.__system__, 'audio', {})
+  setHiddenContext.call(this.__system__.audio, 'setting', {})
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob)
   setHiddenContext.call(this.__system__, 'transition', new LveJSTransition)
 
@@ -145,6 +147,7 @@ LveJSObject.prototype.__setAudioMute = M__setAudioMute
 LveJSObject.prototype.__setInformationElement = M__setInformationElement
 LveJSObject.prototype.__setInformationText = M__setInformationText
 LveJSObject.prototype.__setInformationSprite = M__setInformationSprite
+LveJSObject.prototype.__setInformationVideo = M__setInformationVideo
 LveJSObject.prototype.__setTimescaleElement = M__setTimescaleElement
 LveJSObject.prototype.__setElementEvent = M__setElementEvent
 LveJSObject.prototype.__setPhysicsBody = M__setPhysicsBody

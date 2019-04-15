@@ -17,7 +17,7 @@ handler.__observer = function (p, v, t) {
 handler.stage = function (p, v, t) {
 
   if (this.type !== 'sprite') {
-    return handler
+    return this.spriteset[p]
   }
 
   this.__setInformationSprite(this.style.width, this.style.height, v)
@@ -29,7 +29,7 @@ handler.stage = function (p, v, t) {
 handler.fps = function (p, v, t) {
 
   if (this.type !== 'sprite') {
-    return handler
+    return this.spriteset[p]
   }
 
   this.__system__.sprite.interval = 1000 / v
@@ -41,7 +41,7 @@ handler.fps = function (p, v, t) {
 handler.playing = function (p, v, t) {
 
   if (this.type !== 'sprite') {
-    return handler
+    return this.spriteset[p]
   }
 
   v = !!v
