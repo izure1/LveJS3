@@ -4,10 +4,10 @@ let handler
 handler = {}
 handler.__getter = {}
 
-handler.__getter.playbackRate = handler.__getter.currentTime = handler.__getter.volume = handler.__getter.muted = function (p, t) {
+handler.__getter.playbackRate = handler.__getter.currentTime = handler.__getter.volume = handler.__getter.muted = function(p, t) {
 
-  if (this.type !== 'video') {
-    return handler
+  if (!this.element && !this.element.play) {
+    return null
   }
 
   return this.element[p]
