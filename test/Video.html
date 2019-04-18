@@ -10,6 +10,10 @@
 
 <body>
   <canvas id="test" width="800" height="450"></canvas>
+  <div>
+    <button onclick="lve('video').play()">Play</button>
+    <button onclick="lve('video').pause()">Pause</button>
+  </div>
   <script type="text/javascript">
 
     const lve = new LveJS
@@ -36,8 +40,6 @@
 
     lve.init({
       canvas: '#test'
-    }).ready(function () {
-      lve('video').play();
     })
     
   </script>

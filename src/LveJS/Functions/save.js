@@ -13,6 +13,7 @@ function getPhysicsSetting() {
 function getObjects() {
   let array = []
   for (let t of this.renderer.objects) {
+    delete t.element
     array.push(Object.assign({
       name: t.name
     }, t))

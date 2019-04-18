@@ -108,7 +108,7 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
   setShadow(canvas, drawShadowBlur, drawShadowColor, drawShadowOffsetX, drawShadowOffsetY)
 
   rotateInfo = setRotate(canvas, drawWidth, drawHeight, x, y, style.rotate, style_s.rx, style_s.ry, cameraRotate)
-  
+
 
   pos.x = x
   pos.y = y
@@ -123,23 +123,38 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
   }
 
+
   switch (this.type) {
 
     case 'square':
+
       borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
       square(canvas, drawWidth, drawHeight, drawColor, x, y)
       break
 
+
     case 'circle':
+
       borderCircle(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
       circle(canvas, drawWidth, drawHeight, drawColor, x, y)
       break
 
+
+    case 'text':
+
+      if (!this.__system__.text.information) return this
+
+      this.__system__.text.information.setScale(s)
+
+      borderText(canvas, this.__system__.text.information, x, y)
+      text(canvas, this.__system__.text.information, x, y)
+      break
+
+
     case 'image':
 
-      if (!this.element) {
-        break
-      }
+      if (!this.element) return this
+      if (!this.element.__isLoaded) return this
 
       borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
       image(canvas, this.element, drawWidth, drawHeight, x, y, 0, 0, this.element.naturalWidth, this.element.naturalHeight)
@@ -164,36 +179,30 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
       image(canvas, transImage, transImage._w, transImage._h, rotateInfo.x, rotateInfo.y, 0, 0, transImage.naturalWidth, transImage.naturalHeight)
       break
 
-    case 'text':
-      if (!this.__system__.text.information) {
-        break
-      }
-      this.__system__.text.information.setScale(s)
-      borderText(canvas, this.__system__.text.information, x, y)
-      text(canvas, this.__system__.text.information, x, y)
-      break
 
     case 'video':
-      if (!this.element) {
-        break
-      }
+
+      if (!this.element) return this
+      if (!this.element.__isLoaded) return this
+
       borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
       image(canvas, this.element, drawWidth, drawHeight, x, y, 0, 0, this.element.videoWidth, this.element.videoHeight)
       break
 
+
     case 'sprite':
-      if (!this.element) {
-        break
-      }
+
+      if (!this.element) return this
+      if (!this.element.__isLoaded) return this
+
       borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
       image(canvas, this.element, drawWidth, drawHeight, x, y, this.spriteset.current * sprite.width, 0, sprite.width, sprite.height)
       break
 
   }
 
-
+  
   this.__system__.world.renderer.subjects.push(this)
-
   return this
 
 }

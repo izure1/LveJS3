@@ -1,15 +1,29 @@
+import LveJSVector from '../LveJSVector'
+
+
 function restoreObject(objects) {
 
   let name
   let item
+  let vector
 
   for (let t of objects) {
+
     name = t.name
     delete t.name
+
     item = this.lve(name).create(t)
     item.physicsset.x = t.physicsset.x
     item.physicsset.y = t.physicsset.y
     item.physicsset.a = t.physicsset.a
+
+    for (let p in item.animationset) {
+
+      vector = item.animationset[p]
+      item.animationset[p] = new LveJSVector(vector.start, vector.end, vector.duration, vector.easing, vector.runtime)
+
+    }
+
   }
 
 }

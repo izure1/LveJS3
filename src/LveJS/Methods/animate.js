@@ -4,6 +4,9 @@ import {
   parseArguments
 } from '../Utils/arguments'
 import calcValue from '../Helpers/calcValue'
+import getObjectScope from '../Helpers/getObjectScope'
+
+import LveJSVector from '../LveJSVector'
 
 
 /**
@@ -11,9 +14,10 @@ import calcValue from '../Helpers/calcValue'
  * @param {String|Object} o Properties name
  * @param {Number} v Change in value
  * @param {Number} d Duration
- * @param {*} e Easing type
+ * @param {String} e Easing type
+ * @param {String} s Scope (Default: 'style')
  */
-export default function animate(o, v, d = 0, e = 'linear') {
+export default function animate(o, v, d = 0, e = 'linear', s = 'style') {
 
   let t
   let r
@@ -25,14 +29,24 @@ export default function animate(o, v, d = 0, e = 'linear') {
     return this
   }
 
-  t = this.style
-  r = parseArguments.apply(t, arguments)
-
-
   if (typeof o === 'object') {
-    d = arguments[1] || 0
-    e = arguments[2] || 'linear'
+    d = 1 in arguments ? arguments[1] : 0
+    e = 2 in arguments ? arguments[2] : 'linear'
+    s = 3 in arguments ? arguments[3] : 'style'
   }
+
+  if (s) {
+    s = `.${s}`
+  }
+
+
+  let {
+    scope,
+    property
+  } = getObjectScope(t, `${s}.`)
+
+  t = scope
+  r = parseArguments.apply(t, arguments)
 
   if (r.IS_GET) {
     return this
@@ -41,15 +55,18 @@ export default function animate(o, v, d = 0, e = 'linear') {
 
   each.call(this, function () {
 
-    vo = Object.assign({}, this.style, this.__system__.style)
+    vo = Object.assign({}, t)
+
+    if (s === 'style') {
+      Object.assign(vo, this.__system__.style)
+    }
+
     v1 = vo
     v2 = calcValue.call(this, r.VALUE, vo)
 
     for (let p in v2) {
 
-      let dr
-
-      dr = d
+      let dr = d
 
       if (typeof d === 'object') {
         dr = v2[p] - v1[p]
@@ -57,16 +74,11 @@ export default function animate(o, v, d = 0, e = 'linear') {
         dr = dr / d.speed * 1000
       }
 
-      this.animationset[p] = {
-        type: e,
-        duration: dr,
-        runtime: 0,
-        start: v1[p],
-        end: v2[p],
-      }
+      this.animationset[`${s}.${p}`] = new LveJSVector(v1[p], v2[p], dr, e)
 
       this.emit('animatestart', {
-        property: p,
+        scope: t,
+        property,
         value: v1[p]
       })
 

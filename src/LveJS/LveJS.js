@@ -1,5 +1,6 @@
 import LveJSObjectSession from './LveJSObjectSession'
 import LveJSObject from './LveJSObject'
+import LveJSVector from './LveJSVector'
 import Box2D from '../External/Box2D/Box2D'
 
 import LveJSHashTable from './Managers/LveJSHashTable'
@@ -8,6 +9,7 @@ import LveJSPhysics from './Managers/LveJSPhysics'
 import LveJSEmitter from './Managers/LveJSEmitter'
 import LveJSListener from './Managers/LveJSListener'
 import LveJSObserver from './Managers/LveJSObserver'
+import LveJSAnimator from './Managers/LveJSAnimator'
 import LveJSCache from './Managers/LveJSCache'
 
 import LveQuery from './LveQuery'
@@ -54,6 +56,7 @@ function LveJS() {
   this.emitter = new LveJSEmitter
   this.listener = new LveJSListener
   this.observer = new LveJSObserver
+  this.animator = new LveJSAnimator
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
@@ -63,6 +66,7 @@ function LveJS() {
   this.classes = {
     LveJSObjectSession,
     LveJSObject,
+    LveJSVector,
     Box2D
   }
 
@@ -119,7 +123,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '3.4.4'
+        return '3.5.0'
       }
     },
 

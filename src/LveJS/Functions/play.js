@@ -5,10 +5,13 @@ export default function play() {
   }
 
   this.renderer.isRunning = true
+  this.animator.isRunning = true
   this.physics.isRunning = true
   
   this.renderer.deltaTimer.play()
+  this.animator.deltaTimer.play()
   this.renderer.run()
+  this.animator.run()
   this.physics.run()
 
   // video 유형의 객체 재생

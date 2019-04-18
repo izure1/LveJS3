@@ -1,3 +1,7 @@
+import setHiddenContext from '../Utils/setHiddenContext'
+import ready from '../Utils/domReady'
+
+
 export default function __setElementEvent() {
 
   if (!(this.element instanceof HTMLElement)) {
@@ -28,7 +32,10 @@ export default function __setElementEvent() {
     this.emit('error')
   })
 
-  this.element.__setElementEvent = true
+  setHiddenContext.call(this.element, '__setElementEvent', true)
+  ready.call(this.element, () => {
+    setHiddenContext.call(this.element, '__isLoaded', true)
+  })
 
   return this
 

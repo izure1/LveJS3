@@ -24,6 +24,8 @@ export default function init(o) {
       this.renderer.setting.canvas.context.save()
       this.renderer.start()
       this.physics.start()
+      this.animator.start()
+
 
       if (!this.listener.inited) {
 

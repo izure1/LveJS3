@@ -6,7 +6,7 @@ let handler
 handler = {}
 handler.__getter = {}
 
-handler.__getter.sprite_playing = handler.__getter.sprite_playing = handler.__getter.sprite_fps = handler.__getter.sprite_current = function (p, t) {
+handler.__getter.sprite_playing = handler.__getter.sprite_stage = handler.__getter.sprite_fps = handler.__getter.sprite_current = function (p, t) {
 
   p = p.substr(7)
   return t.spriteset[p]
