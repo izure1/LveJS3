@@ -1,44 +1,12 @@
-import screenfull from 'screenfull'
-
 import clickCheck from '../Utils/clickCheck'
-import getMouseCoords from '../Utils/getMouseCoords'
 
-
-function getMouseCoordsFromFullscreen(el, t) {
-
-  if (!screenfull.isFullscreen) {
-    return t
-  }
-
-  let s
-
-  if (el.width > el.height) {
-
-    s = t.offset.width / el.width
-
-    t.x /= s
-    t.y -= ((t.offset.height - (el.height * s)) / 2)
-    t.y /= s
-
-  } else {
-
-    s = el.height / t.offset.height
-
-    t.x -= ((t.offset.width - (el.width * s)) / 2)
-    t.x /= s
-    t.y /= s
-
-  }
-
-  return t
-
-}
 
 function mouseQuery(objects, pos) {
 
   let r
   let p, s
   let rw, rh, rx, ry, rs
+  let x, y
 
   r = null
 
@@ -55,12 +23,15 @@ function mouseQuery(objects, pos) {
     rw = s.width * rs
     rh = s.height * rs
 
+    x = p.x
+    y = p.y
+
     rx = rw * s.rx
     ry = rh * s.ry
-    rx += p.x
-    ry += p.y
+    rx += x
+    ry += y
 
-    if (clickCheck(pos, [p.x, p.y], [rw, rh], [rx, ry], -t.style.rotate)) {
+    if (clickCheck(pos, [x, y], [rw, rh], [rx, ry], -t.style.rotate)) {
       r = t
       break
     }
@@ -74,7 +45,7 @@ function mouseQuery(objects, pos) {
 
 export default function worldQuery(e) {
 
-  let a, t
+  let a, s, t
   let m, b
 
   a = this.renderer.getRenderStates()
@@ -86,9 +57,9 @@ export default function worldQuery(e) {
   }
 
   a = a.value
+  s = a[10]
 
-  t = getMouseCoords(this.canvas, e)
-  t = getMouseCoordsFromFullscreen(this.canvas, t)
+  t = this.renderer.getMouseCoords(e)
   t = mouseQuery(this.renderer.subjects, [t.x, t.y])
 
   if (t) {

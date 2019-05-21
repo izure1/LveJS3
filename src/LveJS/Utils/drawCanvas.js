@@ -853,7 +853,6 @@ function circle(c, w, h, l, x, y, o) {
 
 function text_draw(c, f, cl, t, rx, ry) {
 
-  let lw
   let s
   let x, y, l, h
 
@@ -868,6 +867,10 @@ function text_draw(c, f, cl, t, rx, ry) {
   }
 
   s = t.scale
+
+  rx /= s
+  ry /= s
+
   x = [...t.nodesWidth]
   y = ry + t.height
   l = 0
@@ -880,12 +883,12 @@ function text_draw(c, f, cl, t, rx, ry) {
     let xx, alignX
 
     ln = node.line
-    width = t.nodesWidth[node.line] * s
+    width = t.nodesWidth[ln]
     ns = node.style
 
     x[ln] -= node.width
     xx = rx
-    xx += x[ln] * s
+    xx += x[ln]
     alignX = 0
 
     switch (t.textAlign) {
@@ -895,19 +898,19 @@ function text_draw(c, f, cl, t, rx, ry) {
         break
 
       case 'center':
-        alignX = node.width * s / 2
-        xx += (t.maxWidth / 2) - (width / 2) + (node.width * s / 2)
+        alignX = node.width / 2
+        xx += (t.maxWidth / 2) - (width / 2) + (node.width / 2)
         break
 
       case 'right':
-        alignX = node.width * s
-        xx += t.maxWidth - width + (node.width * s)
+        alignX = node.width
+        xx += t.maxWidth - width + node.widthw
         break
 
     }
 
     if (l !== node.line) {
-      y -= (h * s)
+      y -= h
       l = node.line
       h = node.height
     }
@@ -922,15 +925,15 @@ function text_draw(c, f, cl, t, rx, ry) {
       let grdX
       let grdColor
 
-      grdWidth = rangeFade * s
+      grdWidth = rangeFade
 
       grdX = xx - grdWidth
-      grdX += ((node.width - rangeHidden) * s)
+      grdX += node.width - rangeHidden
       grdX -= alignX
 
       grdColor = node.style[cl.toLowerCase()] || t[cl]
 
-      color = c.createLinearGradient(grdX, y, grdX + grdWidth, y)
+      color = c.createLinearGradient(grdX * s, y * s, (grdX + grdWidth) * s, y * s)
       color.addColorStop(0, `rgba(${grdColor.r}, ${grdColor.g}, ${grdColor.b}, ${grdColor.opacity})`)
       color.addColorStop(1, `rgba(${grdColor.r}, ${grdColor.g}, ${grdColor.b}, ${0})`)
 
@@ -967,13 +970,19 @@ function text_draw(c, f, cl, t, rx, ry) {
     }
 
 
+    let dx, dy
+
+    // 고쳐야함
+    dx = xx * s
+    dy = y * s
+
     c.textAlign = t.textAlign
     c.font = ns.fontstyle + ' ' + ns.fontweight + ' ' + ns.fontsize * s + 'px ' + ns.fontfamily
     c.strokeStyle = strokeStyle
     c.fillStyle = fillStyle
-    c.lineWidth = lineWidth
+    c.lineWidth = lineWidth * s
 
-    c[f](node.text, xx, y)
+    c[f](node.text, dx, dy)
 
   }
 

@@ -2,6 +2,23 @@ import domReady from '../Utils/domReady'
 import worldQuery from '../Helpers/worldQuery'
 
 
+function isCanvasEl(raw) {
+  return raw instanceof HTMLCanvasElement
+}
+
+function getCanvas(raw) {
+
+  let c
+
+  if (typeof raw === 'string') c = document.querySelector(raw)
+  if (isCanvasEl(raw)) {
+    c = raw
+  }
+
+  return c
+
+}
+
 export default function init(o) {
 
   let c
@@ -11,20 +28,20 @@ export default function init(o) {
     this.renderer.init(o)
     this.physics.init()
 
-    if (o.canvas) {
+    c = getCanvas(this.renderer.setting.canvas) || getCanvas(this.renderer.setting.canvas.element)
 
-      if (typeof o.canvas === 'string') c = document.querySelector(o.canvas)
-      if (o.canvas instanceof HTMLCanvasElement) {
-        c = o.canvas
-      }
+    if (isCanvasEl(c)) {
 
       this.renderer.setting.canvas = {}
       this.renderer.setting.canvas.context = c.getContext('2d')
       this.renderer.setting.canvas.element = c
       this.renderer.setting.canvas.context.save()
-      this.renderer.start()
-      this.physics.start()
-      this.animator.start()
+
+      this.renderer.resize()
+
+      if (!this.renderer.isStart) this.renderer.start()
+      if (!this.physics.isStart) this.physics.start()
+      if (!this.animator.isStart) this.animator.start()
 
 
       if (!this.listener.inited) {

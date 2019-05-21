@@ -1,7 +1,10 @@
 export default function () {
 
   this.canvas = {}
+  this.canvasScale = 1
   this.scaleDistance = 100
+  this.width = undefined
+  this.height = undefined
   this.backgroundColor = 'white'
   this.maxSight = undefined
   this.minSize = 0.35

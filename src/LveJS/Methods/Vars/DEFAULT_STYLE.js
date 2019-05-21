@@ -1,3 +1,6 @@
+import DEFAULT_STYLE_CONTSTANT from './DEFAULT_STYLE_CONSTANT'
+
+
 export default function () {
 
   this.fontSize = 50
@@ -15,26 +18,20 @@ export default function () {
   this.shadowOffsetX = 0
   this.shadowOffsetY = 0
   this.position = 'absolute'
-  this.left = 0
-  this.bottom = 0
-  this.perspective = 100
-  this.opacity = 1
-  this.rotate = 0
-  this.scale = 1
   this.blur = 0
-  this.gradientDirection = 0
   this.gradientType = 'linear'
   this.gradient = {}
   this.pointerEvents = true
   this.display = 'block'
   this.lineHeight = '100%'
   this.verticalAlign = 'top'
-  this.zIndex = 0
   this.cursor = 'auto'
   this.margin = '0 0 0 0'
   this.marginLeft = 0
   this.marginRight = 0
   this.marginTop = 0
   this.marginBottom = 0
+
+  Object.assign(this, DEFAULT_STYLE_CONTSTANT)
 
 }

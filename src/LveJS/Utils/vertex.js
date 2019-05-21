@@ -19,15 +19,18 @@ function getScale(x, d, g) {
  * @param {Number} by Camera axis y
  * @param {Number} bz Camera axis z
  * @param {Number} d Scale distance
+ * @param {Number} cs Canvas scale
  * @returns {Object} x, y, scale
  */
-function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100) {
+function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100, cs = 1) {
 
   let x, y, z
   let s
+
+  d *= cs
   x = ax - bx
   y = ay - by
-  z = az - bz
+  z = az - bz || 1
 
   x = getScale(x, d, z)
   y = getScale(y, d, z)
@@ -51,17 +54,20 @@ function getPosition(w, h, ax, ay, az, bx, by, bz, d = 100) {
  * 
  * @param {Number} w Viewport width
  * @param {Number} h Viewport height
- * @param {Number} x Camera axis x
- * @param {Number} y Camera axis y
+ * @param {Number} x Target axis x
+ * @param {Number} y Target axis y
  */
-function getAABB(w, h, x, y) {
+function getAABB(w, h, x, y, z, cx, cy, cz, d = 100, cs = 1) {
+
+  x *= cs
+  y *= cs
 
   y = h - y
 
   return {
     x,
     y,
-    s: 1
+    s: cs
   }
 
 }

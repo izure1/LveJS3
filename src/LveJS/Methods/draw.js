@@ -1,5 +1,4 @@
 import {
-  getScale,
   getPosition,
   getAABB
 } from '../Utils/vertex'
@@ -40,56 +39,56 @@ VERTEX.fixed = getAABB
  * @param {Number} alpha Alpha color
  * 
  */
-export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, cameraX, cameraY, cameraZ, cameraRotate, distance, alpha = 1) {
+export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, cameraX, cameraY, cameraZ, cameraRotate, distance, canvasScale, alpha = 1) {
 
-  let style, style_s, sprite, pos, transition
+  let {
+    style,
+    sprite,
+    position,
+    transition
+  } = this.__system__
 
-  style = this.style
-  style_s = this.__system__.style
-  sprite = this.__system__.sprite
-  pos = this.__system__.position
-  transition = this.__system__.transition
+  let tStyle = this.style
 
   // 카메라와 객체의 정보를 이용해 캔버스 내의 x, y 절대좌표와 그리기 비율을 구합니다
   let drawWidth, drawHeight, drawColor, rotateInfo
-  let drawShadowBlur, drawShadowColor, drawShadowOffsetX, drawShadowOffsetY, drawBorderWidth, drawBorderColor
-  let X, Y, S
+  let drawBorderWidth, drawBorderColor
+
   let {
     x,
     y,
-    s
-  } = VERTEX[style.position](canvasWidth, canvasHeight, style.left, style.bottom, style.perspective, cameraX, cameraY, cameraZ, distance)
+    s,
+    X = x,
+    Y = y,
+    S = s,
+  } = VERTEX[tStyle.position](canvasWidth, canvasHeight, tStyle.left, tStyle.bottom, tStyle.perspective, cameraX, cameraY, cameraZ, distance, canvasScale)
 
-  X = x
-  Y = y
-  S = s
+  S = s *= style.scale
+
+
+  // position Fixed / verticalAlign 등의 요소를 고려하여 좌표를 보정합니다.
+  // fx, fy 변수가 사용됩니다.
+  x -= s * style.width * style.fx
+  y -= s * style.height * style.fy
+
+
+  // 그리기 비율을 곱해 실제 크기를 구합니다
+  drawWidth = style.width * s
+  drawHeight = style.height * s
+  drawColor = tStyle.color
+
+  drawBorderColor = tStyle.borderColor
+  drawBorderWidth = tStyle.borderWidth * s
+
 
   // 카메라보다 뒤에 있는 객체는 그리기를 중단합니다
   if (s <= 0) {
     return
   }
 
-  S =
-    s =
-    s * style_s.scale
 
-  // position Fixed / verticalAlign 등의 요소를 고려하여 좌표를 보정합니다.
-  // fx, fy 변수가 사용됩니다.
-  x -= s * style_s.width * style_s.fx
-  y -= s * style_s.height * style_s.fy
-
-  // 그리기 비율을 곱해 실제 크기를 구합니다
-  drawWidth = style_s.width * s
-  drawHeight = style_s.height * s
-  drawColor = style.color
-
-  drawShadowColor = style.shadowColor
-  drawShadowBlur = style.shadowBlur * s
-  drawShadowOffsetX = style.shadowOffsetX * s
-  drawShadowOffsetY = style.shadowOffsetY * s
-
-  drawBorderColor = style.borderColor
-  drawBorderWidth = style.borderWidth * s
+  // 알파값 지정 및 회전 알고리즘을 적용합니다
+  setBlur(canvas, tStyle.blur)
 
 
   // 투명도를 지정합니다
@@ -97,33 +96,45 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
   let opacity_transition
 
   opacity_transition = transition.opacity()
-
   opacity = alpha
-  opacity = alpha * style.opacity * opacity_transition
+  opacity = alpha * tStyle.opacity * opacity_transition
 
-
-  // 알파값 지정 및 회전 알고리즘을 적용합니다
-  setBlur(canvas, style.blur)
   setAlpha(canvas, opacity)
-  setShadow(canvas, drawShadowBlur, drawShadowColor, drawShadowOffsetX, drawShadowOffsetY)
-
-  rotateInfo = setRotate(canvas, drawWidth, drawHeight, x, y, style.rotate, style_s.rx, style_s.ry, cameraRotate)
 
 
-  pos.x = x
-  pos.y = y
-  pos.s = s
+  // 그림자를 지정합니다
+  let sc, sb, sx, sy
+
+  sc = tStyle.shadowColor
+  sb = tStyle.shadowBlur * s
+  sx = tStyle.shadowOffsetX * s
+  sy = tStyle.shadowOffsetY * s
+
+  setShadow(canvas, sb, sc, sx, sy)
+
+
+  // 회전각도를 지정합니다
+  rotateInfo = setRotate(canvas, drawWidth, drawHeight, x, y, tStyle.rotate, style.rx, style.ry, cameraRotate)
+
+
+  // 객체의 화면 캔버스 좌표 X, Y 를 객체에 캐싱합니다
+  position.x = x
+  position.y = y
+  position.s = s
+
   x = rotateInfo.x
   y = rotateInfo.y
 
 
-  if (style.gradient.__length) {
+  // 그라디언트가 지정되어있다면 그라디언트 색상 정보를 받아옵니다
+  if (tStyle.gradient.__length) {
 
-    drawColor = getGradient(canvas, style.gradient, style.gradientType, style.gradientDirection, drawWidth, drawHeight, x, y)
+    drawColor = getGradient(canvas, tStyle.gradient, tStyle.gradientType, tStyle.gradientDirection, drawWidth, drawHeight, x, y)
 
   }
 
 
+  // 각 객체 유형에 맞는 그리기 방법을 택합니다
   switch (this.type) {
 
     case 'square':
@@ -142,7 +153,7 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
     case 'text':
 
-      if (!this.__system__.text.information) return this
+      if (!this.__system__.text.information) return
 
       this.__system__.text.information.setScale(s)
 
@@ -169,13 +180,13 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
       // 트랜지션 이미지의 좌표를 보정합니다
       transImage._w = S * transition.image_origin.width
       transImage._h = S * transition.image_origin.height
-      transImage._x = X - (transImage._w * style_s.fx)
-      transImage._y = Y - (transImage._h * style_s.fy)
+      transImage._x = X - (transImage._w * style.fx)
+      transImage._y = Y - (transImage._h * style.fy)
 
       rotateInfo = canvas.setTransform(1, 0, 0, 1, 0, 0)
-      rotateInfo = setRotate(canvas, transImage._w, transImage._h, transImage._x, transImage._y, style.rotate, style_s.rx, style_s.ry)
+      rotateInfo = setRotate(canvas, transImage._w, transImage._h, transImage._x, transImage._y, tStyle.rotate, style.rx, style.ry)
 
-      setAlpha(canvas, alpha * (1 - opacity_transition) * style.opacity)
+      setAlpha(canvas, alpha * (1 - opacity_transition) * tStyle.opacity)
       image(canvas, transImage, transImage._w, transImage._h, rotateInfo.x, rotateInfo.y, 0, 0, transImage.naturalWidth, transImage.naturalHeight)
       break
 
@@ -201,7 +212,8 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
   }
 
-  
+
+  // 화면에 그려진 목록에 추가합니다
   this.__system__.world.renderer.subjects.push(this)
   return this
 

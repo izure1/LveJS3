@@ -10,6 +10,7 @@ import LveJSEmitter from './Managers/LveJSEmitter'
 import LveJSListener from './Managers/LveJSListener'
 import LveJSObserver from './Managers/LveJSObserver'
 import LveJSAnimator from './Managers/LveJSAnimator'
+import LveJSAssetManager from './Managers/LveJSAssetManager'
 import LveJSCache from './Managers/LveJSCache'
 
 import LveQuery from './LveQuery'
@@ -37,6 +38,7 @@ import FnOnce from './Functions/once'
 import FnOff from './Functions/off'
 import FnCreateObject from './Functions/createObject'
 import FnGetRenderStates from './Functions/getRenderStates'
+import FnGetMouseCoords from './Functions/getMouseCoords'
 import FnRequestCaching from './Functions/requestCaching'
 import FnBox2d from './Functions/box2d'
 import FnGetGravity from './Functions/getGravity'
@@ -47,6 +49,8 @@ import FnFullScreen from './Functions/fullScreen'
 import FnExitFullScreen from './Functions/exitFullScreen'
 import FnToggleFullScreen from './Functions/toggleFullScreen'
 import FnIsFullScreen from './Functions/isFullScreen'
+import FnCalc from './Functions/calc'
+import FnLoadAsset from './Functions/loadAsset'
 
 
 function LveJS() {
@@ -57,6 +61,7 @@ function LveJS() {
   this.listener = new LveJSListener
   this.observer = new LveJSObserver
   this.animator = new LveJSAnimator
+  this.assetManager = new LveJSAssetManager
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
@@ -99,6 +104,7 @@ function LveJS() {
   this.lve.off = FnOff.bind(this)
   this.lve.createObject = FnCreateObject.bind(this)
   this.lve.getRenderStates = FnGetRenderStates.bind(this)
+  this.lve.getMouseCoords = FnGetMouseCoords.bind(this)
   this.lve.requestCaching = FnRequestCaching.bind(this)
   this.lve.box2d = FnBox2d.bind(this)
   this.lve.getGravity = FnGetGravity.bind(this)
@@ -109,6 +115,8 @@ function LveJS() {
   this.lve.exitFullscreen = this.lve.exitFullScreen = FnExitFullScreen.bind(this)
   this.lve.toggleFullscreen = this.lve.toggleFullScreen = FnToggleFullScreen.bind(this)
   this.lve.isFullscreen = this.lve.isFullScreen = FnIsFullScreen.bind(this)
+  this.lve.calc = FnCalc.bind(this)
+  this.lve.loadAsset = FnLoadAsset.bind(this)
 
   this.lve.current = FnCurrent.call(this)
 
@@ -123,7 +131,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '3.5.0'
+        return '3.6.0'
       }
     },
 

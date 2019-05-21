@@ -2,7 +2,7 @@
   "name": "lve",
   "title": "LveJS",
   "description": "Light visualnovel Engine",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "main": "dist/LveJS.js",
   "homepage": "https://github.com/izure1/LveJS3",
   "author": {
@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "d3-color": "^1.2.3",
-    "screenfull": "^4.1.0"
+    "screenfull": "^4.1.0",
+    "babel-polyfill": "^6.26.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-polyfill": "^6.26.0",
     "babel-loader": "^7.x.x",
     "babel-preset-es2015": "^6.24.1",
     "circular-dependency-plugin": "^5.0.2",

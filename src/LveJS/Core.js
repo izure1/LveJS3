@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 import LveJS from './LveJS'
 
 

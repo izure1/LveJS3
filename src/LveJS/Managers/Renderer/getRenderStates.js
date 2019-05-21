@@ -1,12 +1,10 @@
-export default function getRenderStates() {
+export default function getRenderStates(ca = this.camera) {
 
   let t
   let c
-  let ca
 
   t = this
   c = this.setting.canvas
-  ca = this.camera
 
   if (!ca) {
     return {
@@ -26,7 +24,8 @@ export default function getRenderStates() {
       ca.style.bottom + ca.__system__.style.height * ca.__system__.style.scale * ca.__system__.style.ry,
       ca.style.perspective,
       ca.style.rotate,
-      t.setting.scaleDistance
+      t.setting.scaleDistance,
+      t.setting.canvasScale
     ]
   }
 
