@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param {String} u  Unique observe ID
+ * @param {Object} o  Observe setting
+ * @param {Function} fn  Callback function
+ */
 export default function observe(u, o, fn) {
 
   let observer

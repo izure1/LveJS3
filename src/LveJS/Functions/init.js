@@ -65,9 +65,26 @@ export default function init(o) {
 
       if (!this.observer.inited) {
 
-        this.observer.init(c)
+        const sizeObserve = {
+          attributes: true
+        }
 
         // 캔버스에 특정 요소가 변경되었을 때, 이를 감지하고 싶으면 this.observer.observe 메서드를 사용합니다.
+        this.observer.init(c)
+        this.observer.observe('change-size', sizeObserve, e => {
+
+          let p = e.attributeName
+
+          switch (p) {
+
+            case 'width':
+            case 'height':
+              this.renderer.setting[p] = c[p]
+              break
+
+          }
+
+        })
 
       }
 
