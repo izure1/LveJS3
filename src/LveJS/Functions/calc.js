@@ -41,7 +41,7 @@ function getRefinedProperties(o, ps) {
 }
 
 
-export default function calc(left, bottom, perspective, o, c) {
+export default function calc(left, bottom, perspective, o, c = this.renderer.camera) {
 
   let ps
   let s, d
