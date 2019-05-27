@@ -18,6 +18,11 @@ export default function destroy() {
     t.remove()
   }
 
+  // 모든 물리객체를 삭제합니다
+  for (let t of this.physics.bodies) {
+    this.physics.destroyObject(t)
+  }
+
   // 모든 매니저의 작동을 중지합니다
   this.renderer.isRunning = false
   this.physics.isRunning = false
