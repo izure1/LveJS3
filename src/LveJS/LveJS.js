@@ -50,6 +50,7 @@ import FnExitFullScreen from './Functions/exitFullScreen'
 import FnToggleFullScreen from './Functions/toggleFullScreen'
 import FnIsFullScreen from './Functions/isFullScreen'
 import FnCalc from './Functions/calc'
+import FnCalcRatio from './Functions/calcRatio'
 import FnLoadAsset from './Functions/loadAsset'
 
 
@@ -116,6 +117,7 @@ function LveJS() {
   this.lve.toggleFullscreen = this.lve.toggleFullScreen = FnToggleFullScreen.bind(this)
   this.lve.isFullscreen = this.lve.isFullScreen = FnIsFullScreen.bind(this)
   this.lve.calc = FnCalc.bind(this)
+  this.lve.calcRatio = FnCalcRatio.bind(this)
   this.lve.loadAsset = FnLoadAsset.bind(this)
 
   this.lve.current = FnCurrent.call(this)
@@ -131,7 +133,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '3.6.3'
+        return '3.6.4'
       }
     },
 

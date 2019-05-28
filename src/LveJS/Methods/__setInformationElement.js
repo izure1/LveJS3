@@ -18,7 +18,7 @@ export default function __setInformationElement(s = '', cb = function () {}) {
     if (t.src !== s) {
 
       t.src = s
-      if (t.load) t.load()
+      if (t.load && t.load.call) t.load()
 
     }
 
