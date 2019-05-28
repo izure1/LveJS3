@@ -8,7 +8,7 @@ export default function __spriteUpdate(tt = 0) {
     return this
   }
 
-  if ((sprite.duration += tt) >= sprite.interval) {
+  if ((sprite.duration += tt * this.timescale) >= sprite.interval) {
 
     sprite.duration = 0
     this.spriteset.current++
