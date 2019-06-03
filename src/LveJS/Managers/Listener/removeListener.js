@@ -4,6 +4,10 @@ export default function removeListener(e) {
     return this
   }
 
+  if (!this.canvas) {
+    return this
+  }
+  
   this.canvas.removeEventListener(e, this.handlers[e])
   delete this.handlers[e]
 

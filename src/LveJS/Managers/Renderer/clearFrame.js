@@ -3,9 +3,13 @@ export default function clearFrame(l) {
   let c
   let w, h
 
+  this.subjects = []
+
   c = this.setting.canvas.context
 
-  this.subjects = []
+  if (!c) {
+    return
+  }
 
   w = c.canvas.width
   h = c.canvas.height

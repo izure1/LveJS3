@@ -2,7 +2,7 @@
   "name": "lve",
   "title": "LveJS",
   "description": "Light visualnovel Engine",
-  "version": "3.6.8",
+  "version": "3.6.9",
   "main": "dist/LveJS.js",
   "homepage": "https://github.com/izure1/LveJS3",
   "author": {

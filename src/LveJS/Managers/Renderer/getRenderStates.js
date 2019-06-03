@@ -6,7 +6,7 @@ export default function getRenderStates(ca = this.camera) {
   t = this
   c = this.setting.canvas
 
-  if (!ca) {
+  if (!ca || !c.context || !c.element) {
     return {
       ready: false,
       value: [
