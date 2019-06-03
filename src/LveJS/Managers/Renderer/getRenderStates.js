@@ -9,7 +9,11 @@ export default function getRenderStates(ca = this.camera) {
   if (!ca) {
     return {
       ready: false,
-      value: []
+      value: [
+        c.context,
+        c.element.width,
+        c.element.height,
+      ]
     }
   }
 
