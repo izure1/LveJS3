@@ -6,13 +6,19 @@ export default function getRenderStates(ca = this.camera) {
   t = this
   c = this.setting.canvas
 
+  let n, w, h
+
+  n = c.context ? c.context : undefined
+  w = c.element ? c.element.width : undefined
+  h = c.element ? c.element.height : undefined
+
   if (!ca || !c.context || !c.element) {
     return {
       ready: false,
       value: [
-        c.context,
-        c.element.width,
-        c.element.height,
+        n,
+        w,
+        h,
       ]
     }
   }
@@ -20,9 +26,9 @@ export default function getRenderStates(ca = this.camera) {
   return {
     ready: true,
     value: [
-      c.context,
-      c.element.width,
-      c.element.height,
+      n,
+      w,
+      h,
       ca.__system__.style.height,
       ca.style.left,
       ca.style.bottom + ca.__system__.style.height * ca.__system__.style.scale * ca.__system__.style.ry,
