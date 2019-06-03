@@ -12,6 +12,7 @@ import run from './Renderer/run'
 import runCallbacks from './Renderer/runCallbacks'
 import update from './Renderer/update'
 import clearFrame from './Renderer/clearFrame'
+import clearTransform from './Renderer/clearTransform'
 import onFullscreen from './Renderer/onFullscreen'
 import onExitFullscreen from './Renderer/onExitFullscreen'
 
@@ -46,6 +47,7 @@ LveJSRenderer.prototype.run = run
 LveJSRenderer.prototype.runCallbacks = runCallbacks
 LveJSRenderer.prototype.update = update
 LveJSRenderer.prototype.clearFrame = clearFrame
+LveJSRenderer.prototype.clearTransform = clearTransform
 LveJSRenderer.prototype.onFullscreen = onFullscreen
 LveJSRenderer.prototype.onExitFullscreen = onExitFullscreen
 

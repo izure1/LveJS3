@@ -52,4 +52,6 @@ export default function update(tt = 0) {
 
   }
 
+  this.clearTransform()
+
 }

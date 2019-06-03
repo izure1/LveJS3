@@ -133,7 +133,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '3.6.5'
+        return '3.6.6'
       }
     },
 
