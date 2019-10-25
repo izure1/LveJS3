@@ -19,6 +19,12 @@ function getCanvas(raw) {
 
 }
 
+/**
+ * 
+ * @param {Object} o  Scene (world) information
+ * @description
+ * Set up a world
+ */
 export default function init(o) {
 
   let c

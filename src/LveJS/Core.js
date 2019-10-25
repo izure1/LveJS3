@@ -1,4 +1,4 @@
-import 'babel-polyfill'
+import '@babel/polyfill'
 
 import LveJS from './LveJS'
 
@@ -23,6 +23,8 @@ import LveJS from './LveJS'
  *  lve는 상수이며, 함수임과 동시에 이름공간(namespace)이기도 합니다.
  *  그 외 lve.js 에서 필요한 내용은 lve 상수의 속성의 형태로 저장되어 있습니다. 변수형 또는 함수형입니다. ( Ex. lve.root or lve.init() )
  */
+
+"use strict";
 
 (function () {
 

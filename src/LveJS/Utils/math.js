@@ -1,5 +1,3 @@
-'use strict'
-
 function radToDeg(r) {
   return r / Math.PI * 180
 }

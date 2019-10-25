@@ -1,26 +1,26 @@
-export default function setObject(l, scene) {
+export default function setObject(l, level) {
 
-  let scenes
+  let levels
 
   this.objects = []
 
-  scenes = scene.split('::')
+  levels = level.split('::')
 
   for (let t of l) {
 
-    scene = scenes[0]
+    level = levels[0]
 
-    for (let i = 0, I = scenes.length; i < I; i++) {
+    for (let i = 0, I = levels.length; i < I; i++) {
 
       if (
-        t.scene === scene ||
-        t.scene === 'anywhere' ||
+        t.level === level ||
+        t.level === 'anywhere' ||
         t.type === 'sprite' ||
         t.animationset.__length
       ) {
 
         t.__setPhysicsFreeze(false)
-        t.__setPhysicsActive('scene', true)
+        t.__setPhysicsActive('level', true)
         t.__setAudioMute(false)
 
         this.objects.push(t)
@@ -28,14 +28,14 @@ export default function setObject(l, scene) {
 
       } else {
 
-        t.__setPhysicsActive('scene', false)
+        t.__setPhysicsActive('level', false)
         t.__setPhysicsFreeze(true)
         t.__setAudioMute(true)
 
       }
 
-      if (scene[i + 1] !== undefined) {
-        scene += '::' + scenes[i + 1]
+      if (level[i + 1] !== undefined) {
+        level += '::' + levels[i + 1]
       }
 
     }

@@ -1,3 +1,8 @@
+/**
+ * @description
+ * Returns the gravity information of the world
+ * @returns {Object} x, y
+ */
 export default function getGravity() {
 
   let gravity

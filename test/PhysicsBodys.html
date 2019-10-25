@@ -17,6 +17,10 @@
     <button onclick="lve('*').findClass('square').css('verticalAlign', 'middle')">Vertical Align - Middle</button>
     <button onclick="lve('*').findClass('square').css('verticalAlign', 'bottom')">Vertical Align - Bottom</button>
   </div>
+  <div>
+      <button onclick="colliderB.destroy()">Destroy collider between squares</button>
+    <button onclick="colliderA.destroy()">Destroy collider between square and ground</button>
+  </div>
   <script type="text/javascript">
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min
@@ -25,6 +29,10 @@
   <script type="text/javascript">
 
     const lve = new LveJS
+    let collider
+
+    colliderA = lve.createCollider('ground', 'square')
+    colliderB = lve.createCollider('square')
     
     lve('camera').create({
       type: 'camera'
@@ -47,7 +55,7 @@
       height: 100,
       color: '#ddd',
       verticalAlign: 'bottom'
-    })
+    }).addClass('ground')
 
     for (let i = 0; i < 100; i++) {
 
@@ -77,6 +85,7 @@
       }).addClass('square')
 
     }
+
   </script>
 </body>
 

@@ -16,18 +16,34 @@ function getContactObjects(B, ptr) {
 
 function checkCollisionAble(a, b) {
 
-  let r = true
+  let r = false
 
-  if (!(a.__system__.physics.active && b.__system__.physics.active)) {
-    r = false
-  }
+  for (let collider of this.colliders) {
 
-  if (a.style.perspective !== b.style.perspective) {
-    r = false
-  }
+    // 객체 a, b 가 각자 classA, classB 를 소유하고 있을 경우
+    r =
+      a.hasClass(collider.a) && b.hasClass(collider.b) ||
+      a.hasClass(collider.b) && b.hasClass(collider.a)
 
-  if (a.style.position !== b.style.position) {
-    r = false
+    // 소유하지 않았을 경우 다음 콜리더 확인
+    if (!r) continue
+
+    // 소유하고 있을 경우 아래 조건을 충족해야함
+    if (!(a.__system__.physics.active && b.__system__.physics.active)) {
+      r = false
+      break
+    }
+
+    if (a.style.position !== b.style.position) {
+      r = false
+      break
+    }
+
+    // 모든 조건을 충족하였을 경우, 콜리더 콜백 함수를 실행하고 탐색 종료
+    r = true
+    collider.callback(a, b)
+    break
+
   }
 
   return r
@@ -44,6 +60,8 @@ export default function getContactListener() {
   B = this.box2d
   m = this.map
   r = new B.JSContactListener
+
+  checkCollisionAble = checkCollisionAble.bind(this)
 
   r.BeginContact = function (ptr) {
 

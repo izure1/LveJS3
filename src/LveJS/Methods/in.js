@@ -1,5 +1,5 @@
 import each from './each'
-import getSceneObj from '../Helpers/getSceneObj'
+import getLevelObj from '../Helpers/getLevelObj'
 import {
   removeDuplicate
 } from '../Utils/array'
@@ -27,9 +27,7 @@ export default function In(u, a = false) {
   if (a) {
 
     each.call(this, function () {
-
-      u.push(this.scene)
-
+      u.push(this.level)
     })
 
   }
@@ -38,7 +36,7 @@ export default function In(u, a = false) {
 
   for (let t of u) {
 
-    r = [...r, ...getSceneObj.call(this.context, t)]
+    r = [...r, ...getLevelObj.call(this.context, t)]
 
   }
 

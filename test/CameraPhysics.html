@@ -31,11 +31,15 @@
       type: 'camera'
     }).css({
       bottom: 500
-    }).use()
+    }).use().addClass('camera')
 
     lve.init({
       canvas: '#test'
     })
+
+    lve.createCollider('camera-ground', 'camera')
+    lve.createCollider('ground', 'square')
+    lve.createCollider('square')
 
     lve('ground').create({
       type: 'square'
@@ -44,7 +48,7 @@
       height: 100,
       color: '#ddd',
       verticalAlign: 'bottom'
-    })
+    }).addClass('ground')
 
     lve('camera-ground').create({
       type: 'square'
@@ -53,7 +57,7 @@
       height: 100,
       verticalAlign: 'bottom',
       perspective: 0
-    })
+    }).addClass('camera-ground')
 
     for (let i = 0; i < 100; i++) {
 

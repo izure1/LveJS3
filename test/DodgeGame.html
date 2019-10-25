@@ -154,6 +154,9 @@
       backgroundColor: '#252525'
     })
 
+    lve.createCollider('ball', 'character')
+    lve.createCollider('block', 'character')
+
     lve('camera').create({
       type: 'camera'
     }).css('bottom', 400).use()
@@ -168,7 +171,7 @@
     }).attr({
       physics: 'static',
       friction: 0.2
-    })
+    }).addClass('block')
 
     lve('deathline').create({
       type: 'square'
@@ -179,7 +182,7 @@
       verticalAlign: 'bottom'
     }).attr({
       physics: 'static'
-    })
+    }).addClass('block')
 
     lve('wall-left').create({
       type: 'square'
@@ -191,7 +194,7 @@
     }).attr({
       physics: 'static',
       restitution: 1.2
-    }).addClass('wall')
+    }).addClass('block')
 
     lve('wall-right').create({
       type: 'square'
@@ -203,7 +206,7 @@
     }).attr({
       physics: 'static',
       restitution: 1.2
-    }).addClass('wall')
+    }).addClass('block')
 
     lve('score').create({
       type: 'text',

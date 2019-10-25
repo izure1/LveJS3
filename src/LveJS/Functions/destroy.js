@@ -1,6 +1,12 @@
 import HANDLERS from '../Managers/Listener/Vars/HANDLERS'
 
 
+/**
+ * 
+ * @description
+ * Destroy the current world completely
+ * 
+ */
 export default function destroy() {
 
   // 캔버스에 할당된 이벤트리스너를 제거합니다

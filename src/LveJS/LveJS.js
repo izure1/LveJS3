@@ -52,6 +52,9 @@ import FnIsFullScreen from './Functions/isFullScreen'
 import FnCalc from './Functions/calc'
 import FnCalcRatio from './Functions/calcRatio'
 import FnLoadAsset from './Functions/loadAsset'
+import FnGetAsset from './Functions/getAsset'
+import FnCreateCollider from './Functions/createCollider'
+import FnGetColliders from './Functions/getColliders'
 
 
 function LveJS() {
@@ -119,6 +122,9 @@ function LveJS() {
   this.lve.calc = FnCalc.bind(this)
   this.lve.calcRatio = FnCalcRatio.bind(this)
   this.lve.loadAsset = FnLoadAsset.bind(this)
+  this.lve.getAsset = FnGetAsset.bind(this)
+  this.lve.createCollider = FnCreateCollider.bind(this)
+  this.lve.getColliders = FnGetColliders.bind(this)
 
   this.lve.current = FnCurrent.call(this)
 
@@ -133,7 +139,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '3.6.11'
+        return '4.0.0'
       }
     },
 

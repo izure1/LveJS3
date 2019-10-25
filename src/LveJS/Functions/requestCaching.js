@@ -8,7 +8,7 @@ export default function requestCaching(f = false) {
   }
 
   if (f) {
-    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene)
+    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.level)
     this.suppressJob.clear('requestCaching')
     return this.lve
   }
@@ -19,7 +19,7 @@ export default function requestCaching(f = false) {
       return
     }
 
-    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.scene)
+    this.renderer.setObject(this.hashTable.select(), this.renderer.camera.level)
 
   }, this.renderer.setting.cacheLevel)
 

@@ -13,7 +13,7 @@ export default function () {
   this.className = ''
   this.text = ''
   this.src = ''
-  this.scene = 'main'
+  this.level = 'main'
   this.sprite_stage = 0
   this.sprite_fps = 0
   this.sprite_playing = 0

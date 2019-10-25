@@ -1,6 +1,3 @@
-'use strict'
-
-
 class LveJSEvent {
 
   constructor(e, target = null) {

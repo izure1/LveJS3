@@ -1,4 +1,4 @@
-import getSceneObj from './Helpers/getSceneObj'
+import getLevelObj from './Helpers/getLevelObj'
 import instanceOf from './Functions/instanceof'
 
 
@@ -24,14 +24,14 @@ export default function LveQuery(u) {
               r = this.hashTable.select()
               break
             }
-          case '[USING_SCENE]':
+          case '[CURRENT_LEVEL]':
             {
-              r = getSceneObj.call(this.hashTable.select(), camera.scene)
+              r = getLevelObj.call(this.hashTable.select(), camera.level)
               break
             }
-          case '[using_scene]':
+          case '[current_level]':
             {
-              r = getSceneObj.call(this.hashTable.select(), camera.scene)
+              r = getLevelObj.call(this.hashTable.select(), camera.level)
               break
             }
           case '[USING_CAMERA]':

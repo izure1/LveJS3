@@ -20,6 +20,13 @@ function setScene(u) {
 }
 
 
+/**
+ * 
+ * @param {LveJSObject} u  Camera
+ * @param {Object} o  Information (width, height, type (file extensions), quality (0 ~ 1), scale(0 ~ 1))
+ * @description
+ * Capture the screen that the camera object is looking at
+ */
 export default function capture(u = lve.current.camera, o = {}) {
 
   let r

@@ -92,7 +92,7 @@ handler.text = function (p, v, t) {
 
 }
 
-handler.scene = function (p, v, t) {
+handler.level = function (p, v, t) {
 
   this.__system__.world.lve.requestCaching()
   return v

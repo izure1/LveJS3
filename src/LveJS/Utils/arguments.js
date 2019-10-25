@@ -1,5 +1,3 @@
-'use strict'
-
 function getProperties(t = Object.keys(this)) {
 
   let r = {}

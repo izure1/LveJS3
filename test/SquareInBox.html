@@ -20,6 +20,8 @@
   <script type="text/javascript">
     const lve = new LveJS
 
+    lve.createCollider('wall', 'square')
+
     lve('camera').create({
       type: 'camera'
     }).css({
@@ -60,7 +62,7 @@
       height: 50,
       color: '#ddd',
       verticalAlign: 'bottom'
-    })
+    }).addClass('wall')
 
     lve('wall-left').create({
       type: 'square'
@@ -96,7 +98,7 @@
       height: 50,
       color: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`,
       cursor: 'pointer'
-    })
+    }).addClass('square')
 
     lve('text').create({
       type: 'text',

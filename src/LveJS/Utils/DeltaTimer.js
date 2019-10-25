@@ -1,7 +1,3 @@
-'use strict'
-
-
-
 function DeltaTimer() {
 
   this.start = null

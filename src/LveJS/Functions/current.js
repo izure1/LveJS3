@@ -1,3 +1,7 @@
+/**
+ * @description 
+ * Returns the information of the current world
+ */
 export default function current() {
 
   let t = this
