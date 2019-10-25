@@ -22,6 +22,7 @@ export default [
   'play',
   'pause',
   'ended',
+  'timeupdate',
   'addclass',
   'removeclass',
   'measuretext',

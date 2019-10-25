@@ -162,7 +162,7 @@ handler.left = handler.bottom = handler.perspective = function (p, v) {
 
     if (!t) continue
 
-    t.__followUpdate(p, v)
+    t.__followUpdate(p, v, this)
 
   }
 

@@ -2,6 +2,15 @@ import setHiddenContext from '../Utils/setHiddenContext'
 import ready from '../Utils/domReady'
 
 
+
+function setAudioContext(props) {
+
+  for (let p in props) {
+    this[p] = props[p]
+  }
+  
+}
+
 export default function __setElementEvent() {
 
   if (!(this.element instanceof HTMLElement)) {
@@ -31,10 +40,17 @@ export default function __setElementEvent() {
   this.element.addEventListener('error', () => {
     this.emit('error')
   })
+  
+  this.element.addEventListener('timeupdate', () => {
+    this.emit('timeupdate')
+  })
 
   setHiddenContext.call(this.element, '__setElementEvent', true)
   ready.call(this.element, () => {
+
     setHiddenContext.call(this.element, '__isLoaded', true)
+    setAudioContext.call(this.element, this.__system__.audio.setting)
+
   })
 
   return this

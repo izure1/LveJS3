@@ -8,6 +8,6 @@ export default function following() {
     return this
   }
 
-  return this.__system__.world.hashTable.select(t.followset.following)
+  return this.__system__.world.hashTable.select(t.followset.following).pop()
 
 }

@@ -10,5 +10,11 @@ handler.ended = function () {
 
 }
 
+handler.timeupdate = function () {
+
+  this.__system__.audio.setting.currentTime = this.element.currentTime
+
+}
+
 
 export default handler
