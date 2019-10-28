@@ -30,54 +30,52 @@ function getGradient(c, g, p, r, w, h, x, y, f = 0) {
   let grd
 
   switch (p) {
-    case 'linear':
-      {
-        let x1, x2, y1, y2
+    case 'linear': {
+      let x1, x2, y1, y2
 
-        if (0 <= r && r < 45) {
-          x1 = 0
-          y1 = h / 2 * (45 - r) / 45
-          x2 = w
-          y2 = h - y1
-        } else if ((45 <= r && r < 135)) {
-          x1 = w * (r - 45) / (135 - 45)
-          y1 = 0
-          x2 = w - x1
-          y2 = h
-        } else if ((135 <= r && r < 225)) {
-          x1 = w
-          y1 = h * (r - 135) / (225 - 135)
-          x2 = 0
-          y2 = h - y1
-        } else if ((225 <= r && r < 315)) {
-          x1 = w * (1 - (r - 225) / (315 - 225))
-          y1 = h
-          x2 = w - x1
-          y2 = 0
-        } else if (315 <= r) {
-          x1 = 0
-          y1 = h - h / 2 * (r - 315) / (360 - 315)
-          x2 = w
-          y2 = h - y1
-        }
-
-        grd = c.createLinearGradient(x1 + x + f, y1 + y, x2 + x + f, y2 + y)
-        break
+      if (0 <= r && r < 45) {
+        x1 = 0
+        y1 = h / 2 * (45 - r) / 45
+        x2 = w
+        y2 = h - y1
+      } else if ((45 <= r && r < 135)) {
+        x1 = w * (r - 45) / (135 - 45)
+        y1 = 0
+        x2 = w - x1
+        y2 = h
+      } else if ((135 <= r && r < 225)) {
+        x1 = w
+        y1 = h * (r - 135) / (225 - 135)
+        x2 = 0
+        y2 = h - y1
+      } else if ((225 <= r && r < 315)) {
+        x1 = w * (1 - (r - 225) / (315 - 225))
+        y1 = h
+        x2 = w - x1
+        y2 = 0
+      } else if (315 <= r) {
+        x1 = 0
+        y1 = h - h / 2 * (r - 315) / (360 - 315)
+        x2 = w
+        y2 = h - y1
       }
-    case 'radial':
-      {
-        let hw, hh
-        let lx, ly
 
-        hw = w / 2
-        hh = h / 2
+      grd = c.createLinearGradient(x1 + x + f, y1 + y, x2 + x + f, y2 + y)
+      break
+    }
+    case 'radial': {
+      let hw, hh
+      let lx, ly
 
-        lx = x + hw + f,
+      hw = w / 2
+      hh = h / 2
+
+      lx = x + hw + f,
         ly = y + hh
 
-        grd = c.createRadialGradient(lx, ly, 0, lx, ly, hw)
-        break
-      }
+      grd = c.createRadialGradient(lx, ly, 0, lx, ly, hw)
+      break
+    }
   }
 
   let pos
@@ -113,25 +111,23 @@ getGradient.getTextAxis = function (tw, p, w, align = 'center') {
 
   switch (align) {
 
-    case 'left':
-      {
-        if (p === 'linear') {
-          r = tw / 2
-        } else {
-          r = -(w / 2) + (tw / 2)
-        }
-        break
+    case 'left': {
+      if (p === 'linear') {
+        r = tw / 2
+      } else {
+        r = -(w / 2) + (tw / 2)
       }
+      break
+    }
 
-    case 'right':
-      {
-        if (p === 'linear') {
-          r = -tw / 2
-        } else {
-          r = (w / 2) - (tw / 2)
-        }
-        break
+    case 'right': {
+      if (p === 'linear') {
+        r = -tw / 2
+      } else {
+        r = (w / 2) - (tw / 2)
       }
+      break
+    }
 
   }
 
@@ -270,12 +266,30 @@ function setRotate(c, w, h, x, y, r = 0, rx = 0.5, ry = 1, ar = 0) {
 
 /**
  * 
- * @param {HTMlCanvasElement} c Canvas context
+ * @param {HTMLCanvasElement} c Canvas context
  * @param {Number} v Blur (pixel)
  */
 function setBlur(c, v) {
 
-  c.filter = ~~v ? `blur(${v}px)` : 'none'
+  v = ~~v ? `blur(${v}px)` : 'none'
+
+  if (c.filter !== v) {
+    c.filter = v
+  }
+
+}
+
+
+/**
+ * 
+ * @param {HTMLCanvasElement} c  Canvas context
+ * @param {*} v  blend mode (https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
+ */
+function setBlendMode(c, v) {
+
+  if (c.globalCompositeOperation !== v) {
+    c.globalCompositeOperation = v
+  }
 
 }
 
@@ -1033,6 +1047,7 @@ export {
   setRotate,
   setAlpha,
   setBlur,
+  setBlendMode,
   borderCircle,
   borderSquare,
   borderText,

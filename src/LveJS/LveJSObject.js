@@ -70,6 +70,7 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob)
   setHiddenContext.call(this.__system__, 'transition', new LveJSTransition)
 
+  this.__system__.ghost = false
   this.__system__.sprite.interval = 0
   this.__system__.sprite.duration = 0
   this.__system__.position.x = 0

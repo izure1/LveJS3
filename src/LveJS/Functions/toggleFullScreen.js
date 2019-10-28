@@ -6,7 +6,7 @@ export default function toggleFullScreen() {
 
   domReady.call(document, async () => {
 
-    if (screenfull.enabled) {
+    if (screenfull.isEnabled) {
       screenfull.toggle(this.canvas)
     }
 

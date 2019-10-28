@@ -8,6 +8,7 @@ import {
   setRotate,
   setAlpha,
   setBlur,
+  setBlendMode,
   borderCircle,
   borderSquare,
   borderText,
@@ -111,6 +112,10 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
   sy = tStyle.shadowOffsetY * s
 
   setShadow(canvas, sb, sc, sx, sy)
+
+
+  // 블렌드 모드를 지정합니다
+  setBlendMode(canvas, tStyle.blendMode)
 
 
   // 회전각도를 지정합니다

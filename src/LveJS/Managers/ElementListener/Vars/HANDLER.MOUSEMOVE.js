@@ -1,14 +1,14 @@
 import LveJSMouseEvent from '../../../LveJSMouseEvent'
 
 
-export default function (e) {
+export default function (e, cb) {
 
   let t
 
   this.suppressJob.set('mousemove_duration', () => {
 
     t = new LveJSMouseEvent('mousemove', e)
-    this.worldQuery(t)
+    cb(t)
 
   }, this.setting.delay, this.setting.limit)
 

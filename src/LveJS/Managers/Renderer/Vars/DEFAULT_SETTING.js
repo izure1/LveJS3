@@ -6,6 +6,7 @@ export default function () {
   this.width = undefined
   this.height = undefined
   this.backgroundColor = 'white'
+  this.defaultCamera = 'camera'
   this.maxSight = undefined
   this.minSize = 0.35
   this.cacheLevel = 1

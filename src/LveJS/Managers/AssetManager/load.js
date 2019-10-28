@@ -4,17 +4,27 @@ import path from 'path'
 function loaded(resolveSrc, blob, resolve, cb) {
 
   this.loading.delete(resolveSrc)
-  this.map.set(resolveSrc, blob)
 
-  resolve(blob)
-  cb(resolveSrc, blob)
+  if (blob !== null) {
+
+    this.map.set(resolveSrc, blob)
+    this.emit('load')
+    
+    resolve(blob)
+    cb(resolveSrc, blob)
+
+  }
+
+  if (this.isReady()) {
+    this.emit('finish')
+  }
 
 }
 
 
 export default function load(src, cb = function () {}) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
 
     let xml, resolveSrc, blob
     let self
@@ -41,7 +51,7 @@ export default function load(src, cb = function () {}) {
     xml.onload = function (e) {
 
       if (this.status !== 200) {
-        resolve(null)
+        loaded.call(self, resolveSrc, null, resolve, cb)
         return
       }
 
@@ -52,7 +62,7 @@ export default function load(src, cb = function () {}) {
 
     }
     xml.onabort = xml.onerror = function (e) {
-      resolve(null)
+      loaded.call(self, resolveSrc, null, resolve, cb)
     }
     xml.responseType = 'blob'
     xml.send(null)

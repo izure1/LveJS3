@@ -1,3 +1,5 @@
+import keycode from 'keycode'
+
 import domReady from '../Utils/domReady'
 import worldQuery from '../Helpers/worldQuery'
 
@@ -45,39 +47,80 @@ export default function init(o) {
 
       this.renderer.resize()
 
+      // Create default camera
+      let defaultCamera = this.renderer.setting.defaultCamera
+      if (defaultCamera && !this.renderer.isStart && !this.lve.exists(defaultCamera)) {
+
+        if (defaultCamera) this.lve(defaultCamera).create({
+          type: 'camera'
+        }).use()
+
+      }
+
+      
       if (!this.renderer.isStart) this.renderer.start()
       if (!this.physics.isStart) this.physics.start()
       if (!this.animator.isStart) this.animator.start()
 
 
-      if (!this.listener.inited) {
+      if (this.keyboardListener.isNotInited) {
 
-        this.listener.init(c, worldQuery.bind(this))
+        this.keyboardListener.initKeys(keycode.codes)
+        this.keyboardListener.init(window)
 
-        // mobile events
-        this.listener.addListener('touchstart')
-        this.listener.addListener('touchend')
-        this.listener.addListener('touchmove')
-
-        // pc events
-        this.listener.addListener('mousemove')
-        this.listener.addListener('mousedown')
-        this.listener.addListener('mouseup')
-        this.listener.addListener('click')
-        this.listener.addListener('dblclick')
-        this.listener.addListener('contextmenu')
+        this.keyboardListener.addListener('keydown', this.keyboardListener.pressKey)
+        this.keyboardListener.addListener('keyup', this.keyboardListener.releaseKey)
 
       }
 
-      if (!this.observer.inited) {
+      if (this.mouseListener.isNotInited) {
+
+        let keys = {
+          LEFT: 1,
+          WHEEL: 2,
+          RIGHT: 3
+        }
+
+        this.mouseListener.initKeys(keys)
+        this.mouseListener.init(window)
+
+        this.mouseListener.addListener('mousedown', this.mouseListener.pressKey)
+        this.mouseListener.addListener('mouseup', this.mouseListener.releaseKey)
+        this.mouseListener.addListener('touchstart', this.mouseListener.pressKey)
+        this.mouseListener.addListener('touchend', this.mouseListener.releaseKey)
+
+      }
+
+      if (this.canvasListener.isNotInited) {
+
+        let cb = worldQuery.bind(this)
+
+        this.canvasListener.init(c)
+
+        // mobile events
+        this.canvasListener.addListener('touchstart', cb)
+        this.canvasListener.addListener('touchend', cb)
+        this.canvasListener.addListener('touchmove', cb)
+
+        // pc events
+        this.canvasListener.addListener('mousemove', cb)
+        this.canvasListener.addListener('mousedown', cb)
+        this.canvasListener.addListener('mouseup', cb)
+        this.canvasListener.addListener('click', cb)
+        this.canvasListener.addListener('dblclick', cb)
+        this.canvasListener.addListener('contextmenu', cb)
+
+      }
+
+      if (this.canvasObserver.isNotInited) {
 
         const sizeObserve = {
           attributes: true
         }
 
-        // 캔버스에 특정 요소가 변경되었을 때, 이를 감지하고 싶으면 this.observer.observe 메서드를 사용합니다.
-        this.observer.init(c)
-        this.observer.observe('change-size', sizeObserve, e => {
+        // 캔버스에 특정 요소가 변경되었을 때, 이를 감지하고 싶으면 this.canvasObserver.observe 메서드를 사용합니다.
+        this.canvasObserver.init(c)
+        this.canvasObserver.observe('change-size', sizeObserve, e => {
 
           let p = e.attributeName
 

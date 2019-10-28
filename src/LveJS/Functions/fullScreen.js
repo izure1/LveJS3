@@ -6,7 +6,7 @@ export default function fullScreen() {
 
   domReady.call(document, async () => {
 
-    if (screenfull.enabled) {
+    if (screenfull.isEnabled) {
       screenfull.request(this.canvas)
     }
 

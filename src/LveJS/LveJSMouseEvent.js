@@ -10,8 +10,10 @@ function LveJSMouseEvent(e, c) {
   s1 = getProperties.call(s1)
   s2 = getProperties.call(c)
 
-  r = Object.assign({}, s1, s2)
-  r = new MouseEvent(e, r)
+  r = new MouseEvent(e, {
+    ...s1,
+    ...s2
+  })
 
   Object.defineProperties(r, {
     target: {

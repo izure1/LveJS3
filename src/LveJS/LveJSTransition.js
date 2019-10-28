@@ -7,6 +7,8 @@ class LveJSTransition {
 
     this[name] = {
       running: false,
+      callback: null,
+      delay: 0,
       easing: 'linear',
       runtime: 0,
       duration: 0,
@@ -19,7 +21,7 @@ class LveJSTransition {
 
   }
 
-  run(name, start, end, duration, easing) {
+  run(name, start, end, duration, easing = 'linear', delay = 0, callback = function () {}) {
 
     this.init(name)
 
@@ -28,6 +30,8 @@ class LveJSTransition {
     t = this[name]
 
     t.running = true
+    t.runtime = -delay
+    t.callback = callback
     t.start = start
     t.end = end
     t.duration = duration
@@ -65,29 +69,33 @@ class LveJSTransition {
 
   }
 
-  update(runtime = 0) {
+  update(interval = 0) {
 
     let t
-    let d
+    let done
+    let runtime
 
     for (let name in this) {
 
       t = this[name]
+      done = false
 
       if (!t.running) {
         continue
       }
 
-      t.runtime += runtime
+      t.runtime += interval
+      runtime = t.runtime > 0 ? t.runtime : 0
 
       if (t.runtime > t.duration) {
         t.runtime = t.duration
-        d = true
+        done = true
       }
 
-      t.opacity = easing(t.easing, t.runtime, t.start, t.end - t.start, t.duration)
+      t.opacity = easing(t.easing, runtime, t.start, t.end - t.start, t.duration)
 
-      if (d) {
+      if (done) {
+        this.runCallback(name)
         this.init(name)
       }
 
@@ -115,6 +123,18 @@ class LveJSTransition {
     }
 
     return opacity
+
+  }
+
+  runCallback(name) {
+
+    let t = this[name]
+
+    if (typeof t.callback !== 'function') {
+      return
+    }
+
+    t.callback()
 
   }
 

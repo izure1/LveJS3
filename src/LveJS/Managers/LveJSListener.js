@@ -1,31 +1,44 @@
-import SuppressJob from '../Utils/SuppressJob'
-
-import addListener from './Listener/addListener'
-import removeListener from './Listener/removeListener'
-import init from './Listener/init'
-
-import SETTING from './Listener/Vars/SETTING'
-
-
 class LveJSListener {
 
   constructor() {
 
     this.inited = false
-    this.canvas = null
-    this.worldQuery = null
-    this.handlers = {}
-    this.setting = new SETTING
-    this.suppressJob = new SuppressJob
-    
+    this.handler = new Map
+    this.element = null
+    this.destroyCallback = null
+
+  }
+
+  init(element = null) {
+
+    this.inited = true
+    this.element = element
+
+  }
+
+  destroy() {
+
+    if (typeof this.clean === 'function') {
+
+      let entries
+
+      entries = this.handler.entries()
+      entries = Array.from(entries)
+
+      this.clean(entries)
+
+    }
+
+    this.handler.clear()
+    this.element = null
+
+  }
+
+  get isNotInited() {
+    return !this.inited
   }
 
 }
-
-
-LveJSListener.prototype.init = init
-LveJSListener.prototype.addListener = addListener
-LveJSListener.prototype.removeListener = removeListener
 
 
 export default LveJSListener

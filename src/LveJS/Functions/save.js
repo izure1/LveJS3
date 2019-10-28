@@ -11,14 +11,22 @@ function getPhysicsSetting() {
 }
 
 function getObjects() {
+
   let array = []
-  for (let t of this.renderer.objects) {
+
+  for (let t of this.renderer.objects.filter(t => !t.__system__.ghost)) {
+
     delete t.element
-    array.push(Object.assign({
-      name: t.name
-    }, t))
+
+    array.push({
+      name: t.name,
+      ...t
+    })
+
   }
+
   return array
+
 }
 
 

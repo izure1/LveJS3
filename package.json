@@ -2,7 +2,7 @@
   "name": "lve",
   "title": "LveJS",
   "description": "Light visualnovel Engine",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "main": "dist/LveJS.js",
   "homepage": "https://github.com/izure1/LveJS3",
   "author": {
@@ -14,8 +14,9 @@
     "url": "https://github.com/izure1/LveJS3"
   },
   "dependencies": {
-    "d3-color": "^1.4.3",
+    "d3-color": "^1.4.0",
     "screenfull": "^5.0.0",
+    "keycode": "^2.2.0",
     "@babel/polyfill": "7.6.0"
   },
   "devDependencies": {

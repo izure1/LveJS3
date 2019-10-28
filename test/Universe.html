@@ -21,9 +21,7 @@
         backgroundColor: 'black'
       })
 
-      lve('camera').create({
-        type: 'camera'
-      }).animate({
+      lve('camera').animate({
         perspective: 30000
       }, 20000).use()
     }
@@ -42,11 +40,11 @@
         persp = Math.random() * 30000
 
         lve(`star_${i}`).create({
-          type: 'circle'
+          type: 'image',
+          src: './image/star.png'
         }).css({
-          width: 100,
-          height: 100,
-          color: 'white',
+          width: 200,
+          height: 200,
           left: left,
           bottom: bottom,
           perspective: persp

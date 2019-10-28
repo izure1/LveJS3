@@ -27,15 +27,16 @@
   <script type="text/javascript">
     const lve = new LveJS
 
+    lve.init({
+      canvas: '#test',
+      defaultCamera: null
+    })
+
     lve('camera').create({
       type: 'camera'
     }).css({
       bottom: 500
     }).use().addClass('camera')
-
-    lve.init({
-      canvas: '#test'
-    })
 
     lve.createCollider('camera-ground', 'camera')
     lve.createCollider('ground', 'square')

@@ -14,6 +14,7 @@ export default function clearFrame(l) {
   w = c.canvas.width
   h = c.canvas.height
 
+  c.globalCompositeOperation = 'source-over'
   c.globalAlpha = 1
   c.fillStyle = l
 

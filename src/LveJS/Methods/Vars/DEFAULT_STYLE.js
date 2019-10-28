@@ -31,6 +31,7 @@ export default function () {
   this.marginRight = 0
   this.marginTop = 0
   this.marginBottom = 0
+  this.blendMode = 'source-over' // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
 
   Object.assign(this, DEFAULT_STYLE_CONTSTANT)
 

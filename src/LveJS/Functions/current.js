@@ -32,6 +32,14 @@ export default function current() {
       return t.version
     },
 
+    get keyboard() {
+      return t.keyboardListener.keys
+    },
+
+    get mouse() {
+      return t.mouseListener.keys
+    },
+
     get world() {
       return t
     }

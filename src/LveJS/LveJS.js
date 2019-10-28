@@ -7,10 +7,11 @@ import LveJSHashTable from './Managers/LveJSHashTable'
 import LveJSRenderer from './Managers/LveJSRenderer'
 import LveJSPhysics from './Managers/LveJSPhysics'
 import LveJSEmitter from './Managers/LveJSEmitter'
-import LveJSListener from './Managers/LveJSListener'
-import LveJSObserver from './Managers/LveJSObserver'
+import LveJSElementListener from './Managers/LveJSElementListener'
+import LveJSElementObserver from './Managers/LveJSElementObserver'
 import LveJSAnimator from './Managers/LveJSAnimator'
 import LveJSAssetManager from './Managers/LveJSAssetManager'
+import LveJSInputListener from './Managers/LveJSInputListener'
 import LveJSCache from './Managers/LveJSCache'
 
 import LveQuery from './LveQuery'
@@ -55,6 +56,7 @@ import FnLoadAsset from './Functions/loadAsset'
 import FnGetAsset from './Functions/getAsset'
 import FnCreateCollider from './Functions/createCollider'
 import FnGetColliders from './Functions/getColliders'
+import FnExists from './Functions/exists'
 
 
 function LveJS() {
@@ -62,10 +64,12 @@ function LveJS() {
   this.renderer = new LveJSRenderer
   this.physics = new LveJSPhysics
   this.emitter = new LveJSEmitter
-  this.listener = new LveJSListener
-  this.observer = new LveJSObserver
+  this.canvasListener = new LveJSElementListener
+  this.canvasObserver = new LveJSElementObserver
   this.animator = new LveJSAnimator
   this.assetManager = new LveJSAssetManager
+  this.keyboardListener = new LveJSInputListener
+  this.mouseListener = new LveJSInputListener
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
@@ -125,6 +129,7 @@ function LveJS() {
   this.lve.getAsset = FnGetAsset.bind(this)
   this.lve.createCollider = FnCreateCollider.bind(this)
   this.lve.getColliders = FnGetColliders.bind(this)
+  this.lve.exists = FnExists.bind(this)
 
   this.lve.current = FnCurrent.call(this)
 
@@ -139,7 +144,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '4.0.0'
+        return '4.1.0'
       }
     },
 

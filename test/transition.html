@@ -16,9 +16,7 @@
   </div>
   <script type="text/javascript">
     function transformIt() {
-
-      lve('image').transition('./image/transition_after.png', 3000, 'linear')
-
+      lve('image').transition(lve.getAsset('./image/transition_after.png'), 3000, 'linear')
     }
 
     function moveIt() {
@@ -28,24 +26,26 @@
         scale: 2,
         rotate: 45
       }, 3000)
+
     }
 
     const lve = new LveJS
 
-    lve('image').create({
-      type: 'image',
-      src: './image/transition_before.png'
-    }).css({
-      height: 400,
-      verticalAlign: 'middle'
-    })
-
-    lve('camera').create({
-      type: 'camera'
-    }).use();
-
     lve.init({
       canvas: '#test'
+    }).loadAsset([
+      './image/transition_before.png',
+      './image/transition_after.png'
+    ]).ready(() => {
+
+      lve('image').create({
+        type: 'image',
+        src: lve.getAsset('./image/transition_before.png')
+      }).css({
+        height: 400,
+        verticalAlign: 'middle'
+      })
+
     })
   </script>
 </body>

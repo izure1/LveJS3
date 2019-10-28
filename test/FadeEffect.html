@@ -16,32 +16,26 @@
   </div>
   <script type="text/javascript">
     function fadeIn() {
-
       lve('image').fadeIn(1000, 'linear')
-
     }
 
     function fadeOut() {
-
       lve('image').fadeOut(1000, 'linear')
-
     }
 
     const lve = new LveJS
 
-    lve('image').create({
-      type: 'image',
-      src: './image/logo.png'
-    }).css({
-      verticalAlign: 'middle'
-    })
-
-    lve('camera').create({
-      type: 'camera'
-    }).use()
-
     lve.init({
       canvas: '#test'
+    }).loadAsset('./image/logo.png').ready(() => {
+
+      lve('image').create({
+        type: 'image',
+        src: lve.getAsset('./image/logo.png')
+      }).css({
+        verticalAlign: 'middle'
+      })
+
     })
   </script>
 </body>

@@ -1,11 +1,11 @@
 import LveJSMouseEvent from '../../../LveJSMouseEvent'
 
 
-export default function (e) {
+export default function (e, cb) {
 
   let t
   
   t = new LveJSMouseEvent('mouseup', e)
-  this.worldQuery(t)
+  cb(t)
 
 }

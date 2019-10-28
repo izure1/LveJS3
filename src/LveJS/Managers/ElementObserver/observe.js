@@ -8,7 +8,7 @@ export default function observe(u, o, fn) {
 
   let observer
 
-  if (u in this.list) {
+  if (this.handler.has(u)) {
     this.disconnect(u)
   }
 
@@ -20,8 +20,8 @@ export default function observe(u, o, fn) {
 
   })
 
-  observer.observe(this.canvas, o)
-  this.list[u] = observer
+  observer.observe(this.element, o)
+  this.handler.set(u, observer)
 
   return this
 

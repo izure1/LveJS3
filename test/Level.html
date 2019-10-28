@@ -16,30 +16,18 @@
     <button onclick="lve('camera').attr('level', 'another')">another</button>
   </div>
   <script type="text/javascript">
-
     const lve = new LveJS
-
-    lve.on('load', function () {
-      console.log('Video playing!')
-    }).on('error', function () {
-      console.log('Video load failed.')
-    })
-
-    lve('video').create({
-      type: 'video',
-      src: './video/sample.mp4'
-    })
-
-    lve('camera').create({
-      type: 'camera'
-    }).use()
 
     lve.init({
       canvas: '#test'
-    }).ready(function () {
-      lve('video').play()
+    }).loadAsset('./video/sample.mp4').ready(() => {
+
+      lve('video').create({
+        type: 'video',
+        src: lve.getAsset('./video/sample.mp4')
+      }).play()
+      
     })
-    
   </script>
 </body>
 

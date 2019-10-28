@@ -8,6 +8,10 @@ import HANDLER_CLICK from './HANDLER.CLICK'
 import HANDLER_DBLCLICK from './HANDLER.DBLCLICK'
 import HANDLER_CONTEXTMENU from './HANDLER.CONTEXTMENU'
 
+import HANDLER_KEYDOWN from './HANDLER.KEYDOWN'
+import HANDLER_KEYUP from './HANDLER.KEYUP'
+import HANDLER_KEYPRESS from './HANDLER.KEYPRESS'
+
 
 export default {
 
@@ -19,6 +23,10 @@ export default {
   mousemove: HANDLER_MOUSEMOVE,
   click: HANDLER_CLICK,
   dblclick: HANDLER_DBLCLICK,
-  contextmenu: HANDLER_CONTEXTMENU
+  contextmenu: HANDLER_CONTEXTMENU,
+
+  keydown: HANDLER_KEYDOWN,
+  keyup: HANDLER_KEYUP,
+  keypress: HANDLER_KEYPRESS
 
 }

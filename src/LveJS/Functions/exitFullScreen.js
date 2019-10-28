@@ -6,7 +6,7 @@ export default function exitFullScreen() {
 
   domReady.call(document, async () => {
 
-    if (screenfull.enabled) {
+    if (screenfull.isEnabled) {
       screenfull.exit()
     }
 

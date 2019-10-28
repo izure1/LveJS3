@@ -1,4 +1,4 @@
-import HANDLERS from '../Managers/Listener/Vars/HANDLERS'
+import HANDLERS from '../Managers/ElementListener/Vars/HANDLERS'
 
 
 /**
@@ -9,14 +9,15 @@ import HANDLERS from '../Managers/Listener/Vars/HANDLERS'
  */
 export default function destroy() {
 
-  // 캔버스에 할당된 이벤트리스너를 제거합니다
-  for (let p in HANDLERS) {
-    this.listener.removeListener(p)
-  }
+  // 각 리스너에 할당된 이벤트리스너를 제거합니다
+  this.canvasListener.destroy()
+  this.mouseListener.destroy()
+  this.keyboardListener.destroy()
 
   // 캔버스에 할당된 옵저버를 제거합니다
-  for (let p in this.observer.list) {
-    this.observer.disconnect(p)
+  for (let p of this.canvasObserver.handler.keys()) {
+    //this.canvasObserver.disconnect(p)
+    this.canvasObserver.destroy()
   }
 
   // 모든 객체를 삭제합니다

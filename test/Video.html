@@ -15,33 +15,27 @@
     <button onclick="lve('video').pause()">Pause</button>
   </div>
   <script type="text/javascript">
-
     const lve = new LveJS
-
-    lve.on('load', function () {
-      console.log('Video playing!')
-    }).on('error', function () {
-      console.log('Video load failed.')
-    })
-
-    lve('video').create({
-      type: 'video',
-      src: './video/sample.mp4',
-      loop: true
-    }).css({
-      verticalAlign: 'middle',
-      width: '100%',
-      height: '100%'
-    })
-
-    lve('camera').create({
-      type: 'camera'
-    }).use()
 
     lve.init({
       canvas: '#test'
+    }).loadAsset('./video/sample.mp4').ready(() => {
+
+      lve('video').create({
+        type: 'video',
+        src: lve.getAsset('./video/sample.mp4'),
+        loop: true
+      }).css({
+        verticalAlign: 'middle',
+        width: '100%',
+        height: '100%'
+      }).once('load', function () {
+        console.log('Video playing!')
+      }).once('error', function () {
+        console.log('Video load failed.')
+      })
+
     })
-    
   </script>
 </body>
 
