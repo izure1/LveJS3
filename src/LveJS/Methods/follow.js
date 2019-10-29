@@ -1,5 +1,5 @@
 import each from './each'
-import intanceOf from '../Functions/instanceof'
+import instanceOf from '../Functions/instanceof'
 import {
   applyArguments
 } from '../Utils/arguments'
@@ -7,7 +7,6 @@ import {
   removeDuplicate
 } from '../Utils/array'
 import calcValue from '../Helpers/calcValue'
-import instanceOf from '../Functions/instanceof'
 
 
 export default function follow(u, o) {
@@ -23,6 +22,12 @@ export default function follow(u, o) {
 
   if (arguments.length === 1) {
     return t.followset[u]
+  }
+
+  o = o || {
+    left: 0,
+    bottom: 0,
+    perspective: 0,
   }
 
   if (typeof u === 'string') {

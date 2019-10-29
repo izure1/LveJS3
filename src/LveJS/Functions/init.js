@@ -57,7 +57,7 @@ export default function init(o) {
 
       }
 
-      
+
       if (!this.renderer.isStart) this.renderer.start()
       if (!this.physics.isStart) this.physics.start()
       if (!this.animator.isStart) this.animator.start()
@@ -66,7 +66,7 @@ export default function init(o) {
       if (this.keyboardListener.isNotInited) {
 
         this.keyboardListener.initKeys(keycode.codes)
-        this.keyboardListener.init(window)
+        this.keyboardListener.initElement(window)
 
         this.keyboardListener.addListener('keydown', this.keyboardListener.pressKey)
         this.keyboardListener.addListener('keyup', this.keyboardListener.releaseKey)
@@ -82,7 +82,7 @@ export default function init(o) {
         }
 
         this.mouseListener.initKeys(keys)
-        this.mouseListener.init(window)
+        this.mouseListener.initElement(window)
 
         this.mouseListener.addListener('mousedown', this.mouseListener.pressKey)
         this.mouseListener.addListener('mouseup', this.mouseListener.releaseKey)
@@ -95,7 +95,7 @@ export default function init(o) {
 
         let cb = worldQuery.bind(this)
 
-        this.canvasListener.init(c)
+        this.canvasListener.initElement(c)
 
         // mobile events
         this.canvasListener.addListener('touchstart', cb)
@@ -119,7 +119,7 @@ export default function init(o) {
         }
 
         // 캔버스에 특정 요소가 변경되었을 때, 이를 감지하고 싶으면 this.canvasObserver.observe 메서드를 사용합니다.
-        this.canvasObserver.init(c)
+        this.canvasObserver.initElement(c)
         this.canvasObserver.observe('change-size', sizeObserve, e => {
 
           let p = e.attributeName
@@ -137,6 +137,10 @@ export default function init(o) {
 
       }
 
+    }
+
+    if (this.particleEmitter.isNotInited) {
+      this.particleEmitter.initLve(this.lve)
     }
 
     if (!this.cache.inited) {

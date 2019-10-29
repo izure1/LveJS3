@@ -7,13 +7,16 @@ export default function __setPhysicsFixture() {
     return this
   }
 
-  let F, B
-
-  B = this.__system__.physics.body
-  F = getFixture.call(this)
+  let B = this.__system__.physics.body
+  let {
+    F,
+    V
+  } = getFixture.call(this)
 
   B.DestroyFixture(B.GetFixtureList())
+  B.ClearTrash()
   B.CreateFixture(F)
+  B.__vector__ = V
 
   this.__setPhysicsDensity(this.density)
 

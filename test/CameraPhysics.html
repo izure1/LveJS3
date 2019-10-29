@@ -38,7 +38,7 @@
       bottom: 500
     }).use().addClass('camera')
 
-    lve.createCollider('camera-ground', 'camera')
+    lve.createCollider('ground', 'camera')
     lve.createCollider('ground', 'square')
     lve.createCollider('square')
 
@@ -50,15 +50,6 @@
       color: '#ddd',
       verticalAlign: 'bottom'
     }).addClass('ground')
-
-    lve('camera-ground').create({
-      type: 'square'
-    }).attr('physics', 'static').css({
-      width: 1000,
-      height: 100,
-      verticalAlign: 'bottom',
-      perspective: 0
-    }).addClass('camera-ground')
 
     for (let i = 0; i < 100; i++) {
 

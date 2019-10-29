@@ -35,6 +35,7 @@ import MReady from './Methods/ready'
 import MRemove from './Methods/remove'
 import MRemoveClass from './Methods/removeClass'
 import MSprite from './Methods/sprite'
+import MParticle from './Methods/particle'
 import MStop from './Methods/stop'
 import MToggleClass from './Methods/toggleClass'
 import MToString from './Methods/toString'
@@ -130,6 +131,7 @@ LveJSObjectSession.prototype.ready = MReady
 LveJSObjectSession.prototype.remove = MRemove
 LveJSObjectSession.prototype.removeClass = MRemoveClass
 LveJSObjectSession.prototype.sprite = MSprite
+LveJSObjectSession.prototype.particle = MParticle
 LveJSObjectSession.prototype.stop = MStop
 LveJSObjectSession.prototype.toggleClass = MToggleClass
 LveJSObjectSession.prototype.toString = MToString

@@ -37,10 +37,11 @@ VERTEX.fixed = getAABB
  * @param {Number} cameraZ Camera axis z
  * @param {Number} cameraRotate Camera rotation
  * @param {Number} distance Scale distance
+ * @param {Number} interval Rendering interval
  * @param {Number} alpha Alpha color
  * 
  */
-export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, cameraX, cameraY, cameraZ, cameraRotate, distance, canvasScale, alpha = 1) {
+export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, cameraX, cameraY, cameraZ, cameraRotate, distance, canvasScale, interval, alpha = 1) {
 
   let {
     style,
@@ -213,6 +214,12 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
       borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
       image(canvas, this.element, drawWidth, drawHeight, x, y, this.spriteset.current * sprite.width, 0, sprite.width, sprite.height)
+      break
+
+
+    case 'particle':
+
+      this.__generateParticle(interval)
       break
 
   }

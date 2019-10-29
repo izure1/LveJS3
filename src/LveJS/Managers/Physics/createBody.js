@@ -1,3 +1,16 @@
+let bodyDef = null
+
+function getBodyDef(B) {
+
+  if (!bodyDef) {
+    bodyDef = new B.b2BodyDef
+  }
+
+  return bodyDef
+
+}
+
+
 /**
  * 
  * @param {String} t Body Type (static, dynamic)
@@ -14,7 +27,7 @@ export default function createBody(t, x = 0, y = 0) {
   x /= s
   y /= s
 
-  r = new B.b2BodyDef
+  r = getBodyDef(B)
   pos = new B.b2Vec2(x, y)
 
   switch (t) {
@@ -35,6 +48,8 @@ export default function createBody(t, x = 0, y = 0) {
 
   r.set_type(t)
   r.set_position(pos)
+
+  pos.__destroy__()
 
   return r
 

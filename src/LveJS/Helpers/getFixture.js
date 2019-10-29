@@ -11,8 +11,6 @@ export default function getFixture() {
   let x, y
   let s
 
-  let F
-
   physics = this.__system__.world.physics
 
   w = this.__system__.style.width || 1
@@ -41,8 +39,6 @@ export default function getFixture() {
   x = getFixturePoint(x, w)
   y = getFixturePoint(y, h)
 
-  F = physics.createFixture(this, w, h, this.density, this.friction, this.restitution, x, y, ml, mr, mt, mb)
-
-  return F
+  return physics.createFixture(this, w, h, this.density, this.friction, this.restitution, x, y, ml, mr, mt, mb)
 
 }

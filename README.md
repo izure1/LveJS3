@@ -46,7 +46,7 @@ lve.init({ canvas: '#yourCanvasSelector' }).loadAsset([
   
   // You can create multiple types of objects
   // camera
-  // image, sprite, video (need asset url (src attribute)
+  // image, sprite, video, particle (need asset url (src attribute)
   // square, circle
   // text (text attribute)
   

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="./css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="../dist/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test',
+      backgroundColor: 'black'
+    }).loadAsset('./image/star.png').ready(() => {
+
+      lve('particleEmitter').create({
+        type: 'particle',
+        src: lve.getAsset('./image/star.png')
+      }).css('verticalAlign', 'middle').particle({
+
+        duration: 1000, // particle life span
+        speed: 300, // particle speed
+        interval: 200, // particle re-spawn interval time
+        blendMode: 'lighter',
+        start: 1,
+        end: 0,
+
+      })
+
+    })
+  </script>
+</body>
+
+</html>

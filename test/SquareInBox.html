@@ -21,16 +21,77 @@
     const lve = new LveJS
 
     lve.createCollider('wall', 'square')
-
-    lve('camera').create({
-      type: 'camera'
-    }).css({
-      bottom: 225
-    }).use()
+    lve.createCollider('wall', 'particle')
 
     lve.init({
-      canvas: '#test',
-      defaultCamera: null
+      canvas: '#test'
+    }).loadAsset('./image/flame.png').ready(() => {
+
+      lve('camera').css('bottom', 225)
+
+      lve('ground').create({
+        type: 'square'
+      }).attr('physics', 'static').css({
+        width: 1000,
+        height: 50,
+        color: '#ddd',
+        verticalAlign: 'bottom'
+      }).addClass('wall')
+
+      lve('wall-left').create({
+        type: 'square'
+      }).attr('physics', 'static').css({
+        width: 50,
+        height: 500,
+        color: '#ddd',
+        left: -475,
+      }).addClass('wall wall-change-color')
+
+      lve('wall-right').create({
+        type: 'square'
+      }).attr('physics', 'static').css({
+        width: 50,
+        height: 500,
+        color: '#ddd',
+        left: 475,
+      }).addClass('wall wall-change-color')
+
+      lve('wall-top').create({
+        type: 'square'
+      }).attr('physics', 'static').css({
+        width: 1000,
+        height: 50,
+        color: '#ddd',
+        bottom: 450,
+      }).addClass('wall wall-change-color')
+
+      lve('square').create({
+        type: 'square'
+      }).attr('physics', 'dynamic').css({
+        width: 50,
+        height: 50,
+        color: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`,
+        cursor: 'pointer',
+        zIndex: 1,
+      }).addClass('square')
+
+      lve('particle').create({
+        type: 'particle',
+        src: lve.getAsset('./image/flame.png')
+      }).follow('square', null).particle({
+        interval: 30
+      }).addClass('particle')
+
+      lve('text').create({
+        type: 'text',
+        text: 'Click me!'
+      }).css({
+        fontSize: 13,
+      }).follow('square', {
+        left: 0,
+        bottom: 60
+      })
+
     })
 
     lve.on('click', e => {
@@ -40,75 +101,18 @@
 
     lve.on('contactstart', e => {
 
-      if (e.target.hasClass('wall')) {
-
+      if (e.target.hasClass('wall-change-color')) {
         e.target.css('color', 'red')
-
       }
 
     })
 
     lve.on('contactend', e => {
 
-      if (e.target.hasClass('wall')) {
+      if (e.target.hasClass('wall-change-color')) {
         e.target.css('color', '#ddd')
       }
 
-    })
-
-    lve('ground').create({
-      type: 'square'
-    }).attr('physics', 'static').css({
-      width: 1000,
-      height: 50,
-      color: '#ddd',
-      verticalAlign: 'bottom'
-    }).addClass('wall')
-
-    lve('wall-left').create({
-      type: 'square'
-    }).attr('physics', 'static').css({
-      width: 50,
-      height: 500,
-      color: '#ddd',
-      left: -475,
-    }).addClass('wall')
-
-    lve('wall-right').create({
-      type: 'square'
-    }).attr('physics', 'static').css({
-      width: 50,
-      height: 500,
-      color: '#ddd',
-      left: 475,
-    }).addClass('wall')
-
-    lve('wall-top').create({
-      type: 'square'
-    }).attr('physics', 'static').css({
-      width: 1000,
-      height: 50,
-      color: '#ddd',
-      bottom: 450,
-    }).addClass('wall')
-
-    lve('square').create({
-      type: 'square'
-    }).attr('physics', 'dynamic').css({
-      width: 50,
-      height: 50,
-      color: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`,
-      cursor: 'pointer'
-    }).addClass('square')
-
-    lve('text').create({
-      type: 'text',
-      text: 'Click me!'
-    }).css({
-      fontSize: 13
-    }).follow('square', {
-      left: 0,
-      bottom: 60
     })
   </script>
 </body>

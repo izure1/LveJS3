@@ -1,4 +1,27 @@
 const MINSIZE = 0.001
+let FixtureDef = null
+let ShapeDef = null
+let VectorDef = null
+
+function getFixtureDef(B) {
+
+  if (!FixtureDef) {
+    FixtureDef = new B.b2FixtureDef
+  }
+
+  return FixtureDef
+
+}
+
+function getShapeDef(B) {
+
+  if (!ShapeDef) {
+    ShapeDef = new B.b2PolygonShape
+  }
+
+  return ShapeDef
+
+}
 
 /**
  * 
@@ -20,12 +43,13 @@ export default function createFixture(t, w = 1, h = 1, d = 1, f = 1, r = 0, x = 
 
   let s
   let B
-  let F, S
+  let F, S, V
 
   s = this.setting.unitScale
   B = this.box2d
-  F = new B.b2FixtureDef
-  S = new B.b2PolygonShape
+
+  F = getFixtureDef(B)
+  S = getShapeDef(B)
 
   F.set_density(d)
   F.set_friction(f)
@@ -55,8 +79,13 @@ export default function createFixture(t, w = 1, h = 1, d = 1, f = 1, r = 0, x = 
   if (w < MINSIZE) w = MINSIZE
   if (h < MINSIZE) h = MINSIZE
 
-  S.SetAsBox(w + ml + mr, h + mt + mb, new B.b2Vec2(x + mr - ml, y + mt - mb), 0)
 
-  return F
+  V = new B.b2Vec2(x + mr - ml, y + mt - mb)
+  S.SetAsBox(w + ml + mr, h + mt + mb, V, 0)
+
+  return {
+    V,
+    F
+  }
 
 }

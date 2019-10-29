@@ -12,6 +12,7 @@ import LveJSElementObserver from './Managers/LveJSElementObserver'
 import LveJSAnimator from './Managers/LveJSAnimator'
 import LveJSAssetManager from './Managers/LveJSAssetManager'
 import LveJSInputListener from './Managers/LveJSInputListener'
+import LveJSParticleEmitter from './Managers/LveJSParticleEmitter'
 import LveJSCache from './Managers/LveJSCache'
 
 import LveQuery from './LveQuery'
@@ -70,6 +71,7 @@ function LveJS() {
   this.assetManager = new LveJSAssetManager
   this.keyboardListener = new LveJSInputListener
   this.mouseListener = new LveJSInputListener
+  this.particleEmitter = new LveJSParticleEmitter
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
@@ -144,7 +146,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '4.1.0'
+        return '4.2.0'
       }
     },
 

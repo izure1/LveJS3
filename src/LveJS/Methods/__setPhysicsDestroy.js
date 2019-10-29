@@ -1,6 +1,3 @@
-import getFixture from '../Helpers/getFixture'
-
-
 export default function __setPhysicsDestroy() {
 
   let B
@@ -12,6 +9,8 @@ export default function __setPhysicsDestroy() {
   }
 
   this.__system__.world.physics.bodies.add(B)
+  this.__system__.physics.body = null
+  
   delete this.__system__.physics.body
 
   return this

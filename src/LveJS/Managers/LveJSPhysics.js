@@ -1,7 +1,6 @@
-import DeltaTimer from '../Utils/DeltaTimer'
-
-import B from '../../External/Box2D/Box2D'
+import Box2D from '../../External/Box2D/Box2D'
 import DEFAULT_SETTING from './Physics/Vars/DEFAULT_SETTING'
+import DEFAULT_CONFIG from './Physics/Vars/DEFAULT_CONFIG'
 
 import FnInit from './Physics/init'
 import FnStart from './Physics/start'
@@ -19,11 +18,13 @@ class LveJSPhysics {
 
   constructor() {
 
-    this.setting = new DEFAULT_SETTING
-    this.map = new WeakMap
+    let box2d = Box2D(new DEFAULT_CONFIG)
 
-    this.box2d = B()
-    this.world = new this.box2d.b2World(new this.box2d.b2Vec2(0, this.setting.gravity), false)
+    this.setting = new DEFAULT_SETTING
+    this.map = new Map
+
+    this.box2d = box2d
+    this.world = new box2d.b2World(new box2d.b2Vec2(0, this.setting.gravity), false)
     this.bodies = new Set
     this.colliders = new Set
 

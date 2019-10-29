@@ -1,17 +1,20 @@
-class LveJSListener {
+import LveJSManager from './LveJSManager'
+
+
+class LveJSListener extends LveJSManager {
 
   constructor() {
 
-    this.inited = false
+    super()
     this.handler = new Map
     this.element = null
     this.destroyCallback = null
 
   }
 
-  init(element = null) {
+  initElement(element = null) {
 
-    this.inited = true
+    this.init()
     this.element = element
 
   }
@@ -32,10 +35,6 @@ class LveJSListener {
     this.handler.clear()
     this.element = null
 
-  }
-
-  get isNotInited() {
-    return !this.inited
   }
 
 }

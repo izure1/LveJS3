@@ -4,6 +4,10 @@ export default function (t) {
     element: document.createElement('img')
   }
 
+  this.particle = {
+    element: document.createElement('img')
+  }
+
   this.sprite = {
     element: document.createElement('img'),
     loop: true

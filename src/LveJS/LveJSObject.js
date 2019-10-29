@@ -13,6 +13,7 @@ import DEFAULT_FOLLOW from './Methods/Vars/DEFAULT_FOLLOW'
 import DEFAULT_SPRITE from './Methods/Vars/DEFAULT_SPRITE'
 import DEFAULT_PHYSICS from './Methods/Vars/DEFAULT_PHYSICS'
 import DEFAULT_VIDEO from './Methods/Vars/DEFAULT_VIDEO'
+import DEFAULT_PARTICLE from './Methods/Vars/DEFAULT_PARTICLE'
 
 import PROXY_HANDLER_ATTRIBUTE from './Methods/Vars/PROXY_HANDLER.ATTRIBUTE'
 import PROXY_HANDLER_STYLE from './Methods/Vars/PROXY_HANDLER.STYLE'
@@ -21,6 +22,7 @@ import PROXY_HANDLER_FOLLOW from './Methods/Vars/PROXY_HANDLER.FOLLOW'
 import PROXY_HANDLER_SPRITE from './Methods/Vars/PROXY_HANDLER.SPRITE'
 import PROXY_HANDLER_PHYSICS from './Methods/Vars/PROXY_HANDLER.PHYSICS'
 import PROXY_HANDLER_VIDEO from './Methods/Vars/PROXY_HANDLER.VIDEO'
+import PROXY_HANDLER_PARTICLE from './Methods/Vars/PROXY_HANDLER.PARTICLE'
 
 import M__draw from './Methods/draw'
 import M__animationUpdate from './Methods/__animationUpdate'
@@ -44,6 +46,7 @@ import M__setPhysicsDensity from './Methods/__setPhysicsDensity'
 import M__setPhysicsTransform from './Methods/__setPhysicsTransform'
 import M__transitionUpdate from './Methods/__transitionUpdate'
 import M__physicsUpdate from './Methods/__physicsUpdate'
+import M__generateParticle from './Methods/__generateParticle'
 
 
 
@@ -64,6 +67,7 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__, 'sprite', {})
   setHiddenContext.call(this.__system__, 'position', {})
   setHiddenContext.call(this.__system__, 'physics', {})
+  setHiddenContext.call(this.__system__, 'particle', {})
   setHiddenContext.call(this.__system__.physics, 'information', {})
   setHiddenContext.call(this.__system__, 'audio', {})
   setHiddenContext.call(this.__system__.audio, 'setting', {})
@@ -79,6 +83,7 @@ function setSysAttr(r) {
   this.__system__.audio.setting.currentTime = 0
   this.__system__.audio.setting.volume = 1
   this.__system__.audio.setting.muted = false
+  this.__system__.particle.count = 0
 
   for (let t of DEFAULT_EVENT) {
     this.__system__.events[t] = new Map
@@ -113,6 +118,10 @@ function setHDRAttr(r) {
   // videoset
   this.videoset = new DEFAULT_VIDEO
   this.videoset = getPropertiesProxy.call(this, this.videoset, PROXY_HANDLER_VIDEO)
+
+  // particleset
+  this.particleset = new DEFAULT_PARTICLE
+  this.particleset = getPropertiesProxy.call(this, this.particleset, PROXY_HANDLER_PARTICLE)
 
 }
 
@@ -164,5 +173,7 @@ LveJSObject.prototype.__setPhysicsDensity = M__setPhysicsDensity
 LveJSObject.prototype.__setPhysicsTransform = M__setPhysicsTransform
 LveJSObject.prototype.__transitionUpdate = M__transitionUpdate
 LveJSObject.prototype.__physicsUpdate = M__physicsUpdate
+LveJSObject.prototype.__generateParticle = M__generateParticle
+
 
 export default LveJSObject

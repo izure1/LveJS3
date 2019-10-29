@@ -14,7 +14,7 @@ function setScene(u) {
   a = a.value
 
   for (let t of this.renderer.objects) {
-    t.draw.apply(t, a)
+    t.draw(...a)
   }
 
 }

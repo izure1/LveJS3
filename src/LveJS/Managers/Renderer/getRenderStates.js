@@ -35,7 +35,8 @@ export default function getRenderStates(ca = this.camera) {
       ca.style.perspective,
       ca.style.rotate,
       t.setting.scaleDistance,
-      t.setting.canvasScale
+      t.setting.canvasScale,
+      t.interval
     ]
   }
 
