@@ -78,11 +78,11 @@ export default function calc(left, bottom, perspective, o, c = this.renderer.cam
 
       o = getCalcedProperties(o, s)
 
-      o.left -= this.renderer.setting.width / 2
+      o.left -= this.renderer.setting.originWidth / 2
       o.left *= s
       o.left += o.width / 2
 
-      o.bottom -= this.renderer.setting.height / 2
+      o.bottom -= this.renderer.setting.originHeight / 2
       o.bottom *= s
 
       o.perspective = perspective

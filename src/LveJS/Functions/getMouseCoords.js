@@ -17,7 +17,7 @@ export default function getMouseCoords(e, reverse = true) {
   y = p.y / a
 
   if (reverse) {
-    y = this.renderer.setting.height - y
+    y = this.renderer.setting.originHeight - y
   }
 
   return {

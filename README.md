@@ -14,10 +14,11 @@ WebGL을 사용하지 않고, canvas API으로 동작합니다. *따라서 오�
 
 기본적으로 [kripken](https://github.com/kripken)의 [Box2D](https://github.com/kripken/box2d.js)의 물리엔진이 내장되어 있습니다. 
 따라서 번거롭게 물리엔진을 적용하지 않아도 됩니다.  
+
 원한다면 생성한 오브젝트의 속성을 수정하는 것만으로 물리충돌을 제어할 수 있으며, 
 이는 LveJS가 비주얼노벨뿐만 아니라, 간단한 2D 게임도 구현할 수 있다는 의미입니다.
 
-## 시작하기 ##
+## 시작하기
 ```
 const lve = new LveJS
 

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <canvas id="test" width="800" height="450"></canvas>
+  <canvas id="test" width="400" height="450"></canvas>
   <div>
     <button onclick="lve('video').play()">Play</button>
     <button onclick="lve('video').pause()">Pause</button>
@@ -30,7 +30,7 @@
         let {
           width,
           height
-        } = lve.calcRatio(800, 450, lve('video').width(), lve('video').height(), 0.8)
+        } = lve.calcRatio(400, 450, lve('video').width(), lve('video').height(), 1)
 
         lve('video').css({
           width,

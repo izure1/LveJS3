@@ -30,7 +30,7 @@ function getObjects() {
 }
 
 
-export default function () {
+export default function save() {
 
   let camera
   let renderer

@@ -41,7 +41,7 @@ function restoreCamera(u) {
   this.renderer.camera = this.lve(u).get()
 }
 
-export default function (data) {
+export default function restore(data) {
 
   let {
     camera,
@@ -62,6 +62,6 @@ export default function (data) {
 
   this.lve.requestCaching(true)
 
-  return this
+  return this.lve
 
 }
