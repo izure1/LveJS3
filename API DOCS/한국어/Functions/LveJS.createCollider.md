@@ -42,5 +42,5 @@ colliderB.destroy()
 
 ---
 
-> return : `LveJSCollider```
+> return : `LveJSCollider`
   `LveJSCollider` 객체를 반환합니다. `destroy` 메서드를 이용하여 이 충돌기를 파괴할 수 있습니다.

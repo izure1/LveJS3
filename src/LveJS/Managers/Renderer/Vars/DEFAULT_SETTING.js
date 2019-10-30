@@ -5,8 +5,8 @@ export default class {
     this.canvas = {}
     this.canvasScale = 1
     this.scaleDistance = 100
-    this.width = null
-    this.height = null
+    this.width = undefined
+    this.height = undefined
     this.backgroundColor = 'white'
     this.defaultCamera = 'camera'
     this.maxSight = null
