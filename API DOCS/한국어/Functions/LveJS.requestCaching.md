@@ -3,6 +3,8 @@
 > immediately : `Boolean`  
   즉시 캐싱을 수행할지 여부를 지정합니다.
 
+---
+
 LveJS 월드의 렌더링 리스트 배열을 재정렬하는 함수입니다.  
 `renderer의` `cacheLevel의` 영향을 받습니다.
 

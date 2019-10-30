@@ -3,6 +3,8 @@
 > setting : `Object`  
   LveJS 렌더링 설정값입니다.
 
+---
+
 LveJS 월드의 전역 설정을 합니다. 일반적으로 맨 처음에 사용되는 함수입니다.  
 `setting` 매개변수에 넣을 수 있는 속성값들은 아래와 같습니다.
 
@@ -12,10 +14,10 @@ LveJS 월드의 전역 설정을 합니다. 일반적으로 맨 처음에 사용
 > width : `Number`  
   캔버스의 넓이를 지정합니다. 기본값은 `canvas.width`입니다.
 
-> height : `Number`
+> height : `Number`  
   캔버스의 높이를 지정합니다. 기본값은 `canvas.height`입니다.
 
-> backgroundColor : `String`
+> backgroundColor : `String`  
   캔버스의 배경색을 지정합니다. 기본값은 `transparent` 입니다.
 
 > defaultCamera : `String` | `false`  
@@ -31,7 +33,7 @@ LveJS 월드의 전역 설정을 합니다. 일반적으로 맨 처음에 사용
   보여줄 최소 크기입니다. 객체의 `style.width` 또는 `style.height` 가 `minSize`보다 작다면, 이 객체는 더 이상 보여지지 않습니다. 이 제한을 없애려면 `null`을 기입하십시오.  
   기본값은 `0.35`입니다.
 
-> cacheLevel : `Number`
+> cacheLevel : `Number`  
   캐시 레벨입니다. 객체를 생성하거나, 객체의 `style.perspective`를 변경할 때 마다, *LveJS 월드는 모든 객체가 담긴 배열을 재정렬합니다.* 이 숫자가 높을수록 재정렬의 빈도를 줄어듭니다.  
   따라서 LveJS의 성능이 증가하지만, 그만큼 렌더링의 반응성이 느려집니다.  
   기본값은 `1`입니다.

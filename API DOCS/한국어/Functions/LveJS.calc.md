@@ -1,4 +1,22 @@
-# LveJS.calc(left, bottom, perspective [, option] [, camera])
+# LveJS.calc(left, bottom, perspective [, style] [, camera])
+
+> left : `Number`  
+  객체가 보여지고 싶은 x좌표
+
+> bottom : `Number`  
+  객체가 보여지고 싶은 y좌표
+
+> perspective : `Number`
+  객체에 지정하고 싶은 z좌표
+
+> style : `Object`  
+  객체에 지정하고 싶은 CSS 스타일
+
+> camera : `LveJSObjectSession` | `LveJSObject`  
+  이 매개변수로 넘어온 카메라가 보고 있는 화면을 기준으로 작업합니다.  
+  기본값은 `lve.current.camera`입니다.
+
+---
 
 특정 카메라가 바라보고 있는 화면을 기준으로, 원하는 위치와 모양의 객체를 생성할 수 있도록 도와줍니다.  
 

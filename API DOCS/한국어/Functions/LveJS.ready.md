@@ -1,6 +1,8 @@
 # LveJS.ready(callback)
 
-> callback : `Function`  
+> callback : `Function`
+
+---
 
 게임이 정상적으로 플레이가 가능해질 때 까지 대기합니다.  
 정상적인 플레이가 가능해질 때라는 건, 아래 상황을 모두 만족했을 경우입니다.

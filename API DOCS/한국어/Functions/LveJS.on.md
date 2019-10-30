@@ -1,10 +1,12 @@
 # LveJS.on(event, handler)
 
-> event : `String`
+> event : `String`  
   등록할 이벤트 이름입니다.
 
 > handler : `Function`  
   이벤트가 발생했을 경우, 호출될 핸들러 함수입니다.
+
+---
 
 이벤트는 LveJS 객체를 제어할 수 있는 가장 좋은 방법 중 하나입니다.  
 가령, 객체를 클릭했을 때, 특정 작업을 하고 싶다면 `LveJSObjectSession.prototype.on` 메서드를 이용할 수 있습니다. 아래와 같습니다.
