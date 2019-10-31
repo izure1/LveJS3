@@ -1,4 +1,4 @@
-# fadeIn([duration] [, ease], [, delay])
+# fadeOut([duration] [, ease], [, delay])
 
 > duration : `Number`  
   페이드가 진행될 시간입니다. 기본값은 `400`입니다.
