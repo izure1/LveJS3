@@ -74,7 +74,7 @@ lve('particleObject').particle({
 아래 예제를 참고하십시오.
 
 ```
-lve('yourObject').css('blendMode', 'lighter')
+lve('yourObject').particle('blendMode', 'lighter')
 ```
 
 ---
