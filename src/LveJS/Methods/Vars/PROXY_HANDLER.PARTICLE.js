@@ -36,4 +36,15 @@ handler.playing = function (p, v, t) {
 
 }
 
+handler.gravityScale = function (p, v, t) {
+
+  if (this.type !== 'particle') {
+    return this.particleset[p]
+  }
+
+  this.__system__.proxy.gravityscale = v
+  return v
+
+}
+
 export default handler

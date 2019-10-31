@@ -10,5 +10,6 @@ export default function () {
   this.rangeX = 0
   this.rangeY = 0
   this.rangeZ = 0
+  this.gravityScale = 1
 
 }

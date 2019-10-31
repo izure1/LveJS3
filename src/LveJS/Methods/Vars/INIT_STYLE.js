@@ -21,8 +21,8 @@ export default function () {
   }
 
   this.particle = {
-    width: 1,
-    height: 1,
+    width: 0,
+    height: 0,
     pointerEvents: false
   }
 

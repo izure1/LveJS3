@@ -18,18 +18,39 @@
       backgroundColor: 'black'
     }).loadAsset('./image/star.png').ready(() => {
 
+      // Create particle emitter
       lve('particleEmitter').create({
         type: 'particle',
         src: lve.getAsset('./image/star.png')
-      }).css('verticalAlign', 'middle').particle({
+      }).css({
+        width: 0,
+        height: 0,
+        verticalAlign: 'middle',
+        position: 'fixed',
+      }).particle({
 
         duration: 1000, // particle life span
         speed: 300, // particle speed
-        interval: 200, // particle re-spawn interval time
+        interval: 50, // particle re-spawn interval time
         blendMode: 'lighter',
-        start: 1,
+        gravityScale: 0,
+        start: 0.3,
         end: 0,
 
+      })
+
+    })
+
+    test.addEventListener('mousemove', e => {
+
+      let {
+        x,
+        y,
+      } = lve.getMouseCoords(e)
+
+      lve('particleEmitter').css({
+        left: x,
+        bottom: y
       })
 
     })

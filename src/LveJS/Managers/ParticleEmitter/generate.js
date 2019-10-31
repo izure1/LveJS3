@@ -6,6 +6,7 @@ export default function generate(emitter) {
 
   let {
     src,
+    element,
     particleset,
     className
   } = emitter
@@ -21,6 +22,16 @@ export default function generate(emitter) {
     return this
   }
 
+  if (!element) {
+    return this
+  }
+
+  let elWidth = 0
+
+  if (position === 'fixed') {
+    elWidth = element.width
+  }
+
 
   let {
     rangeX,
@@ -31,6 +42,7 @@ export default function generate(emitter) {
     duration,
     blendMode,
     speed,
+    gravityScale,
   } = particleset
 
   
@@ -43,7 +55,7 @@ export default function generate(emitter) {
   rangeY /= 2
   rangeZ /= 2
 
-  left += getRandomInt(-rangeX, rangeX)
+  left += getRandomInt(-rangeX, rangeX) - (elWidth * start / 2)
   bottom += getRandomInt(-rangeY, rangeY)
   perspective += getRandomInt(-rangeZ, rangeZ)
 
@@ -55,6 +67,7 @@ export default function generate(emitter) {
     density: 0,
     friction: 0.25,
     restitution: 0.5,
+    gravityscale: gravityScale,
     src,
 
   }).css({
