@@ -1,6 +1,6 @@
 # remove([includeFollowers])
 
-> includeFollowers : `Boolean` | `Function`
+> includeFollowers : `Boolean` | `Function`  
   이 객체를 follow 메서드로 따라다니는 객체도 함께 삭제할지 여부를 지정합니다.  
   기본값은 `false`입니다.
 
