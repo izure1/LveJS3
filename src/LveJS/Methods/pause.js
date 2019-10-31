@@ -9,6 +9,7 @@ export default function pause() {
     switch (this.type) {
       case 'video':
       case 'sprite':
+      case 'particle':
         break
       default:
         return
@@ -20,10 +21,11 @@ export default function pause() {
         this.element.pause()
         this.element.dataset.playing = 'false'
       })
-      
+
     }
 
     this.spriteset.playing = false
+    this.particleset.playing = false
 
   })
 

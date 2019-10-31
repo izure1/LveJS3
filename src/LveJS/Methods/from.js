@@ -34,6 +34,7 @@ export default function from(t) {
     o.element = t.element.cloneNode(true)
   }
 
+  o.type = t.type
   r = w.lve(this.name).create(o)
 
   return r

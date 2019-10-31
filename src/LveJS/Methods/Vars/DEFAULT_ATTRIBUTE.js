@@ -1,6 +1,5 @@
 export default function () {
 
-  this.type = null
   this.element = null
   this.physics = null
   this.loop = false

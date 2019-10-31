@@ -1,5 +1,6 @@
 export default function () {
 
+  this.playing = true
   this.start = 1
   this.end = 0
   this.duration = 1000

@@ -12,4 +12,28 @@ handler.__observer = function (p, v, t) {
 
 }
 
+handler.playing = function (p, v, t) {
+
+  if (this.type !== 'particle') {
+    return this.particleset[p]
+  }
+
+  v = !!v
+
+  switch (v) {
+
+    case true:
+      this.emit('play')
+      break
+
+    default:
+      this.emit('pause')
+      break
+
+  }
+
+  return v
+
+}
+
 export default handler

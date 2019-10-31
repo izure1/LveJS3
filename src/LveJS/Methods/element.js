@@ -1,8 +1,3 @@
-/**
- * 
- * @param {String|Object} o Properties name
- * @param {*} v Value
- */
 export default function element() {
 
   let t

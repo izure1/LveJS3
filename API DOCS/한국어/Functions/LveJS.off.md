@@ -12,7 +12,14 @@
 `lve.on` 함수로 LveJS 월드에 전역으로 등록된 이벤트를 삭제합니다.
 
 ```
-lve.off('click') // 전역으로 등록된 모든 click 이벤트가 삭제됩니다.
+// 전역으로 등록된 모든 click 이벤트가 삭제됩니다.
+lve.off('click')
+```
+
+한번에 여러 이벤트를 제거하고 싶다면, 띄어쓰기로 구분하십시오.
+
+```
+lve.off('click mousedown mouseup')
 ```
 
 ---

@@ -31,18 +31,6 @@ handler.__observer = function (p, v, t) {
 
 }
 
-handler.type = function (p, v, t) {
-
-  this.__system__.style.d_type = 1
-
-  if (v === 'camera') {
-    this.__system__.style.d_type = 0
-  }
-
-  return v
-
-}
-
 
 handler.timescale = function (p, v, t) {
 

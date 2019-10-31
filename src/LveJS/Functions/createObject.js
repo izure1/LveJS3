@@ -25,7 +25,8 @@ export default function (u, o = {}) {
   v2 = v2[o.type] || {}
 
   // 객체 속성을 정의합니다
-  t = new this.classes.LveJSObject(this, u)
+  t = new this.classes.LveJSObject(this, u, o.type)
+  delete o.type
 
   t.attr(v1).__setElementEvent()
   t.attr(o).css(v2).css(t.css()).sprite(t.sprite())

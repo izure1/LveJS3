@@ -18,6 +18,7 @@ export default function toString() {
   w = new this.__system__.world.constructor
 
   o = JSON.parse(JSON.stringify(t))
+  o.type = t.type
   o.style.position = 'fixed'
 
   w('__capture__').create(o)

@@ -1,12 +1,4 @@
-import each from './each'
-
-
-
-/**
- * 
- * @param {Number} v Gravity scale
- */
-export default function getPhysicsBody(v) {
+export default function getPhysicsBody() {
 
   return this.get().__system__.physics.body
 

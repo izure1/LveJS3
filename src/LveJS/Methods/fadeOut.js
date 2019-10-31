@@ -5,18 +5,19 @@ import each from './each'
  * 
  * @param {Number} d Duration
  * @param {String} e Easing type
- * @param {Number} l Delay
- * @param {Boolean} r When end of fadeout, this object will be destroy
+ * @param {Number} l Delay. If this value is not 0, this object will be destroy after fadeout
  */
-export default function fadeOut(d = 400, e = 'linear', l = 0, r = false) {
+export default function fadeOut(d = 400, e = 'linear', l = 0) {
 
   each.call(this, function () {
+
+    let r
 
     if (!this.__isDisplay()) {
       return
     }
 
-    if (r) {
+    if (l) {
 
       this.__system__.ghost = true
       r = () => {

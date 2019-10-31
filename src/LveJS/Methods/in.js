@@ -7,8 +7,8 @@ import {
 
 /**
  * 
- * @param {String|Array} u 씬 이름
- * @param {Boolean} a 하위 씬에 존재하는 객체도 포함합니다
+ * @param {String|Array} u 레벨 이름
+ * @param {Boolean} a 하위 레벨에 존재하는 객체도 포함합니다
  */
 export default function In(u, a = false) {
 
@@ -19,7 +19,7 @@ export default function In(u, a = false) {
   r = []
   w = this.__system__.world
 
-  // 'main main_another' 같이 여러 씬을 공백으로 구분한 문자열을 배열로 치환합니다.
+  // 'main main_another' 같이 여러 레벨을 공백으로 구분한 문자열을 배열로 치환합니다.
   if (typeof u === 'string') {
     u = u.split(' ')
   }
