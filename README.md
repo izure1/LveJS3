@@ -18,6 +18,22 @@ WebGL을 사용하지 않고, canvas API으로 동작합니다. *따라서 오�
 원한다면 생성한 오브젝트의 속성을 수정하는 것만으로 물리충돌을 제어할 수 있으며, 
 이는 LveJS가 비주얼노벨뿐만 아니라, 간단한 2D 게임도 구현할 수 있다는 의미입니다.
 
+## 설치하기
+
+다운로드 [https://www.npmjs.com/package/lve](https://www.npmjs.com/package/lve)
+
+### npm
+
+```
+npm install lve
+```
+
+### browser
+
+```
+<script src="dist/LveJS.js"></script>
+```
+
 ## 시작하기
 ```
 const lve = new LveJS
