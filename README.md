@@ -2,7 +2,7 @@
 *LveJS 3.0 ~ x.x*
 
 ## LveJS란?
-LveJS는, **Light Visualnovel Engine**의 약자입니다.  
+LveJS는, **Light Visual novel Engine**의 약자입니다.  
 
 웹에서 비주얼노벨을 손쉽게 구현할 수 있도록 지원하는 Web Canvas 라이브러리이며, [jQuery](https://github.com/jquery/jquery)의 문법과 비슷하기에, 기존의 jQuery 사용자는 쉽게 배울 수 있습니다.
 
@@ -102,5 +102,4 @@ lve.init({ canvas: '#yourCanvasSelector' }).loadAsset([
 ```
 
 # 예제
-Github 다운로드를 받고, projectDirectory/test 폴더 내에 예제 html 파일이 있습니다.  
-웹 보안 문제로 인해 서버에서 테스트하시길 바랍니다.
+Github 다운로드를 받고, `npm run dev` 명령어를 실행하십시오.

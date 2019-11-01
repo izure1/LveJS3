@@ -1,27 +1,35 @@
 const fs = require('fs')
 const path = require('path')
+const process = require('process')
 
 const ejs = require('ejs')
 const express = require('express')
+const serveIndex = require('serve-index')
 const glob = require('fast-glob')
 const showdown = require('showdown')
 
 const app = express()
 
 
-
-
+const DIRECTORY_RENDER = path.join(__dirname, '../test/render').replace(/\\/g, '/')
 const DIRECTORY_DOCS = path.join(__dirname, '../DOCS').replace(/\\/g, '/')
 
 
 app.set('view engine', 'ejs')
 app.set('views', './test/render')
+
 app.use(express.static('./test/public'))
+
+app.use('/sample', serveIndex(`${DIRECTORY_RENDER}/sample`))
+app.use('/docs', serveIndex(DIRECTORY_DOCS))
+
 
 
 app.get('/', (req, res) => {
   res.render('main')
 })
+
+
 
 app.get('/LveJS.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/LveJS.js'))
@@ -31,85 +39,29 @@ app.get('/LveJS.Interface.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/LveJS.Interface.js'))
 })
 
-app.get('/sample', (req, res) => {
 
-  let items
-  let title
 
-  items = fs.readdirSync(path.join(__dirname, 'render/sample'))
-  items = items.filter(t => path.extname(t) === '.ejs')
-  items = items.map(t => {
+app.get(/(.*)\.ejs$/, (req, res) => {
 
-    let name = path.parse(t).name
+  let file
 
-    return {
-      name,
-      url: `/sample/${name}`
-    }
-
-  })
-
-  title = 'LveJS sample list'
-
-  res.render('index', {
-    title,
-    items,
-  })
+  file = decodeURIComponent(req.url).substr(1)
+  res.render(file)
 
 })
 
-app.get('/sample/:name', (req, res) => {
+app.get(/.*\.md$/, (req, res) => {
 
-  let name
-
-  name = req.param('name')
-  res.render(`sample/${name}`)
-
-})
-
-app.get('/docs/', async (req, res) => {
-
-  let title
-  let items
-
-  items = await glob(`${DIRECTORY_DOCS}/**/*`, {
-    onlyFiles: true
-  })
-
-  title = 'LveJS API DOCS'
-  items = items.sort().map(t => {
-
-    let name, url
-    
-    name = t.replace(DIRECTORY_DOCS, '')
-    url = path.join('/docs', encodeURIComponent(name))
-
-
-    return {
-      name,
-      url,
-    }
-    
-  })
-
-  res.render('index', {
-    title,
-    items,
-  })
-
-})
-
-app.get('/docs/:doc', (req, res) => {
-
-  let title
+  let file
   let converter
-  let article
+  let title, article
 
-  title = decodeURIComponent(req.param('doc'))
+  file = decodeURIComponent(req.url)
+  file = path.join(process.cwd(), file)
+  title = path.basename(file)
+
   converter = new showdown.Converter
-
-  article = path.join(DIRECTORY_DOCS, title)
-  article = fs.readFileSync(article, 'utf8')
+  article = fs.readFileSync(file, 'utf8')
   article = converter.makeHtml(article)
 
   res.render('markdown', {
