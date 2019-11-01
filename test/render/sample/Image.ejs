@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test'
+    }).loadAsset('/image/logo.png').ready(() => {
+
+      lve('image').create({
+        type: 'image',
+        src: lve.getAsset('/image/logo.png')
+      }).css({
+        verticalAlign: 'middle'
+      })
+
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test',
+      backgroundColor: 'black'
+    }).loadAsset([
+      '/image/logo.png',
+      '/image/star.png'
+    ]).ready(() => {
+
+      lve('logo').create({
+        type: 'image',
+        src: lve.getAsset('/image/logo.png')
+      }).css('verticalAlign', 'middle')
+
+      // lve('particleEmitter').create({
+      //   type: 'particle',
+      //   src: lve.getAsset('/image/star.png')
+      // }).css('bottom', -600).particle({
+      //   betweenX: 1000,
+      //   betweenZ: 100,
+      //   interval: 50,
+      //   speed: 50,
+      //   space: 100,
+      //   duration: 9000,
+      //   end: 1
+      // })
+
+      lve.setGravity(0, 0.5)
+      generateStars(0)
+
+    })
+  </script>
+  <script>
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+    function generateStars(i) {
+
+      setTimeout(t => {
+
+        let x, z, f
+
+        x = getRandomInt(-400, 400)
+        z = getRandomInt(0, 200)
+        f = getRandomInt(-200, 200) / 200 
+
+        lve(`star_${i}`).create({
+          type: 'image',
+          src: lve.getAsset('./image/star.png'),
+        }).attr('physics', 'dynamic').css({
+          left: x,
+          bottom: -500,
+          perspective: z,
+          blendMode: 'lighter'
+        }).fadeOut(1000, 'linear', 6000, true).applyForce(f, 0)
+
+        generateStars(++i)
+
+      }, 50)
+
+    }
+  </script>
+</body>
+
+</html>

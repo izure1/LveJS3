@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+
+    const lve = new LveJS
+
+    lve.on('mouseover', function (e) {
+      lve('text').attr('text', 'Mouse over!')
+      e.target.css('borderWidth', 5)
+    })
+
+    lve.on('mouseout', function (e) {
+      lve('text').attr('text', 'Mouse out!')
+      e.target.css('borderWidth', 0)
+    })
+
+
+
+    lve('square').create({
+      type: 'square'
+    }).css({
+      perspective: 1000,
+      borderColor: 'orange'
+    }).animate({
+      perspective: 100
+    }, 3000)
+
+    lve('text').create({
+      type: 'text',
+      text: 'Mouse out!'
+    }).css({
+      bottom: -200,
+      borderColor: 'orange'
+    })
+
+    lve.init({
+      canvas: '#test'
+    })
+
+  </script>
+</body>
+
+</html>

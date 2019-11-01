@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test',
+      backgroundColor: 'black'
+    }).loadAsset('/image/star.png').ready(() => {
+
+      // Create particle emitter
+      lve('particleEmitter').create({
+        type: 'particle',
+        src: lve.getAsset('/image/star.png')
+      }).css({
+        width: 0,
+        height: 0,
+        verticalAlign: 'middle',
+        position: 'fixed',
+      }).particle({
+
+        duration: 1000, // particle life span
+        speed: 300, // particle speed
+        interval: 50, // particle re-spawn interval time
+        blendMode: 'lighter',
+        gravityScale: 0,
+        start: 0.3,
+        end: 0,
+
+      })
+
+    })
+
+    test.addEventListener('mousemove', e => {
+
+      let {
+        x,
+        y,
+      } = lve.getMouseCoords(e)
+
+      lve('particleEmitter').css({
+        left: x,
+        bottom: y
+      })
+
+    })
+  </script>
+</body>
+
+</html>

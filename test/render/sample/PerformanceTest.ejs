@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+
+    const lve = new LveJS
+    
+    function initWorld() {
+      lve.init({
+        canvas: '#test',
+        backgroundColor: 'black',
+        defaultCamera: null
+      })
+    }
+
+    function initCamera(length, gap) {
+      let w = length * gap
+      lve('camera').create({
+        type: 'camera'
+      }).css({
+        left: w / 2,
+        bottom: w / 2
+      }).use()
+
+    }
+
+    function createParticles(length, gap = 50) {
+
+      let left, bottom, perspective
+      let particle
+
+      for (let i = 0; i < length; i++) {
+
+        left = i * gap
+
+        for (let j = 0; j < length; j++) {
+
+          bottom = j * gap
+
+          for (let k = 0; k < length; k++) {
+
+            perspective = k * gap
+            particle = lve(`particle_${i}_${j}_${k}`).create({
+              type: 'square',
+              text: 'Hello, World!'
+            }).addClass('particle').css({
+              left,
+              bottom,
+              perspective,
+              fontSize: 5
+            }).animate({
+              rotate: 2080
+            }, 30000)
+
+          }
+
+        }
+
+      }
+
+      lve('*').findClass('particle').css({
+        width: 5,
+        height: 5,
+        color: 'white'
+      })
+
+    }
+
+
+    function checkPerformance(length, gap) {
+
+      const duration = 10000
+      let start, end
+
+      start = performance.now()
+
+      lve('camera').animate({
+        perspective: length * gap
+      }, 30000).once('animateend', e => {
+
+        end = performance.now()
+
+        console.log(`interval: ${end - start}ms`)
+
+      })
+    }
+
+    window.onload = function () {
+
+      const length = 20,
+        gap = 50
+
+      initWorld()
+      initCamera(length, gap)
+      createParticles(length, gap)
+      checkPerformance(length, gap)
+    }
+  </script>
+</body>
+
+</html>

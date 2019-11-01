@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+  </head>
+  <body>
+    <canvas id="test" width="800" height="450"></canvas>
+    <div>
+      <button onclick="typing()">Typing effect</button>
+    </div>
+    <script type="text/javascript">
+
+    const lve = new LveJS
+
+    lve('text').create({
+      type: 'text',
+      text: 'Hello, World!\nYou can use multiple line,\nand <style fontSize="20" fontWeight="bold" fontStyle="italic" color="yellow" borderColor="red">Size, Color, Style, Weight</style> properties also.'
+    }).css({
+      textAlign: 'center',
+      lineHeight: '150%',
+      color: 'white',
+      borderColor: '#0075c8',
+      borderWidth: 4,
+      fontSize: 30
+    })
+
+    lve.init({
+      canvas: '#test'
+    })
+    
+    </script>
+    <script type="text/javascript">
+  
+      function typing() {
+
+        let text = lve('text').get().text // text
+        let speed = 35 // number of fade character per second
+
+        lve('text').transition(text, speed)
+
+      }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <div>
+    <button onclick="lve('sprite').play()">Play</button>
+    <button onclick="lve('sprite').pause()">Pause</button>
+  </div>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test'
+    }).loadAsset('/image/sprite.png').ready(() => {
+
+      lve('sprite').create({
+        type: 'sprite',
+        src: lve.getAsset('/image/sprite.png')
+      }).sprite({
+        stage: 10,
+        fps: 12
+      })
+
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <div>
+    <button onclick="lve('video').play()">Play</button>
+    <button onclick="lve('video').pause()">Pause</button>
+  </div>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test'
+    }).loadAsset('/video/sample.mp4').ready(() => {
+
+      lve('video').create({
+        type: 'video',
+        src: lve.getAsset('/video/sample.mp4'),
+        loop: true
+      }).css({
+        verticalAlign: 'middle',
+        width: '100%',
+        height: '100%'
+      }).once('load', function () {
+        console.log('Video playing!')
+      }).once('error', function () {
+        console.log('Video load failed.')
+      })
+
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+  <script type="text/javascript" src="/LveJS.Interface.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <div>
+    <button onclick="removeAllObject()">Remove All Object in the world</button>
+    <button onclick="removeAllInterfaceA()">Remove All Interface A in the world</button>
+    <button onclick="removeAllInterfaceB()">Remove All Interface B in the world</button>
+  </div>
+  <script>
+    function removeAllObject() {
+      // Exclude camera
+      lve('*').filter(t => t.type !== 'camera').remove()
+    }
+
+    function removeAllInterfaceA() {
+      interface.removeGroup(groupA) // or group.remove()
+    }
+
+    function removeAllInterfaceB() {
+      interface.removeGroup(groupB) // or group.remove()
+    }
+  </script>
+  <script type="text/javascript">
+    const lve = new LveJS
+    const interface = new LveJSInterface(lve)
+
+    lve('square').create({
+      type: 'square'
+    }).css({
+      color: 'transparent',
+      borderWidth: 4,
+      borderColor: 'lightgreen'
+    })
+
+    lve.init({
+      canvas: '#test'
+    })
+
+    // Create interface Group
+    let groupA, groupB
+
+    groupA = interface.createGroup()
+    groupB = interface.createGroup()
+
+    groupA.appendContent(interface.createContent('helloWorld', {
+      type: 'text',
+      text: 'Hello, World!'
+    }).css({
+      fontSize: 30,
+      color: 'blue',
+      left: -200
+    }))
+
+    // You can't use the same content name in group.
+    // But it doesn't matter with other groups.
+    groupB.appendContent(interface.createContent('helloWorld', {
+      type: 'text',
+      text: 'Hello, World!'
+    }).css({
+      fontSize: 30,
+      color: 'red',
+      left: 200
+    }))
+
+  </script>
+</body>
+
+</html>

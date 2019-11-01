@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test'
+    }).loadAsset([
+      '/video/sample.mp4',
+      '/image/logo.png',
+      '/image/sprite.png',
+      '/image/transition_before.png',
+      '/image/transition_after.png',
+      '/image/test', // error!
+      '/image/../image/transition_before.png' // duplicated src == '/image/transition_before.png'
+    ]).ready(function () {
+
+      let blobURL = lve.getAsset('/video/sample.mp4')
+
+      lve('video').create({
+        type: 'video',
+        src: blobURL
+      }).css({
+        verticalAlign: 'middle'
+      }).play()
+
+    })
+  </script>
+</body>
+
+</html>
