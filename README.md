@@ -102,4 +102,4 @@ lve.init({ canvas: '#yourCanvasSelector' }).loadAsset([
 ```
 
 # 예제
-Github 다운로드를 받고, `npm run dev` 명령어를 실행하십시오.
+Github에서 프로젝트를 다운로드 받고 순서대로 `npm install` 명령어를 실행하여 의존 모듈을 설치하십시오. 이후 `npm run dev` 명령어를 실행하여 데모 페이지를 여십시오.

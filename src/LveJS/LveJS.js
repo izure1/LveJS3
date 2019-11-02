@@ -1,3 +1,7 @@
+import {
+  version
+} from '../../package.json'
+
 import LveJSObjectSession from './LveJSObjectSession'
 import LveJSObject from './LveJSObject'
 import LveJSVector from './LveJSVector'
@@ -146,7 +150,7 @@ function LveJS() {
 
     'version': {
       get() {
-        return '4.2.4'
+        return version
       }
     },
 

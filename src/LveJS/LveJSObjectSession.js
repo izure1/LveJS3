@@ -38,7 +38,6 @@ import MSprite from './Methods/sprite'
 import MParticle from './Methods/particle'
 import MStop from './Methods/stop'
 import MToggleClass from './Methods/toggleClass'
-import MToString from './Methods/toString'
 import MTransition from './Methods/transition'
 import MUnfollow from './Methods/unfollow'
 import MUse from './Methods/use'
@@ -134,7 +133,6 @@ LveJSObjectSession.prototype.sprite = MSprite
 LveJSObjectSession.prototype.particle = MParticle
 LveJSObjectSession.prototype.stop = MStop
 LveJSObjectSession.prototype.toggleClass = MToggleClass
-LveJSObjectSession.prototype.toString = MToString
 LveJSObjectSession.prototype.transition = MTransition
 LveJSObjectSession.prototype.unfollow = MUnfollow
 LveJSObjectSession.prototype.use = MUse

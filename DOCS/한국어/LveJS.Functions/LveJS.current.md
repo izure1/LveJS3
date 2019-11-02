@@ -7,8 +7,8 @@ lve.current.world // 현재 LveJS 월드를 반환합니다
 lve.current.camera // 현재 사용 중인 카메라 객체를 반환합니다
 lve.current.fps // 현재 프레임 정보를 반환합니다
 
-lve.current.isPaused // 현재 월드의 일시정지 상태 여부를 반환합니다
-lve.current.isStarted // 현재 월드의 시작 상태 여부를 반환합니다
+lve.current.paused // 현재 월드의 일시정지 상태 여부를 반환합니다
+lve.current.started // 현재 월드의 시작 상태 여부를 반환합니다
 
 lve.current.canvas // 현재 월드의 캔버스 Element를 반환합니다
 lve.current.version // 이 LveJS 파일의 버전 정보를 반환합니다

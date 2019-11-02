@@ -5,14 +5,14 @@ const process = require('process')
 const ejs = require('ejs')
 const express = require('express')
 const serveIndex = require('serve-index')
-const glob = require('fast-glob')
 const showdown = require('showdown')
+const open = require('open')
 
 const app = express()
 
 
 const DIRECTORY_RENDER = path.join(__dirname, '../test/render').replace(/\\/g, '/')
-const DIRECTORY_DOCS = path.join(__dirname, '../DOCS').replace(/\\/g, '/')
+const DIRECTORY_DOCS = path.join(__dirname, '../docs').replace(/\\/g, '/')
 
 
 app.set('view engine', 'ejs')
@@ -29,8 +29,6 @@ app.get('/', (req, res) => {
   res.render('main')
 })
 
-
-
 app.get('/LveJS.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/LveJS.js'))
 })
@@ -38,8 +36,6 @@ app.get('/LveJS.js', (req, res) => {
 app.get('/LveJS.Interface.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/LveJS.Interface.js'))
 })
-
-
 
 app.get(/(.*)\.ejs$/, (req, res) => {
 
@@ -72,5 +68,5 @@ app.get(/.*\.md$/, (req, res) => {
 })
 
 app.listen(9001, () => {
-  console.log('http://localhost:9001')
+  open('http://localhost:9001')
 })
