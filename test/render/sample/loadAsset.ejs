@@ -25,11 +25,9 @@
       '/image/../image/transition_before.png' // duplicated src == '/image/transition_before.png'
     ]).ready(function () {
 
-      let blobURL = lve.getAsset('/video/sample.mp4')
-
       lve('video').create({
         type: 'video',
-        src: blobURL
+        src: '/video/sample.mp4'
       }).css({
         verticalAlign: 'middle'
       }).play()

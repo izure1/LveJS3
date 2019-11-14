@@ -143,6 +143,10 @@ export default function init(o) {
       this.particleEmitter.initLve(this.lve)
     }
 
+    if (this.spriteManager.isNotInited) {
+      this.spriteManager.initLve(this.lve)
+    }
+
     if (!this.cache.inited) {
 
       for (let f of this.queue) f.call(this, this)

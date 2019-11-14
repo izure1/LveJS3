@@ -2,13 +2,11 @@ import LveJSEvent from '../../LveJSEvent'
 
 import HANDLER_DEFAULT from './Vars/HANDLER.DEFAULT'
 import HANDLER_VIDEO from './Vars/HANDLER.VIDEO'
-import HANDLER_SPRITE from './Vars/HANDLER.SPRITE'
 
 
 let handler
 
 handler = {}
-handler.sprite = HANDLER_SPRITE
 handler.video = HANDLER_VIDEO
 
 for (let type in handler) {

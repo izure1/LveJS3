@@ -14,25 +14,20 @@ handler.__observer = function (p, v, t) {
 
 }
 
-handler.stage = function (p, v, t) {
+handler.name = function (p, v, t) {
 
   if (this.type !== 'sprite') {
     return this.spriteset[p]
   }
 
-  this.__setInformationSprite(this.style.width, this.style.height, v)
+  this.__system__.sprite.name = v
+  let sprite = this.__system__.world.spriteManager.get(v)
 
-  return v
-
-}
-
-handler.fps = function (p, v, t) {
-
-  if (this.type !== 'sprite') {
-    return this.spriteset[p]
+  if (sprite && this.spriteset.name !== v) {
+    this.spriteset.current = sprite.start
   }
 
-  this.__system__.sprite.interval = 1000 / v
+  this.__setInformationSprite()
 
   return v
 
@@ -40,16 +35,29 @@ handler.fps = function (p, v, t) {
 
 handler.playing = function (p, v, t) {
 
+  let sprite
+
   if (this.type !== 'sprite') {
     return this.spriteset[p]
   }
 
   v = !!v
+  sprite = this.__system__.world.spriteManager.get(this.__system__.sprite.name)
+
+  if (!sprite) {
+    v = false
+  }
 
   switch (v) {
 
     case true:
+
       this.emit('play')
+
+      if (sprite.isOverflow(this.spriteset.current + sprite.next)) {
+        this.spriteset.current = sprite.start
+      }
+
       break
 
     default:
@@ -64,8 +72,28 @@ handler.playing = function (p, v, t) {
 
 handler.current = function (p, v, t) {
 
-  if (v >= t.stage) {
-    v = 0
+  if (this.type !== 'sprite') {
+    return this.spriteset[p]
+  }
+
+  let sprite = this.__system__.world.spriteManager.get(this.__system__.sprite.name)
+
+  if (!sprite) {
+    return 0
+  }
+
+  if (sprite.isOverflow(v)) {
+
+    this.emit('ended')
+
+    if (this.loop) {
+      v = sprite.start
+      this.spriteset.playing = true
+    } else {
+      v = sprite.end
+      this.spriteset.playing = false
+    }
+
   }
 
   return v

@@ -10,7 +10,6 @@ export default function Ready(f) {
 
       case 'image':
       case 'video':
-      case 'sprite':
       case 'particle':
         ready.call(this.element, f.bind(this))
         break

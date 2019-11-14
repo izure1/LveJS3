@@ -37,6 +37,43 @@ function restorePhysics(o) {
   Object.assign(this.physics.setting, o)
 }
 
+function restoreColliders(o) {
+
+  for (let t of o) {
+
+    let c = this.lve.createCollider(t.a, t.b)
+
+    if (t.playing) c.play()
+    else c.pause()
+
+  }
+
+}
+
+function restoreSprites(o) {
+
+  for (let t of o) {
+
+    let {
+      name,
+      src,
+      fps,
+      frame,
+      start,
+      end,
+    } = t
+
+    this.lve.createSprite(name, src, {
+      fps,
+      frame,
+      start,
+      end
+    })
+
+  }
+
+}
+
 function restoreCamera(u) {
   this.renderer.camera = this.lve(u).get()
 }
@@ -47,16 +84,15 @@ export default function restore(data) {
     camera,
     renderer,
     physics,
+    colliders,
+    sprites,
     objects
-  } = data
-
-  camera = JSON.parse(camera)
-  renderer = JSON.parse(renderer)
-  physics = JSON.parse(physics)
-  objects = JSON.parse(objects)
+  } = JSON.parse(data)
 
   restoreRenderer.call(this, renderer)
   restorePhysics.call(this, physics)
+  restoreColliders.call(this, colliders)
+  restoreSprites.call(this, sprites)
   restoreObject.call(this, objects)
   restoreCamera.call(this, camera)
 

@@ -22,4 +22,4 @@ lve.restore(savedata)
 
 ---
 
-> return : `Object` { camera, renderer, physics, objects }
+> return : `String`

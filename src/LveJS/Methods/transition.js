@@ -4,14 +4,19 @@ import each from './each'
 
 function image(src, d, e) {
 
-  if (this.src === src) {
+  let after, before
+
+  after = this.__system__.world.assetManager.get(src) || src
+  before = this.__system__.world.assetManager.get(this.src) || this.src
+
+  if (this.src === after) {
     return
   }
 
   let el
 
   el = new Image
-  el.src = this.src
+  el.src = before
 
   this.__system__.transition.run('image_origin', 0, 1, d, e)
   this.__system__.transition.attach('image_origin', {

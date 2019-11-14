@@ -1,14 +1,24 @@
 class LveJSCollider {
 
-  constructor(a, b, cb, colliders) {
+  constructor(a, b, manager) {
     this.a = a
     this.b = b
-    this.callback = cb
-    this.colliders = colliders
+    this.playing = true
+    this.manager = manager
   }
 
   destroy() {
-    return this.colliders.delete(this)
+    return this.manager.delete(this)
+  }
+
+  play() {
+    this.playing = true
+    return this
+  }
+
+  pause() {
+    this.playing = false
+    return this
   }
 
 }

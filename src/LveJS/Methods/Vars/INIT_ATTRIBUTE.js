@@ -9,7 +9,6 @@ export default function (t) {
   }
 
   this.sprite = {
-    element: document.createElement('img'),
     loop: true
   }
 

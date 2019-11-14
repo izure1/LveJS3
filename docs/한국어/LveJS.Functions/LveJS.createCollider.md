@@ -1,13 +1,10 @@
-# LveJS.createCollider(classA [, classB] [, callback])
+# LveJS.createCollider(classA [, classB])
 
 > classA : `String`  
   충돌을 감지할 객체A의 클래스 이름입니다.
 
 > classB : `String`  
   충돌을 감지할 객체B의 클래스 이름입니다.
-
-> callback : `Function`  
-  이 객체들이 충돌할 때 발생할 콜백 함수입니다.
 
 ---
 
@@ -43,4 +40,4 @@ colliderB.destroy()
 ---
 
 > return : `LveJSCollider`  
-  `destroy` 메서드를 이용하여 이 충돌기를 파괴할 수 있습니다.
+  `destroy` 메서드를 이용하여 이 충돌기를 파괴할 수 있습니다. `pause`, `play` 메서드를 이용하여 이 충돌기를 비활성화/활성화 할 수 있습니다.

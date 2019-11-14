@@ -33,7 +33,7 @@
         r = getRandomInt(0, 255)
         g = getRandomInt(0, 255)
         b = getRandomInt(0, 255)
-        radius = getRandomInt(15, 20)
+        radius = getRandomInt(50, 60)
 
         i -= 1
 
@@ -42,7 +42,8 @@
         }
 
         lve(`ball_${getRandomInt(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)}`).create({
-          type: 'circle'
+          type: 'image',
+          src: '/image/poop.gif'
         }).css({
           width: radius,
           height: radius,
@@ -158,11 +159,15 @@
 
         // press left key
         if (lve.current.keyboard.LEFT.isDown) {
-          lve('character').applyForce(-300, 0)
+          lve('character').sprite('name', 'left').play().applyForce(-500, 0)
         }
         // press right key
         else if (lve.current.keyboard.RIGHT.isDown) {
-          lve('character').applyForce(300, 0)
+          lve('character').sprite('name', 'right').play().applyForce(500, 0)
+        }
+        // stop
+        else {
+          lve('character').sprite('name', 'stop').play()
         }
 
         // mouse check...
@@ -179,137 +184,175 @@
       })
 
     }
+
+    function createPlatform() {
+
+      lve('ground').create({
+        type: 'square'
+      }).css({
+        width: 1400,
+        height: 25,
+        color: '#A5F2F3',
+        bottom: 50
+      }).attr({
+        physics: 'static',
+        friction: 0.2
+      }).addClass('block')
+
+      lve('deathline').create({
+        type: 'square'
+      }).css({
+        width: Number.MAX_SAFE_INTEGER,
+        height: 10000,
+        bottom: -1000,
+        verticalAlign: 'bottom'
+      }).attr({
+        physics: 'static'
+      }).addClass('block melt')
+
+      lve('wall-left').create({
+        type: 'square'
+      }).css({
+        width: 5,
+        height: 1000,
+        color: '#ddd',
+        left: -600
+      }).attr({
+        physics: 'static',
+        restitution: 1.2
+      }).addClass('block wall')
+
+      lve('wall-right').create({
+        type: 'square'
+      }).css({
+        width: 5,
+        height: 1000,
+        color: '#ddd',
+        left: 600
+      }).attr({
+        physics: 'static',
+        restitution: 1.2
+      }).addClass('block wall')
+
+    }
+
+    function createScore() {
+
+      lve('score').create({
+        type: 'text',
+        text: '0'
+      }).css({
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: 'white',
+        borderWidth: 10,
+        borderColor: '#0075c8',
+        left: 30,
+        bottom: 800,
+        position: 'fixed'
+      })
+
+      lve('highscore').create({
+        type: 'text',
+        text: highscore
+      }).css({
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
+        borderWidth: 5,
+        borderColor: 'red',
+        left: 30,
+        bottom: 750,
+        position: 'fixed'
+      })
+
+    }
   </script>
   <script>
     lve.init({
       canvas: '#test',
-      backgroundColor: '#252525',
-      defaultCamera: null
+      backgroundColor: '#252525'
+    }).loadAsset([
+      '/image/mummy.png',
+      '/image/poop.gif',
+    ]).ready(() => {
+
+      // Create colliders
+      lve.createCollider('block', 'character')
+      lve.createCollider('ball', 'character')
+      lve.createCollider('ball', 'wall')
+
+
+      // Create Sprite motions
+      lve.createSprite('left', '/image/mummy.png', {
+        frame: 36,
+        start: 17,
+        end: 0,
+        fps: 17 * 4
+      })
+
+      lve.createSprite('right', '/image/mummy.png', {
+        frame: 36,
+        start: 18,
+        end: 35,
+        fps: 17 * 4
+      })
+
+      lve.createSprite('stop', '/image/mummy.png', {
+        frame: 36,
+        start: 14,
+        end: 14,
+      })
+
+
+      // Setting camera
+      lve('camera').css('bottom', 400)
+
+      createPlatform()
+      createScore()
+
+
+      lve('character').create({
+        type: 'sprite'
+      }).css({
+        width: 'auto',
+        height: 60,
+        bottom: 160,
+      }).attr({
+        physics: 'dynamic',
+        friction: 1,
+        density: 1,
+        fixedrotation: true
+      }).addClass('character').sprite('name', 'stop').play()
+
+      lve.on('contactstart', e => {
+
+        if (e.target.name === 'character') {
+
+          // ball hit
+          if (e.another.hasClass('ball') && !e.another.hasClass('melting')) {
+            gameover()
+          }
+          // dropped
+          else if (e.another.name === 'deathline') {
+            gameover()
+          }
+
+        }
+
+        // melt ball
+        else if (e.target.hasClass('ball')) {
+
+          if (e.another.hasClass('melt')) {
+            e.target.fadeOut(300)
+            setTimeout(() => e.target.remove(), 300)
+          }
+
+        }
+
+      })
+
     }).start(setKeyControl)
-
-    lve.createCollider('block', 'character')
-    lve.createCollider('ball', 'character')
-    lve.createCollider('ball', 'wall')
-
-    lve('camera').create({
-      type: 'camera'
-    }).css('bottom', 400).use()
-
-    lve('ground').create({
-      type: 'square'
-    }).css({
-      width: 1400,
-      height: 25,
-      color: '#A5F2F3',
-      bottom: 50
-    }).attr({
-      physics: 'static',
-      friction: 0.2
-    }).addClass('block')
-
-    lve('deathline').create({
-      type: 'square'
-    }).css({
-      width: Number.MAX_SAFE_INTEGER,
-      height: 10000,
-      bottom: -1000,
-      verticalAlign: 'bottom'
-    }).attr({
-      physics: 'static'
-    }).addClass('block melt')
-
-    lve('wall-left').create({
-      type: 'square'
-    }).css({
-      width: 5,
-      height: 1000,
-      color: '#ddd',
-      left: -600
-    }).attr({
-      physics: 'static',
-      restitution: 1.2
-    }).addClass('block wall')
-
-    lve('wall-right').create({
-      type: 'square'
-    }).css({
-      width: 5,
-      height: 1000,
-      color: '#ddd',
-      left: 600
-    }).attr({
-      physics: 'static',
-      restitution: 1.2
-    }).addClass('block wall')
-
-    lve('score').create({
-      type: 'text',
-      text: '0'
-    }).css({
-      fontSize: 40,
-      fontWeight: 'bold',
-      color: 'white',
-      borderWidth: 10,
-      borderColor: '#0075c8',
-      left: 30,
-      bottom: 800,
-      position: 'fixed'
-    })
-
-    lve('highscore').create({
-      type: 'text',
-      text: highscore
-    }).css({
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: 'white',
-      borderWidth: 5,
-      borderColor: 'red',
-      left: 30,
-      bottom: 750,
-      position: 'fixed'
-    })
-
-    lve('character').create({
-      type: 'square'
-    }).css({
-      width: 20,
-      height: 50,
-      color: 'white',
-      bottom: 60,
-    }).attr({
-      physics: 'dynamic',
-      friction: 1,
-      density: 1,
-      fixedrotation: true
-    }).addClass('character')
-
-    lve.on('contactstart', e => {
-
-      if (e.target.name === 'character') {
-
-        // ball hit
-        if (e.another.hasClass('ball') && !e.another.hasClass('melting')) {
-          gameover()
-        }
-        // dropped
-        else if (e.another.name === 'deathline') {
-          gameover()
-        }
-
-      }
-
-      // melt ball
-      else if (e.target.hasClass('ball')) {
-
-        if (e.another.hasClass('melt')) {
-          e.target.fadeOut(300)
-          setTimeout(() => e.target.remove(), 300)
-        }
-
-      }
-
-    })
   </script>
   <script>
     createBall(300)

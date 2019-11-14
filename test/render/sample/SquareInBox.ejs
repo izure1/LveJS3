@@ -101,7 +101,7 @@
 
     lve.on('contactstart', e => {
 
-      if (e.target.hasClass('wall-change-color')) {
+      if (e.target.hasClass('wall-change-color') && !e.another.hasClass('particle')) {
         e.target.css('color', 'red')
       }
 
@@ -109,7 +109,7 @@
 
     lve.on('contactend', e => {
 
-      if (e.target.hasClass('wall-change-color')) {
+      if (e.target.hasClass('wall-change-color') && !e.another.hasClass('particle')) {
         e.target.css('color', '#ddd')
       }
 

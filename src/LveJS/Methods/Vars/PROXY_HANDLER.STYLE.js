@@ -55,7 +55,7 @@ handler.width = handler.height = function (p, v, t) {
         break
 
       case 'sprite':
-        this.__setInformationSprite(sw, sh, this.spriteset.stage)
+        this.__setInformationSprite()
         break
 
       default:
@@ -177,7 +177,7 @@ handler.left = handler.bottom = handler.perspective = function (p, v) {
       break
 
     case 'perspective':
-      if (this.type === 'camera') break
+      if (this.type === 'camera' || this.type === 'particle') break
       w.lve.requestCaching()
       break
 

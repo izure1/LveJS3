@@ -16,7 +16,7 @@
   </div>
   <script type="text/javascript">
     function transformIt() {
-      lve('image').transition(lve.getAsset('/image/transition_after.png'), 3000, 'linear')
+      lve('image').transition('/image/transition_after.png', 3000, 'linear')
     }
 
     function moveIt() {
@@ -40,7 +40,7 @@
 
       lve('image').create({
         type: 'image',
-        src: lve.getAsset('/image/transition_before.png')
+        src: '/image/transition_before.png'
       }).css({
         height: 400,
         verticalAlign: 'middle'

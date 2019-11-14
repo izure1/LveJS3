@@ -50,6 +50,7 @@ export default function __setInformationText() {
     this.__system__.style.height = t.height
 
     this.emit('change', this)
+    this.__setPhysicsFixture()
 
   }, 1)
 

@@ -39,4 +39,4 @@ lve.extendStart(() => {
 
 ---
 
-> return : `Object` { world, camera, fps, isPaused, isStarted, canvas, version, keyboard, mouse  }
+> return : `Object` { world, camera, fps, paused, started, canvas, version, keyboard, mouse  }

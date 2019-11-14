@@ -1,8 +1,7 @@
 export default function () {
 
+  this.name = null
   this.playing = false
-  this.stage = 1
-  this.fps = 1
   this.current = 0
 
 }

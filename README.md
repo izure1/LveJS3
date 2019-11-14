@@ -43,22 +43,19 @@ lve.init({ canvas: '#yourCanvasSelector' }).loadAsset([
   'http://image-video-audio-and-all-type.mp4'
 ]).ready(() => {
   
-  // Get loaded asset's converted url (blob-url)
-  
-  const imageSrc = lve.getAsset('http://your-asset-in-here.png')
-  const videoSrc = lve.getAsset('http://image-video-audio-and-all-type.mp4')
-  
   
   // Create image and video object on screen
+  // This asset has been loaded as a loadAsset function,
+  // so you do not need to wait for it to load.
   
   lve('Objects-unique-identifier').create({
     type: 'image',
-    src: imageSrc
+    src: 'http://your-asset-in-here.png'
   })
   
   lve('Like this').create({
     type: 'video',
-    src: videoSrc
+    src: 'http://image-video-audio-and-all-type.mp4'
   })
   
   // You can create multiple types of objects

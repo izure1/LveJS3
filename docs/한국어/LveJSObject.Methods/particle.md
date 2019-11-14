@@ -30,7 +30,7 @@
 
 > options.blendMode : `String`  
   입자의 블렌드 모드를 설정합니다.  
-  기본값은 `source-over`입니다. 사용할 수 있는 값은 [`style.blendMode`](../Styles/blendMode.md) 문서를 참고하십시오.
+  기본값은 `source-over`입니다. 사용할 수 있는 값은 [`style.blendMode`](../LveJSObject.Styles/blendMode.md) 문서를 참고하십시오.
 
 > options.rangeX : `Number`  
   이 범위만큼 `파티클` 객체에서 x좌표로 넓게 퍼져 랜덤하게 생성됩니다.  
@@ -49,6 +49,20 @@
   만일 입자가 중력의 영향을 받고 싶지 않다면, 이 값을 `0`으로 기입하십시오.  
   중력을 역전하고 싶다면, 음수를 기입하십시오.  
   기본값은 `1`입니다.
+
+> options.fixedRotation : `Boolean`  
+  입자의 회전 여부를 설정합니다.
+
+> options.density : `Number`  
+  입자의 밀도를 설정합니다. 자연스러운 퍼짐을 위해서는 건드리지 않아도 됩니다.  기본값은 `0`입니다.
+
+> options.friction : `Number`  
+  입자의 마찰력을 설정합니다. 자연스러운 퍼짐을 위해서는 건드리지 않아도 됩니다.  
+  기본값은 `0.25`입니다.
+
+> options.restitution : `Number`  
+  입자의 탄성력을 설정합니다. 자연스러운 퍼짐을 위해서는 건드리지 않아도 됩니다.  
+  기본값은 `0.5`입니다.
 
 예시는 아래를 참고하십시오.
 

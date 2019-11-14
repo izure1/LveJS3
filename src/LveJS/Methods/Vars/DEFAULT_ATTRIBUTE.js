@@ -13,9 +13,8 @@ export default function () {
   this.text = ''
   this.src = ''
   this.level = 'main'
-  this.sprite_stage = 0
-  this.sprite_fps = 0
-  this.sprite_playing = 0
+  this.sprite_playing = false
+  this.sprite_frame = 0
   this.sprite_current = 0
   this.video_playbackRate = 1
   this.video_currentTime = 1

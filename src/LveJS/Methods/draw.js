@@ -45,7 +45,6 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
   let {
     style,
-    sprite,
     position,
     transition
   } = this.__system__
@@ -209,11 +208,17 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
     case 'sprite':
 
-      if (!this.element) return this
-      if (!this.element.__isLoaded) return this
+      if (!this.spriteset.name) return this
+
+      let motion, sprite
+
+      motion = this.spriteset.name
+      sprite = this.__system__.world.spriteManager.get(motion)
+
+      if (!sprite || !sprite.ready) return this
 
       borderSquare(canvas, drawWidth, drawHeight, x, y, drawBorderWidth, drawBorderColor)
-      image(canvas, this.element, drawWidth, drawHeight, x, y, this.spriteset.current * sprite.width, 0, sprite.width, sprite.height)
+      image(canvas, sprite.element, drawWidth, drawHeight, x, y, this.spriteset.current * sprite.width, 0, sprite.width, sprite.height)
       break
 
 

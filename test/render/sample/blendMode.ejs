@@ -23,21 +23,8 @@
 
       lve('logo').create({
         type: 'image',
-        src: lve.getAsset('/image/logo.png')
+        src: '/image/logo.png'
       }).css('verticalAlign', 'middle')
-
-      // lve('particleEmitter').create({
-      //   type: 'particle',
-      //   src: lve.getAsset('/image/star.png')
-      // }).css('bottom', -600).particle({
-      //   betweenX: 1000,
-      //   betweenZ: 100,
-      //   interval: 50,
-      //   speed: 50,
-      //   space: 100,
-      //   duration: 9000,
-      //   end: 1
-      // })
 
       lve.setGravity(0, 0.5)
       generateStars(0)
@@ -61,7 +48,7 @@
 
         lve(`star_${i}`).create({
           type: 'image',
-          src: lve.getAsset('./image/star.png'),
+          src: './image/star.png',
         }).attr('physics', 'dynamic').css({
           left: x,
           bottom: -500,

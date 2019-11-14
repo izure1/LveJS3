@@ -1,4 +1,4 @@
-import instanceOf from '../Functions/instanceof'
+import instanceOf from './instanceof'
 
 
 function setScene(u) {

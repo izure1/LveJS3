@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="/css/common.css">
+  <meta charset="utf-8">
+  <script type="text/javascript" src="/LveJS.js"></script>
+</head>
+
+<body>
+  <canvas id="test" width="800" height="450"></canvas>
+  <p>Keyboard A, D</p>
+  <script type="text/javascript">
+    const lve = new LveJS
+
+    lve.init({
+      canvas: '#test'
+    }).loadAsset('/image/mummy.png').ready(() => {
+
+      lve.createSprite('left', '/image/mummy.png', {
+        frame: 36,
+        start: 17,
+        end: 0
+      })
+
+      lve.createSprite('right', '/image/mummy.png', {
+        frame: 36,
+        start: 18,
+        end: 35
+      })
+
+      lve.createSprite('stop', '/image/mummy.png', {
+        frame: 36,
+        start: 14,
+        end: 14
+      })
+
+      const sprite = lve('sprite').create({
+        type: 'sprite'
+      }).css({
+        width: 100
+      }).sprite('name', 'left').play()
+
+      lve.extendStart(() => {
+
+        // When pressing A key
+        if (lve.current.keyboard.A.isDown) {
+          sprite.sprite('name', 'left')
+        }
+
+        // When pressing D key
+        else if (lve.current.keyboard.D.isDown) {
+          sprite.sprite('name', 'right')
+        }
+        
+        //
+        else {
+          sprite.sprite('name', 'stop')
+        }
+
+      })
+
+    })
+  </script>
+</body>
+
+</html>

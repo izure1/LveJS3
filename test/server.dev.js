@@ -33,6 +33,10 @@ app.get('/LveJS.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/LveJS.js'))
 })
 
+app.get('/LveJS.Game.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/LveJS.Game.js'))
+})
+
 app.get('/LveJS.Interface.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/LveJS.Interface.js'))
 })

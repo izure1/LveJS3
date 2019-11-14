@@ -14,7 +14,9 @@ export default function fadeIn(d = 400, e = 'linear') {
       return
     }
 
-    this.__system__.transition.run('fade', 0, 1, d, e)
+    let opacity = this.__system__.transition.opacity()
+
+    this.__system__.transition.run('fade', 0, opacity, d, e)
     this.style.display = 'block'
 
   })

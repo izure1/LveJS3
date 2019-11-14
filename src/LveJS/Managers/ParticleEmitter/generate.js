@@ -43,6 +43,10 @@ export default function generate(emitter) {
     blendMode,
     speed,
     gravityScale,
+    fixedRoatation,
+    density,
+    friction,
+    restitution,
   } = particleset
 
   
@@ -64,11 +68,12 @@ export default function generate(emitter) {
 
     type: 'image',
     physics: 'dynamic',
-    density: 0,
-    friction: 0.25,
-    restitution: 0.5,
     gravityscale: gravityScale,
+    fixedrotation: fixedRoatation,
     src,
+    density,
+    friction,
+    restitution,
 
   }).css({
 
@@ -87,9 +92,8 @@ export default function generate(emitter) {
 
   }, duration).on('animateend', () => {
 
-    particle.__setPhysicsDestroy()
     particle.remove()
-
+    
   }).applyLinearImpulse(toX, toY).addClass(className)
 
   particle.__system__.ghost = true

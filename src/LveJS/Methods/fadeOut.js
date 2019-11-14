@@ -26,7 +26,9 @@ export default function fadeOut(d = 400, e = 'linear', l = 0) {
 
     }
 
-    this.__system__.transition.run('fade', 1, 0, d, e, l, r)
+    let opacity = this.__system__.transition.opacity()
+
+    this.__system__.transition.run('fade', opacity, 0, d, e, l, r)
     this.style.display = 'none'
 
   })

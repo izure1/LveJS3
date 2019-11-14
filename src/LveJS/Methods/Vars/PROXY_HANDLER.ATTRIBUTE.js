@@ -6,7 +6,7 @@ let handler
 handler = {}
 handler.__getter = {}
 
-handler.__getter.sprite_playing = handler.__getter.sprite_stage = handler.__getter.sprite_fps = handler.__getter.sprite_current = function (p, t) {
+handler.__getter.sprite_name = handler.__getter.sprite_playing = handler.__getter.sprite_current = function (p, t) {
 
   p = p.substr(7)
   return t.spriteset[p]
@@ -47,11 +47,9 @@ handler.src = function (p, v, t) {
   switch (this.type) {
 
     case 'image':
-    case 'sprite':
     case 'video':
     case 'particle':
       this.__setInformationElement(v, () => {
-        this.__setInformationSprite(this.style.width, this.style.height, this.spriteset.stage)
         this.__setInformationVideo()
         this.__setTimescaleElement(this.timescale)
         this.__setPhysicsFixture()
@@ -189,19 +187,19 @@ handler.fixedrotation = function (p, v, t) {
 
 }
 
-handler.sprite_playing = handler.sprite_stage = handler.sprite_fps = handler.sprite_current = function (p, v, t) {
+handler.video_playbackRate = handler.video_currentTime = handler.video_volume = handler.video_muted = function (p, v, t) {
 
-  p = p.substr(7)
-  t.spriteset[p] = v
+  p = p.substr(6)
+  t.videoset[p] = v
 
   return v
 
 }
 
-handler.video_playbackRate = handler.video_currentTime = handler.video_volume = handler.video_muted = function (p, v, t) {
+handler.sprite_name = handler.sprite_current = handler.sprite_playing = function (p, v, t) {
 
-  p = p.substr(6)
-  t.videoset[p] = v
+  p = p.substr(7)
+  t.spriteset[p] = v
 
   return v
 

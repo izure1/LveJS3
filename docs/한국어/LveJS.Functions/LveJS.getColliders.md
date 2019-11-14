@@ -6,7 +6,7 @@
 ```
 const colliders = lve.getColliders()
 
-colliders.iterate(collider => {
+colliders.forEach(collider => {
     collider.destroy()
 })
 ```

@@ -39,9 +39,8 @@ function checkCollisionAble(a, b) {
       break
     }
 
-    // 모든 조건을 충족하였을 경우, 콜리더 콜백 함수를 실행하고 탐색 종료
+    // 모든 조건을 충족하였을 경우 탐색 종료
     r = true
-    collider.callback(a, b)
     break
 
   }

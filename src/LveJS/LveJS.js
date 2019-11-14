@@ -17,6 +17,7 @@ import LveJSAnimator from './Managers/LveJSAnimator'
 import LveJSAssetManager from './Managers/LveJSAssetManager'
 import LveJSInputListener from './Managers/LveJSInputListener'
 import LveJSParticleEmitter from './Managers/LveJSParticleEmitter'
+import LveJSSpriteManager from './Managers/LveJSSpriteManager'
 import LveJSCache from './Managers/LveJSCache'
 
 import LveQuery from './LveQuery'
@@ -60,9 +61,18 @@ import FnCalcRatio from './Functions/calcRatio'
 import FnLoadAsset from './Functions/loadAsset'
 import FnGetAsset from './Functions/getAsset'
 import FnCreateCollider from './Functions/createCollider'
+import FnCreateSprite from './Functions/createSprite'
 import FnGetColliders from './Functions/getColliders'
+import FnGetSprites from './Functions/getSprites'
 import FnExists from './Functions/exists'
 
+
+const CLASSES = {
+  LveJSObjectSession,
+  LveJSObject,
+  LveJSVector,
+  Box2D
+}
 
 function LveJS() {
 
@@ -76,18 +86,14 @@ function LveJS() {
   this.keyboardListener = new LveJSInputListener
   this.mouseListener = new LveJSInputListener
   this.particleEmitter = new LveJSParticleEmitter
+  this.spriteManager = new LveJSSpriteManager
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
   this.cache = new LveJSCache
   this.queue = []
 
-  this.classes = {
-    LveJSObjectSession,
-    LveJSObject,
-    LveJSVector,
-    Box2D
-  }
+  this.classes = CLASSES
 
   let self = this
   this.lve = function (u = null) {
@@ -134,7 +140,9 @@ function LveJS() {
   this.lve.loadAsset = FnLoadAsset.bind(this)
   this.lve.getAsset = FnGetAsset.bind(this)
   this.lve.createCollider = FnCreateCollider.bind(this)
+  this.lve.createSprite = FnCreateSprite.bind(this)
   this.lve.getColliders = FnGetColliders.bind(this)
+  this.lve.getSprites = FnGetSprites.bind(this)
   this.lve.exists = FnExists.bind(this)
 
   this.lve.current = FnCurrent.call(this)
@@ -174,5 +182,12 @@ function LveJS() {
   }
 
 }
+
+
+Object.defineProperty(LveJS, 'CLASS', {
+  get() {
+    return CLASSES
+  }
+})
 
 export default LveJS

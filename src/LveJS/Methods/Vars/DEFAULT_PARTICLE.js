@@ -11,5 +11,9 @@ export default function () {
   this.rangeY = 0
   this.rangeZ = 0
   this.gravityScale = 1
+  this.density = 0
+  this.friction = 0.25
+  this.restitution = 0.5
+  this.fixedRotation = false
 
 }

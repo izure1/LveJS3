@@ -1,6 +1,6 @@
 # LveJS.restore(savedata)
 
-> savedata : `Object` { camera, renderer, physics, objects }
+> savedata : `String`
 
 ---
 
