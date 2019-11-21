@@ -2,6 +2,15 @@ import getRandomInt from '../../Utils/getRandomInt'
 import createUUID from '../../Utils/CreateUUID'
 
 
+function getMaxiumDuration(v, duration) {
+
+  if (v > duration) v = duration
+  if (v < 0) v = 0
+
+  return v
+
+}
+
 export default function generate(emitter) {
 
   let {
@@ -11,13 +20,6 @@ export default function generate(emitter) {
     className
   } = emitter
 
-  let {
-    left,
-    bottom,
-    perspective,
-    position
-  } = emitter.style
-
   if (!src) {
     return this
   }
@@ -25,13 +27,6 @@ export default function generate(emitter) {
   if (!element) {
     return this
   }
-
-  let elWidth = 0
-
-  if (position === 'fixed') {
-    elWidth = element.width
-  }
-
 
   let {
     rangeX,
@@ -49,7 +44,8 @@ export default function generate(emitter) {
     restitution,
   } = particleset
 
-  
+
+
   let toX, toY
 
   toX = getRandomInt(-speed, speed)
@@ -59,9 +55,25 @@ export default function generate(emitter) {
   rangeY /= 2
   rangeZ /= 2
 
+
+
+  let {
+    left,
+    bottom,
+    perspective,
+    position
+  } = emitter.style
+
+  let elWidth = 0
+
+  if (position === 'fixed') {
+    elWidth = element.width
+  }
+
   left += getRandomInt(-rangeX, rangeX) - (elWidth * start / 2)
   bottom += getRandomInt(-rangeY, rangeY)
   perspective += getRandomInt(-rangeZ, rangeZ)
+
 
 
   const particle = this.lve(`__particle_${createUUID()}__`).create({
@@ -84,7 +96,8 @@ export default function generate(emitter) {
     scale: start,
     blendMode,
     pointerEvents: false,
-    verticalAlign: 'middle'
+    verticalAlign: 'middle',
+    display: 'none'
 
   }).animate({
 
@@ -93,8 +106,24 @@ export default function generate(emitter) {
   }, duration).on('animateend', () => {
 
     particle.remove()
-    
+
   }).applyLinearImpulse(toX, toY).addClass(className)
+
+
+
+  let {
+    fadeIn,
+    fadeOut,
+  } = particleset
+
+  fadeIn = getMaxiumDuration(fadeIn, duration)
+  fadeOut = getMaxiumDuration(fadeOut, duration)
+
+  particle.fadeIn(fadeIn)
+  setTimeout(() => {
+    particle.fadeOut(fadeOut)
+  }, duration - fadeOut)
+
 
   particle.__system__.ghost = true
   return this

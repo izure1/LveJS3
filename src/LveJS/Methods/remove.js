@@ -79,6 +79,8 @@ export default function remove(includefollower = false) {
     // 오브젝트 목록에서 제거합니다.
     w.hashTable.delete(this.name)
 
+    this.emit('remove')
+
   })
 
   w.lve.requestCaching()

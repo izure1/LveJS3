@@ -79,14 +79,15 @@ function LveJS() {
   this.renderer = new LveJSRenderer
   this.physics = new LveJSPhysics
   this.emitter = new LveJSEmitter
-  this.canvasListener = new LveJSElementListener
-  this.canvasObserver = new LveJSElementObserver
   this.animator = new LveJSAnimator
   this.assetManager = new LveJSAssetManager
-  this.keyboardListener = new LveJSInputListener
-  this.mouseListener = new LveJSInputListener
   this.particleEmitter = new LveJSParticleEmitter
   this.spriteManager = new LveJSSpriteManager
+
+  this.keyboardListener = new LveJSInputListener
+  this.mouseListener = new LveJSInputListener
+  this.canvasListener = new LveJSElementListener
+  this.canvasObserver = new LveJSElementObserver
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob

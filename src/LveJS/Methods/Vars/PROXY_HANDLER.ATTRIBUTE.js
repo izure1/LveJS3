@@ -205,4 +205,41 @@ handler.sprite_name = handler.sprite_current = handler.sprite_playing = function
 
 }
 
+
+handler.style = function (p, v, t) {
+  this.__attachPreset(this.style, v)
+  return this.style
+}
+
+handler.videoset = function (p, v, t) {
+  this.__attachPreset(this.videoset, v)
+  return this.videoset
+}
+
+handler.spriteset = function (p, v, t) {
+  this.__attachPreset(this.spriteset, v)
+  return this.spriteset
+}
+
+handler.dataset = function (p, v, t) {
+  this.__attachPreset(this.dataset, v)
+  return this.dataset
+}
+
+handler.followset = function (p, v, t) {
+  this.__attachPreset(this.followset, v)
+  return this.followset
+}
+
+handler.physicsset = function (p, v, t) {
+  this.__attachPreset(this.physicsset, v)
+  return this.physicsset
+}
+
+handler.particleset = function (p, v, t) {
+  this.__attachPreset(this.particleset, v)
+  return this.particleset
+}
+
+
 export default handler
