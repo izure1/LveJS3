@@ -30,7 +30,7 @@ handler.width = handler.height = function (p, v, t) {
   let c, vp
 
   w = this.__system__.world
-  w.lve.start(w => {
+  w.lve.start(() => {
 
     sw = this.style.width
     sh = this.style.height

@@ -1,17 +1,21 @@
 export default function __setPhysicsFreeze(r) {
 
-  let t
-  let B
+  this.__system__.create.wait(() => {
 
-  t = this.__system__.physics.body
-  B = this.__system__.world.physics.box2d
+    let t
+    let B
 
-  if (!t) {
-    return this
-  }
+    t = this.__system__.physics.body
+    B = this.__system__.world.physics.box2d
 
-  r = !!r ? B.b2_staticBody : this.__system__.physics.type
-  t.SetType(r)
+    if (!t) {
+      return this
+    }
+
+    r = !!r ? B.b2_staticBody : this.__system__.physics.type
+    t.SetType(r)
+
+  })
 
   return this
 

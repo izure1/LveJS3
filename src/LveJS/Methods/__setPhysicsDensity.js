@@ -1,34 +1,38 @@
 export default function __setPhysicsDensity(v) {
 
-  if (!this.__system__.physics.body) {
-    return this
-  }
+  this.__system__.create.wait(() => {
 
-  let body, total
-  let {
-    width = 0,
-      height = 0,
-      marginLeft = 0,
-      marginRight = 0,
-      marginTop = 0,
-      marginBottom = 0
-  } = this.__system__.style
+    if (!this.__system__.physics.body) {
+      return this
+    }
 
-
-  body = width * height
-
-  total = width + marginLeft + marginRight
-  total *= (height + marginTop + marginBottom)
+    let body, total
+    let {
+      width = 0,
+        height = 0,
+        marginLeft = 0,
+        marginRight = 0,
+        marginTop = 0,
+        marginBottom = 0
+    } = this.__system__.style
 
 
-  /* Exclude margin space density */
-  let n
+    body = width * height
 
-  n = body / total
-  n = n || 1
+    total = width + marginLeft + marginRight
+    total *= (height + marginTop + marginBottom)
 
-  this.__system__.physics.body.GetFixtureList().SetDensity(v * n)
-  this.__system__.physics.body.ResetMassData()
+
+    /* Exclude margin space density */
+    let n
+
+    n = body / total
+    n = n || 1
+
+    this.__system__.physics.body.GetFixtureList().SetDensity(v * n)
+    this.__system__.physics.body.ResetMassData()
+
+  })
 
   return this
 

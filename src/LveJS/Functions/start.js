@@ -1,11 +1,6 @@
 export default function start(f) {
 
-  if (this.cache.inited) {
-    f.call(this, this)
-    return this.lve
-  }
-
-  this.queue.push(f)
+  this.worldReady.wait(f)
   return this.lve
 
 }

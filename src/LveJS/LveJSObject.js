@@ -1,5 +1,6 @@
 import setHiddenContext from './Utils/setHiddenContext'
 import SuppressJob from './Utils/SuppressJob'
+import WaitReady from './Utils/WaitReady'
 
 import LveJSObjectSession from './LveJSObjectSession'
 import LveJSTransition from './LveJSTransition'
@@ -72,6 +73,7 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__.physics, 'information', {})
   setHiddenContext.call(this.__system__, 'audio', {})
   setHiddenContext.call(this.__system__.audio, 'setting', {})
+  setHiddenContext.call(this.__system__, 'create', new WaitReady)
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob)
   setHiddenContext.call(this.__system__, 'transition', new LveJSTransition)
 

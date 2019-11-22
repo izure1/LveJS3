@@ -23,6 +23,7 @@ import LveJSCache from './Managers/LveJSCache'
 import LveQuery from './LveQuery'
 
 import SuppressJob from './Utils/SuppressJob'
+import WaitReady from './Utils/WaitReady'
 
 // Functions
 import FnInstanceOf from './Functions/instanceof'
@@ -91,8 +92,8 @@ function LveJS() {
 
   this.hashTable = new LveJSHashTable
   this.suppressJob = new SuppressJob
+  this.worldReady = new WaitReady
   this.cache = new LveJSCache
-  this.queue = []
 
   this.classes = CLASSES
 

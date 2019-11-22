@@ -3,22 +3,26 @@ import getFixture from '../Helpers/getFixture'
 
 export default function __setPhysicsFixture() {
 
-  if (!this.__system__.physics.body) {
-    return this
-  }
+  this.__system__.create.wait(() => {
 
-  let B = this.__system__.physics.body
-  let {
-    F,
-    V
-  } = getFixture.call(this)
+    if (!this.__system__.physics.body) {
+      return this
+    }
 
-  B.DestroyFixture(B.GetFixtureList())
-  B.ClearTrash()
-  B.CreateFixture(F)
-  B.__vector__ = V
+    let B = this.__system__.physics.body
+    let {
+      F,
+      V
+    } = getFixture.call(this)
 
-  this.__setPhysicsDensity(this.density)
+    B.DestroyFixture(B.GetFixtureList())
+    B.ClearTrash()
+    B.CreateFixture(F)
+    B.__vector__ = V
+
+    this.__setPhysicsDensity(this.density)
+
+  })
 
   return this
 

@@ -147,14 +147,7 @@ export default function init(o) {
       this.spriteManager.initLve(this.lve)
     }
 
-    if (!this.cache.inited) {
-
-      for (let f of this.queue) f.call(this, this)
-
-      this.cache.inited = true
-      delete this.queue
-
-    }
+    this.worldReady.done()
 
   })
 

@@ -27,10 +27,12 @@ export default function __setInformationElement(s = '', cb = function () {}) {
     // 엘리멘트가 준비되면 실제 크기값을 저장합니다
     ready.call(t, () => {
 
-      this.__system__.world.lve.start(w => {
+      this.__system__.world.lve.start(() => {
 
         let c
+        let w
 
+        w = this.__system__.world
         c = w.canvas
         d = getSizeofElement(t, this.style.width, this.style.height, c.width, c.height)
 
