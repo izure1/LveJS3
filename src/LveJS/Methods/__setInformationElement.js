@@ -9,6 +9,8 @@ export default function __setInformationElement(s = '', cb = function () {}) {
 
   let t
   let d
+  
+  this.__system__.ready.element.init()
 
   this.__system__.suppressJob.clear('setElement')
   this.__system__.suppressJob.set('setElement', () => {
@@ -43,6 +45,7 @@ export default function __setInformationElement(s = '', cb = function () {}) {
         this.__system__.style.height = d.height
 
         this.__setPhysicsFixture()
+        this.__system__.ready.element.done()
 
         cb.call(this)
 

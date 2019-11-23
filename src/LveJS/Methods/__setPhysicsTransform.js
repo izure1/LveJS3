@@ -5,7 +5,7 @@ import {
 
 export default function __setPhysicsTansform(x, y, r) {
 
-  this.__system__.create.wait(() => {
+  this.__system__.ready.physics.wait(() => {
 
     let B, S
 

@@ -1,6 +1,6 @@
 export default function __setPhysicsFreeze(r) {
 
-  this.__system__.create.wait(() => {
+  this.__system__.ready.physics.wait(() => {
 
     let t
     let B

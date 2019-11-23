@@ -9,7 +9,7 @@ export default function __physicsUpdate() {
   let pos
   let s
 
-  this.__system__.create.wait(() => {
+  this.__system__.ready.physics.wait(() => {
 
     if (!this.__system__.physics.body) {
       return this

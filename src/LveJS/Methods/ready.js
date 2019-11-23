@@ -1,24 +1,19 @@
 import each from './each'
-import ready from '../Utils/domReady'
+import domReady from '../Utils/domReady'
 
 
 export default function Ready(f) {
 
   each.call(this, function () {
 
-    switch (this.type) {
-
-      case 'image':
-      case 'video':
-      case 'particle':
-        ready.call(this.element, f.bind(this))
-        break
-
-      default:
-        f.call(this)
-        break
-
+    if (this.element) {
+      this.__system__.ready.element.wait(() => {
+        domReady.call(this.element, f.bind(this))
+      })
+      return
     }
+
+    f.call(this)
 
   })
 

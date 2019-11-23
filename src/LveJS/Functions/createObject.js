@@ -31,7 +31,7 @@ export default function (u, o = {}) {
   t.attr(v1).__setElementEvent()
   t.attr(o).css(v2).css(t.css()).sprite(t.sprite())
 
-  t.__system__.create.done()
+  t.__system__.ready.create.done()
 
   return t
 

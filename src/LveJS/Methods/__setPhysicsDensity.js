@@ -1,6 +1,6 @@
 export default function __setPhysicsDensity(v) {
 
-  this.__system__.create.wait(() => {
+  this.__system__.ready.physics.wait(() => {
 
     if (!this.__system__.physics.body) {
       return this

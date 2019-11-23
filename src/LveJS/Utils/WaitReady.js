@@ -5,6 +5,11 @@ class WaitReady {
     this.ready = false
   }
 
+  init() {
+    this.ready = false
+    this.callbacks = new Set
+  }
+
   wait(callback) {
 
     if (this.ready) {

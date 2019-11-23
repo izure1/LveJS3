@@ -73,7 +73,7 @@ function setSysAttr(r) {
   setHiddenContext.call(this.__system__.physics, 'information', {})
   setHiddenContext.call(this.__system__, 'audio', {})
   setHiddenContext.call(this.__system__.audio, 'setting', {})
-  setHiddenContext.call(this.__system__, 'create', new WaitReady)
+  setHiddenContext.call(this.__system__, 'ready', {})
   setHiddenContext.call(this.__system__, 'suppressJob', new SuppressJob)
   setHiddenContext.call(this.__system__, 'transition', new LveJSTransition)
 
@@ -90,6 +90,10 @@ function setSysAttr(r) {
   for (let t of DEFAULT_EVENT) {
     this.__system__.events[t] = new Map
   }
+
+  this.__system__.ready.create = new WaitReady
+  this.__system__.ready.element = new WaitReady
+  this.__system__.ready.physics = new WaitReady
 
   this.__system__.physics.force = true
   this.__system__.style.d_type = this.type === 'camera' ? 0 : 1

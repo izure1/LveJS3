@@ -3,7 +3,7 @@ import getFixture from '../Helpers/getFixture'
 
 export default function __setPhysicsFixture() {
 
-  this.__system__.create.wait(() => {
+  this.__system__.ready.physics.wait(() => {
 
     if (!this.__system__.physics.body) {
       return this
