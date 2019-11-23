@@ -3,47 +3,42 @@ import getFixture from '../Helpers/getFixture'
 
 export default function __setPhysicsBody() {
 
-  this.__system__.ready.create.wait(() => {
+  if (this.__system__.physics.body) {
+    return this
+  }
 
-    if (this.__system__.physics.body) {
-      return this
-    }
+  let w, h, x, y, r
+  let B
+  let R
 
-    let w, h, x, y, r
-    let B
-    let R
+  w = this.__system__.style.width
+  h = this.__system__.style.height
+  x = this.style.left
+  y = this.style.bottom
+  r = this.style.rotate
 
-    w = this.__system__.style.width
-    h = this.__system__.style.height
-    x = this.style.left
-    y = this.style.bottom
-    r = this.style.rotate
+  let {
+    F,
+    V
+  } = getFixture.call(this)
 
-    let {
-      F,
-      V
-    } = getFixture.call(this)
+  B = this.__system__.world.physics.createBody(this.physics, x, y, r)
+  R = this.__system__.world.physics.createObject(this, B, F)
 
-    B = this.__system__.world.physics.createBody(this.physics, x, y, r)
-    R = this.__system__.world.physics.createObject(this, B, F)
+  R.__vector__ = V
+  R.ClearTrash = function () {
 
-    R.__vector__ = V
-    R.ClearTrash = function () {
+    // Clear vector trash in shape
+    if (!R.__vector__) return
 
-      // Clear vector trash in shape
-      if (!R.__vector__) return
+    R.__vector__.__destroy__()
+    R.__vector__ = null
 
-      R.__vector__.__destroy__()
-      R.__vector__ = null
+  }
 
-    }
+  this.__system__.physics.body = R
 
-    this.__system__.physics.body = R
-    this.__system__.ready.physics.done()
-
-    this.__setPhysicsTransform(x, y, r)
-
-  })
+  this.__setPhysicsTransform(x, y, r)
 
   return this
 

@@ -49,6 +49,7 @@ import M__transitionUpdate from './Methods/__transitionUpdate'
 import M__physicsUpdate from './Methods/__physicsUpdate'
 import M__generateParticle from './Methods/__generateParticle'
 import M__attachPreset from './Methods/__attachPreset'
+import M__runAllPropertiesHandler from './Methods/__runAllPropertiesHandler'
 
 
 
@@ -186,6 +187,7 @@ LveJSObject.prototype.__transitionUpdate = M__transitionUpdate
 LveJSObject.prototype.__physicsUpdate = M__physicsUpdate
 LveJSObject.prototype.__generateParticle = M__generateParticle
 LveJSObject.prototype.__attachPreset = M__attachPreset
+LveJSObject.prototype.__runAllPropertiesHandler = M__runAllPropertiesHandler
 
 
 export default LveJSObject

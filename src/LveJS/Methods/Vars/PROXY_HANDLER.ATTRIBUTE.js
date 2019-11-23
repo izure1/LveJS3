@@ -57,6 +57,7 @@ handler.src = function (p, v, t) {
       break
 
     default:
+      this.__system__.ready.element.done()
       return ''
 
   }
@@ -129,6 +130,7 @@ handler.physics = function (p, v, t) {
   }
 
   this.__setPhysicsBody()
+
   this.__system__.physics.body.SetType(y)
   this.__system__.physics.type = y
 

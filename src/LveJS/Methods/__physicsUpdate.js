@@ -9,29 +9,25 @@ export default function __physicsUpdate() {
   let pos
   let s
 
-  this.__system__.ready.physics.wait(() => {
+  if (!this.__system__.physics.body) {
+    return this
+  }
 
-    if (!this.__system__.physics.body) {
-      return this
-    }
+  if (!this.__system__.physics.body.IsActive()) {
+    return this
+  }
 
-    if (!this.__system__.physics.body.IsActive()) {
-      return this
-    }
+  s = this.__system__.world.physics.setting.unitScale
+  physics = this.__system__.physics
 
-    s = this.__system__.world.physics.setting.unitScale
-    physics = this.__system__.physics
+  pos = physics.body.GetPosition()
+  physics.force = false
 
-    pos = physics.body.GetPosition()
-    physics.force = false
+  this.style.left = pos.get_x() * s
+  this.style.bottom = pos.get_y() * s
+  this.style.rotate = radToDeg(physics.body.GetAngle())
 
-    this.style.left = pos.get_x() * s
-    this.style.bottom = pos.get_y() * s
-    this.style.rotate = radToDeg(physics.body.GetAngle())
-
-    physics.force = true
-
-  })
+  physics.force = true
 
   return this
 
