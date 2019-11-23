@@ -66,6 +66,7 @@ import FnCreateSprite from './Functions/createSprite'
 import FnGetColliders from './Functions/getColliders'
 import FnGetSprites from './Functions/getSprites'
 import FnExists from './Functions/exists'
+import FnGetAssetBlob from './Functions/getAssetBlob'
 
 
 const CLASSES = {
@@ -146,6 +147,7 @@ function LveJS() {
   this.lve.getColliders = FnGetColliders.bind(this)
   this.lve.getSprites = FnGetSprites.bind(this)
   this.lve.exists = FnExists.bind(this)
+  this.lve.getAssetBlob = FnGetAssetBlob.bind(this)
 
   this.lve.current = FnCurrent.call(this)
 

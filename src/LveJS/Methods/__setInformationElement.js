@@ -13,8 +13,11 @@ export default function __setInformationElement(s = '', cb = function () {}) {
   this.__system__.suppressJob.clear('setElement')
   this.__system__.suppressJob.set('setElement', () => {
 
-    s = this.__system__.world.assetManager.get(s) || s
     t = this.element
+    s =
+      this.__system__.world.assetManager.get(s) ?
+      this.__system__.world.assetManager.get(s).blobURL : s
+
 
     // 엘리멘트와 매개변수로 넘어온 source 주소값이 다를 경우, 새롭게 불러들입니다.
     if (t.src !== s) {

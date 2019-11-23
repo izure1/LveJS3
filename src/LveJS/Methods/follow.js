@@ -21,10 +21,10 @@ export default function follow(u, o) {
   }
 
   if (arguments.length === 1) {
-    return t.followset[u]
+    return t.followset.position[u]
   }
 
-  o = o || {
+  if (!(o instanceof Object)) o = {
     left: 0,
     bottom: 0,
     perspective: 0,

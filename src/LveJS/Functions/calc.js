@@ -60,10 +60,12 @@ export default function calc(left, bottom, perspective, o, c = this.renderer.cam
   c = c.value
 
   ps = Object.keys(o).concat('left', 'bottom', 'perspective')
+  // 기본 스타일값과 매개변수로 넘겨받은 스타일 값을 병합합니다.
   o = Object.assign({}, o)
   o = Object.assign(new DEFAULT_STYLE, o)
 
 
+  // 카메라 기본 시야각거리와 z좌표와의 거리를 계산하여 비율을 얻습니다.
   d  = this.renderer.setting.scaleDistance
   d = d / ((d - c[6]) / d)
   s = perspective / d
@@ -80,14 +82,14 @@ export default function calc(left, bottom, perspective, o, c = this.renderer.cam
 
       o.left -= this.renderer.setting.originWidth / 2
       o.left *= s
-      o.left += o.width / 2
+      o.left += (o.width * o.scale) / 2
 
       o.bottom -= this.renderer.setting.originHeight / 2
       o.bottom *= s
 
       o.perspective = perspective
 
-      // Camera axis amend
+      // Apply camera axis
       o.left += c[4]
       o.bottom += c[5]
 

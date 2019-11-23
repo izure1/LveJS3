@@ -3,7 +3,7 @@
 > name : `LveJSObjectSession` | `LveJSObject` | `String`  
   따라다닐 객체입니다.
 
-> relativeGap : `Object` { left, bottom, perspective }  
+> relativeGap : `null` | `Object` { left, bottom, perspective }  
   이 정도 거리를 벌리고 따라다닙니다. 기본값은 각각 `0`입니다.
 
 ---
@@ -30,6 +30,12 @@ lve('camera').follow('player', { left: -100 })
 
 `follow` 메서드를 이용하여, 동시에 여러 객체를 따라다닐 수 없습니다.  
 만일 이전에 `A`라는 객체를 따라다녔지만, 새롭게 `B`라는 객체를 따라다니게 한다면, *기존 `A`객체를 더이상 추적하지 않습니다.*
+
+만일 `{ left: 0, bottom: 0, perspective: 0 }` 만큼 따라다니게 만들고 싶다면, `relativeGap` 매개변수로 `null`을 넘기십시오. 아래와 같습니다.
+
+```
+lve('yourObject').follow('target', null)
+```
 
 ---
 

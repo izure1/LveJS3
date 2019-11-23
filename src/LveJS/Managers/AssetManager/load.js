@@ -1,17 +1,19 @@
 import path from 'path'
 
 
-function loaded(resolveSrc, blob, resolve, cb) {
+function loaded(resolveSrc, response, resolve, cb) {
 
   this.loading.delete(resolveSrc)
 
-  if (blob !== null) {
+  if (response !== null) {
 
-    this.map.set(resolveSrc, blob)
+    response.blobURL = URL.createObjectURL(response)
+
+    this.map.set(resolveSrc, response)
     this.emit('load')
     
-    resolve(blob)
-    cb(resolveSrc, blob)
+    resolve(response)
+    cb(resolveSrc, response.blobURL)
 
   }
 
@@ -51,18 +53,15 @@ export default function load(src, cb = function () {}) {
     xml.onload = function (e) {
 
       if (this.status !== 200) {
-        loaded.call(self, resolveSrc, null, resolve, cb)
+        loaded.call(self, resolveSrc, this.response, resolve, cb)
         return
       }
 
-      blob = this.response
-      blob = URL.createObjectURL(blob)
-
-      loaded.call(self, resolveSrc, blob, resolve, cb)
+      loaded.call(self, resolveSrc, this.response, resolve, cb)
 
     }
     xml.onabort = xml.onerror = function (e) {
-      loaded.call(self, resolveSrc, null, resolve, cb)
+      loaded.call(self, resolveSrc, null, null, resolve, cb)
     }
     xml.responseType = 'blob'
     xml.send(null)

@@ -6,8 +6,11 @@ function image(src, d, e) {
 
   let after, before
 
-  after = this.__system__.world.assetManager.get(src) || src
-  before = this.__system__.world.assetManager.get(this.src) || this.src
+  after = this.__system__.world.assetManager.get(src)
+  after = after ? after.blobURL : src
+
+  before = this.__system__.world.assetManager.get(this.src)
+  before = before ? before.blobURL : this.src
 
   if (this.src === after) {
     return

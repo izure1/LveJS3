@@ -25,7 +25,7 @@ function checkCollisionAble(a, b) {
       a.hasClass(collider.a) && b.hasClass(collider.b) ||
       a.hasClass(collider.b) && b.hasClass(collider.a)
 
-    // 소유하지 않았을 경우 다음 콜리더 확인
+    // 소유하지 않았을 경우 다음 충돌기 확인
     if (!r) continue
 
     // 소유하고 있을 경우 아래 조건을 충족해야함

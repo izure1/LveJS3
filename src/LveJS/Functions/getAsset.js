@@ -6,6 +6,6 @@
  */
 export default function getAsset(src = null) {
 
-  return this.assetManager.get(src)
+  return this.assetManager.get(src).blobURL
 
 }

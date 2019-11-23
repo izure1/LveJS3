@@ -44,25 +44,26 @@ export default function generate(emitter) {
     restitution,
   } = particleset
 
-
+  let {
+    left,
+    bottom,
+    perspective,
+    position,
+    scale,
+  } = emitter.style
 
   let toX, toY
 
   toX = getRandomInt(-speed, speed)
   toY = getRandomInt(-speed, speed)
 
+  rangeX *= scale
+  rangeY *= scale
+  rangeZ *= scale
+  
   rangeX /= 2
   rangeY /= 2
   rangeZ /= 2
-
-
-
-  let {
-    left,
-    bottom,
-    perspective,
-    position
-  } = emitter.style
 
   let elWidth = 0
 
@@ -73,6 +74,9 @@ export default function generate(emitter) {
   left += getRandomInt(-rangeX, rangeX) - (elWidth * start / 2)
   bottom += getRandomInt(-rangeY, rangeY)
   perspective += getRandomInt(-rangeZ, rangeZ)
+
+  start *= scale
+  end *= scale
 
 
 
