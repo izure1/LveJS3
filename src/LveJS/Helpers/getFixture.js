@@ -13,20 +13,27 @@ export default function getFixture() {
 
   physics = this.__system__.world.physics
 
-  w = this.__system__.style.width || 1
-  h = this.__system__.style.height || 1
+  w = this.__system__.style.width
+  h = this.__system__.style.height
   x = this.__system__.style.fx
   y = this.__system__.style.fy
   s = this.__system__.style.scale
 
-  ml = this.__system__.style.marginLeft || 0
-  mr = this.__system__.style.marginRight || 0
-  mt = this.__system__.style.marginTop || 0
-  mb = this.__system__.style.marginBottom || 0
+  ml = this.__system__.style.marginLeft
+  mr = this.__system__.style.marginRight
+  mt = this.__system__.style.marginTop
+  mb = this.__system__.style.marginBottom
 
+  if (isNaN(w)) w = 1
+  if (isNaN(h)) h = 1
   if (isNaN(x)) x = 0.5
   if (isNaN(y)) y = 0.5
   if (isNaN(s)) s = 1
+
+  if (isNaN(ml)) ml = 0
+  if (isNaN(mr)) mr = 0
+  if (isNaN(mt)) mt = 0
+  if (isNaN(mb)) mb = 0
 
   w *= s
   h *= s
