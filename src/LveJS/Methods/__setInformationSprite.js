@@ -8,51 +8,55 @@ export default function __setInformationSprite() {
   let c
   let sprite
 
-  if (this.type !== 'sprite') {
-    return this
-  }
+  this.__system__.suppressJob.set('__setInformationSprite', () => {
 
-  sprite = this.__system__.world.spriteManager.get(this.__system__.sprite.name)
+    if (this.type !== 'sprite') {
+      return this
+    }
 
-  if (!sprite) {
-    return this
-  }
+    sprite = this.__system__.world.spriteManager.get(this.__system__.sprite.name)
 
-  ready.call(sprite.element, () => {
+    if (!sprite) {
+      return this
+    }
 
-    this.__system__.world.lve.start(() => {
+    ready.call(sprite.element, () => {
 
-      vp = this.__system__.world.canvas
-      c = getSizeofElement(sprite.element, this.style.width, this.style.height, vp.width, vp.height)
+      this.__system__.world.lve.start(() => {
 
-      this.__system__.style.width = c.width
-      this.__system__.style.height = c.height
-      this.__system__.sprite.width = sprite.width
-      this.__system__.sprite.height = sprite.height
+        vp = this.__system__.world.canvas
+        c = getSizeofElement(sprite.element, this.style.width, this.style.height, vp.width, vp.height)
 
-      switch (this.style.width) {
+        this.__system__.style.width = c.width
+        this.__system__.style.height = c.height
+        this.__system__.sprite.width = sprite.width
+        this.__system__.sprite.height = sprite.height
 
-        case 'auto':
-          this.__system__.style.width /= sprite.frame
-          break
+        switch (this.style.width) {
 
-        default:
-          switch (this.style.height) {
+          case 'auto':
+            this.__system__.style.width /= sprite.frame
+            break
 
-            case 'auto':
-              this.__system__.style.height *= sprite.frame
-              break
+          default:
+            switch (this.style.height) {
 
-          }
-          break
+              case 'auto':
+                this.__system__.style.height *= sprite.frame
+                break
 
-      }
+            }
+            break
 
-      this.__setPhysicsFixture()
+        }
+
+        this.__setPhysicsFixture()
+
+      })
 
     })
 
-  })
+  }, 1)
 
   return this
 

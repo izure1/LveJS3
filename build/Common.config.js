@@ -6,7 +6,7 @@ module.exports = {
 
   // production
   // development
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [{
       test: /\.js$/,
