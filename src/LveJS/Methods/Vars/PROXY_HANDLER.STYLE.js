@@ -59,15 +59,20 @@ handler.width = handler.height = function (p, v, t) {
         break
 
       default:
-        c = this.element || {}
-        d = getSizeofElement(c, sw, sh, vp.width, vp.height)
+        this.__onElementReady(() => {
+          
+          c = this.element || {}
+          d = getSizeofElement(c, sw, sh, vp.width, vp.height)
 
-        this.__system__.style[p] = d[p]
+          this.__system__.style.width = d.width
+          this.__system__.style.height = d.height
+
+          this.__setPhysicsFixture()
+          
+        })
         break
 
     }
-
-    this.__setPhysicsFixture()
 
   })
 
@@ -142,7 +147,6 @@ handler.fontSize = handler.fontFamily = handler.fontStyle = handler.fontWeight =
   }
 
   this.__setInformationText()
-  this.__setPhysicsFixture()
   return v
 
 }
@@ -235,7 +239,9 @@ handler.rotate = function (p, v, t) {
 handler.scale = function (p, v, t) {
 
   this.__system__.style.scale = v
-  this.__setPhysicsFixture()
+  this.__onElementReady(() => {
+    this.__setPhysicsFixture()
+  })
   return v
 
 }
@@ -287,7 +293,9 @@ handler.margin = function (p, v, t) {
   this.__system__.style.marginTop = mt
   this.__system__.style.marginBottom = mb
 
-  this.__setPhysicsFixture()
+  this.__onElementReady(() => {
+    this.__setPhysicsFixture()
+  })
 
   return `${mt} ${mr} ${mb} ${ml}`
 
@@ -301,7 +309,9 @@ handler.marginLeft = handler.marginRight = handler.marginTop = handler.marginBot
   }
 
   this.__system__.style[p] = v
-  this.__setPhysicsFixture()
+  this.__onElementReady(() => {
+    this.__setPhysicsFixture()
+  })
 
   return v
 

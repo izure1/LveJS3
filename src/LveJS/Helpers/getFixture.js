@@ -1,7 +1,9 @@
+import DEFAULT_STYLE from '../Methods/Vars/DEFAULT_STYLE'
+
+
 function getFixturePoint(v = 0.5, h = 1) {
   return (v / 0.5 - 1) * h
 }
-
 
 export default function getFixture() {
 
@@ -24,16 +26,27 @@ export default function getFixture() {
   mt = this.__system__.style.marginTop
   mb = this.__system__.style.marginBottom
 
-  if (isNaN(w)) w = 1
-  if (isNaN(h)) h = 1
+
+  let {
+    width,
+    height,
+    scale,
+    marginLeft,
+    marginRight,
+    marginTop,
+    marginBottom
+  } = new DEFAULT_STYLE
+
+  if (isNaN(w)) w = width
+  if (isNaN(h)) h = height
+  if (isNaN(s)) s = scale
   if (isNaN(x)) x = 0.5
   if (isNaN(y)) y = 0.5
-  if (isNaN(s)) s = 1
 
-  if (isNaN(ml)) ml = 0
-  if (isNaN(mr)) mr = 0
-  if (isNaN(mt)) mt = 0
-  if (isNaN(mb)) mb = 0
+  if (isNaN(ml)) ml = marginLeft
+  if (isNaN(mr)) mr = marginRight
+  if (isNaN(mt)) mt = marginTop
+  if (isNaN(mb)) mb = marginBottom
 
   w *= s
   h *= s
