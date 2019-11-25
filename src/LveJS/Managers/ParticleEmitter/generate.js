@@ -42,6 +42,7 @@ export default function generate(emitter) {
     density,
     friction,
     restitution,
+    quantity,
   } = particleset
 
   let {
@@ -52,15 +53,10 @@ export default function generate(emitter) {
     scale,
   } = emitter.style
 
-  let toX, toY
-
-  toX = getRandomInt(-speed, speed)
-  toY = getRandomInt(-speed, speed)
-
   rangeX *= scale
   rangeY *= scale
   rangeZ *= scale
-  
+
   rangeX /= 2
   rangeY /= 2
   rangeZ /= 2
@@ -71,65 +67,76 @@ export default function generate(emitter) {
     elWidth = element.width
   }
 
-  left += getRandomInt(-rangeX, rangeX) - (elWidth * start / 2)
-  bottom += getRandomInt(-rangeY, rangeY)
-  perspective += getRandomInt(-rangeZ, rangeZ)
-
   start *= scale
   end *= scale
 
 
 
-  const particle = this.lve(`__particle_${createUUID()}__`).create({
+  for (let i = 0; i < quantity; i++) {
 
-    type: 'image',
-    physics: 'dynamic',
-    gravityscale: gravityScale,
-    fixedrotation: fixedRoatation,
-    src,
-    density,
-    friction,
-    restitution,
+    let toX, toY
+    let particlePosition
 
-  }).css({
+    toX = getRandomInt(-speed, speed)
+    toY = getRandomInt(-speed, speed)
 
-    left,
-    bottom,
-    perspective,
-    position,
-    scale: start,
-    blendMode,
-    pointerEvents: false,
-    verticalAlign: 'middle',
-    display: 'none'
+    particlePosition = {
+      left: left + getRandomInt(-rangeX, rangeX) - (elWidth * start / 2),
+      bottom: bottom + getRandomInt(-rangeY, rangeY),
+      perspective: perspective + getRandomInt(-rangeZ, rangeZ),
+    }
 
-  }).animate({
+    const particle = this.lve(`__particle_${createUUID()}__`).create({
 
-    scale: end
+      type: 'image',
+      physics: 'dynamic',
+      gravityscale: gravityScale,
+      fixedrotation: fixedRoatation,
+      src,
+      density,
+      friction,
+      restitution,
 
-  }, duration).on('animateend', () => {
+    }).css({
 
-    particle.remove()
+      ...particlePosition,
+      position,
+      scale: start,
+      blendMode,
+      pointerEvents: false,
+      verticalAlign: 'middle',
+      display: 'none'
 
-  }).applyLinearImpulse(toX, toY).addClass(className)
+    }).animate({
 
+      scale: end
 
+    }, duration).on('animateend', () => {
 
-  let {
-    fadeIn,
-    fadeOut,
-  } = particleset
+      particle.remove()
 
-  fadeIn = getMaxiumDuration(fadeIn, duration)
-  fadeOut = getMaxiumDuration(fadeOut, duration)
-
-  particle.fadeIn(fadeIn)
-  setTimeout(() => {
-    particle.fadeOut(fadeOut)
-  }, duration - fadeOut)
+    }).applyLinearImpulse(toX, toY).addClass(className)
 
 
-  particle.__system__.ghost = true
+
+    let {
+      fadeIn,
+      fadeOut,
+    } = particleset
+
+    fadeIn = getMaxiumDuration(fadeIn, duration)
+    fadeOut = getMaxiumDuration(fadeOut, duration)
+
+    particle.fadeIn(fadeIn)
+    setTimeout(() => {
+      particle.fadeOut(fadeOut)
+    }, duration - fadeOut)
+
+
+    particle.__system__.ghost = true
+
+  }
+
   return this
 
 }

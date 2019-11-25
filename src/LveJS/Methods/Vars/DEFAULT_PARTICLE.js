@@ -16,6 +16,7 @@ export default function () {
   this.density = 0
   this.friction = 0.25
   this.restitution = 0.5
+  this.quantity = 1
   this.fixedRotation = false
 
 }
