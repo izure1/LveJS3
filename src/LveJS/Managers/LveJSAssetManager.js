@@ -7,6 +7,9 @@ import on from './AssetManager/on'
 import once from './AssetManager/once'
 import emit from './AssetManager/emit'
 import setCallback from './AssetManager/setCallback'
+import getBaseURL from './AssetManager/getBaseURL'
+import setBaseURL from './AssetManager/setBaseURL'
+import getResolvedURL from './AssetManager/getResolvedURL'
 
 
 class LveJSAssetManager {
@@ -16,6 +19,7 @@ class LveJSAssetManager {
     this.event = new Map
     this.map = new Map
     this.loading = new Set
+    this.baseURL = ''
 
   }
 
@@ -31,6 +35,10 @@ LveJSAssetManager.prototype.on = on
 LveJSAssetManager.prototype.once = once
 LveJSAssetManager.prototype.emit = emit
 LveJSAssetManager.prototype.setCallback = setCallback
+LveJSAssetManager.prototype.getBaseURL = getBaseURL
+LveJSAssetManager.prototype.setBaseURL = setBaseURL
+LveJSAssetManager.prototype.getResolvedURL = getResolvedURL
+
 
 
 export default LveJSAssetManager

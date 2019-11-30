@@ -272,9 +272,9 @@
     lve.init({
       canvas: '#test',
       backgroundColor: '#252525'
-    }).loadAsset([
-      '/image/mummy.png',
-      '/image/poop.gif',
+    }).setBaseURL('/image/').loadAsset([
+      'mummy.png',
+      'poop.gif',
     ]).ready(() => {
 
       // Create colliders

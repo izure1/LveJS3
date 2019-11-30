@@ -1,11 +1,18 @@
-export default function getAssetBlob(src) {
+/**
+ * 
+ * @param {String|null} src  Asset src
+ * @description
+ * Returns the blob object of the loaded set
+ */
+export default function getAssetBlob(src = null) {
 
-  let blob = this.assetManager.get(src)
-
-  if (!blob) {
-    return null
+  if (src === null) {
+    return Array.from(this.assetManager.get())
   }
 
-  return blob
+  src = this.assetManager.get(src)
+  if (src === null) return null
+
+  return src
 
 }

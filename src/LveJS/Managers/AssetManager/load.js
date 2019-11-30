@@ -1,6 +1,3 @@
-import path from 'path'
-
-
 function loaded(resolveSrc, response, resolve, cb) {
 
   this.loading.delete(resolveSrc)
@@ -11,7 +8,7 @@ function loaded(resolveSrc, response, resolve, cb) {
 
     this.map.set(resolveSrc, response)
     this.emit('load')
-    
+
     resolve(response)
     cb(resolveSrc, response.blobURL)
 
@@ -28,40 +25,39 @@ export default function load(src, cb = function () {}) {
 
   return new Promise(resolve => {
 
-    let xml, resolveSrc, blob
-    let self
+    let resolvedSrc = this.getResolvedURL(src)
 
-    resolveSrc = path.resolve(src)
-
-    if (this.map.has(resolveSrc)) {
-      loaded.call(this, resolveSrc, this.map.get(resolveSrc), resolve, cb)
+    if (this.map.has(src)) {
+      loaded.call(this, resolvedSrc, this.map.get(resolvedSrc), resolve, cb)
       return
     }
 
-    if (this.loading.has(resolveSrc)) {
+    if (this.loading.has(resolvedSrc)) {
       resolve(null)
       return
     }
 
 
+    let self
     self = this
-    self.loading.add(resolveSrc)
+    self.loading.add(resolvedSrc)
 
+    let xml
     xml = new XMLHttpRequest
-    xml.open('GET', src)
+    xml.open('GET', resolvedSrc)
     xml.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
     xml.onload = function (e) {
 
       if (this.status !== 200) {
-        loaded.call(self, resolveSrc, this.response, resolve, cb)
+        loaded.call(self, resolvedSrc, this.response, resolve, cb)
         return
       }
 
-      loaded.call(self, resolveSrc, this.response, resolve, cb)
+      loaded.call(self, resolvedSrc, this.response, resolve, cb)
 
     }
     xml.onabort = xml.onerror = function (e) {
-      loaded.call(self, resolveSrc, null, null, resolve, cb)
+      loaded.call(self, resolvedSrc, null, null, resolve, cb)
     }
     xml.responseType = 'blob'
     xml.send(null)
