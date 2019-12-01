@@ -10,6 +10,7 @@ import setCallback from './AssetManager/setCallback'
 import getBaseURL from './AssetManager/getBaseURL'
 import setBaseURL from './AssetManager/setBaseURL'
 import getResolvedURL from './AssetManager/getResolvedURL'
+import destroy from './AssetManager/destroy'
 
 
 class LveJSAssetManager {
@@ -38,7 +39,7 @@ LveJSAssetManager.prototype.setCallback = setCallback
 LveJSAssetManager.prototype.getBaseURL = getBaseURL
 LveJSAssetManager.prototype.setBaseURL = setBaseURL
 LveJSAssetManager.prototype.getResolvedURL = getResolvedURL
-
+LveJSAssetManager.prototype.destroy = destroy
 
 
 export default LveJSAssetManager

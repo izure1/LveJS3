@@ -13,6 +13,7 @@ export default function destroy() {
   this.canvasListener.destroy()
   this.mouseListener.destroy()
   this.keyboardListener.destroy()
+  this.assetManager.destroy()
 
   // 캔버스에 할당된 옵저버를 제거합니다
   for (let p of this.canvasObserver.handler.keys()) {
