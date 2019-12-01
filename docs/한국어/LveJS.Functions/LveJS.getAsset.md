@@ -14,7 +14,6 @@ const imageSrc = 'https://sample.png'
 lve.loadAsset(imageSrc).ready(() => {
 
   const convertedSrc = lve.getAsset(imageSrc)
-
   console.log(convertedSrc)
 
 })

@@ -23,7 +23,7 @@
       '/image/transition_after.png',
       '/image/test', // error!
       '/image/../image/transition_before.png' // duplicated src == '/image/transition_before.png'
-    ]).ready(function () {
+    ], console.log).ready(function () {
 
       lve('video').create({
         type: 'video',

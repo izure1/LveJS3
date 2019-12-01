@@ -1,6 +1,6 @@
 # LveJS.loadAsset(urls [, callback])
 
-> urls : `Array` | `String`  
+> urls : `Array` | `String` | `LveJSAsset`  
   불러올 에셋의 경로입니다. 여러개를 불러올 경우, 배열로 입력하십시오.
 
 > callback : `Function`  

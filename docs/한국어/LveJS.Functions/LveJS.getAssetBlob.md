@@ -13,7 +13,6 @@ const imageSrc = 'https://sample.png'
 lve.loadAsset(imageSrc).ready(() => {
 
   const blob = lve.getAssetBlob(imageSrc)
-
   console.log(blob.arrayBuffer())
 
 })

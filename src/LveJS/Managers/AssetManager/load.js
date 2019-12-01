@@ -8,7 +8,7 @@ function loaded(resolveSrc, response, resolve, cb) {
   if (response !== null) {
 
     let asset = new LveJSAsset
-    
+
     if (response instanceof LveJSAsset) {
       asset = response
     } else {
@@ -21,7 +21,7 @@ function loaded(resolveSrc, response, resolve, cb) {
     this.emit('load')
 
     resolve(asset)
-    cb(asset.getName(), asset.getURL())
+    cb(asset.getName(), asset.getURL(), this.map.size, this.map.size + this.loading.size)
 
   }
 
