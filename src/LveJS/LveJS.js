@@ -67,6 +67,7 @@ import FnGetColliders from './Functions/getColliders'
 import FnGetSprites from './Functions/getSprites'
 import FnExists from './Functions/exists'
 import FnGetAssetBlob from './Functions/getAssetBlob'
+import FnGetAssetData from './Functions/getAssetData'
 import FnGetBaseURL from './Functions/getBaseURL'
 import FnSetBaseURL from './Functions/setBaseURL'
 
@@ -150,6 +151,7 @@ function LveJS() {
   this.lve.getSprites = FnGetSprites.bind(this)
   this.lve.exists = FnExists.bind(this)
   this.lve.getAssetBlob = FnGetAssetBlob.bind(this)
+  this.lve.getAssetData = FnGetAssetData.bind(this)
   this.lve.getBaseURL = FnGetBaseURL.bind(this)
   this.lve.setBaseURL = FnSetBaseURL.bind(this)
 

@@ -7,12 +7,12 @@
 export default function getAssetBlob(src = null) {
 
   if (src === null) {
-    return Array.from(this.assetManager.get())
+    return Array.from(this.assetManager.get()).map(t => t.getBlob())
   }
 
   src = this.assetManager.get(src)
   if (src === null) return null
 
-  return src
+  return src.getBlob()
 
 }

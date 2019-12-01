@@ -7,10 +7,10 @@ function image(src, d, e) {
   let after, before
 
   after = this.__system__.world.assetManager.get(src)
-  after = after ? after.blobURL : src
+  after = after ? after.getURL() : src
 
   before = this.__system__.world.assetManager.get(this.src)
-  before = before ? before.blobURL : this.src
+  before = before ? before.getURL() : this.src
 
   if (this.src === after) {
     return

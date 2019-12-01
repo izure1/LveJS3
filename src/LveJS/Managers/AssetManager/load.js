@@ -1,16 +1,27 @@
+import LveJSAsset from '../../LveJSAsset'
+
+
 function loaded(resolveSrc, response, resolve, cb) {
 
   this.loading.delete(resolveSrc)
 
   if (response !== null) {
 
-    response.blobURL = URL.createObjectURL(response)
+    let asset = new LveJSAsset
+    
+    if (response instanceof LveJSAsset) {
+      asset = response
+    } else {
+      asset.setName(resolveSrc)
+      asset.setURL(URL.createObjectURL(response))
+      asset.setBlob(response)
+    }
 
-    this.map.set(resolveSrc, response)
+    this.map.set(asset.getName(), asset)
     this.emit('load')
 
-    resolve(response)
-    cb(resolveSrc, response.blobURL)
+    resolve(asset)
+    cb(asset.getName(), asset.getURL())
 
   }
 
@@ -24,6 +35,11 @@ function loaded(resolveSrc, response, resolve, cb) {
 export default function load(src, cb = function () {}) {
 
   return new Promise(resolve => {
+
+    if (src instanceof LveJSAsset) {
+      loaded.call(this, src.getName(), src, resolve, cb)
+      return
+    }
 
     let resolvedSrc = this.getResolvedURL(src)
 
