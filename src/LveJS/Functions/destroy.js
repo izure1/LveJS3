@@ -7,14 +7,18 @@ import HANDLERS from '../Managers/ElementListener/Vars/HANDLERS'
  * Destroy the current world completely
  * 
  */
-export default function destroy() {
+export default function destroy(includeAsset = true) {
 
   // 각 리스너에 할당된 이벤트리스너를 제거합니다
   this.canvasListener.destroy()
   this.mouseListener.destroy()
   this.keyboardListener.destroy()
+
+  // 생성된 모든 에셋을 파괴합니다
+  if (includeAsset) this.lve.destroyAsset()
   this.assetManager.destroy()
 
+  
   // 캔버스에 할당된 옵저버를 제거합니다
   for (let p of this.canvasObserver.handler.keys()) {
     //this.canvasObserver.disconnect(p)

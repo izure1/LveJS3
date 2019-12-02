@@ -7,11 +7,12 @@ function loaded(resolveSrc, response, resolve, cb) {
 
   if (response !== null) {
 
-    let asset = new LveJSAsset
+    let asset
 
     if (response instanceof LveJSAsset) {
       asset = response
     } else {
+      asset = new LveJSAsset
       asset.setName(resolveSrc)
       asset.setURL(URL.createObjectURL(response))
       asset.setBlob(response)
@@ -61,7 +62,6 @@ export default function load(src, cb = function () {}) {
     let xml
     xml = new XMLHttpRequest
     xml.open('GET', resolvedSrc)
-    xml.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
     xml.onload = function (e) {
 
       if (this.status !== 200) {

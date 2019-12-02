@@ -11,6 +11,7 @@ import getBaseURL from './AssetManager/getBaseURL'
 import setBaseURL from './AssetManager/setBaseURL'
 import getResolvedURL from './AssetManager/getResolvedURL'
 import destroy from './AssetManager/destroy'
+import drop from './AssetManager/drop'
 
 
 class LveJSAssetManager {
@@ -40,6 +41,7 @@ LveJSAssetManager.prototype.getBaseURL = getBaseURL
 LveJSAssetManager.prototype.setBaseURL = setBaseURL
 LveJSAssetManager.prototype.getResolvedURL = getResolvedURL
 LveJSAssetManager.prototype.destroy = destroy
+LveJSAssetManager.prototype.drop = drop
 
 
 export default LveJSAssetManager

@@ -70,6 +70,7 @@ import FnGetAssetBlob from './Functions/getAssetBlob'
 import FnGetAssetData from './Functions/getAssetData'
 import FnGetBaseURL from './Functions/getBaseURL'
 import FnSetBaseURL from './Functions/setBaseURL'
+import FnDestroyAsset from './Functions/destroyAsset'
 
 
 const CLASSES = {
@@ -154,6 +155,7 @@ function LveJS() {
   this.lve.getAssetData = FnGetAssetData.bind(this)
   this.lve.getBaseURL = FnGetBaseURL.bind(this)
   this.lve.setBaseURL = FnSetBaseURL.bind(this)
+  this.lve.destroyAsset = FnDestroyAsset.bind(this)
 
   this.lve.current = FnCurrent.call(this)
 
