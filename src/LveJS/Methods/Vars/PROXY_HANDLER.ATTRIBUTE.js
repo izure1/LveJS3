@@ -129,10 +129,7 @@ handler.physics = function (p, v, t) {
     return v
   }
 
-  this.__setPhysicsBody()
-
-  this.__system__.physics.body.SetType(y)
-  this.__system__.physics.type = y
+  this.__setPhysicsBody(y)
 
   return v
 
@@ -147,44 +144,28 @@ handler.density = function (p, v, t) {
 
 handler.friction = function (p, v, t) {
 
-  if (!this.__system__.physics.body) {
-    return v
-  }
-
-  this.__system__.physics.body.GetFixtureList().SetFriction(v)
+  this.__setPhysicsFriction(v)
   return v
 
 }
 
 handler.restitution = function (p, v, t) {
 
-  if (!this.__system__.physics.body) {
-    return v
-  }
-
-  this.__system__.physics.body.GetFixtureList().SetRestitution(v)
+  this.__setPhysicsRestitution(v)
   return v
 
 }
 
 handler.gravityscale = function (p, v, t) {
 
-  if (!this.__system__.physics.body) {
-    return v
-  }
-
-  this.__system__.physics.body.SetGravityScale(v)
+  this.__setPhysicsGravityScale(v)
   return v
 
 }
 
 handler.fixedrotation = function (p, v, t) {
 
-  if (!this.__system__.physics.body) {
-    return v
-  }
-
-  this.__system__.physics.body.SetFixedRotation(v)
+  this.__setPhysicsFixedRotation(v)
   return v
 
 }

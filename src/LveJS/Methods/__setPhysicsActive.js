@@ -9,9 +9,7 @@ export default function __setPhysicsActive(p, v) {
   h.information[p] = Number(!!v)
 
   for (let p in h.information) {
-
     r += h.information[p]
-
   }
 
   if (r === h.information.__length)

@@ -1,11 +1,12 @@
 import LveJSMouseEvent from '../../../LveJSMouseEvent'
 
+const JOB_SYMBOL = Symbol('mousemove_duration')
 
 export default function (e, cb) {
 
   let t
 
-  this.suppressJob.set('mousemove_duration', () => {
+  this.suppressJob.set(JOB_SYMBOL, () => {
 
     t = new LveJSMouseEvent('mousemove', e)
     cb(t)

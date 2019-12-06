@@ -17,10 +17,6 @@ export default function __setElementEvent() {
     return this
   }
 
-  if (this.element.__setElementEvent) {
-    return this
-  }
-
   this.element.addEventListener('canplaythough', () => {
     this.emit('canplay')
   })
@@ -43,14 +39,6 @@ export default function __setElementEvent() {
   
   this.element.addEventListener('timeupdate', () => {
     this.emit('timeupdate')
-  })
-
-  setHiddenContext.call(this.element, '__setElementEvent', true)
-  ready.call(this.element, () => {
-
-    setHiddenContext.call(this.element, '__isLoaded', true)
-    setAudioContext.call(this.element, this.__system__.audio.setting)
-
   })
 
   return this

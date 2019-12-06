@@ -1,3 +1,5 @@
+import WaitReady from '../Utils/WaitReady'
+
 import Box2D from '../../External/Box2D/Box2D'
 import DEFAULT_SETTING from './Physics/Vars/DEFAULT_SETTING'
 import DEFAULT_CONFIG from './Physics/Vars/DEFAULT_CONFIG'
@@ -12,6 +14,7 @@ import FnDestroyObject from './Physics/destroyObject'
 import FnCreateBody from './Physics/createBody'
 import FnCreateFixture from './Physics/createFixture'
 import FnCreateCollider from './Physics/createCollider'
+import FnOnUpdate from './Physics/onUpdate'
 
 
 class LveJSPhysics {
@@ -25,7 +28,7 @@ class LveJSPhysics {
 
     this.box2d = box2d
     this.world = new box2d.b2World(new box2d.b2Vec2(0, this.setting.gravity), false)
-    this.bodies = new Set
+    this.lockRelease = new WaitReady
     this.colliders = new Set
 
     this.isRunning = false
@@ -48,6 +51,7 @@ LveJSPhysics.prototype.destroyObject = FnDestroyObject
 LveJSPhysics.prototype.createBody = FnCreateBody
 LveJSPhysics.prototype.createFixture = FnCreateFixture
 LveJSPhysics.prototype.createCollider = FnCreateCollider
+LveJSPhysics.prototype.onUpdate = FnOnUpdate
 
 
 export default LveJSPhysics

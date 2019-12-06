@@ -5,29 +5,34 @@ import {
 
 export default function __physicsUpdate() {
 
-  let physics
-  let pos
-  let s
+  this.__system__.world.physics.onUpdate(() => {
 
-  if (!this.__system__.physics.body) {
-    return this
-  }
+    let physics
+    let pos
+    let s
 
-  if (!this.__system__.physics.body.IsActive()) {
-    return this
-  }
+    if (!this.__system__.physics.body) {
+      return this
+    }
 
-  s = this.__system__.world.physics.setting.unitScale
-  physics = this.__system__.physics
+    if (!this.__system__.physics.body.IsActive()) {
+      return this
+    }
 
-  pos = physics.body.GetPosition()
-  physics.force = false
+    s = this.__system__.world.physics.setting.unitScale
+    physics = this.__system__.physics
 
-  this.style.left = pos.get_x() * s
-  this.style.bottom = pos.get_y() * s
-  this.style.rotate = radToDeg(physics.body.GetAngle())
+    pos = physics.body.GetPosition()
+    physics.force = false
 
-  physics.force = true
+    this.style.left = pos.get_x() * s
+    this.style.bottom = pos.get_y() * s
+    this.style.rotate = radToDeg(physics.body.GetAngle())
+
+    physics.force = true
+
+  })
+
 
   return this
 

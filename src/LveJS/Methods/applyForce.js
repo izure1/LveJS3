@@ -22,9 +22,12 @@ export default function applyForce(x, y) {
 
   each.call(this, function () {
 
-    if (!this.__system__.physics.body) return
+    this.__system__.world.physics.onUpdate(() => {
 
-    this.__system__.physics.body.ApplyForceToCenter(V)
+      if (!this.__system__.physics.body) return
+      this.__system__.physics.body.ApplyForceToCenter(V)
+
+    })
 
   })
 

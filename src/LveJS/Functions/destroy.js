@@ -31,9 +31,7 @@ export default function destroy(includeAsset = true) {
   }
 
   // 모든 물리객체를 삭제합니다
-  for (let t of this.physics.bodies) {
-    this.physics.destroyObject(t)
-  }
+  this.physics.lockRelease.done()
 
   // 모든 매니저의 작동을 중지합니다
   this.renderer.isRunning = false

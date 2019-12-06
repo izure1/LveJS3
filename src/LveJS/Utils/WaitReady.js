@@ -1,9 +1,7 @@
 class WaitReady {
 
-  constructor() {
-    this.callbacks = new Set
-    this.ready = false
-  }
+  callbacks = new Set
+  ready = false
 
   init() {
     this.ready = false
@@ -21,17 +19,17 @@ class WaitReady {
 
   }
 
-  done() {
+  done(init = false) {
 
-    if (this.ready) {
-      return
-    }
+    if (this.ready) return
 
     this.ready = true
     this.callbacks.forEach(callback => {
       callback()
       this.callbacks.delete(callback)
     })
+
+    if (init) this.init()
 
   }
 

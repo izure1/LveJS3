@@ -8,7 +8,7 @@ export default function ready(f) {
 
     if (this.element) {
 
-      this.__system__.ready.element.wait(() => {
+      this.__onElementReady(() => {
         domReady.call(this.element, f.bind(this))
       })
       

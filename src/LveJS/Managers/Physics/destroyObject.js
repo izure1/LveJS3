@@ -8,7 +8,6 @@ export default function destroyObject(B) {
   B.ClearTrash()
   
   this.world.DestroyBody(B)
-  this.bodies.delete(B)
   this.map.delete(B)
 
 }

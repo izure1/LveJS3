@@ -1,6 +1,8 @@
 import getSizeofElement from '../Helpers/getSizeofElement'
 import ready from '../Utils/domReady'
 
+const JOB_SYMBOL = Symbol('setInformationSprite')
+
 
 export default function __setInformationSprite() {
 
@@ -8,7 +10,7 @@ export default function __setInformationSprite() {
   let c
   let sprite
 
-  this.__system__.suppressJob.set('__setInformationSprite', () => {
+  this.__system__.suppressJob.set(JOB_SYMBOL, () => {
 
     if (this.type !== 'sprite') {
       return this

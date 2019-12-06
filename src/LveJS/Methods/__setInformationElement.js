@@ -1,6 +1,8 @@
 import ready from '../Utils/domReady'
 import getSizeofElement from '../Helpers/getSizeofElement'
 
+const JOB_SYMBOL = Symbol('setInformationElement')
+
 
 /**
  * @param {String} s Element src
@@ -12,8 +14,8 @@ export default function __setInformationElement(s = '', cb = function () {}) {
   
   this.__system__.ready.element.init()
 
-  this.__system__.suppressJob.clear('setElement')
-  this.__system__.suppressJob.set('setElement', () => {
+  this.__system__.suppressJob.clear(JOB_SYMBOL)
+  this.__system__.suppressJob.set(JOB_SYMBOL, () => {
 
     t = this.element
     s =
@@ -47,6 +49,7 @@ export default function __setInformationElement(s = '', cb = function () {}) {
         this.__setPhysicsFixture()
         this.__system__.ready.element.done()
 
+        t.__isLoaded = true
         cb.call(this)
 
       })
@@ -55,6 +58,9 @@ export default function __setInformationElement(s = '', cb = function () {}) {
 
     }, () => {
 
+      t.__isLoaded = false
+      
+      this.__system__.ready.element.done()
       this.emit('error')
 
     })
@@ -64,3 +70,16 @@ export default function __setInformationElement(s = '', cb = function () {}) {
   return this
 
 }
+
+
+// ready.call(this.element, () => {
+
+//   setHiddenContext.call(this.element, '__isLoaded', true)
+//   setAudioContext.call(this.element, this.__system__.audio.setting)
+
+// }, () => {
+
+//   setHiddenContext.call(this.element, '__isLoaded', false)
+//   setAudioContext.call(this.element, this.__system__.audio.setting)
+
+// })

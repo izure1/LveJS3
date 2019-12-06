@@ -22,9 +22,12 @@ export default function setLinearVelocity(x, y) {
 
   each.call(this, function () {
 
-    if (!this.__system__.physics.body) return
+    this.__system__.world.physics.onUpdate(() => {
 
-    this.__system__.physics.body.SetLinearVelocity(V)
+      if (!this.__system__.physics.body) return
+      this.__system__.physics.body.SetLinearVelocity(V)
+
+    })
 
   })
 

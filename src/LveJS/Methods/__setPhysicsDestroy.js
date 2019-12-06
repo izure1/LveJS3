@@ -1,19 +1,17 @@
 export default function __setPhysicsDestroy() {
 
   this.__system__.ready.physics.done()
+  this.__system__.world.physics.onUpdate(() => {
 
-  let B
+    let B
 
-  B = this.__system__.physics.body
+    B = this.__system__.physics.body
+    if (!B) return this
 
-  if (!B) {
-    return this
-  }
+    this.__system__.world.physics.destroyObject(B)
+    delete this.__system__.physics.body
 
-  this.__system__.world.physics.bodies.add(B)
-  this.__system__.physics.body = null
-  
-  delete this.__system__.physics.body
+  })
 
   return this
 

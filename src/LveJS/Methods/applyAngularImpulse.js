@@ -15,9 +15,12 @@ export default function applyAngularImpulse(v) {
 
   each.call(this, function () {
 
-    if (!this.__system__.physics.body) return
+    this.__system__.world.physics.onUpdate(() => {
 
-    this.__system__.physics.body.ApplyAngularImpulse(v)
+      if (!this.__system__.physics.body) return
+      this.__system__.physics.body.ApplyAngularImpulse(v)
+
+    })
 
   })
 

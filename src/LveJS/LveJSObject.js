@@ -44,6 +44,10 @@ import M__setPhysicsFixture from './Methods/__setPhysicsFixture'
 import M__setPhysicsActive from './Methods/__setPhysicsActive'
 import M__setPhysicsFreeze from './Methods/__setPhysicsFreeze'
 import M__setPhysicsDensity from './Methods/__setPhysicsDensity'
+import M__setPhysicsFriction from './Methods/__setPhysicsFriction'
+import M__setPhysicsRestitution from './Methods/__setPhysicsRestitution'
+import M__setPhysicsGravityScale from './Methods/__setPhysicsGravityScale'
+import M__setPhysicsFixedRotation from './Methods/__setPhysicsFixedRotation'
 import M__setPhysicsTransform from './Methods/__setPhysicsTransform'
 import M__transitionUpdate from './Methods/__transitionUpdate'
 import M__physicsUpdate from './Methods/__physicsUpdate'
@@ -183,6 +187,10 @@ LveJSObject.prototype.__setPhysicsFixture = M__setPhysicsFixture
 LveJSObject.prototype.__setPhysicsActive = M__setPhysicsActive
 LveJSObject.prototype.__setPhysicsFreeze = M__setPhysicsFreeze
 LveJSObject.prototype.__setPhysicsDensity = M__setPhysicsDensity
+LveJSObject.prototype.__setPhysicsFriction = M__setPhysicsFriction
+LveJSObject.prototype.__setPhysicsRestitution = M__setPhysicsRestitution
+LveJSObject.prototype.__setPhysicsGravityScale = M__setPhysicsGravityScale
+LveJSObject.prototype.__setPhysicsFixedRotation = M__setPhysicsFixedRotation
 LveJSObject.prototype.__setPhysicsTransform = M__setPhysicsTransform
 LveJSObject.prototype.__transitionUpdate = M__transitionUpdate
 LveJSObject.prototype.__physicsUpdate = M__physicsUpdate

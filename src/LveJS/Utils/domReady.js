@@ -47,7 +47,7 @@ function elementSourceReady(t, f, fa) {
       })
       t.addEventListener('error', function cb() {
         t.removeEventListener('error', cb)
-        f.call(t, t)
+        fa.call(t, t)
       })
 
       r = false
@@ -81,7 +81,7 @@ function elementStreamReady(t, f, fa) {
     })
     t.addEventListener('error', function cb() {
       t.removeEventListener('error', cb)
-      f.call(t, t)
+      fa.call(t, t)
     })
 
     r = false

@@ -1,6 +1,9 @@
 import {
   TextInformation
 } from '../Utils/drawCanvas'
+import {
+  SET_INFORMATION_TEXT as JOB_SYMBOL
+} from './Vars/SYMBOL'
 
 
 export default function __setInformationText() {
@@ -10,7 +13,7 @@ export default function __setInformationText() {
   let t
   let str, w
 
-  this.__system__.suppressJob.set('__setInformationText', () => {
+  this.__system__.suppressJob.set(JOB_SYMBOL, () => {
 
     fontSize = this.style.fontSize
     fontFamily = this.style.fontFamily
