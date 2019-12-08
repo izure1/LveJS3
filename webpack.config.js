@@ -1,26 +1,16 @@
 'use strict'
 
-const config_common = require('./build/Common.config')
-const config_core = require('./build/Core.config')
-const config_modal = require('./build/Modal.config')
-const config_interface = require('./build/Interface.config')
+const WebpackBuilder = require('./build/WebpackBuilder')
 
 // set webpack
 module.exports = [
 
-  {
-    ...config_common,
-    ...config_core,
-  },
-
-  {
-    ...config_common,
-    ...config_modal,
-  },
-
-  {
-    ...config_common,
-    ...config_interface,
-  },
+  WebpackBuilder.exportToProduction('./src/LveJS/Core.js', 'LveJS.min', 'LveJS'),
+  WebpackBuilder.exportToProduction('./src/LveJS.Modal/Core.js', 'LveJS.Modal.min', 'LveJSModal'),
+  WebpackBuilder.exportToProduction('./src/LveJS.Interface/Core.js', 'LveJS.Interface.min', 'LveJSInterface'),
+  
+  WebpackBuilder.exportToDevelopment('./src/LveJS/Core.js', 'LveJS', 'LveJS'),
+  WebpackBuilder.exportToDevelopment('./src/LveJS.Modal/Core.js', 'LveJS.Modal', 'LveJSModal'),
+  WebpackBuilder.exportToDevelopment('./src/LveJS.Interface/Core.js', 'LveJS.Interface', 'LveJSInterface'),
 
 ]

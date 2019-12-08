@@ -116,7 +116,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Man
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Manager_show__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Manager/show */ \"./src/LveJS.Modal/Manager/show.js\");\n/* harmony import */ var _Manager_hide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Manager/hide */ \"./src/LveJS.Modal/Manager/hide.js\");\n/* harmony import */ var _Manager_close__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Manager/close */ \"./src/LveJS.Modal/Manager/close.js\");\n\n\n\n\nclass ModalManager {\n  constructor(lve) {\n    this.lve = lve;\n    this.modals = new Map();\n  }\n\n}\n\nModalManager.prototype.show = _Manager_show__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\nModalManager.prototype.hide = _Manager_hide__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\nModalManager.prototype.close = _Manager_close__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalManager);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Manager_show__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Manager/show */ \"./src/LveJS.Modal/Manager/show.js\");\n/* harmony import */ var _Manager_hide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Manager/hide */ \"./src/LveJS.Modal/Manager/hide.js\");\n/* harmony import */ var _Manager_close__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Manager/close */ \"./src/LveJS.Modal/Manager/close.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\n\n\n\n\nvar ModalManager = function ModalManager(lve) {\n  _classCallCheck(this, ModalManager);\n\n  this.lve = lve;\n  this.modals = new Map();\n};\n\nModalManager.prototype.show = _Manager_show__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\nModalManager.prototype.hide = _Manager_hide__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\nModalManager.prototype.close = _Manager_close__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalManager);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager.js?");
 
 /***/ }),
 
@@ -128,7 +128,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Man
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (name) {\n  this.modals.delete(name);\n});\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager/close.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (name) {\n  this.modals[\"delete\"](name);\n});\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager/close.js?");
 
 /***/ }),
 
@@ -140,7 +140,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (name, duration = 600) {\n  if (!this.modals.has(name)) {\n    return;\n  }\n\n  this.modals.get(name).hide(duration);\n});\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager/hide.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (name) {\n  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 600;\n\n  if (!this.modals.has(name)) {\n    return;\n  }\n\n  this.modals.get(name).hide(duration);\n});\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager/hide.js?");
 
 /***/ }),
 
@@ -152,7 +152,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modal */ \"./src/LveJS.Modal/Modal.js\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (name, duration = 600, style = {}) {\n  let modal;\n\n  if (!this.modals.has(name)) {\n    this.modals.set(name, new _Modal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]());\n  }\n\n  modal = this.modals.get(name);\n  modal.updateStyle(style);\n  modal.show(duration);\n});\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager/show.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modal */ \"./src/LveJS.Modal/Modal.js\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (name) {\n  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 600;\n  var style = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};\n  var modal;\n\n  if (!this.modals.has(name)) {\n    this.modals.set(name, new _Modal__WEBPACK_IMPORTED_MODULE_0__[\"default\"]());\n  }\n\n  modal = this.modals.get(name);\n  modal.updateStyle(style);\n  modal.show(duration);\n});\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Manager/show.js?");
 
 /***/ }),
 
@@ -164,7 +164,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Mod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Modal_ModalTitle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal/ModalTitle */ \"./src/LveJS.Modal/Modal/ModalTitle.js\");\n/* harmony import */ var _Modal_ModalContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal/ModalContent */ \"./src/LveJS.Modal/Modal/ModalContent.js\");\n/* harmony import */ var _Modal_ModalFrame__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal/ModalFrame */ \"./src/LveJS.Modal/Modal/ModalFrame.js\");\n\n\n\n\nclass LveModal {\n  constructor() {\n    this.title = new _Modal_ModalTitle__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n    this.content = new _Modal_ModalContent__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n    this.frame = new _Modal_ModalFrame__WEBPACK_IMPORTED_MODULE_2__[\"default\"]();\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (LveModal);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Modal_ModalTitle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal/ModalTitle */ \"./src/LveJS.Modal/Modal/ModalTitle.js\");\n/* harmony import */ var _Modal_ModalContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal/ModalContent */ \"./src/LveJS.Modal/Modal/ModalContent.js\");\n/* harmony import */ var _Modal_ModalFrame__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal/ModalFrame */ \"./src/LveJS.Modal/Modal/ModalFrame.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\n\n\n\n\nvar LveModal = function LveModal() {\n  _classCallCheck(this, LveModal);\n\n  this.title = new _Modal_ModalTitle__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  this.content = new _Modal_ModalContent__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n  this.frame = new _Modal_ModalFrame__WEBPACK_IMPORTED_MODULE_2__[\"default\"]();\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (LveModal);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal.js?");
 
 /***/ }),
 
@@ -176,7 +176,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Mod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nclass ModalContent {\n  constructor() {\n    this.text = '';\n    this.color = 'black';\n    this.fontSize = 13;\n    this.fontFamily = 'consolas';\n    this.fontWeight = 'normal';\n    this.fontStyle = 'normal';\n    this.borderWidth = 0;\n    this.borderColor = 'gray';\n    this.backgroundColor = 'white';\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalContent);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal/ModalContent.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar ModalContent = function ModalContent() {\n  _classCallCheck(this, ModalContent);\n\n  this.text = '';\n  this.color = 'black';\n  this.fontSize = 13;\n  this.fontFamily = 'consolas';\n  this.fontWeight = 'normal';\n  this.fontStyle = 'normal';\n  this.borderWidth = 0;\n  this.borderColor = 'gray';\n  this.backgroundColor = 'white';\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalContent);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal/ModalContent.js?");
 
 /***/ }),
 
@@ -188,7 +188,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nclass ModalContent {\n  const
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nclass ModalFrame {\n  constructor() {\n    this.borderWidth = 1;\n    this.borderColor = '#ef007c';\n    this.width = '40%';\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalFrame);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal/ModalFrame.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar ModalFrame = function ModalFrame() {\n  _classCallCheck(this, ModalFrame);\n\n  this.borderWidth = 1;\n  this.borderColor = '#ef007c';\n  this.width = '40%';\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalFrame);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal/ModalFrame.js?");
 
 /***/ }),
 
@@ -200,7 +200,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nclass ModalFrame {\n  constru
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nclass ModalTitle {\n  constructor() {\n    this.text = '';\n    this.color = 'white';\n    this.fontSize = 13;\n    this.fontFamily = 'consolas';\n    this.fontWeight = 'normal';\n    this.fontStyle = 'normal';\n    this.borderWidth = 0;\n    this.borderColor = 'white';\n    this.backgroundColor = 'gray';\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalTitle);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal/ModalTitle.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar ModalTitle = function ModalTitle() {\n  _classCallCheck(this, ModalTitle);\n\n  this.text = '';\n  this.color = 'white';\n  this.fontSize = 13;\n  this.fontFamily = 'consolas';\n  this.fontWeight = 'normal';\n  this.fontStyle = 'normal';\n  this.borderWidth = 0;\n  this.borderColor = 'white';\n  this.backgroundColor = 'gray';\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (ModalTitle);\n\n//# sourceURL=webpack://LveJSModal/./src/LveJS.Modal/Modal/ModalTitle.js?");
 
 /***/ })
 

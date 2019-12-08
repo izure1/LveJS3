@@ -1,7 +1,6 @@
 /node_modules
 /.vscode
 /.gitignore
-/.babelrc
 /test
 /src
 /build
