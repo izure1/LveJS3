@@ -132,11 +132,15 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
 
   // 그라디언트가 지정되어있다면 그라디언트 색상 정보를 받아옵니다
-  if (tStyle.gradient.__length) {
-
-    drawColor = getGradient(canvas, tStyle.gradient, tStyle.gradientType, tStyle.gradientDirection, drawWidth, drawHeight, x, y)
-
-  }
+  if (tStyle.gradient.__length) drawColor = getGradient(
+    canvas,
+    tStyle.gradient,
+    tStyle.gradientType,
+    tStyle.gradientDirection,
+    drawWidth,
+    drawHeight,
+    x, y
+  )
 
 
   // 각 객체 유형에 맞는 그리기 방법을 택합니다
@@ -223,6 +227,9 @@ export default function draw(canvas, canvasWidth, canvasHeight, cameraHeight, ca
 
 
     case 'particle':
+
+      if (!this.element) return this
+      if (!this.element.__isLoaded) return this
 
       this.__generateParticle(interval)
       break

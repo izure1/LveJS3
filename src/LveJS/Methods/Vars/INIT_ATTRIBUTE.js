@@ -8,12 +8,12 @@ export default function (t) {
     element: document.createElement('img')
   }
 
-  this.sprite = {
-    loop: true
-  }
-
   this.video = {
     element: document.createElement('video')
+  }
+
+  this.sprite = {
+    loop: true
   }
 
   this.text = {

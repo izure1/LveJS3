@@ -14,21 +14,11 @@ function getBodyDef(B) {
 /**
  * 
  * @param {String} t Body Type (static, dynamic)
- * @param {Number} x Body X axis
- * @param {Number} y Body Y axis
  */
-export default function createBody(t, x = 0, y = 0) {
+export default function createBody(t) {
 
-  let B
-  let r, pos, s
-
-  B = this.box2d
-  s = this.setting.unitScale
-  x /= s
-  y /= s
-
-  r = getBodyDef(B)
-  pos = new B.b2Vec2(x, y)
+  let B = this.box2d
+  let r = getBodyDef(B)
 
   switch (t) {
 
@@ -47,10 +37,6 @@ export default function createBody(t, x = 0, y = 0) {
   }
 
   r.set_type(t)
-  r.set_position(pos)
-
-  pos.__destroy__()
-
   return r
 
 }

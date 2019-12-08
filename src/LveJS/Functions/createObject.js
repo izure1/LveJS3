@@ -34,8 +34,7 @@ export default function (u, o = {}) {
     ...o
   }
 
-  t.attr(attr).__setElementEvent()
-  t.css(css)
+  t.attr(attr).css(css).__setElementEvent()
 
   // run reactivity for all properties
   t.__runAllPropertiesHandler()

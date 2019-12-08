@@ -20,14 +20,6 @@ export default function generate(emitter) {
     className
   } = emitter
 
-  if (!src) {
-    return this
-  }
-
-  if (!element) {
-    return this
-  }
-
   let {
     rangeX,
     rangeY,
@@ -62,10 +54,7 @@ export default function generate(emitter) {
   rangeZ /= 2
 
   let elWidth = 0
-
-  if (position === 'fixed') {
-    elWidth = element.width
-  }
+  if (position === 'fixed') elWidth = element.width
 
   start *= scale
   end *= scale
@@ -81,11 +70,15 @@ export default function generate(emitter) {
     toY = getRandomInt(-speed, speed)
 
     particlePosition = {
-      left: left + getRandomInt(-rangeX, rangeX) - (elWidth * start / 2),
-      bottom: bottom + getRandomInt(-rangeY, rangeY),
-      perspective: perspective + getRandomInt(-rangeZ, rangeZ),
+      left,
+      bottom,
+      perspective
     }
+    particlePosition.left += getRandomInt(-rangeX, rangeX) - (elWidth * start / 2)
+    particlePosition.bottom += getRandomInt(-rangeY, rangeY)
+    particlePosition.perspective += getRandomInt(-rangeZ, rangeZ)
 
+    
     const particle = this.lve(`__particle_${createUUID()}__`).create({
 
       type: 'image',
@@ -97,9 +90,8 @@ export default function generate(emitter) {
       friction,
       restitution,
 
-    }).css({
+    }).css(particlePosition).css({
 
-      ...particlePosition,
       position,
       scale: start,
       blendMode,

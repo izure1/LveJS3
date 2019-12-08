@@ -1,10 +1,8 @@
 export default function __runAllPropertiesHandler() {
 
-  let t
-
-  t = this
-  t = JSON.stringify(t)
-  t = JSON.parse(t)
+  let t = {
+    ...this
+  }
 
   delete t.name
   delete t.type

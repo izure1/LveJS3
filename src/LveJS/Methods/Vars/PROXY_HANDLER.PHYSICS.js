@@ -18,24 +18,18 @@ handler.__getter.a = function (p, t) {
 }
 
 handler.x = function (p, v, t) {
-
   this.setLinearVelocity(v, this.physicsset.y)
   return v
-
 }
 
 handler.y = function (p, v, t) {
-
   this.setLinearVelocity(this.physicsset.x, v)
   return v
-
 }
 
 handler.a = function (p, v, t) {
-
   this.setAngularVelocity(v)
   return v
-
 }
 
 export default handler

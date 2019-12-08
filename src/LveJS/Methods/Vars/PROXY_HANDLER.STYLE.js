@@ -1,8 +1,4 @@
 import getSizeofElement from '../../Helpers/getSizeofElement'
-import {
-  radToDeg,
-  degToRad
-} from '../../Utils/math'
 
 
 let handler

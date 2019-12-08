@@ -1,24 +1,18 @@
-import setHiddenContext from '../../Utils/setHiddenContext'
-
-
 let handler
 
 handler = {}
 handler.__getter = {}
 
 handler.__getter.sprite_name = handler.__getter.sprite_playing = handler.__getter.sprite_current = function (p, t) {
-
   p = p.substr(7)
   return t.spriteset[p]
-
 }
 
 handler.__getter.video_playbackRate = handler.__getter.video_currentTime = handler.__getter.video_volume = handler.__getter.video_muted = function (p, t) {
-
   p = p.substr(6)
   return t.videoset[p]
-
 }
+
 
 handler.__observer = function (p, v, t) {
 
@@ -33,10 +27,8 @@ handler.__observer = function (p, v, t) {
 
 
 handler.timescale = function (p, v, t) {
-
   this.__setTimescaleElement(v)
   return v
-
 }
 
 
@@ -81,10 +73,8 @@ handler.text = function (p, v, t) {
 }
 
 handler.level = function (p, v, t) {
-
   this.__system__.world.lve.requestCaching()
   return v
-
 }
 
 
@@ -135,40 +125,32 @@ handler.physics = function (p, v, t) {
 
 }
 
-handler.density = function (p, v, t) {
 
+handler.density = function (p, v, t) {
   this.__setPhysicsDensity(v)
   return v
-
 }
 
 handler.friction = function (p, v, t) {
-
   this.__setPhysicsFriction(v)
   return v
-
 }
 
 handler.restitution = function (p, v, t) {
-
   this.__setPhysicsRestitution(v)
   return v
-
 }
 
 handler.gravityscale = function (p, v, t) {
-
   this.__setPhysicsGravityScale(v)
   return v
-
 }
 
 handler.fixedrotation = function (p, v, t) {
-
   this.__setPhysicsFixedRotation(v)
   return v
-
 }
+
 
 handler.video_playbackRate = handler.video_currentTime = handler.video_volume = handler.video_muted = function (p, v, t) {
 
