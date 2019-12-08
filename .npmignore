@@ -6,4 +6,5 @@
 /build
 /docs
 /webpack.config.js
+/babel.config.json
 /Deving
