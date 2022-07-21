@@ -27,7 +27,7 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "express": "^4.17.1",
-    "ejs": "^2.7.4",
+    "ejs": "^3.1.7",
     "showdown": "^1.9.1",
     "serve-index": "^1.9.1",
     "open": "^7.0.0"
