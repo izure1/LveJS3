@@ -14,7 +14,7 @@
     "url": "https://github.com/izure1/LveJS3"
   },
   "dependencies": {
-    "d3-color": "^1.4.0",
+    "d3-color": "^3.1.0",
     "screenfull": "^5.0.0",
     "keycode": "^2.2.0"
   },
